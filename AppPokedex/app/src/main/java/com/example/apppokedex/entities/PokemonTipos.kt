@@ -4,6 +4,8 @@ class PokemonTipos(
     val name: String,
     val debilidad: List<String>,
     val fortaleza: List<String>
+    //var noEfectivo: List<String>,
+    //var inmune: List<String>
 ) {
     override fun toString(): String {
         return "$name - Debilidades: ${debilidad.joinToString()} | Fortalezas: ${fortaleza.joinToString()}"
