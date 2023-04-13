@@ -48,5 +48,4 @@ class FragmentPokemonData : Fragment() {
         Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
     }
-
 }
