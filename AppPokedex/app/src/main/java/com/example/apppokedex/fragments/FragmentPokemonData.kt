@@ -18,7 +18,14 @@ class FragmentPokemonData : Fragment() {
     lateinit var labelName : TextView
     lateinit var labelId : TextView
     lateinit var labelTipo : TextView
+    lateinit var labelDebilidad : TextView
     lateinit var imgPokemon : ImageView
+    lateinit var labelDescripcion : TextView
+    lateinit var labelAltura : TextView
+    lateinit var labelPeso : TextView
+    lateinit var labelCategoria: TextView
+    lateinit var labelHabilidad : TextView
+
 
     lateinit var pokemon : Pokemons
 
@@ -32,7 +39,13 @@ class FragmentPokemonData : Fragment() {
         labelName = vista.findViewById(R.id.txtPokeName)
         labelId = vista.findViewById(R.id.txtPokeIdDato)
         labelTipo = vista.findViewById(R.id.txtPokeTipoDato)
+        labelDebilidad = vista.findViewById(R.id.txtPokeDebilidadDato)
+        labelDescripcion = vista.findViewById(R.id.txtPokeDescripcion)
         imgPokemon = vista.findViewById(R.id.imgPokeDato)
+        labelAltura = vista.findViewById(R.id.txtPokeAlturaDato)
+        labelPeso = vista.findViewById(R.id.txtPokePesoDato)
+        labelCategoria = vista.findViewById(R.id.txtPokeCategoriaDato)
+        labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
 
         return vista
     }
@@ -45,6 +58,12 @@ class FragmentPokemonData : Fragment() {
         labelName.text = pokemon.nombre
         labelId.text = pokemon.id.toString()
         labelTipo.text = pokemon.tipo
+        labelDebilidad.text = pokemon.debilidad
+        labelDescripcion.text = pokemon.descripcion
+        labelAltura.text = pokemon.altura
+        labelPeso.text = pokemon.peso
+        labelCategoria.text = pokemon.categoria
+        labelHabilidad.text = pokemon.habilidad
         Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
     }

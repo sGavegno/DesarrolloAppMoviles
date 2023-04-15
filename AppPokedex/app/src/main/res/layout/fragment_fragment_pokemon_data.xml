@@ -8,22 +8,11 @@
     tools:context=".fragments.FragmentPokemonData">
 
     <TextView
-        android:id="@+id/txtPokeTipoDato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/txtPokeTipo"
-        app:layout_constraintTop_toBottomOf="@+id/txtPokeIdDato" />
-
-    <TextView
         android:id="@+id/txtPokeIdDato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/txtPokeId"
@@ -31,9 +20,9 @@
 
     <ImageView
         android:id="@+id/imgPokeDato"
-        android:layout_width="200dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="184dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +31,7 @@
         android:id="@+id/txtPokeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:text="Nombre"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +42,8 @@
         android:id="@+id/txtPokeId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="Nº:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,22 +53,166 @@
         android:id="@+id/txtPokeTipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:text="Tipo:"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPokeId" />
+        app:layout_constraintEnd_toEndOf="@+id/txtPokePeso"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@+id/txtPokePeso"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokePesoDato" />
 
     <TextView
-        android:id="@+id/txtProx"
+        android:id="@+id/txtPokeTipoDato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proximamente más datos"
-        android:textSize="24sp"
+        android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeTipo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.374"
+        app:layout_constraintStart_toEndOf="@+id/txtPokeTipo"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeTipo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokePeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Peso:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeAltura"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeAltura"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeAlturaDato" />
+
+    <TextView
+        android:id="@+id/txtPokePesoDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PokePeso"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokePeso"
+        app:layout_constraintStart_toStartOf="@+id/txtPokePeso"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokePeso" />
+
+    <TextView
+        android:id="@+id/txtPokeAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Altura:"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595" />
+
+    <TextView
+        android:id="@+id/txtPokeAlturaDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PokeAltura"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeAltura"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeAltura"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeAltura" />
+
+    <TextView
+        android:id="@+id/txtPokeCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeAltura"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeAltura"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokeCategoriaDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PokeCategoria"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeCategoria"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeCategoria"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeCategoria" />
+
+    <TextView
+        android:id="@+id/txtPokeHabilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habilidad:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokePeso"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeCategoria"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeCategoria"
+        app:layout_constraintTop_toTopOf="@+id/txtPokePeso" />
+
+    <TextView
+        android:id="@+id/txtPokeHabilidadDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PokeHabilidad"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeHabilidad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeHabilidad"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeHabilidad" />
+
+    <TextView
+        android:id="@+id/txtPokeDebilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Debilidad:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokeTipo"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/txtPokeTipo"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeTipo" />
+
+    <TextView
+        android:id="@+id/txtPokeDebilidadDato"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="32dp"
+        android:text="PokeDebilidad"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeDebilidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintStart_toEndOf="@+id/txtPokeDebilidad"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeDebilidad"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokeDescripcion"
+        android:layout_width="331dp"
+        android:layout_height="93dp"
+        android:layout_marginBottom="355dp"
+        android:text="Descripcion"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeName"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
