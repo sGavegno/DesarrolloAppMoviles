@@ -31,5 +31,8 @@
         <argument
             android:name="pokemonData"
             app:argType="com.example.apppokedex.entities.Pokemons" />
+        <action
+            android:id="@+id/action_fragmentPokemonData_self"
+            app:destination="@id/fragmentPokemonData" />
     </fragment>
 </navigation>

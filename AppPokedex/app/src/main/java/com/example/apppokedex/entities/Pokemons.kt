@@ -14,8 +14,9 @@ class Pokemons(
     var altura : String,
     var peso : String,
     var categoria : String,
-    var habilidad : String) : Parcelable {
-    //var evolucion : String,                     //ver como implementar esto
-
-
+    var habilidad : String,
+    var generacion : Int,
+    var evolucion : List<Int>) : Parcelable {
+    //Nivel en el que evoluciona
 }
+

@@ -9,8 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.adapters.EvolucionesAdapter
+import com.example.apppokedex.adapters.PokemonAdapter
+import com.example.apppokedex.entities.PokemonRepo
 import com.example.apppokedex.entities.Pokemons
 
 class FragmentPokemonData : Fragment() {
@@ -26,8 +32,11 @@ class FragmentPokemonData : Fragment() {
     lateinit var labelCategoria: TextView
     lateinit var labelHabilidad : TextView
 
+    lateinit var recEvoluciones : RecyclerView
+    lateinit var adapter: EvolucionesAdapter
 
     lateinit var pokemon : Pokemons
+    var pokemonRepository : PokemonRepo = PokemonRepo()
 
     lateinit var vista : View
 
@@ -47,6 +56,8 @@ class FragmentPokemonData : Fragment() {
         labelCategoria = vista.findViewById(R.id.txtPokeCategoriaDato)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
 
+        recEvoluciones = vista.findViewById(R.id.listaEvolucion)
+
         return vista
     }
 
@@ -65,6 +76,16 @@ class FragmentPokemonData : Fragment() {
         labelCategoria.text = pokemon.categoria
         labelHabilidad.text = pokemon.habilidad
         Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
+
+        adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
+//          onItemClick( ) cambiar a la pantalla datos
+            val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
+                pokemonRepository.pokemon[pokemon.evolucion[position]-1])
+            findNavController().navigate(action)            //accion de cambiar de pantalla
+//            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)
+        }
+        recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
+        recEvoluciones.adapter = adapter
 
     }
 }
