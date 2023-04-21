@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
+import com.example.apppokedex.activity.MainActivity
+import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
@@ -23,6 +26,7 @@ class FragmentLogin : Fragment() {
     lateinit var inputTxtEmail : EditText
     lateinit var inputTxtPass : EditText
     private lateinit var btnNexScreen : Button
+    private lateinit var btnSingin : Button
 
     lateinit var vista : View
 
@@ -38,6 +42,7 @@ class FragmentLogin : Fragment() {
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
         label = vista.findViewById(R.id.txtView)
         btnNexScreen = vista.findViewById(R.id.btnLogin)
+        btnSingin = vista.findViewById(R.id.btnSingin)
         inputTxtEmail = vista.findViewById(R.id.editTxtEmail)
         inputTxtPass = vista.findViewById(R.id.editTxtPass)
         return vista
@@ -54,12 +59,20 @@ class FragmentLogin : Fragment() {
 
             if (userFind != null) {
                 println("Bienvenido ${userFind.lastName} ${userFind.name}.")
-                //val action = Fragment1Directions.actionFragment1ToFragment2( User())
-                val action = FragmentLoginDirections.actionFragmentLoginToFragmentPokedex()
-                findNavController().navigate(action)            //accion de cambiar de pantalla
+
+
+                val intent = Intent(activity, activity_home::class.java)
+                startActivity(intent)
+                // val action = FragmentLoginDirections.actionFragmentLoginToFragmentPokedex()
+                //findNavController().navigate(action)            //accion de cambiar de pantalla
             } else {
                 Snackbar.make(vista, "datos incorrectos", Snackbar.LENGTH_SHORT).show()
             }
+        }
+
+        btnSingin.setOnClickListener{
+        //    val action = FragmentLoginDirections.actionFragmentLoginToFragmentPokedex()
+        //    findNavController().navigate(action)            //accion de cambiar de pantalla
         }
     }
 

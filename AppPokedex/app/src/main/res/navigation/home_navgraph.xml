@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navgraph"
+    app:startDestination="@id/fragmentPokedex">
+
+    <fragment
+        android:id="@+id/fragmentPokemonData"
+        android:name="com.example.apppokedex.fragments.FragmentPokemonData"
+        android:label="fragment_fragment_pokemon_data"
+        tools:layout="@layout/fragment_fragment_pokemon_data">
+        <argument
+            android:name="pokemonData"
+            app:argType="com.example.apppokedex.entities.Pokemons" />
+        <action
+            android:id="@+id/action_fragmentPokemonData_self"
+            app:destination="@id/fragmentPokemonData" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPokedex"
+        android:name="com.example.apppokedex.fragments.FragmentPokedex"
+        android:label="fragment_fragment_pokedex"
+        tools:layout="@layout/fragment_fragment_pokedex">
+        <action
+            android:id="@+id/action_fragmentPokedex_to_fragmentPokemonData"
+            app:destination="@id/fragmentPokemonData" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentUser"
+        android:name="com.example.apppokedex.fragments.FragmentUser"
+        android:label="fragment_fragment_user"
+        tools:layout="@layout/fragment_fragment_user" />
+</navigation>

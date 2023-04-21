@@ -11,29 +11,12 @@
         android:label="fragment_fragment_login"
         tools:layout="@layout/fragment_fragment_login" >
         <action
-            android:id="@+id/action_fragmentLogin_to_fragmentPokedex"
-            app:destination="@id/fragmentPokedex" />
+            android:id="@+id/action_fragmentLogin_to_fragmentRegister"
+            app:destination="@id/fragmentRegister" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentPokedex"
-        android:name="com.example.apppokedex.fragments.FragmentPokedex"
-        android:label="fragment_fragment_pokedex"
-        tools:layout="@layout/fragment_fragment_pokedex" >
-        <action
-            android:id="@+id/action_fragmentPokedex_to_fragmentPokemonData"
-            app:destination="@id/fragmentPokemonData" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentPokemonData"
-        android:name="com.example.apppokedex.fragments.FragmentPokemonData"
-        android:label="fragment_fragment_pokemon_data"
-        tools:layout="@layout/fragment_fragment_pokemon_data" >
-        <argument
-            android:name="pokemonData"
-            app:argType="com.example.apppokedex.entities.Pokemons" />
-        <action
-            android:id="@+id/action_fragmentPokemonData_self"
-            app:destination="@id/fragmentPokemonData"
-            app:popUpTo="@id/fragmentPokedex" />
-    </fragment>
+        android:id="@+id/fragmentRegister"
+        android:name="com.example.apppokedex.fragments.FragmentRegister"
+        android:label="fragment_fragment_register"
+        tools:layout="@layout/fragment_fragment_register" />
 </navigation>

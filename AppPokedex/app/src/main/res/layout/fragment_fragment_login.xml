@@ -53,4 +53,15 @@
         app:layout_constraintEnd_toEndOf="@+id/editTxtPass"
         app:layout_constraintStart_toStartOf="@+id/editTxtPass"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPass" />
+
+    <Button
+        android:id="@+id/btnSingin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Singin"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
