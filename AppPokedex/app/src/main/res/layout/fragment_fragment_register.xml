@@ -1,7 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentRegister" />
+    tools:context=".fragments.FragmentRegister" >
+
+    <EditText
+        android:id="@+id/txtEditRegTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="phone"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegEmail"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegEmail" />
+
+    <EditText
+        android:id="@+id/txtrEditRegApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegNombre"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegNombre"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegNombre" />
+
+    <EditText
+        android:id="@+id/txtEditRegNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgReg"
+        app:layout_constraintStart_toStartOf="@+id/imgReg"
+        app:layout_constraintTop_toBottomOf="@+id/imgReg" />
+
+    <ImageView
+        android:id="@+id/imgReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/txtEditRegEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Mail"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtrEditRegApellido"
+        app:layout_constraintStart_toStartOf="@+id/txtrEditRegApellido"
+        app:layout_constraintTop_toBottomOf="@+id/txtrEditRegApellido" />
+
+    <EditText
+        android:id="@+id/txtEditRegDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Direccion"
+        android:inputType="textPostalAddress"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegTelefono"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegTelefono"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegTelefono" />
+</androidx.constraintlayout.widget.ConstraintLayout>
