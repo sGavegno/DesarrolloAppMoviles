@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/fragmentPokedex"
+        android:icon="@drawable/icono_pokedex"
         android:title="Pokedex"/>
     <item
         android:id="@+id/fragmentUser"
+        android:icon="@drawable/icono_user"
         android:title="Usuario" />
 
 </menu>

@@ -15,7 +15,8 @@
             app:argType="com.example.apppokedex.entities.Pokemons" />
         <action
             android:id="@+id/action_fragmentPokemonData_self"
-            app:destination="@id/fragmentPokemonData" />
+            app:destination="@id/fragmentPokemonData"
+            app:popUpTo="@id/fragmentPokedex" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPokedex"

@@ -4,11 +4,8 @@ class User(
     var name : String,
     var lastName : String,
     var email : String,
-    var password : String) {
+    var password : String,
+    var telefono : String,
+    var direccion : String) {
 
-    var age : Int = 0
-
-    companion object{
-        const val MAX_AGE = 100
-    }
 }

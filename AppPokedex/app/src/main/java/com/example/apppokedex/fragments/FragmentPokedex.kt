@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +18,7 @@ import org.w3c.dom.Text
 class FragmentPokedex : Fragment() {
 
     lateinit var vista : View
-    lateinit var txtTitulo : TextView
+    lateinit var imgTitulo : ImageView
     lateinit var recPokemon : RecyclerView
     lateinit var adapter: PokemonAdapter
 
@@ -29,7 +30,7 @@ class FragmentPokedex : Fragment() {
     ): View? {
         vista = inflater.inflate(R.layout.fragment_fragment_pokedex, container, false)
         recPokemon = vista.findViewById(R.id.listaPoxe)
-        txtTitulo = vista.findViewById(R.id.txtTitle)
+        imgTitulo = vista.findViewById(R.id.imgTitulo)
         return vista
     }
 

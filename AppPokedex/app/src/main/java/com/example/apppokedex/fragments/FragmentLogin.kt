@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
@@ -19,10 +20,10 @@ import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentLogin : Fragment() {
-    private var newUser : User = User( "Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar", "1234")
+    private var newUser : User = User( "Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar", "1234", "01155555555", "Av. Medrano 951")
     var users : MutableList<User> = mutableListOf()
 
-    lateinit var label : TextView
+    lateinit var imgTitulo : ImageView
     lateinit var inputTxtEmail : EditText
     lateinit var inputTxtPass : EditText
     private lateinit var btnNexScreen : Button
@@ -34,13 +35,14 @@ class FragmentLogin : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        users.add(User("Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234"))
-        users.add(User("Tester",  "Primero", "test1@frba.utn.edu.ar",  "5678"))
-        users.add(User("Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357"))
-        users.add(User("Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468"))
+
+        users.add(User("Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
+        users.add(User("Tester",  "Primero", "test1@frba.utn.edu.ar",  "5678", "01155555555", "Av. Medrano 951"))
+        users.add(User("Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
+        users.add(User("Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
-        label = vista.findViewById(R.id.txtView)
+        imgTitulo = vista.findViewById(R.id.imgLogin)
         btnNexScreen = vista.findViewById(R.id.btnLogin)
         btnSingin = vista.findViewById(R.id.btnSingin)
         inputTxtEmail = vista.findViewById(R.id.editTxtEmail)
@@ -58,21 +60,16 @@ class FragmentLogin : Fragment() {
             val userFind = users.find { it.email == inputTxt1 && it.password == inputTxt2}
 
             if (userFind != null) {
-                println("Bienvenido ${userFind.lastName} ${userFind.name}.")
-
-
                 val intent = Intent(activity, activity_home::class.java)
                 startActivity(intent)
-                // val action = FragmentLoginDirections.actionFragmentLoginToFragmentPokedex()
-                //findNavController().navigate(action)            //accion de cambiar de pantalla
             } else {
                 Snackbar.make(vista, "datos incorrectos", Snackbar.LENGTH_SHORT).show()
             }
         }
 
         btnSingin.setOnClickListener{
-        //    val action = FragmentLoginDirections.actionFragmentLoginToFragmentPokedex()
-        //    findNavController().navigate(action)            //accion de cambiar de pantalla
+            val action = FragmentLoginDirections.actionFragmentLoginToFragmentRegister()
+            findNavController().navigate(action)            //accion de cambiar de pantalla
         }
     }
 
