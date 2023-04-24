@@ -66,19 +66,6 @@ class FragmentPokemonData : Fragment() {
     override fun onStart() {
         super.onStart()
 //        findNavController().navigateUp()
-        pokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).pokemonData
-
-        labelName.setText(pokemon.nombre)
-        labelId.setText(pokemon.id.toString())
-        labelTipo.setText(pokemon.tipo)
-        labelDebilidad.setText(pokemon.debilidad)
-        labelDescripcion.setText(pokemon.descripcion)
-        labelAltura.setText(pokemon.altura)
-        labelPeso.setText(pokemon.peso)
-        labelCategoria.setText(pokemon.categoria)
-        labelHabilidad.setText(pokemon.habilidad)
-
-        Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
         adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
 //          onItemClick( ) cambiar a la pantalla datos
@@ -89,8 +76,27 @@ class FragmentPokemonData : Fragment() {
             findNavController().navigate(action)            //accion de cambiar de pantalla
 //            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)
         }
-        recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
-        recEvoluciones.adapter = adapter
+
+        pokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).pokemonData
+
+        if(pokemon.nombre != "")
+        {
+            labelName.setText(pokemon.nombre)
+            labelId.setText(pokemon.id.toString())
+            labelTipo.setText(pokemon.tipo)
+            labelDebilidad.setText(pokemon.debilidad)
+            labelDescripcion.setText(pokemon.descripcion)
+            labelAltura.setText(pokemon.altura)
+            labelPeso.setText(pokemon.peso)
+            labelCategoria.setText(pokemon.categoria)
+            labelHabilidad.setText(pokemon.habilidad)
+
+            Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
+
+            recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
+            recEvoluciones.adapter = adapter
+        }
+
 
     }
 

@@ -37,7 +37,7 @@ class FragmentLogin : Fragment() {
     ): View? {
 
         users.add(User("Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester",  "Primero", "test1@frba.utn.edu.ar",  "5678", "01155555555", "Av. Medrano 951"))
+        users.add(User("Sebastian",  "Gavgeno", "a",  "1", "01155555555", "Av. Medrano 951"))
         users.add(User("Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
         users.add(User("Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
 
