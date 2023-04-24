@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.entities.PokemonRepo
 import com.example.apppokedex.entities.Pokemons
+import com.example.apppokedex.entities.User
 
 class EvolucionesAdapter(
     var evolucionList: List <Int>,
@@ -20,6 +21,7 @@ class EvolucionesAdapter(
     class EvolucionHolder(v: View) : RecyclerView.ViewHolder(v){
 
         var pokemonRepository : PokemonRepo = PokemonRepo()
+        var users : MutableList<User> = mutableListOf()
 
         private var vista : View
         init{
@@ -29,8 +31,12 @@ class EvolucionesAdapter(
         fun setEvolucion(id : Int){
             val txtEvolucion : TextView = vista.findViewById(R.id.txtEvolucion)
             var imgEvolucion : ImageView = vista.findViewById(R.id.imgEvolucion)
-            txtEvolucion.text = pokemonRepository.pokemon[id-1].nombre
-            Glide.with(vista).load(pokemonRepository.pokemon[id-1].imgURL).into(imgEvolucion)
+            val pokemonFind = pokemonRepository.pokemon.find { it.id == id }
+            if(pokemonFind != null)
+            {
+                txtEvolucion.text = pokemonFind.nombre
+                Glide.with(vista).load(pokemonFind.imgURL).into(imgEvolucion)
+            }
         }
         fun getCard(): CardView {
             return vista.findViewById(R.id.cardEvolucion)

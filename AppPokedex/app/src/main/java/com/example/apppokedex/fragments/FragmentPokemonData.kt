@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -18,19 +19,20 @@ import com.example.apppokedex.adapters.EvolucionesAdapter
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.entities.PokemonRepo
 import com.example.apppokedex.entities.Pokemons
+import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
 
-    lateinit var labelName : TextView
-    lateinit var labelId : TextView
-    lateinit var labelTipo : TextView
-    lateinit var labelDebilidad : TextView
+    lateinit var labelName : EditText
+    lateinit var labelId : EditText
+    lateinit var labelTipo : EditText
+    lateinit var labelDebilidad : EditText
     lateinit var imgPokemon : ImageView
-    lateinit var labelDescripcion : TextView
-    lateinit var labelAltura : TextView
-    lateinit var labelPeso : TextView
-    lateinit var labelCategoria: TextView
-    lateinit var labelHabilidad : TextView
+    lateinit var labelDescripcion : EditText
+    lateinit var labelAltura : EditText
+    lateinit var labelPeso : EditText
+    lateinit var labelCategoria: EditText
+    lateinit var labelHabilidad : EditText
 
     lateinit var recEvoluciones : RecyclerView
     lateinit var adapter: EvolucionesAdapter
@@ -66,19 +68,22 @@ class FragmentPokemonData : Fragment() {
 //        findNavController().navigateUp()
         pokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).pokemonData
 
-        labelName.text = pokemon.nombre
-        labelId.text = pokemon.id.toString()
-        labelTipo.text = pokemon.tipo
-        labelDebilidad.text = pokemon.debilidad
-        labelDescripcion.text = pokemon.descripcion
-        labelAltura.text = pokemon.altura
-        labelPeso.text = pokemon.peso
-        labelCategoria.text = pokemon.categoria
-        labelHabilidad.text = pokemon.habilidad
+        labelName.setText(pokemon.nombre)
+        labelId.setText(pokemon.id.toString())
+        labelTipo.setText(pokemon.tipo)
+        labelDebilidad.setText(pokemon.debilidad)
+        labelDescripcion.setText(pokemon.descripcion)
+        labelAltura.setText(pokemon.altura)
+        labelPeso.setText(pokemon.peso)
+        labelCategoria.setText(pokemon.categoria)
+        labelHabilidad.setText(pokemon.habilidad)
+
         Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
         adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
 //          onItemClick( ) cambiar a la pantalla datos
+            //Guardar datos actualizados
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
             val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
                 pokemonRepository.pokemon[pokemon.evolucion[position]-1])
             findNavController().navigate(action)            //accion de cambiar de pantalla
@@ -88,4 +93,11 @@ class FragmentPokemonData : Fragment() {
         recEvoluciones.adapter = adapter
 
     }
+
+    override fun onStop() {
+        super.onStop()
+        //Atender accion de ir para atras, y guardar cambios
+        Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+    }
+
 }

@@ -65,4 +65,11 @@ class PokemonAdapter(
             onClick(position)               //
         }
     }
+
+    fun deleteItem(position: Int) {
+        // Eliminar el objeto en la posición especificada
+        pokemonList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
 }

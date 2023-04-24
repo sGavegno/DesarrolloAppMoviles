@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
+import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.PokemonRepo
 import org.w3c.dom.Text
 
@@ -46,6 +48,16 @@ class FragmentPokedex : Fragment() {
         }
         recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
         recPokemon.adapter = adapter
+
+        val swipeHandler = object : ActionLista(adapter) {
+            override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+                // Permitir que se deslice solo en ciertos elementos del RecyclerView
+                return super.getSwipeDirs(recyclerView, viewHolder)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recPokemon)
 
     }
 
