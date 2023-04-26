@@ -6,6 +6,8 @@ class PokemonRepo {
     private var urlImagen : String = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
 
     init {
+        //pokemon.add(Pokemons( 1, "Bulbasaur", listOf("Planta","Veneno"),"Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1,  listOf(1,2,3)))
+        //pokemon.add(Pokemons( 1, "Bulbasaur", listOf(1,7),"Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1,  listOf(1,2,3)))
         pokemon.add(Pokemons( 1, "Bulbasaur", "Planta/Veneno","Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1,  listOf(1,2,3)))
         pokemon.add(Pokemons( 2, "Ivysaur", "Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"002.png","Cuando le crece bastante el bulbo del lomo, pierde la capacidad de erguirse sobre las patas traseras.", "1,0 m", "13,0 Kg","Semilla","Espesura", 1, listOf(1,2,3)))
         pokemon.add(Pokemons( 3, "Venusaur", "Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"003.png","La planta florece cuando absorbe energía solar, lo cual le obliga a buscar siempre la luz del sol.","2,0 m", "100,0 Kg","Semilla","Espesura", 1, listOf(1,2,3)))
@@ -54,7 +56,187 @@ class PokemonRepo {
         pokemon.add(Pokemons( 34, "Nidoking", "Veneno/Tierra","Fuego/Psiquico/Volador/Hielo",urlImagen+"034.png","Una vez que se desboca, no hay quien lo pare. Solo se calma ante Nidoqueen, su compañera de toda la vida.", "0.7 m", "6.9 Kg","Taladro","Punto Tóxico\n"+"Rivalidad", 1, listOf(32,33,34)))
 
 
+        pokemon.add(Pokemons( 35, "Clefairy", "Hada","Acero/Veneno",urlImagen+"035.png","", "", "","","\n"+"", 1, listOf(35,36)))
+        pokemon.add(Pokemons( 36, "Clefable", "","",urlImagen+"036.png","", "", "","","\n"+"", 1, listOf(35,36)))
+
+        pokemon.add(Pokemons( 37, "Vulpix", "","",urlImagen+"037.png","", "", "","","\n"+"", 1, listOf(37,38)))
+        pokemon.add(Pokemons( 38, "Ninetales", "","",urlImagen+"038.png","", "", "","","\n"+"", 1, listOf(37,38)))
+
+        pokemon.add(Pokemons( 39, "Jigglypuff", "","",urlImagen+"039.png","", "", "","","\n"+"", 1, listOf(39,40)))
+        pokemon.add(Pokemons( 40, "Wigglytuff", "","",urlImagen+"040.png","", "", "","","\n"+"", 1, listOf(39,40)))
+
+        pokemon.add(Pokemons( 41, "Zubat", "","",urlImagen+"041.png","", "", "","","\n"+"", 1, listOf(41,42)))
+        pokemon.add(Pokemons( 42, "Golbat", "","",urlImagen+"042.png","", "", "","","\n"+"", 1, listOf(41,42)))
+
+        pokemon.add(Pokemons( 43, "Oddish", "","",urlImagen+"043.png","", "", "","","\n"+"", 1, listOf(43,44,45)))
+        pokemon.add(Pokemons( 44, "Gloom", "","",urlImagen+"044.png","", "", "","","\n"+"", 1, listOf(43,44,45)))
+        pokemon.add(Pokemons( 45, "Vileplume", "","",urlImagen+"045.png","", "", "","","\n"+"", 1, listOf(43,44,45)))
+
+        pokemon.add(Pokemons( 46, "Paras", "","",urlImagen+"046.png","", "", "","","\n"+"", 1, listOf(46,47)))
+        pokemon.add(Pokemons( 47, "Parasect", "","",urlImagen+"047.png","", "", "","","\n"+"", 1, listOf(46,47)))
+
+        pokemon.add(Pokemons( 48, "Venonat", "","",urlImagen+"048.png","", "", "","","\n"+"", 1, listOf(48,49)))
+        pokemon.add(Pokemons( 49, "Venomoth", "","",urlImagen+"049.png","", "", "","","\n"+"", 1, listOf(48,49)))
+
+        pokemon.add(Pokemons( 50, "Diglett", "","",urlImagen+"050.png","", "", "","","\n"+"", 1, listOf(50,51)))
+        pokemon.add(Pokemons( 51, "Dugtrio", "","",urlImagen+"051.png","", "", "","","\n"+"", 1, listOf(50,51)))
+
+        pokemon.add(Pokemons( 52, "Meowth", "","",urlImagen+"052.png","", "", "","","\n"+"", 1, listOf(52,53)))
+        pokemon.add(Pokemons( 53, "Persian", "","",urlImagen+"053.png","", "", "","","\n"+"", 1, listOf(52,53)))
+
+        pokemon.add(Pokemons( 54, "Psyduck", "","",urlImagen+"054.png","", "", "","","\n"+"", 1, listOf(54,55)))
+        pokemon.add(Pokemons( 55, "Golduck", "","",urlImagen+"055.png","", "", "","","\n"+"", 1, listOf(54,55)))
+
+        pokemon.add(Pokemons( 56, "Mankey", "","",urlImagen+"056.png","", "", "","","\n"+"", 1, listOf(56,57)))
+        pokemon.add(Pokemons( 57, "Primeape", "","",urlImagen+"057.png","", "", "","","\n"+"", 1, listOf(56,57)))
+
+        pokemon.add(Pokemons( 58, "Growlithe", "","",urlImagen+"058.png","", "", "","","\n"+"", 1, listOf(58,59)))
+        pokemon.add(Pokemons( 59, "Arcanine", "","",urlImagen+"059.png","", "", "","","\n"+"", 1, listOf(58,59)))
+
+        pokemon.add(Pokemons( 60, "Poliwag", "","",urlImagen+"060.png","", "", "","","\n"+"", 1, listOf(60,61,62)))
+        pokemon.add(Pokemons( 61, "Poliwhirl", "","",urlImagen+"061.png","", "", "","","\n"+"", 1, listOf(60,61,62)))
+        pokemon.add(Pokemons( 62, "Poliwrath", "","",urlImagen+"062.png","", "", "","","\n"+"", 1, listOf(60,61,62)))
+
+        pokemon.add(Pokemons( 63, "Abra", "","",urlImagen+"063.png","", "", "","","\n"+"", 1, listOf(63,64,65)))
+        pokemon.add(Pokemons( 64, "Kadabra", "","",urlImagen+"064.png","", "", "","","\n"+"", 1, listOf(63,64,65)))
+        pokemon.add(Pokemons( 65, "Alakazam", "","",urlImagen+"065.png","", "", "","","\n"+"", 1, listOf(63,64,65)))
+
+        pokemon.add(Pokemons( 66, "Machop", "","",urlImagen+"066.png","", "", "","","\n"+"", 1, listOf(66,67,68)))
+        pokemon.add(Pokemons( 67, "Machoke", "","",urlImagen+"067.png","", "", "","","\n"+"", 1, listOf(66,67,68)))
+        pokemon.add(Pokemons( 68, "Machamp", "","",urlImagen+"068.png","", "", "","","\n"+"", 1, listOf(66,67,68)))
+
+        pokemon.add(Pokemons( 69, "Bellsprout", "","",urlImagen+"069.png","", "", "","","\n"+"", 1, listOf(69,70,71)))
+        pokemon.add(Pokemons( 70, "Weepinbell", "","",urlImagen+"070.png","", "", "","","\n"+"", 1, listOf(69,70,71)))
+        pokemon.add(Pokemons( 71, "Victreebel", "","",urlImagen+"071.png","", "", "","","\n"+"", 1, listOf(69,70,71)))
+
+        pokemon.add(Pokemons( 72, "Tentacool", "","",urlImagen+"072.png","", "", "","","\n"+"", 1, listOf(72,73)))
+        pokemon.add(Pokemons( 73, "Tentacruel", "","",urlImagen+"073.png","", "", "","","\n"+"", 1, listOf(72,73)))
+
+        pokemon.add(Pokemons( 74, "Geodude", "","",urlImagen+"074.png","", "", "","","\n"+"", 1, listOf(74,75,76)))
+        pokemon.add(Pokemons( 75, "Graveler", "","",urlImagen+"075.png","", "", "","","\n"+"", 1, listOf(74,75,76)))
+        pokemon.add(Pokemons( 76, "Golem", "","",urlImagen+"076.png","", "", "","","\n"+"", 1, listOf(74,75,76)))
+
+        pokemon.add(Pokemons( 77, "Ponyta", "","",urlImagen+"077.png","", "", "","","\n"+"", 1, listOf(77,78)))
+        pokemon.add(Pokemons( 78, "Rapidash", "","",urlImagen+"078.png","", "", "","","\n"+"", 1, listOf(77,78)))
+
+        pokemon.add(Pokemons( 79, "Slowpoke", "","",urlImagen+"079.png","", "", "","","\n"+"", 1, listOf(79,80)))
+        pokemon.add(Pokemons( 80, "Slowbro", "","",urlImagen+"080.png","", "", "","","\n"+"", 1, listOf(79,80)))
+
+        pokemon.add(Pokemons( 81, "Magnemite", "","",urlImagen+"081.png","", "", "","","\n"+"", 1, listOf(81,82)))
+        pokemon.add(Pokemons( 82, "Magneton", "","",urlImagen+"082.png","", "", "","","\n"+"", 1, listOf(81,82)))
+
+        pokemon.add(Pokemons( 83, "Farfetch’d", "","",urlImagen+"083.png","", "", "","","\n"+"", 1, listOf(83)))
+
+        pokemon.add(Pokemons( 84, "Doduo", "","",urlImagen+"084.png","", "", "","","\n"+"", 1, listOf(84,85)))
+        pokemon.add(Pokemons( 85, "Dodrio", "","",urlImagen+"085.png","", "", "","","\n"+"", 1, listOf(84,85)))
+
+        pokemon.add(Pokemons( 86, "Seel", "","",urlImagen+"086.png","", "", "","","\n"+"", 1, listOf(86,87)))
+        pokemon.add(Pokemons( 87, "Dewgong", "","",urlImagen+"087.png","", "", "","","\n"+"", 1, listOf(86,87)))
+
+        pokemon.add(Pokemons( 88, "Grimer", "","",urlImagen+"088.png","", "", "","","\n"+"", 1, listOf(88,89)))
+        pokemon.add(Pokemons( 89, "Muk", "","",urlImagen+"089.png","", "", "","","\n"+"", 1, listOf(88,89)))
+
+        pokemon.add(Pokemons( 90, "Shellder", "","",urlImagen+"090.png","", "", "","","\n"+"", 1, listOf(90,91)))
+        pokemon.add(Pokemons( 91, "Cloyster", "","",urlImagen+"091.png","", "", "","","\n"+"", 1, listOf(90,91)))
+
+        pokemon.add(Pokemons( 92, "Gastly", "","",urlImagen+"092.png","", "", "","","\n"+"", 1, listOf(92,93,94)))
+        pokemon.add(Pokemons( 93, "Haunter", "","",urlImagen+"093.png","", "", "","","\n"+"", 1, listOf(92,93,94)))
+        pokemon.add(Pokemons( 94, "Gengar", "","",urlImagen+"094.png","", "", "","","\n"+"", 1, listOf(92,93,94)))
+
+        pokemon.add(Pokemons( 95, "Onix", "","",urlImagen+"095.png","", "", "","","\n"+"", 1, listOf(95)))
+
+        pokemon.add(Pokemons( 96, "Drowzee", "","",urlImagen+"096.png","", "", "","","\n"+"", 1, listOf(96,97)))
+        pokemon.add(Pokemons( 97, "Hypno", "","",urlImagen+"097.png","", "", "","","\n"+"", 1, listOf(96,97)))
+
+        pokemon.add(Pokemons( 98, "Krabby", "","",urlImagen+"098.png","", "", "","","\n"+"", 1, listOf(98,99)))
+        pokemon.add(Pokemons( 99, "Kingler", "","",urlImagen+"099.png","", "", "","","\n"+"", 1, listOf(98,99)))
+
+        pokemon.add(Pokemons( 100, "Voltorb", "","",urlImagen+"100.png","", "", "","","\n"+"", 1, listOf(100,101)))
+        pokemon.add(Pokemons( 101, "Electrode", "","",urlImagen+"101.png","", "", "","","\n"+"", 1, listOf(100,101)))
+
+        pokemon.add(Pokemons( 102, "Exeggcute", "","",urlImagen+"102.png","", "", "","","\n"+"", 1, listOf(102,103)))
+        pokemon.add(Pokemons( 103, "Exeggutor", "","",urlImagen+"103.png","", "", "","","\n"+"", 1, listOf(102,103)))
+
+        pokemon.add(Pokemons( 104, "Cubone", "","",urlImagen+"104.png","", "", "","","\n"+"", 1, listOf(104,105)))
+        pokemon.add(Pokemons( 105, "Marowak", "","",urlImagen+"105.png","", "", "","","\n"+"", 1, listOf(104,105)))
+
+        pokemon.add(Pokemons( 106, "Hitmonlee", "","",urlImagen+"106.png","", "", "","","\n"+"", 1, listOf(106)))
+
+        pokemon.add(Pokemons( 107, "Hitmonchan", "","",urlImagen+"107.png","", "", "","","\n"+"", 1, listOf(107)))
+
+        pokemon.add(Pokemons( 108, "Lickitung", "","",urlImagen+"108.png","", "", "","","\n"+"", 1, listOf(108)))
+
+        pokemon.add(Pokemons( 109, "Koffing", "","",urlImagen+"109.png","", "", "","","\n"+"", 1, listOf(109,110)))
+        pokemon.add(Pokemons( 110, "Weezing", "","",urlImagen+"110.png","", "", "","","\n"+"", 1, listOf(109,110)))
+
+        pokemon.add(Pokemons( 111, "Rhyhorn", "","",urlImagen+"111.png","", "", "","","\n"+"", 1, listOf(111,112)))
+        pokemon.add(Pokemons( 112, "Rhydon", "","",urlImagen+"112.png","", "", "","","\n"+"", 1, listOf(112)))
+
+        pokemon.add(Pokemons( 113, "Chansey", "","",urlImagen+"113.png","", "", "","","\n"+"", 1, listOf(113)))
+
+        pokemon.add(Pokemons( 114, "Tangela", "","",urlImagen+"114.png","", "", "","","\n"+"", 1, listOf(114)))
+
+        pokemon.add(Pokemons( 115, "Kangaskhan", "","",urlImagen+"115.png","", "", "","","\n"+"", 1, listOf(115)))
+
+        pokemon.add(Pokemons( 116, "Horsea", "","",urlImagen+"116.png","", "", "","","\n"+"", 1, listOf(116,117)))
+        pokemon.add(Pokemons( 117, "Seadra", "","",urlImagen+"117.png","", "", "","","\n"+"", 1, listOf(116,117)))
+
+        pokemon.add(Pokemons( 118, "Goldeen", "","",urlImagen+"118.png","", "", "","","\n"+"", 1, listOf(118,119)))
+        pokemon.add(Pokemons( 119, "Seaking", "","",urlImagen+"119.png","", "", "","","\n"+"", 1, listOf(118,119)))
+
+        pokemon.add(Pokemons( 120, "Staryu", "","",urlImagen+"120.png","", "", "","","\n"+"", 1, listOf(120,121)))
+        pokemon.add(Pokemons( 121, "Starmie", "","",urlImagen+"121.png","", "", "","","\n"+"", 1, listOf(120,121)))
+
+        pokemon.add(Pokemons( 122, "Mr. Mime", "","",urlImagen+"122.png","", "", "","","\n"+"", 1, listOf(122)))
+
+        pokemon.add(Pokemons( 123, "Scyther", "","",urlImagen+"123.png","", "", "","","\n"+"", 1, listOf(123)))
+
+        pokemon.add(Pokemons( 124, "Jynx", "","",urlImagen+"124.png","", "", "","","\n"+"", 1, listOf(124)))
+
+        pokemon.add(Pokemons( 125, "Electabuzz", "","",urlImagen+"125.png","", "", "","","\n"+"", 1, listOf(125)))
+
+        pokemon.add(Pokemons( 126, "Magmar", "","",urlImagen+"126.png","", "", "","","\n"+"", 1, listOf(126)))
+
+        pokemon.add(Pokemons( 127, "Pinsir", "","",urlImagen+"127.png","", "", "","","\n"+"", 1, listOf(127)))
+
+        pokemon.add(Pokemons( 128, "Tauros", "","",urlImagen+"128.png","", "", "","","\n"+"", 1, listOf(128)))
+
+        pokemon.add(Pokemons( 129, "Magikarp", "","",urlImagen+"129.png","", "", "","","\n"+"", 1, listOf(129,130)))
+        pokemon.add(Pokemons( 130, "Gyarados", "","",urlImagen+"130.png","", "", "","","\n"+"", 1, listOf(129,130)))
+
+        pokemon.add(Pokemons( 131, "Lapras", "","",urlImagen+"131.png","", "", "","","\n"+"", 1, listOf(131)))
+
+        pokemon.add(Pokemons( 132, "Ditto", "","",urlImagen+"132.png","", "", "","","\n"+"", 1, listOf(132)))
+
+        pokemon.add(Pokemons( 133, "Eevee", "","",urlImagen+"133.png","", "", "","","\n"+"", 1, listOf(133,134,135,136)))
+        pokemon.add(Pokemons( 134, "Vaporeon", "","",urlImagen+"134.png","", "", "","","\n"+"", 1, listOf(133,134)))
+        pokemon.add(Pokemons( 135, "Jolteon", "","",urlImagen+"135.png","", "", "","","\n"+"", 1, listOf(133,135)))
+        pokemon.add(Pokemons( 136, "Flareon ", "","",urlImagen+"136.png","", "", "","","\n"+"", 1, listOf(133,136)))
+
+        pokemon.add(Pokemons( 137, "Porygon", "","",urlImagen+"137.png","", "", "","","\n"+"", 1, listOf(137)))
+
+        pokemon.add(Pokemons( 138, "Omanyte", "","",urlImagen+"138.png","", "", "","","\n"+"", 1, listOf(138,139)))
+        pokemon.add(Pokemons( 139, "Omastar", "","",urlImagen+"139.png","", "", "","","\n"+"", 1, listOf(138,139)))
+
+        pokemon.add(Pokemons( 140, "Kabuto", "","",urlImagen+"140.png","", "", "","","\n"+"", 1, listOf(140,141)))
+        pokemon.add(Pokemons( 141, "Kabutops", "","",urlImagen+"141.png","", "", "","","\n"+"", 1, listOf(140,141)))
+
+        pokemon.add(Pokemons( 142, "Aerodactyl", "","",urlImagen+"142.png","", "", "","","\n"+"", 1, listOf(142)))
+
+        pokemon.add(Pokemons( 143, "Snorlax", "","",urlImagen+"143.png","", "", "","","\n"+"", 1, listOf(143)))
+
+        pokemon.add(Pokemons( 144, "Articuno", "","",urlImagen+"144.png","", "", "","","\n"+"", 1, listOf(144)))
+
+        pokemon.add(Pokemons( 145, "Zapdos", "","",urlImagen+"145.png","", "", "","","\n"+"", 1, listOf(145)))
+
+        pokemon.add(Pokemons( 146, "Moltres", "","",urlImagen+"146.png","", "", "","","\n"+"", 1, listOf(146)))
+
+        pokemon.add(Pokemons( 147, "Dratini", "Dragon","",urlImagen+"147.png","", "", "","","\n"+"", 1, listOf(147,148,149)))
+        pokemon.add(Pokemons( 148, "Dragonair", "Dragon","",urlImagen+"148.png","", "", "","","\n"+"", 1, listOf(147,148,149)))
+        pokemon.add(Pokemons( 149, "Dragonite", "Dragon/Volador","",urlImagen+"149.png","", "", "","","\n"+"", 1, listOf(147,148,149)))
+
         pokemon.add(Pokemons( 150, "Mewtwo", "Písquico","Fantasma/Siniestro/Bicho",urlImagen+"150.png","Su ADN es casi el mismo que el de Mew. Sin embargo, su tamaño y carácter son muy diferentes.", "2,0 m", "122,0 Kg","Genetico","Presión", 1, listOf(150)))
+
         pokemon.add(Pokemons( 151, "Mew", "Písquico","Fantasma/Siniestro/Bicho",urlImagen+"151.png","Si se observa a través de un microscopio, puede distinguirse cuán corto, fino y delicado es el pelaje de este Pokémon.", "0,4 m", "4,0 Kg","Nueva Especie","Sincronía", 1, listOf(151)))
     }
 }
