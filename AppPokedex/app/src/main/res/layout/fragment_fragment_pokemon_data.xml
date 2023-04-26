@@ -8,18 +8,18 @@
     android:background="#FF0000"
     tools:context=".fragments.FragmentPokemonData">
 
-    <EditText
+    <TextView
         android:id="@+id/txtPokeName"
-        android:layout_width="212dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="186dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:text="Nombre"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,31 +27,32 @@
         android:id="@+id/txtPokeId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Nº:"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/txtPokeName"
-        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="@+id/txtPokeName"
         app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtPokeIdDato"
-        android:layout_width="121dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
+        android:background="@android:color/transparent"
         android:text="Nº de ID"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/txtPokeId"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toEndOf="@+id/txtPokeId"
         app:layout_constraintTop_toTopOf="@+id/txtPokeId"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtPokeDebilidad"
@@ -66,11 +67,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listaEvolucion" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtPokeDebilidadDato"
         android:layout_width="247dp"
         android:layout_height="57dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:background="@android:color/transparent"
         android:text="PokeDebilidad"
         android:textAlignment="center"
@@ -79,20 +80,20 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtPokeDebilidad"
         app:layout_constraintStart_toEndOf="@+id/txtPokeDebilidad"
         app:layout_constraintTop_toTopOf="@+id/txtPokeDebilidad"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtPokeTipoDato"
-        android:layout_width="157dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:text="PokeTipo"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/txtPokeName"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="@+id/txtPokeName"
         app:layout_constraintTop_toBottomOf="@+id/txtPokeId" />
 
@@ -145,7 +146,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvImgPokemom">
 
-        <EditText
+        <TextView
             android:id="@+id/txtPokeDescripcion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -184,11 +185,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtPokeAlturaDato"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="84dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="88dp"
                 android:background="@android:color/transparent"
                 android:text="PokeAltura"
                 android:textColor="#FFFFFF"
@@ -196,7 +197,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokeAltura"
                 app:layout_constraintStart_toEndOf="@+id/txtPokeAltura"
                 app:layout_constraintTop_toTopOf="@+id/txtPokeAltura"
-                app:layout_constraintVertical_bias="0.38" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtPokePeso"
@@ -211,11 +212,11 @@
                 app:layout_constraintStart_toStartOf="@+id/txtPokeAltura"
                 app:layout_constraintTop_toBottomOf="@+id/txtPokeAltura" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtPokeHabilidadDato"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
                 android:background="@android:color/transparent"
                 android:text="PokeHabilidad"
                 android:textAlignment="viewStart"
@@ -224,7 +225,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokeHabilidad"
                 app:layout_constraintStart_toEndOf="@+id/txtPokeHabilidad"
                 app:layout_constraintTop_toTopOf="@+id/txtPokeHabilidad"
-                app:layout_constraintVertical_bias="0.576" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtPokeHabilidad"
@@ -238,11 +239,11 @@
                 app:layout_constraintStart_toStartOf="@+id/txtPokeCategoria"
                 app:layout_constraintTop_toBottomOf="@+id/txtPokeCategoria" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtPokePesoDato"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="92dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
                 android:background="@android:color/transparent"
                 android:text="PokePeso"
                 android:textColor="#FFFFFF"
@@ -250,7 +251,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokePeso"
                 app:layout_constraintStart_toEndOf="@+id/txtPokePeso"
                 app:layout_constraintTop_toTopOf="@+id/txtPokePeso"
-                app:layout_constraintVertical_bias="0.423" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtPokeCategoria"
@@ -265,11 +266,11 @@
                 app:layout_constraintStart_toStartOf="@+id/txtPokePeso"
                 app:layout_constraintTop_toBottomOf="@+id/txtPokePeso" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtPokeCategoriaDato"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
                 android:background="@android:color/transparent"
                 android:text="PokeCategoria"
                 android:textAlignment="viewStart"
@@ -278,7 +279,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokeCategoria"
                 app:layout_constraintStart_toEndOf="@+id/txtPokeCategoria"
                 app:layout_constraintTop_toTopOf="@+id/txtPokeCategoria"
-                app:layout_constraintVertical_bias="0.375" />
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

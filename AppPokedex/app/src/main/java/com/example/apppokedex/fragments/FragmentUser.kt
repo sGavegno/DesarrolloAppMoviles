@@ -18,7 +18,7 @@ import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentUser : Fragment() {
-    private var newUser : User = User( "Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar", "1234", "01155555555", "Av. Medrano 951")
+    private var newUser : User = User( 0,"Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar", "1234", "01155555555", "Av. Medrano 951")
 
     lateinit var vista : View
 

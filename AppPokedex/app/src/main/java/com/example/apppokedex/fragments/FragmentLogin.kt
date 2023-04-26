@@ -1,9 +1,7 @@
 package com.example.apppokedex.fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +9,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
-import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.activity.activity_home
+import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentLogin : Fragment() {
-    private var newUser : User = User( "Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar", "1234", "01155555555", "Av. Medrano 951")
     var users : MutableList<User> = mutableListOf()
+
+    private var db: AppDatabase? = null
+    private var userDao: UserDao? = null
 
     lateinit var imgTitulo : ImageView
     lateinit var inputTxtEmail : EditText
@@ -34,12 +34,12 @@ class FragmentLogin : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        users.add(User("Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
-        users.add(User("Sebastian",  "Gavgeno", "a",  "1", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
+        users.add(User(1,"Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
+        users.add(User(2,"Sebastian",  "Gavgeno", "a",  "1", "01155555555", "Av. Medrano 951"))
+        users.add(User(3,"Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
+        users.add(User(4,"Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
         imgTitulo = vista.findViewById(R.id.imgLogin)

@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,17 +24,17 @@ import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
 
-    lateinit var labelName : EditText
-    lateinit var labelId : EditText
-    lateinit var labelTipo : EditText
-    lateinit var labelDebilidad : EditText
+    lateinit var labelName : TextView
+    lateinit var labelId : TextView
+    lateinit var labelTipo : TextView
+    lateinit var labelDebilidad : TextView
     lateinit var imgPokemon : ImageView
-    lateinit var labelDescripcion : EditText
-    lateinit var labelAltura : EditText
-    lateinit var labelPeso : EditText
-    lateinit var labelCategoria: EditText
-    lateinit var labelHabilidad : EditText
-
+    lateinit var labelDescripcion : TextView
+    lateinit var labelAltura : TextView
+    lateinit var labelPeso : TextView
+    lateinit var labelCategoria: TextView
+    lateinit var labelHabilidad : TextView
+    lateinit var txtEvolucion : TextView
     lateinit var recEvoluciones : RecyclerView
     lateinit var adapter: EvolucionesAdapter
 
@@ -57,9 +58,39 @@ class FragmentPokemonData : Fragment() {
         labelPeso = vista.findViewById(R.id.txtPokePesoDato)
         labelCategoria = vista.findViewById(R.id.txtPokeCategoriaDato)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
-
+        txtEvolucion = vista.findViewById(R.id.txtPokeEvolucion)
         recEvoluciones = vista.findViewById(R.id.listaEvolucion)
 
+        labelName.setOnClickListener {
+            showAlertDialogNomre()
+        }
+        labelId.setOnClickListener {
+            showAlertDialogId()
+        }
+        labelTipo.setOnClickListener {
+            showAlertDialogTipo()
+        }
+        labelDebilidad.setOnClickListener {
+            showAlertDialogDebilidad()
+        }
+        labelDescripcion.setOnClickListener {
+            showAlertDialogDescripcion()
+        }
+        imgPokemon.setOnClickListener {
+            showAlertDialogImg()
+        }
+        labelAltura.setOnClickListener {
+            showAlertDialogAltura()
+        }
+        labelPeso.setOnClickListener {
+            showAlertDialogPeso()
+        }
+        labelCategoria.setOnClickListener {
+            showAlertDialogCategoria()
+        }
+        labelHabilidad.setOnClickListener {
+            showAlertDialogHabilidad()
+        }
         return vista
     }
 
@@ -67,43 +98,296 @@ class FragmentPokemonData : Fragment() {
         super.onStart()
 //        findNavController().navigateUp()
 
-        adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
-//          onItemClick( ) cambiar a la pantalla datos
-            //Guardar datos actualizados
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-            val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
-                pokemonRepository.pokemon[pokemon.evolucion[position]-1])
-            findNavController().navigate(action)            //accion de cambiar de pantalla
-//            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)
-        }
-
         pokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).pokemonData
 
         if(pokemon.nombre != "")
         {
-            labelName.setText(pokemon.nombre)
-            labelId.setText(pokemon.id.toString())
-            labelTipo.setText(pokemon.tipo)
-            labelDebilidad.setText(pokemon.debilidad)
-            labelDescripcion.setText(pokemon.descripcion)
-            labelAltura.setText(pokemon.altura)
-            labelPeso.setText(pokemon.peso)
-            labelCategoria.setText(pokemon.categoria)
-            labelHabilidad.setText(pokemon.habilidad)
+            labelName.text = pokemon.nombre
+            labelId.text =pokemon.id.toString()
+            labelTipo.text =pokemon.tipo
+            labelDebilidad.text = pokemon.debilidad
+            labelDescripcion.text = pokemon.descripcion
+            labelAltura.text = pokemon.altura
+            labelPeso.text = pokemon.peso
+            labelCategoria.text = pokemon.categoria
+            labelHabilidad.text = pokemon.habilidad
 
             Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
+            adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
+//          onItemClick( ) cambiar a la pantalla datos
+                //Guardar datos actualizados
+                Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+                val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
+                    pokemonRepository.pokemon[pokemon.evolucion[position]-1])
+                findNavController().navigate(action)            //accion de cambiar de pantalla
+            }
             recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
             recEvoluciones.adapter = adapter
         }
-
-
     }
 
-    override fun onStop() {
-        super.onStop()
-        //Atender accion de ir para atras, y guardar cambios
-        Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+    private fun showAlertDialogNomre() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelName.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar nombre")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelName.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
     }
+
+    private fun showAlertDialogId() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelId.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar ID")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelId.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogTipo() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelTipo.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Tipo")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelTipo.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogDebilidad() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelDebilidad.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Debilidad")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelDebilidad.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogDescripcion() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelDescripcion.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Descripcion")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelDescripcion.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogImg() {
+        // Crear un EditText para obtener el nuevo texto
+        var urlImagen = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
+        val editText = EditText(requireContext())
+        if(pokemon.imgURL == "")
+        {
+            editText.setText(urlImagen)
+        }
+        else
+        {
+            editText.setText(pokemon.imgURL)
+        }
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar URL. Agregar 'ID'.png")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            pokemon.imgURL = newText
+            Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogAltura() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelAltura.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Altura")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelAltura.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogPeso() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelPeso.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Peso")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelPeso.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogCategoria() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelCategoria.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Categoria")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelCategoria.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+    private fun showAlertDialogHabilidad() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(labelHabilidad.text)
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Modificar Habilidad")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            labelHabilidad.text = newText
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+
+/*
+    private fun showAlertDialogEvolucion() {
+        // Crear un EditText para obtener el nuevo texto
+        val editText = EditText(requireContext())
+        editText.setText(pokemon.evolucion.toString())
+
+        // Crear un cuadro de texto utilizando un AlertDialog.Builder
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alertDialog.setTitle("Ingresar Id de evoluciones\nEj: 1,2,3")
+        alertDialog.setView(editText)
+
+        // Agregar un botón "Aceptar" al cuadro de texto
+        alertDialog.setPositiveButton("Aceptar") { _, _ ->
+            // Obtener el nuevo texto del EditText y establecerlo en el TextView
+            val newText = editText.text.toString()
+            //labelHabilidad.text = newText
+            pokemon.evolucion = editText.text.split(",").map { it.toInt()}
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+        // Agregar un botón "Cancelar" al cuadro de texto
+        alertDialog.setNegativeButton("Cancelar", null)
+        // Mostrar el cuadro de texto
+        alertDialog.show()
+    }
+    */
 
 }

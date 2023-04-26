@@ -13,11 +13,16 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
+import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentRegister : Fragment() {
     var users : MutableList<User> = mutableListOf()
+
+    private var db: AppDatabase? = null
+    private var userDao: UserDao? = null
 
     lateinit var vista : View
 
@@ -31,10 +36,10 @@ class FragmentRegister : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        users.add(User("Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester",  "Primero", "test1@frba.utn.edu.ar",  "5678", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
-        users.add(User("Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
+        users.add(User(1,"Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
+        users.add(User(2,"Tester",  "Primero", "test1@frba.utn.edu.ar",  "5678", "01155555555", "Av. Medrano 951"))
+        users.add(User(3,"Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
+        users.add(User(4,"Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_register, container, false)
         txtTitulo = vista.findViewById(R.id.txtTituloRegistro)
@@ -47,6 +52,13 @@ class FragmentRegister : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        db = AppDatabase.getInstance(vista.context)
+        userDao = db?.userDao()
+
+        // Dummy call to pre-populate db
+        userDao?.fetchAllUsers()
+
         btnSingIn.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
             val inputTxtEmail : String = txtEmail.text.toString()
@@ -55,10 +67,11 @@ class FragmentRegister : Fragment() {
 
             if(inputTxtPass == inputTxtPassConf){
                 //Buscar si exciste en la base de datos
-                val userFind = users.find { it.email == inputTxtEmail}
+                val userFind = userDao?.fetchUserByEmail(inputTxtEmail)
 
                 if (userFind == null) {
                     //si no encuentra este usuario Agregarlo a la base de datos y Cambiar a la Activity
+                    userDao?.insertUser(User(0, "", "", txtEmail.text.toString(), txtPassword.text.toString(), "",""))
                     val intent = Intent(activity, activity_home::class.java)
                     startActivity(intent)
                 } else {
