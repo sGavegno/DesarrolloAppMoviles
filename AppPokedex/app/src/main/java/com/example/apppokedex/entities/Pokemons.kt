@@ -18,5 +18,8 @@ class Pokemons(
     var generacion : Int,
     var evolucion : List<Int>) : Parcelable {
     //Nivel en el que evoluciona
+        //mote : String,
+        //parent : Int,     // id de la evolucion sigiente
+        //child : Int,      // id de la evolucion previa
 }
 

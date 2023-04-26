@@ -32,4 +32,9 @@
         android:name="com.example.apppokedex.fragments.FragmentUser"
         android:label="fragment_fragment_user"
         tools:layout="@layout/fragment_fragment_user" />
+    <fragment
+        android:id="@+id/fragmentPc"
+        android:name="com.example.apppokedex.fragments.FragmentPc"
+        android:label="fragment_fragment_pc"
+        tools:layout="@layout/fragment_fragment_pc" />
 </navigation>

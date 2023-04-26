@@ -61,23 +61,12 @@ class FragmentPokemonData : Fragment() {
         txtEvolucion = vista.findViewById(R.id.txtPokeEvolucion)
         recEvoluciones = vista.findViewById(R.id.listaEvolucion)
 
-        labelName.setOnClickListener {
-            showAlertDialogNomre()
-        }
-        labelId.setOnClickListener {
-            showAlertDialogId()
-        }
-        labelTipo.setOnClickListener {
-            showAlertDialogTipo()
-        }
+
         labelDebilidad.setOnClickListener {
             showAlertDialogDebilidad()
         }
         labelDescripcion.setOnClickListener {
             showAlertDialogDescripcion()
-        }
-        imgPokemon.setOnClickListener {
-            showAlertDialogImg()
         }
         labelAltura.setOnClickListener {
             showAlertDialogAltura()
@@ -127,75 +116,6 @@ class FragmentPokemonData : Fragment() {
         }
     }
 
-    private fun showAlertDialogNomre() {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelName.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar nombre")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelName.text = newText
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-
-    private fun showAlertDialogId() {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelId.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar ID")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelId.text = newText
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-
-    private fun showAlertDialogTipo() {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelTipo.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Tipo")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelTipo.text = newText
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-
     private fun showAlertDialogDebilidad() {
         // Crear un EditText para obtener el nuevo texto
         val editText = EditText(requireContext())
@@ -235,36 +155,6 @@ class FragmentPokemonData : Fragment() {
             val newText = editText.text.toString()
             labelDescripcion.text = newText
             Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-
-    private fun showAlertDialogImg() {
-        // Crear un EditText para obtener el nuevo texto
-        var urlImagen = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
-        val editText = EditText(requireContext())
-        if(pokemon.imgURL == "")
-        {
-            editText.setText(urlImagen)
-        }
-        else
-        {
-            editText.setText(pokemon.imgURL)
-        }
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar URL. Agregar 'ID'.png")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            pokemon.imgURL = newText
-            Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
         }
         // Agregar un botón "Cancelar" al cuadro de texto
         alertDialog.setNegativeButton("Cancelar", null)
@@ -363,31 +253,5 @@ class FragmentPokemonData : Fragment() {
         // Mostrar el cuadro de texto
         alertDialog.show()
     }
-
-/*
-    private fun showAlertDialogEvolucion() {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(pokemon.evolucion.toString())
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Ingresar Id de evoluciones\nEj: 1,2,3")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            //labelHabilidad.text = newText
-            pokemon.evolucion = editText.text.split(",").map { it.toInt()}
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-    */
 
 }

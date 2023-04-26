@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
+    android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FF0000"
-    tools:context=".fragments.FragmentPokedex">
-
+    tools:context=".fragments.FragmentPc">
 
     <ImageView
-        android:id="@+id/imgTitulo"
+        android:id="@+id/imgTituloMyPc"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:src="@drawable/pokedex_logo"
+        android:src="@drawable/pokemon_logo"
         app:layout_constraintBottom_toTopOf="@+id/listaPoxeMyPc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,4 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnAddPokemonMyPc"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="+"
+        app:cornerRadius="360dp"
+        app:layout_constraintBottom_toBottomOf="@+id/listaPoxeMyPc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

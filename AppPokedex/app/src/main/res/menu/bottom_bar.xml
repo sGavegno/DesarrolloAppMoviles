@@ -4,6 +4,12 @@
         android:id="@+id/fragmentPokedex"
         android:icon="@drawable/icono_pokedex"
         android:title="Pokedex"/>
+
+    <item
+        android:id="@+id/fragmentPc"
+        android:icon="@drawable/icono_pokeball"
+        android:title="My PC" />
+
     <item
         android:id="@+id/fragmentUser"
         android:icon="@drawable/icono_user"

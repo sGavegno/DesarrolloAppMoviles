@@ -36,10 +36,10 @@ class FragmentLogin : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        users.add(User(1,"Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar",  "1234", "01155555555", "Av. Medrano 951"))
-        users.add(User(2,"Sebastian",  "Gavgeno", "a",  "1", "01155555555", "Av. Medrano 951"))
-        users.add(User(3,"Tester", "Segundo",  "test2@frba.utn.edu.ar",  "1357", "01155555555", "Av. Medrano 951"))
-        users.add(User(4,"Tester", "Tercero",  "test3@frba.utn.edu.ar",  "2468", "01155555555", "Av. Medrano 951"))
+        users.add(User(1, "Seba","1234","Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
+        users.add(User(2,"a","1","Carlos",  "G", "",  "", ""))
+        users.add(User(3,"Seba","1357","Tester", "Segundo",  "test2@frba.utn.edu.ar",  "01155555555", "Av. Medrano 951"))
+        users.add(User(4,"Seba","2468","Tester", "Tercero",  "test3@frba.utn.edu.ar", "01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
         imgTitulo = vista.findViewById(R.id.imgLogin)
