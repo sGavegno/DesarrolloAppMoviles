@@ -6,8 +6,6 @@ class PokemonRepo {
     private var urlImagen : String = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
 
     init {
-        //pokemon.add(Pokemons( 1, "Bulbasaur", listOf("Planta","Veneno"),"Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1,  listOf(1,2,3)))
-        //pokemon.add(Pokemons( 1, "Bulbasaur", listOf(1,7),"Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1,  listOf(1,2,3)))
         pokemon.add(Pokemons( 1, "Bulbasaur",  "Planta/Veneno","Fuego/Psiquico/Volador/Hielo", urlImagen+"001.png", "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", "0,7 m", "6,9 Kg","Semilla", "Espesura", 1, 0, 2))
         pokemon.add(Pokemons( 2, "Ivysaur", "Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"002.png","Cuando le crece bastante el bulbo del lomo, pierde la capacidad de erguirse sobre las patas traseras.", "1,0 m", "13,0 Kg","Semilla","Espesura", 1,1,3))
         pokemon.add(Pokemons( 3, "Venusaur", "Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"003.png","La planta florece cuando absorbe energía solar, lo cual le obliga a buscar siempre la luz del sol.","2,0 m", "100,0 Kg","Semilla","Espesura", 1, 2, 0))
@@ -55,184 +53,184 @@ class PokemonRepo {
         pokemon.add(Pokemons( 33, "Nidorino", "Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"033.png","Dondequiera que va, parte rocas con su cuerno, más duro que un diamante, en busca de una Piedra Lunar.", "0.7 m", "6.9 Kg","Pin Veneno","Punto Tóxico\n"+"Rivalidad", 1,32,34))
         pokemon.add(Pokemons( 34, "Nidoking", "Veneno/Tierra","Fuego/Psiquico/Volador/Hielo",urlImagen+"034.png","Una vez que se desboca, no hay quien lo pare. Solo se calma ante Nidoqueen, su compañera de toda la vida.", "0.7 m", "6.9 Kg","Taladro","Punto Tóxico\n"+"Rivalidad", 1,33,0))
 
-        pokemon.add(Pokemons( 35, "Clefairy","Hada","Acero/Veneno",urlImagen+"035.png","", "", "","","\n"+"", 1,0,36))
-        pokemon.add(Pokemons( 36, "Clefable","","",urlImagen+"036.png","", "", "","","\n"+"", 1,35,0))
+        pokemon.add(Pokemons( 35, "Clefairy","Hada","Acero/Veneno",urlImagen+"035.png","Se dice que la felicidad llegará a quien vea un grupo de Clefairy bailando a la luz de la luna llena.", "0,6 m", "7,5 Kg","Hada","Gran Encanto\n"+"Muro Magico", 1,0,36))
+        pokemon.add(Pokemons( 36, "Clefable","Hada","Acero/Veneno",urlImagen+"036.png","Este Pokémon de aspecto feérico, raramente visto por los humanos, corre a esconderse en cuanto detecta que hay alguien cerca. ", "1,3 m", "40,0 Kg","Hada","Gran Encanto\n"+"Muro Magico", 1,35,0))
 
-        pokemon.add(Pokemons( 37, "Vulpix", "","",urlImagen+"037.png","", "", "","","\n"+"", 1,0,38))
-        pokemon.add(Pokemons( 38, "Ninetales","","",urlImagen+"038.png","", "", "","","\n"+"", 1,37,0))
+        pokemon.add(Pokemons( 37, "Vulpix", "Fuego","Agua/Tierra/Roca",urlImagen+"037.png","De pequeño, tiene seis colas de gran belleza. A medida que crece, le van saliendo más.", "0,6 m", "9,9 Kg","Zorro","Absorbe Fuego", 1,0,38))
+        pokemon.add(Pokemons( 38, "Ninetales","Fuego","Agua/Tierra/Roca",urlImagen+"038.png","Cuentan que llega a vivir hasta mil años y que cada una de las colas posee poderes sobrenaturales.", "1,1 m", "19,9 Kg","Zorro","Absorbe Fuego", 1,37,0))
 
-        pokemon.add(Pokemons( 39, "Jigglypuff","","",urlImagen+"039.png","", "", "","","\n"+"", 1,0,40))
-        pokemon.add(Pokemons( 40, "Wigglytuff","","",urlImagen+"040.png","", "", "","","\n"+"", 1,39,0))
+        pokemon.add(Pokemons( 39, "Jigglypuff","Normal/Hada","Acero/Veneno",urlImagen+"039.png","Cuando le tiemblan sus redondos y adorables ojos, entona una melodía agradable y misteriosa con la que duerme a sus enemigos. ", "0,5 m", "5,5 Kg","Globo","Gran Encanto\n"+"Tenacidad", 1,0,40))
+        pokemon.add(Pokemons( 40, "Wigglytuff","Normal/Hada","Acero/Veneno",urlImagen+"040.png","Tiene un pelaje muy fino. Se recomienda no enfadarlo, o se inflará y golpeará con todo su cuerpo.", "1,0 m", "12,0 kg","Globo","Gran Encanto\n"+"Tenacidad", 1,39,0))
 
-        pokemon.add(Pokemons( 41, "Zubat", "","",urlImagen+"041.png","", "", "","","\n"+"", 1,0,42))
-        pokemon.add(Pokemons( 42, "Golbat","","",urlImagen+"042.png","", "", "","","\n"+"", 1,41,0))
+        pokemon.add(Pokemons( 41, "Zubat", "Veneno/Volador","Psiquico/Electrico/Hielo/Roca",urlImagen+"041.png","Emite ondas ultrasónicas por la boca para escrutar el entorno, lo que le permite volar con pericia por cuevas angostas.", "0,8 m", "7,5 kg","Murciélago","Fuerza Mental", 1,0,42))
+        pokemon.add(Pokemons( 42, "Golbat","Veneno/Volador","Psiquico/Electrico/Hielo/Roca",urlImagen+"042.png","Le encanta chuparles la sangre a los seres vivos. En ocasiones comparte la preciada colecta con otros congéneres hambrientos.", "1,6 m", "55,0 kg","Murciélago","Fuerza Mental", 1,41,0))
 
-        pokemon.add(Pokemons( 43, "Oddish","","",urlImagen+"043.png","", "", "","","\n"+"", 1,0,44))
-        pokemon.add(Pokemons( 44, "Gloom","","",urlImagen+"044.png","", "", "","","\n"+"", 1,43,45))
-        pokemon.add(Pokemons( 45, "Vileplume","","",urlImagen+"045.png","", "", "","","\n"+"", 1,44,0))
+        pokemon.add(Pokemons( 43, "Oddish","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"043.png","Se mueve al exponerse a la luz de la luna. Merodea por la noche para esparcir sus semillas. ", "0,5 m", "5,4 kg","Hierbajo","Clorofila", 1,0,44))
+        pokemon.add(Pokemons( 44, "Gloom","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"044.png","Libera un fétido olor por los pistilos. El fuerte hedor hace perder el conocimiento a cualquiera que se encuentre en un radio de 2 km.", "0,8 m", "8,6 kg","Hierbajo","Clorofila", 1,43,45))
+        pokemon.add(Pokemons( 45, "Vileplume","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"045.png","Tiene los pétalos más grandes del mundo. Al caminar, de ellos se desprenden densas nubes de polen tóxico. ", "1,2 m", "18,6 Kg","Flor","Clorofila", 1,44,0))
 
-        pokemon.add(Pokemons( 46, "Paras", "","",urlImagen+"046.png","", "", "","","\n"+"", 1,0,47))
-        pokemon.add(Pokemons( 47, "Parasect","","",urlImagen+"047.png","", "", "","","\n"+"", 1,46,0))
+        pokemon.add(Pokemons( 46, "Paras", "Bicho/Panta","Fuego/Volador/Hielo/Veneno/Roca/Bicho",urlImagen+"046.png","Escarba en el suelo para extraer nutrientes de las raíces de los árboles, que las setas del lomo absorben después casi por completo.", "0,3 m", "5,4 kg","Hongo","Efecto Espora\n"+"Piel Seca", 1,0,47))
+        pokemon.add(Pokemons( 47, "Parasect","Bicho/Panta","Fuego/Volador/Hielo/Veneno/Roca/Bicho",urlImagen+"047.png","Tras largo tiempo absorbiendo la energía del huésped, la seta parásita del lomo es la que parece controlar la voluntad de este Pokémon. ", "1,0 m", "29,5 kg","Hongo","Efecto Espora\n"+"Piel Seca", 1,46,0))
 
-        pokemon.add(Pokemons( 48, "Venonat","","",urlImagen+"048.png","", "", "","","\n"+"", 1,0,49))
-        pokemon.add(Pokemons( 49, "Venomoth","","",urlImagen+"049.png","", "", "","","\n"+"", 1,48,0))
+        pokemon.add(Pokemons( 48, "Venonat","Bicho/Veneno","Fuego/Psiquico/Volador/Roca",urlImagen+"048.png","Rezuma veneno por todo su cuerpo. De noche, atrapa y come pequeños Pokémon insecto atraídos por la luz. ", "1,0 m", "30,0 Kg","Insecto","Ojo Compuesto\n"+"Cromolente", 1,0,49))
+        pokemon.add(Pokemons( 49, "Venomoth","Bicho/Veneno","Fuego/Psiquico/Volador/Roca",urlImagen+"049.png","Tiene las alas cubiertas de escamas. Cada vez que las bate, esparce un polvillo sumamente venenoso", "1,5 m", "12,5 Kg","Polilla Venenosa","Polvo Escudo\n"+"Cromolente", 1,48,0))
 
-        pokemon.add(Pokemons( 50, "Diglett","","",urlImagen+"050.png","", "", "","","\n"+"", 1,0,51))
-        pokemon.add(Pokemons( 51, "Dugtrio","","",urlImagen+"051.png","", "", "","","\n"+"", 1,50,0))
+        pokemon.add(Pokemons( 50, "Diglett","Tierra","Agua/Planta/Hielo",urlImagen+"050.png","Vive 1 m por debajo del suelo, donde se alimenta de raíces. A veces también aparece en la superficie.", "0,2 m", "0,8 Kg","Topo","Velo Arena\n"+"Trampa Arena", 1,0,51))
+        pokemon.add(Pokemons( 51, "Dugtrio","Tierra","Agua/Planta/Hielo",urlImagen+"051.png","Sus tres cabezas suben y bajan para remover la tierra cercana y facilitar así la excavación. ", "0,7 m", "33,3 Kg","Topo","Velo Arena\n"+"Trampa Arena", 1,50,0))
 
-        pokemon.add(Pokemons( 52, "Meowth","","",urlImagen+"052.png","", "", "","","\n"+"", 1,0,53))
-        pokemon.add(Pokemons( 53, "Persian","","",urlImagen+"053.png","", "", "","","\n"+"", 1,52,0))
+        pokemon.add(Pokemons( 52, "Meowth","Normal","Lucha",urlImagen+"052.png","Durante el día, se dedica a dormir. De noche, vigila su territorio con un brillo en los ojos. ", "0,4 m", "4,2 Kg","Gato Araña","Recogida\n"+"Experto", 1,0,53))
+        pokemon.add(Pokemons( 53, "Persian","Normal","Lucha",urlImagen+"053.png","Aunque es muy admirado por el pelaje, es difícil de entrenar como mascota porque enseguida suelta arañazos.", "1,0 m", "32,0 Kg","Gato Felino","Experto\n"+"Flexibilidad", 1,52,0))
 
-        pokemon.add(Pokemons( 54, "Psyduck","","",urlImagen+"054.png","", "", "","","\n"+"", 1,0,55))
-        pokemon.add(Pokemons( 55, "Golduck","","",urlImagen+"055.png","", "", "","","\n"+"", 1,54,0))
+        pokemon.add(Pokemons( 54, "Psyduck","Agua","Planta/Electrico",urlImagen+"054.png","Padece continuamente dolores de cabeza. Cuando son muy fuertes, empieza a usar misteriosos poderes. ", "0,8 m", "16,6 Kg","Pato","Humedad\n"+"Aclimatacion", 1,0,55))
+        pokemon.add(Pokemons( 55, "Golduck","Agua","Planta/Electrico",urlImagen+"055.png","Cuando nada a toda velocidad usando sus largas extremidades palmeadas, su frente comienza a brillar.", "1,7 m", "76,6 Kg","Pato","Humedad\n"+"Aclimatacion", 1,54,0))
 
-        pokemon.add(Pokemons( 56, "Mankey","","",urlImagen+"056.png","", "", "","","\n"+"", 1,0,57))
-        pokemon.add(Pokemons( 57, "Primeape","","",urlImagen+"057.png","", "", "","","\n"+"", 1,56,0))
+        pokemon.add(Pokemons( 56, "Mankey","Lucha","Psiquico/Volador/Hada",urlImagen+"056.png","Vive en grupos en las copas de los árboles. Si pierde de vista a su manada, se siente solo y se enfada.", "0,5 m", "28,0 Kg","Mono Cerdo","Espíritu Vital\n"+"Irascible", 1,0,57))
+        pokemon.add(Pokemons( 57, "Primeape","Lucha","Psiquico/Volador/Hada",urlImagen+"057.png","Se pone furioso si nota que alguien lo está mirando. Persigue a cualquiera que establezca contacto visual con él. ", "1,0 m", "32,0 Kg","Mono Cerdo","Espíritu Vital\n"+"Irascible", 1,56,0))
 
-        pokemon.add(Pokemons( 58, "Growlithe","","",urlImagen+"058.png","", "", "","","\n"+"", 1,0,59))
-        pokemon.add(Pokemons( 59, "Arcanine","","",urlImagen+"059.png","", "", "","","\n"+"", 1,58,0))
+        pokemon.add(Pokemons( 58, "Growlithe","Fuego","Agua/Tierra/Roca",urlImagen+"058.png","De naturaleza valiente y honrada, se enfrenta sin miedo a enemigos más grandes y fuertes.", "0,7 m", "19,0 Kg","Perrito","Intimidacion\n"+"Absorbe Fuego", 1,0,59))
+        pokemon.add(Pokemons( 59, "Arcanine","Fuego","Agua/Tierra/Roca",urlImagen+"059.png","Cuenta un antiguo pergamino que la gente se quedaba fascinada al verlo correr por las praderas.", "1,9 m", "155,0 Kg","Leyenda","Intimidacion\n"+"Absorbe Fuego", 1,58,0))
 
-        pokemon.add(Pokemons( 60, "Poliwag", "","",urlImagen+"060.png","", "", "","","\n"+"", 1,0,61))
-        pokemon.add(Pokemons( 61, "Poliwhirl","","",urlImagen+"061.png","", "", "","","\n"+"", 1,60,62))
-        pokemon.add(Pokemons( 62, "Poliwrath","","",urlImagen+"062.png","", "", "","","\n"+"", 1,61,0))
+        pokemon.add(Pokemons( 60, "Poliwag", "Agua","Planta/Electrico",urlImagen+"060.png","Es más ágil en el agua que en la tierra. La espiral de su vientre no es más que parte de sus vísceras que se ven a través de la piel. ", "0,6 m", "12,4 Kg","Renacuajo","Humedad\n"+"Absorbe Agua", 1,0,61))
+        pokemon.add(Pokemons( 61, "Poliwhirl","Agua","Planta/Electrico",urlImagen+"061.png","Mirar fijamente la espiral de su vientre provoca somnolencia, por lo que puede usarse como alternativa a las nanas para dormir a los niños.", "1,0 m", "20,0 kg","Renacuajo","Humedad\n"+"Absorbe Agua", 1,60,62))
+        pokemon.add(Pokemons( 62, "Poliwrath","Agua/Lucha","Hada/Planta/Volador/Psiquico/Electrico",urlImagen+"062.png","Su cuerpo es puro músculo. Logra abrirse paso por aguas gélidas partiendo el hielo con sus fornidos brazos. ", "1,3 m", "54,0 Kg","Renacuajo","Humedad\n"+"Absorbe Agua", 1,61,0))
 
-        pokemon.add(Pokemons( 63, "Abra","","",urlImagen+"063.png","", "", "","","\n"+"", 1,0,64))
-        pokemon.add(Pokemons( 64, "Kadabra","","",urlImagen+"064.png","", "", "","","\n"+"", 1,63,65))
-        pokemon.add(Pokemons( 65, "Alakazam","","",urlImagen+"065.png","", "", "","","\n"+"", 1,64,0))
+        pokemon.add(Pokemons( 63, "Abra","Psiquico","Fantasmo/Siniestro/Bicho",urlImagen+"063.png","Es capaz de usar sus poderes psíquicos aun estando dormido. Al parecer, el contenido del sueño influye en sus facultades.", "0,9 m", "19,5 Kg","Psi","Fuerza Mental\n"+"Sincronia", 1,0,64))
+        pokemon.add(Pokemons( 64, "Kadabra","Psiquico","Fantasmo/Siniestro/Bicho",urlImagen+"064.png","Duerme suspendido en el aire gracias a sus poderes psíquicos. La cola, de una flexibilidad extraordinaria, hace las veces de almohada.", "1,3 m", "56,5 Kg","Psi","Fuerza Mental\n"+"Sincronia", 1,63,65))
+        pokemon.add(Pokemons( 65, "Alakazam","Psiquico","Fantasmo/Siniestro/Bicho",urlImagen+"065.png","Posee una capacidad intelectual fuera de lo común que le permite recordar todo lo sucedido desde el instante de su nacimiento.", "1,5 m", "48,0 Kg","Psi","Fuerza Mental\n"+"Sincronia", 1,64,0))
 
-        pokemon.add(Pokemons( 66, "Machop","","",urlImagen+"066.png","", "", "","","\n"+"", 1,0,67))
-        pokemon.add(Pokemons( 67, "Machoke","","",urlImagen+"067.png","", "", "","","\n"+"", 1,66,68))
-        pokemon.add(Pokemons( 68, "Machamp","","",urlImagen+"068.png","", "", "","","\n"+"", 1,67,0))
+        pokemon.add(Pokemons( 66, "Machop","Lucha","Psiquico/Volador/Hada",urlImagen+"066.png","Es una masa de músculos y, pese a su pequeño tamaño, tiene fuerza de sobra para levantar en brazos a 100 personas.", "0,8 m", "19,5 kg","Superpoder","Agallas\n"+"Indefenso", 1,0,67))
+        pokemon.add(Pokemons( 67, "Machoke","Lucha","Psiquico/Volador/Hada",urlImagen+"067.png","Su musculoso cuerpo es tan fuerte que usa un cinto antifuerza para controlar sus movimientos.", "1,5 m", "70,5 Kg","Superpoder","Agallas\n"+"Indefenso", 1,66,68))
+        pokemon.add(Pokemons( 68, "Machamp","Lucha","Psiquico/Volador/Hada",urlImagen+"068.png","Mueve rápidamente sus cuatro brazos para asestar incesantes golpes y puñetazos desde todos los ángulos.", "1,6 m", "130,0 kg","Superpoder","Agallas\n"+"Indefenso", 1,67,0))
 
-        pokemon.add(Pokemons( 69, "Bellsprout","","",urlImagen+"069.png","", "", "","","\n"+"", 1,0,70))
-        pokemon.add(Pokemons( 70, "Weepinbell","","",urlImagen+"070.png","", "", "","","\n"+"", 1,69,71))
-        pokemon.add(Pokemons( 71, "Victreebel","","",urlImagen+"071.png","", "", "","","\n"+"", 1,70,0))
+        pokemon.add(Pokemons( 69, "Bellsprout","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"069.png","Prefiere lugares cálidos y húmedos. Atrapa pequeños Pokémon insectos con sus lianas para devorarlos", "0,7 m", "4,0 Kg","Flor","Clorofila", 1,0,70))
+        pokemon.add(Pokemons( 70, "Weepinbell","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"070.png","Cuando tiene hambre, engulle a todo lo que se mueve. La pobre presa acaba disuelta en sus ácidos.", "1,0 m", "6,4 kg","Matamoscas","Clorofila", 1,69,71))
+        pokemon.add(Pokemons( 71, "Victreebel","Planta/Veneno","Fuego/Psiquico/Volador/Hielo",urlImagen+"071.png","Atrae a su presa con un dulce aroma a miel. Una vez atrapada en la boca, la disuelve en tan solo un día, huesos incluidos.", "1,7 m", "15,5 Kg","Matamoscas","Clorofila", 1,70,0))
 
-        pokemon.add(Pokemons( 72, "Tentacool", "","",urlImagen+"072.png","", "", "","","\n"+"", 1,0,73))
-        pokemon.add(Pokemons( 73, "Tentacruel", "","",urlImagen+"073.png","", "", "","","\n"+"", 1,72,0))
+        pokemon.add(Pokemons( 72, "Tentacool", "Agua/Veneno","Psiquico/Electrico/Tierra",urlImagen+"072.png","Sus facultades natatorias son más bien escasas, por lo que se limita a flotar a la deriva en aguas poco profundas en busca de alimento.", "0,9 m", "45,5 Kg","Medusa","Cuerpo Puro\n"+"Viscosecrecion", 1,0,73))
+        pokemon.add(Pokemons( 73, "Tentacruel", "Agua/Veneno","Psiquico/Electrico/Tierra",urlImagen+"073.png","Si las esferas rojas que tiene a ambos lados de la cabeza brillan con intensidad, indica que está a punto de lanzar ondas ultrasónicas", "1,6 m", "55,0 Kg","Medusa","Cuerpo Puro\n"+"Viscosecrecion", 1,72,0))
 
-        pokemon.add(Pokemons( 74, "Geodude", "","",urlImagen+"074.png","", "", "","","\n"+"", 1,0,75))
-        pokemon.add(Pokemons( 75, "Graveler", "","",urlImagen+"075.png","", "", "","","\n"+"", 1,74,76))
-        pokemon.add(Pokemons( 76, "Golem","","",urlImagen+"076.png","", "", "","","\n"+"", 1,75,0))
+        pokemon.add(Pokemons( 74, "Geodude", "Roca/Tierra","Acero/Lucha/Agua/Hielo/Planta/Tierra",urlImagen+"074.png","Se suele encontrar en senderos de montaña y sitios parecidos. Conviene andar con cuidado para no pisarlo sin querer y provocar su enfado.", "0,4 m", "20,0 Kg","Roca","Cabeza Roca\n"+"Robustez", 1,0,75))
+        pokemon.add(Pokemons( 75, "Graveler", "Roca/Tierra","Acero/Lucha/Agua/Hielo/Planta/Tierra",urlImagen+"075.png","Se le suele ver rodando montaña abajo. No evita los obstáculos, sino que los arrolla.", "1,0 m", "105,0 kg","Roca","Cabeza Roca\n"+"Robustez", 1,74,76))
+        pokemon.add(Pokemons( 76, "Golem","Roca/Tierra","Acero/Lucha/Agua/Hielo/Planta/Tierra",urlImagen+"076.png","Nada más mudar la piel, su cuerpo se vuelve blando y blanquecino, pero se endurece al poco tiempo de entrar en contacto con el aire.", "1,4 m", "300,0 Kg","Megatón","Cabeza Roca\n"+"Robustez", 1,75,0))
 
-        pokemon.add(Pokemons( 77, "Ponyta","","",urlImagen+"077.png","", "", "","","\n"+"", 1,0,78))
-        pokemon.add(Pokemons( 78, "Rapidash","","",urlImagen+"078.png","", "", "","","\n"+"", 1,77,0))
+        pokemon.add(Pokemons( 77, "Ponyta","Fuego","Agua/Tierra/Roca",urlImagen+"077.png","Al nacer es un poco lento, pero va fortaleciendo las patas paulatinamente al disputar carreras con sus congéneres. ", "1,0 m", "30,0 Kg","Caballo Fuego","Fuga\n"+"Absorber Fuego", 1,0,78))
+        pokemon.add(Pokemons( 78, "Rapidash","Fuego","Agua/Tierra/Roca",urlImagen+"078.png","Su ardiente crin ondea al viento mientras atraviesa extensas praderas a una velocidad de 240 km/h.", "1,7 m", "95,0 Kg","Caballo Fuego","Fuga\n"+"Absorber Fuego", 1,77,0))
 
-        pokemon.add(Pokemons( 79, "Slowpoke", "","",urlImagen+"079.png","", "", "","","\n"+"", 1,0,80))
-        pokemon.add(Pokemons( 80, "Slowbro", "","",urlImagen+"080.png","", "", "","","\n"+"", 1,79,0))
+        pokemon.add(Pokemons( 79, "Slowpoke", "Agua/Psiquico","Fantasma/Siniestro/Planta/Electrico/Bicho",urlImagen+"079.png","", "", "","","\n"+"", 1,0,80))
+        pokemon.add(Pokemons( 80, "Slowbro", "Agua/Psiquico","Fantasma/Siniestro/Planta/Electrico/Bicho",urlImagen+"080.png","", "", "","","\n"+"", 1,79,0))
 
-        pokemon.add(Pokemons( 81, "Magnemite", "","",urlImagen+"081.png","", "", "","","\n"+"", 1,0,82))
-        pokemon.add(Pokemons( 82, "Magneton","","",urlImagen+"082.png","", "", "","","\n"+"", 1,81,0))
+        pokemon.add(Pokemons( 81, "Magnemite", "Electrico/Acero","Fuego/Lucha/Tierra",urlImagen+"081.png","", "", "","","\n"+"", 1,0,82))
+        pokemon.add(Pokemons( 82, "Magneton","Electrico/Acero","Fuego/Lucha/Tierra",urlImagen+"082.png","", "", "","","\n"+"", 1,81,0))
 
-        pokemon.add(Pokemons( 83, "Farfetch’d", "","",urlImagen+"083.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 83, "Farfetch’d", "Normal/Volador","Electrico/Hielo/Roca",urlImagen+"083.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 84, "Doduo","","",urlImagen+"084.png","", "", "","","\n"+"", 1,0,85))
-        pokemon.add(Pokemons( 85, "Dodrio", "","",urlImagen+"085.png","", "", "","","\n"+"", 1,84,0))
+        pokemon.add(Pokemons( 84, "Doduo","Normal/Volador","Electrico/Hielo/Roca",urlImagen+"084.png","", "", "","","\n"+"", 1,0,85))
+        pokemon.add(Pokemons( 85, "Dodrio", "Normal/Volador","Electrico/Hielo/Roca",urlImagen+"085.png","", "", "","","\n"+"", 1,84,0))
 
-        pokemon.add(Pokemons( 86, "Seel", "","",urlImagen+"086.png","", "", "","","\n"+"", 1,0,87))
-        pokemon.add(Pokemons( 87, "Dewgong", "","",urlImagen+"087.png","", "", "","","\n"+"", 1,86,0))
+        pokemon.add(Pokemons( 86, "Seel", "Agua","Planta/Electrico",urlImagen+"086.png","", "", "","","\n"+"", 1,0,87))
+        pokemon.add(Pokemons( 87, "Dewgong", "Agua/Hielo","Planta/Electrico/Lucha/Roca",urlImagen+"087.png","", "", "","","\n"+"", 1,86,0))
 
-        pokemon.add(Pokemons( 88, "Grimer", "","",urlImagen+"088.png","", "", "","","\n"+"", 1,0,89))
-        pokemon.add(Pokemons( 89, "Muk","","",urlImagen+"089.png","", "", "","","\n"+"", 1,88,0))
+        pokemon.add(Pokemons( 88, "Grimer", "Veneno","Psiquico/Tierra",urlImagen+"088.png","", "", "","","\n"+"", 1,0,89))
+        pokemon.add(Pokemons( 89, "Muk","Veneno","Psiquico/Tierra",urlImagen+"089.png","", "", "","","\n"+"", 1,88,0))
 
-        pokemon.add(Pokemons( 90, "Shellder","","",urlImagen+"090.png","", "", "","","\n"+"", 1,0,91))
-        pokemon.add(Pokemons( 91, "Cloyster","","",urlImagen+"091.png","", "", "","","\n"+"", 1,90,0))
+        pokemon.add(Pokemons( 90, "Shellder","Agua","Planta/Electrico",urlImagen+"090.png","", "", "","","\n"+"", 1,0,91))
+        pokemon.add(Pokemons( 91, "Cloyster","Agua/Hielo","Planta/Electrico/Lucha/Roca",urlImagen+"091.png","", "", "","","\n"+"", 1,90,0))
 
-        pokemon.add(Pokemons( 92, "Gastly","","",urlImagen+"092.png","", "", "","","\n"+"", 1,0,93))
-        pokemon.add(Pokemons( 93, "Haunter","","",urlImagen+"093.png","", "", "","","\n"+"", 1,92,94))
-        pokemon.add(Pokemons( 94, "Gengar","","",urlImagen+"094.png","", "", "","","\n"+"", 1,93,0))
+        pokemon.add(Pokemons( 92, "Gastly","Fantasma/Veneno","Fantasmo/Siniestro/Psiquico/Tierra",urlImagen+"092.png","", "", "","","\n"+"", 1,0,93))
+        pokemon.add(Pokemons( 93, "Haunter","Fantasma/Veneno","Fantasmo/Siniestro/Psiquico/Tierra",urlImagen+"093.png","", "", "","","\n"+"", 1,92,94))
+        pokemon.add(Pokemons( 94, "Gengar","Fantasma/Veneno","Fantasmo/Siniestro/Psiquico/Tierra",urlImagen+"094.png","", "", "","","\n"+"", 1,93,0))
 
-        pokemon.add(Pokemons( 95, "Onix","","",urlImagen+"095.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 95, "Onix","Roca/Tierra","Acero/Lucha/Agua/Hielo/Planta/Tierra",urlImagen+"095.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 96, "Drowzee", "","",urlImagen+"096.png","", "", "","","\n"+"", 1,0,97))
-        pokemon.add(Pokemons( 97, "Hypno","","",urlImagen+"097.png","", "", "","","\n"+"", 1,96,0))
+        pokemon.add(Pokemons( 96, "Drowzee", "Psiquico","Fantasmo/Siniestro/Bicho",urlImagen+"096.png","", "", "","","\n"+"", 1,0,97))
+        pokemon.add(Pokemons( 97, "Hypno","Psiquico","Fantasmo/Siniestro/Bicho",urlImagen+"097.png","", "", "","","\n"+"", 1,96,0))
 
-        pokemon.add(Pokemons( 98, "Krabby", "","",urlImagen+"098.png","", "", "","","\n"+"", 1,0,99))
-        pokemon.add(Pokemons( 99, "Kingler","","",urlImagen+"099.png","", "", "","","\n"+"", 1,98,0))
+        pokemon.add(Pokemons( 98, "Krabby", "Agua","Planta/Electrico",urlImagen+"098.png","", "", "","","\n"+"", 1,0,99))
+        pokemon.add(Pokemons( 99, "Kingler","Agua","Planta/Electrico",urlImagen+"099.png","", "", "","","\n"+"", 1,98,0))
 
-        pokemon.add(Pokemons( 100, "Voltorb","","",urlImagen+"100.png","", "", "","","\n"+"", 1,0,101))
-        pokemon.add(Pokemons( 101, "Electrode", "","",urlImagen+"101.png","", "", "","","\n"+"", 1,100,0))
+        pokemon.add(Pokemons( 100, "Voltorb","Electrico","Tierra",urlImagen+"100.png","", "", "","","\n"+"", 1,0,101))
+        pokemon.add(Pokemons( 101, "Electrode", "Electrico","Tierra",urlImagen+"101.png","", "", "","","\n"+"", 1,100,0))
 
-        pokemon.add(Pokemons( 102, "Exeggcute", "","",urlImagen+"102.png","", "", "","","\n"+"", 1,0,103))
-        pokemon.add(Pokemons( 103, "Exeggutor", "","",urlImagen+"103.png","", "", "","","\n"+"", 1,102,0))
+        pokemon.add(Pokemons( 102, "Exeggcute", "Planta/Psiquico","Fantasma/Fuego/Volador/Hielo/Siniestro/Veneno/Bicho",urlImagen+"102.png","", "", "","","\n"+"", 1,0,103))
+        pokemon.add(Pokemons( 103, "Exeggutor", "Planta/Psiquico","Fantasma/Fuego/Volador/Hielo/Siniestro/Veneno/Bicho",urlImagen+"103.png","", "", "","","\n"+"", 1,102,0))
 
-        pokemon.add(Pokemons( 104, "Cubone", "","",urlImagen+"104.png","", "", "","","\n"+"", 1,0,105))
-        pokemon.add(Pokemons( 105, "Marowak", "","",urlImagen+"105.png","", "", "","","\n"+"", 1,104,0))
+        pokemon.add(Pokemons( 104, "Cubone", "Tierra","Agua/Planta/Hielo",urlImagen+"104.png","", "", "","","\n"+"", 1,0,105))
+        pokemon.add(Pokemons( 105, "Marowak", "Tierra","Agua/Planta/Hielo",urlImagen+"105.png","", "", "","","\n"+"", 1,104,0))
 
-        pokemon.add(Pokemons( 106, "Hitmonlee","","",urlImagen+"106.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 106, "Hitmonlee","Lucha","Psiquico/Volador/Hada",urlImagen+"106.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 107, "Hitmonchan", "","",urlImagen+"107.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 107, "Hitmonchan", "Lucha","Psiquico/Volador/Hada",urlImagen+"107.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 108, "Lickitung","","",urlImagen+"108.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 108, "Lickitung","Normal","Lucha",urlImagen+"108.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 109, "Koffing","","",urlImagen+"109.png","", "", "","","\n"+"", 1,0,110))
-        pokemon.add(Pokemons( 110, "Weezing","","",urlImagen+"110.png","", "", "","","\n"+"", 1,109,0))
+        pokemon.add(Pokemons( 109, "Koffing","Veneno","Psiquico/Tierra",urlImagen+"109.png","", "", "","","\n"+"", 1,0,110))
+        pokemon.add(Pokemons( 110, "Weezing","Veneno","Psiquico/Tierra",urlImagen+"110.png","", "", "","","\n"+"", 1,109,0))
 
-        pokemon.add(Pokemons( 111, "Rhyhorn","","",urlImagen+"111.png","", "", "","","\n"+"", 1,0,112))
-        pokemon.add(Pokemons( 112, "Rhydon", "","",urlImagen+"112.png","", "", "","","\n"+"", 1,111,0))
+        pokemon.add(Pokemons( 111, "Rhyhorn","Tierra/Roca","Acero/Hielo/Agua/Lucha/Planta/Tierra",urlImagen+"111.png","", "", "","","\n"+"", 1,0,112))
+        pokemon.add(Pokemons( 112, "Rhydon", "Tierra/Roca","Acero/Hielo/Agua/Lucha/Planta/Tierra",urlImagen+"112.png","", "", "","","\n"+"", 1,111,0))
 
-        pokemon.add(Pokemons( 113, "Chansey","","",urlImagen+"113.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 113, "Chansey","Normal","Lucha",urlImagen+"113.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 114, "Tangela","","",urlImagen+"114.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 114, "Tangela","Planta","Fuego/Volador/Hielo/Veneno/Bicho",urlImagen+"114.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 115, "Kangaskhan","","",urlImagen+"115.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 115, "Kangaskhan","Normal","Lucha",urlImagen+"115.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 116, "Horsea","","",urlImagen+"116.png","", "", "","","\n"+"", 1,0,117))
-        pokemon.add(Pokemons( 117, "Seadra", "","",urlImagen+"117.png","", "", "","","\n"+"", 1,116,0))
+        pokemon.add(Pokemons( 116, "Horsea","Agua","Planta/Electrico",urlImagen+"116.png","", "", "","","\n"+"", 1,0,117))
+        pokemon.add(Pokemons( 117, "Seadra", "Agua","Planta/Electrico",urlImagen+"117.png","", "", "","","\n"+"", 1,116,0))
 
-        pokemon.add(Pokemons( 118, "Goldeen", "","",urlImagen+"118.png","", "", "","","\n"+"", 1,0,119))
-        pokemon.add(Pokemons( 119, "Seaking", "","",urlImagen+"119.png","", "", "","","\n"+"", 1,118,0))
+        pokemon.add(Pokemons( 118, "Goldeen", "Agua","Planta/Electrico",urlImagen+"118.png","", "", "","","\n"+"", 1,0,119))
+        pokemon.add(Pokemons( 119, "Seaking", "Agua","Planta/Electrico",urlImagen+"119.png","", "", "","","\n"+"", 1,118,0))
 
-        pokemon.add(Pokemons( 120, "Staryu","","",urlImagen+"120.png","", "", "","","\n"+"", 1,0,120))
-        pokemon.add(Pokemons( 121, "Starmie", "","",urlImagen+"121.png","", "", "","","\n"+"", 1,120,0))
+        pokemon.add(Pokemons( 120, "Staryu","Agua","Planta/Electrico",urlImagen+"120.png","", "", "","","\n"+"", 1,0,120))
+        pokemon.add(Pokemons( 121, "Starmie", "Agua/Psiquico","Fantasma/Siniestro/Planta/Electrico/Bicho",urlImagen+"121.png","", "", "","","\n"+"", 1,120,0))
 
-        pokemon.add(Pokemons( 122, "Mr. Mime", "","",urlImagen+"122.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 122, "Mr. Mime", "Psiquico/Hada","Fantasma/Acero/Veneno",urlImagen+"122.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 123, "Scyther", "","",urlImagen+"123.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 123, "Scyther", "Bicho/Volador","Fuego/Volador/Electrico/Hielo/Roca",urlImagen+"123.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 124, "Jynx","","",urlImagen+"124.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 124, "Jynx","Hielo/Psiquico","Acero/Fantasma/Fuego/Siniestro/Roca/Bicho",urlImagen+"124.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 125, "Electabuzz", "","",urlImagen+"125.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 125, "Electabuzz", "Electrico","Tierra",urlImagen+"125.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 126, "Magmar", "","",urlImagen+"126.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 126, "Magmar", "Fuego","Agua/Tierra/Roca",urlImagen+"126.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 127, "Pinsir", "","",urlImagen+"127.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 127, "Pinsir", "Bicho","Fuego/Volador/Roca",urlImagen+"127.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 128, "Tauros","","",urlImagen+"128.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 128, "Tauros","Normal","Lucha",urlImagen+"128.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 129, "Magikarp", "","",urlImagen+"129.png","", "", "","","\n"+"", 1,0,130))
-        pokemon.add(Pokemons( 130, "Gyarados","","",urlImagen+"130.png","", "", "","","\n"+"", 1,129,0))
+        pokemon.add(Pokemons( 129, "Magikarp", "Agua","Planta/Electrico",urlImagen+"129.png","", "", "","","\n"+"", 1,0,130))
+        pokemon.add(Pokemons( 130, "Gyarados","Agua/Volador","Electrico/Roca",urlImagen+"130.png","", "", "","","\n"+"", 1,129,0))
 
-        pokemon.add(Pokemons( 131, "Lapras","","",urlImagen+"131.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 131, "Lapras","Agua/Hielo","Planta/Electrico/Fuego/Roca",urlImagen+"131.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 132, "Ditto", "","",urlImagen+"132.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 132, "Ditto", "Normal","Lucha",urlImagen+"132.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 133, "Eevee", "","",urlImagen+"133.png","", "", "","","\n"+"", 1,0, 133))         //FALTA VER COMO IMPLEMENTAR CUANDO TIENE MAS DE UNA EVOLUCION
-        pokemon.add(Pokemons( 134, "Vaporeon", "","",urlImagen+"134.png","", "", "","","\n"+"", 1,133,0))
-        pokemon.add(Pokemons( 135, "Jolteon", "","",urlImagen+"135.png","", "", "","","\n"+"", 1,133,0))
-        pokemon.add(Pokemons( 136, "Flareon ", "","",urlImagen+"136.png","", "", "","","\n"+"", 1,133,0))
+        pokemon.add(Pokemons( 133, "Eevee", "Normal","Lucha",urlImagen+"133.png","", "", "","","\n"+"", 1,0, 133))         //FALTA VER COMO IMPLEMENTAR CUANDO TIENE MAS DE UNA EVOLUCION
+        pokemon.add(Pokemons( 134, "Vaporeon", "Agua","Planta/Electrico",urlImagen+"134.png","", "", "","","\n"+"", 1,133,0))
+        pokemon.add(Pokemons( 135, "Jolteon", "Electrico","Tierra",urlImagen+"135.png","", "", "","","\n"+"", 1,133,0))
+        pokemon.add(Pokemons( 136, "Flareon ", "Fuego","Agua/Tierra/Roca",urlImagen+"136.png","", "", "","","\n"+"", 1,133,0))
 
-        pokemon.add(Pokemons( 137, "Porygon", "","",urlImagen+"137.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 137, "Porygon", "Normal","Lucha",urlImagen+"137.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 138, "Omanyte", "","",urlImagen+"138.png","", "", "","","\n"+"", 1,0,139))
-        pokemon.add(Pokemons( 139, "Omastar", "","",urlImagen+"139.png","", "", "","","\n"+"", 1,138,0, ))
+        pokemon.add(Pokemons( 138, "Omanyte", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"138.png","", "", "","","\n"+"", 1,0,139))
+        pokemon.add(Pokemons( 139, "Omastar", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"139.png","", "", "","","\n"+"", 1,138,0, ))
 
-        pokemon.add(Pokemons( 140, "Kabuto", "","",urlImagen+"140.png","", "", "","","\n"+"", 1,0,141))
-        pokemon.add(Pokemons( 141, "Kabutops", "","",urlImagen+"141.png","", "", "","","\n"+"", 1,140,0,))
+        pokemon.add(Pokemons( 140, "Kabuto", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"140.png","", "", "","","\n"+"", 1,0,141))
+        pokemon.add(Pokemons( 141, "Kabutops", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"141.png","", "", "","","\n"+"", 1,140,0,))
 
-        pokemon.add(Pokemons( 142, "Aerodactyl", "","",urlImagen+"142.png","", "", "","","\n"+"", 1,0,0, ))
+        pokemon.add(Pokemons( 142, "Aerodactyl", "Roca/Volador","Acero/Agua/Electrico/Hielo/Roca",urlImagen+"142.png","", "", "","","\n"+"", 1,0,0, ))
 
-        pokemon.add(Pokemons( 143, "Snorlax", "","",urlImagen+"143.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 143, "Snorlax", "Normal","Lucha",urlImagen+"143.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 144, "Articuno", "","",urlImagen+"144.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 144, "Articuno", "Hielo/Volador","Acero/Fuego/Electrico/Roca",urlImagen+"144.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 145, "Zapdos", "","",urlImagen+"145.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 145, "Zapdos", "Electrico/Volador","Hielo/Roca",urlImagen+"145.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 146, "Moltres", "","",urlImagen+"146.png","", "", "","","\n"+"", 1,0,0))
+        pokemon.add(Pokemons( 146, "Moltres", "Fuego/Volador","Agua/Electrico/Roca",urlImagen+"146.png","", "", "","","\n"+"", 1,0,0))
 
-        pokemon.add(Pokemons( 147, "Dratini", "Dragon","",urlImagen+"147.png","", "", "","","\n"+"", 1,0,148))
-        pokemon.add(Pokemons( 148, "Dragonair", "Dragon","",urlImagen+"148.png","", "", "","","\n"+"", 1,147,149))
-        pokemon.add(Pokemons( 149, "Dragonite", "Dragon/Volador","",urlImagen+"149.png","", "", "","","\n"+"", 1,148,0))
+        pokemon.add(Pokemons( 147, "Dratini", "Dragon","Hada/Hielo/Dragon",urlImagen+"147.png","", "", "","","\n"+"", 1,0,148))
+        pokemon.add(Pokemons( 148, "Dragonair", "Dragon","Hada/Hielo/Dragon",urlImagen+"148.png","", "", "","","\n"+"", 1,147,149))
+        pokemon.add(Pokemons( 149, "Dragonite", "Dragon/Volador","Hada/Dragon/Hielo/Roca",urlImagen+"149.png","", "", "","","\n"+"", 1,148,0))
 
         pokemon.add(Pokemons( 150, "Mewtwo", "Písquico","Fantasma/Siniestro/Bicho",urlImagen+"150.png","Su ADN es casi el mismo que el de Mew. Sin embargo, su tamaño y carácter son muy diferentes.", "2,0 m", "122,0 Kg","Genetico","Presión", 1,0,0))
 
