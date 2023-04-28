@@ -21,7 +21,6 @@ class EvolucionesAdapter(
     class EvolucionHolder(v: View) : RecyclerView.ViewHolder(v){
 
         var pokemonRepository : PokemonRepo = PokemonRepo()
-        var users : MutableList<User> = mutableListOf()
 
         private var vista : View
         init{

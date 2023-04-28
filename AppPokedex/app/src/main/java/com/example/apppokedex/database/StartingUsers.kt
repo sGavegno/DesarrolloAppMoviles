@@ -27,7 +27,7 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
         val dao = AppDatabase.getInstance(context)?.userDao()
 
         try {
-            val users = loadJSONArray(context)
+            val users = loadJSONArray(context)              //Carga tabla ubicada en el json
             for (i in 0 until users.length()) {
                 val item = users.getJSONObject(i)
                 val user = User(
@@ -43,6 +43,8 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
 
                 dao?.insertUser(user)
             }
+            //idem para pokedex
+
         } catch (e: JSONException) {
             Log.e("fillWithStartingNotes", e.toString())
         }

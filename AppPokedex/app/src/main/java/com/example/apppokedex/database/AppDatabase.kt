@@ -9,6 +9,8 @@ import com.example.apppokedex.entities.User
 @Database(entities = [User::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase()  {
     abstract fun userDao(): UserDao
+    abstract fun PokemonDao(): PokemonDao
+    abstract fun PokemonUserDao(): PokemonUserDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
@@ -30,6 +32,7 @@ abstract class AppDatabase : RoomDatabase()  {
                         "myDB"
                     )
                         .addCallback(StartingUsers(context))
+                        //inicializar tabla pokedex
                         .fallbackToDestructiveMigration()
                         .allowMainThreadQueries() // No es recomendable que se ejecute en el mainthread
                         .build()
@@ -38,5 +41,4 @@ abstract class AppDatabase : RoomDatabase()  {
             return INSTANCE
         }
     }
-
 }

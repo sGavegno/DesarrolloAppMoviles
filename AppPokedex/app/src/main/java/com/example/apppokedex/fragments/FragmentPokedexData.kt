@@ -62,7 +62,7 @@ class FragmentPokedexData : Fragment() {
     override fun onStart() {
         super.onStart()
 //        findNavController().navigateUp()
-
+        lateinit var PokemonEvolucionList: List<Int>
         var idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
         pokemon = pokemonRepository.pokemon[idPokemon-1]
 
@@ -80,15 +80,23 @@ class FragmentPokedexData : Fragment() {
 
             Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
-            adapter = EvolucionesAdapter(pokemon.evolucion){ position ->
+            if(pokemon.child != 0) {
+                PokemonEvolucionList = PokemonEvolucionList.plus(pokemon.child)
+            }
+            PokemonEvolucionList = PokemonEvolucionList.plus(pokemon.id)
+            if(pokemon.parent != 0) {
+                PokemonEvolucionList = PokemonEvolucionList.plus(pokemon.parent)
+            }
+
+            adapter = EvolucionesAdapter(PokemonEvolucionList){ position ->
 //          onItemClick( ) cambiar a la pantalla datos
                 //Guardar datos actualizados
                 Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
                 val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
-                    pokemonRepository.pokemon[pokemon.evolucion[position]-1].id)
+                    PokemonEvolucionList[position])
                 findNavController().navigate(action)            //accion de cambiar de pantalla
             }
-            recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
+            recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
             recEvoluciones.adapter = adapter
         }
     }

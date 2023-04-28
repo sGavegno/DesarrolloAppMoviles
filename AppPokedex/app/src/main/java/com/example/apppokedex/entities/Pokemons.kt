@@ -10,7 +10,6 @@ import kotlinx.parcelize.Parcelize
 class Pokemons(
     id : Int,
     nombre : String,
-    mote : String,
     tipo : String,
     debilidad : String,
     imgURL : String,
@@ -20,9 +19,9 @@ class Pokemons(
     categoria : String,
     habilidad : String,
     generacion : Int,
-    parent : Int,     // id de la evolucion sigiente
     child : Int,      // id de la evolucion previa
-    evolucion : List<Int>) {
+    parent : Int     // id de la evolucion sigiente
+    ) {
     //Nivel en el que evoluciona
 
     @PrimaryKey(autoGenerate = true)
@@ -31,9 +30,6 @@ class Pokemons(
 
     @ColumnInfo(name = "nombre")
     var nombre: String
-
-    @ColumnInfo(name = "mote")
-    var mote: String
 
     @ColumnInfo(name = "tipo")
     var tipo: String
@@ -68,13 +64,9 @@ class Pokemons(
     @ColumnInfo(name = "generacion")
     var generacion: Int
 
-    @ColumnInfo(name = "evolucion")
-    var evolucion : List<Int>
-
     init {
         this.id = id
         this.nombre = nombre
-        this.mote = mote
         this.tipo = tipo
         this.debilidad = debilidad
         this.imgURL = imgURL
@@ -86,7 +78,6 @@ class Pokemons(
         this.child = child
         this.parent = parent
         this.generacion = generacion
-        this.evolucion = evolucion
     }
 }
 
