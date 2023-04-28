@@ -1,7 +1,6 @@
 package com.example.apppokedex.fragments
 
 import android.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,12 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.EvolucionesAdapter
-import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.entities.PokemonRepo
 import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
@@ -39,6 +36,7 @@ class FragmentPokemonData : Fragment() {
     lateinit var adapter: EvolucionesAdapter
 
     lateinit var pokemon : Pokemons
+
     var pokemonRepository : PokemonRepo = PokemonRepo()
 
     lateinit var vista : View
@@ -62,9 +60,6 @@ class FragmentPokemonData : Fragment() {
         recEvoluciones = vista.findViewById(R.id.listaEvolucion)
 
 
-        labelDebilidad.setOnClickListener {
-            showAlertDialogDebilidad()
-        }
         labelDescripcion.setOnClickListener {
             showAlertDialogDescripcion()
         }
@@ -87,7 +82,8 @@ class FragmentPokemonData : Fragment() {
         super.onStart()
 //        findNavController().navigateUp()
 
-        pokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).pokemonData
+        var idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
+        pokemon = pokemonRepository.pokemon[idPokemon-1]
 
         if(pokemon.nombre != "")
         {
@@ -108,7 +104,7 @@ class FragmentPokemonData : Fragment() {
                 //Guardar datos actualizados
                 Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
                 val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
-                    pokemonRepository.pokemon[pokemon.evolucion[position]-1])
+                    pokemonRepository.pokemon[pokemon.evolucion[position]-1].id)
                 findNavController().navigate(action)            //accion de cambiar de pantalla
             }
             recEvoluciones.layoutManager = GridLayoutManager(context,3)             //da formato a la lista
@@ -116,28 +112,6 @@ class FragmentPokemonData : Fragment() {
         }
     }
 
-    private fun showAlertDialogDebilidad() {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelDebilidad.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Debilidad")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelDebilidad.text = newText
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
 
     private fun showAlertDialogDescripcion() {
         // Crear un EditText para obtener el nuevo texto

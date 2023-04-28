@@ -14,7 +14,7 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email")
     fun fetchUserByEmail(email: String): User?
 
-    @Query("SELECT * FROM users WHERE idUser = :UserName")
+    @Query("SELECT * FROM users WHERE UserName = :UserName")
     fun fetchUserByUserName(UserName: String): User?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

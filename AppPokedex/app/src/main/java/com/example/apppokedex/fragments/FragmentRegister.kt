@@ -32,11 +32,9 @@ class FragmentRegister : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         users.add(User(1, "Seba", "1234","Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
         users.add(User(2,"Seba","5678","Tester",  "Primero", "test1@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
-        users.add(User(3,"Seba","1357","Tester", "Segundo",  "test2@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
-        users.add(User(4,"Seba","2468","Tester", "Tercero",  "test3@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_register, container, false)
         txtTitulo = vista.findViewById(R.id.txtTituloRegistro)

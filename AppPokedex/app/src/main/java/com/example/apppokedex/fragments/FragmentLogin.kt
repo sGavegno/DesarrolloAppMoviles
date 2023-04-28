@@ -38,8 +38,6 @@ class FragmentLogin : Fragment() {
 
         users.add(User(1, "Seba","1234","Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
         users.add(User(2,"a","1","Carlos",  "G", "",  "", ""))
-        users.add(User(3,"Seba","1357","Tester", "Segundo",  "test2@frba.utn.edu.ar",  "01155555555", "Av. Medrano 951"))
-        users.add(User(4,"Seba","2468","Tester", "Tercero",  "test3@frba.utn.edu.ar", "01155555555", "Av. Medrano 951"))
 
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
         imgTitulo = vista.findViewById(R.id.imgLogin)
@@ -52,18 +50,30 @@ class FragmentLogin : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        db = AppDatabase.getInstance(vista.context)
+        userDao = db?.userDao()
+
+        // Dummy call to pre-populate db
+        userDao?.fetchAllUsers()
+
         btnNexScreen.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
-            val inputTxt1 : String = inputTxtEmail.text.toString()
-            val inputTxt2 : String = inputTxtPass.text.toString()
+            val inputTxtUserName : String = inputTxtEmail.text.toString()
+            val inputTxtPass : String = inputTxtPass.text.toString()
 
-            val userFind = users.find { it.email == inputTxt1 && it.password == inputTxt2}
+            //val userFind = users.find { it.email == inputTxt1 && it.password == inputTxt2}
+            val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
 
             if (userFind != null) {
-                val intent = Intent(activity, activity_home::class.java)
-                startActivity(intent)
+                if(userFind.password == inputTxtPass){
+                    val intent = Intent(activity, activity_home::class.java)
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
+                }
             } else {
-                Snackbar.make(vista, "datos incorrectos", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
             }
         }
 

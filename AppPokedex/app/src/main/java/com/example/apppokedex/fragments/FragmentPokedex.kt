@@ -29,7 +29,7 @@ class FragmentPokedex : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_fragment_pokedex, container, false)
-        recPokemon = vista.findViewById(R.id.listaPoxeMyPc)
+        recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTitulo)
         return vista
     }
@@ -40,23 +40,13 @@ class FragmentPokedex : Fragment() {
         //Acá se debe ingresar la base de datos de todos los pokemons, esta base de datos es Read Only
         adapter = PokemonAdapter(pokemonRepository.pokemon){ position ->
 //          onItemClick( ) cambiar a la pantalla datos
-            val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokemonData(
-                pokemonRepository.pokemon[position])
+            val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
+                pokemonRepository.pokemon[position].id)
             findNavController().navigate(action)            //accion de cambiar de pantalla
 //            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)
         }
         recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
         recPokemon.adapter = adapter
-
-        val swipeHandler = object : ActionLista(adapter) {
-            override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-                // Permitir que se deslice solo en ciertos elementos del RecyclerView
-                return super.getSwipeDirs(recyclerView, viewHolder)
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(recPokemon)
 
     }
 

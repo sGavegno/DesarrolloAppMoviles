@@ -1,25 +1,92 @@
 package com.example.apppokedex.entities
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
+@Entity(tableName = "pokemons")
 class Pokemons(
-    var id : Int,
-    var nombre : String,
-    var tipo : String,
-    var debilidad : String,
-    var imgURL : String,
-    var descripcion : String,
-    var altura : String,
-    var peso : String,
-    var categoria : String,
-    var habilidad : String,
-    var generacion : Int,
-    var evolucion : List<Int>) : Parcelable {
+    id : Int,
+    nombre : String,
+    mote : String,
+    tipo : String,
+    debilidad : String,
+    imgURL : String,
+    descripcion : String,
+    altura : String,
+    peso : String,
+    categoria : String,
+    habilidad : String,
+    generacion : Int,
+    parent : Int,     // id de la evolucion sigiente
+    child : Int,      // id de la evolucion previa
+    evolucion : List<Int>) {
     //Nivel en el que evoluciona
-        //mote : String,
-        //parent : Int,     // id de la evolucion sigiente
-        //child : Int,      // id de la evolucion previa
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int
+
+    @ColumnInfo(name = "nombre")
+    var nombre: String
+
+    @ColumnInfo(name = "mote")
+    var mote: String
+
+    @ColumnInfo(name = "tipo")
+    var tipo: String
+
+    @ColumnInfo(name = "debilidad")
+    var debilidad: String
+
+    @ColumnInfo(name = "imgURL")
+    var imgURL: String
+
+    @ColumnInfo(name = "descripcion")
+    var descripcion: String
+
+    @ColumnInfo(name = "altura")
+    var altura: String
+
+    @ColumnInfo(name = "peso")
+    var peso: String
+
+    @ColumnInfo(name = "categoria")
+    var categoria: String
+
+    @ColumnInfo(name = "habilidad")
+    var habilidad: String
+
+    @ColumnInfo(name = "parent")
+    var parent: Int
+
+    @ColumnInfo(name = "child")
+    var child: Int
+
+    @ColumnInfo(name = "generacion")
+    var generacion: Int
+
+    @ColumnInfo(name = "evolucion")
+    var evolucion : List<Int>
+
+    init {
+        this.id = id
+        this.nombre = nombre
+        this.mote = mote
+        this.tipo = tipo
+        this.debilidad = debilidad
+        this.imgURL = imgURL
+        this.descripcion = descripcion
+        this.altura = altura
+        this.peso = peso
+        this.categoria = categoria
+        this.habilidad = habilidad
+        this.child = child
+        this.parent = parent
+        this.generacion = generacion
+        this.evolucion = evolucion
+    }
 }
 

@@ -55,6 +55,4 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
             return JSONArray(it.readText())
         }
     }
-
-
 }

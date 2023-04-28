@@ -15,7 +15,6 @@ import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.PokemonRepo
-import com.example.apppokedex.entities.Pokemons
 
 class FragmentPc : Fragment() {
 
@@ -26,15 +25,14 @@ class FragmentPc : Fragment() {
     lateinit var adapter: PokemonAdapter
 
     var pokemonRepository : PokemonRepo = PokemonRepo()
-    var pokemonEmpty : Pokemons = Pokemons(1, "", "","", "", "", "", "","", "", 1,  listOf())
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_fragment_pc, container, false)
-        recPokemon = vista.findViewById(R.id.listaPoxeMyPc)
-        imgTitulo = vista.findViewById(R.id.imgTitulo)
-        btnAddPokemon = vista.findViewById(R.id.btnAddPokemonMyPc)
+        recPokemon = vista.findViewById(R.id.listaPoxePc)
+        imgTitulo = vista.findViewById(R.id.imgTituloPc)
+        btnAddPokemon = vista.findViewById(R.id.btnAddPokemonPc)
         return vista
 
     }
@@ -44,7 +42,7 @@ class FragmentPc : Fragment() {
 
         btnAddPokemon.setOnClickListener{
             //crear nueva entrada a la base de datos y pasar la posicion como parametro
-            val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokemonData(pokemonEmpty)
+            val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(0)
             findNavController().navigate(action)            //accion de cambiar de pantalla
         }
 
@@ -52,8 +50,9 @@ class FragmentPc : Fragment() {
         // Esta base de datos solo la puede modificar el propio usuario y solo algunos parametros como el mote, peso y altura
         adapter = PokemonAdapter(pokemonRepository.pokemon){ position ->
 
-            val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokemonData(
-                pokemonRepository.pokemon[position])
+            val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(
+                pokemonRepository.pokemon[position].id
+            )
             findNavController().navigate(action)            //accion de cambiar de pantalla
 //            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)
         }
