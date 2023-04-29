@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.PokemonUserDao
 import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar

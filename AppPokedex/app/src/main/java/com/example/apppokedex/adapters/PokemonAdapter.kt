@@ -1,8 +1,5 @@
 package com.example.apppokedex.adapters
 
-import android.annotation.SuppressLint
-import android.graphics.Color
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +12,7 @@ import com.example.apppokedex.R
 import com.example.apppokedex.entities.Pokemons
 
 class PokemonAdapter(
-    var pokemonList: MutableList <Pokemons>,
+    var pokemonList: MutableList<Pokemons?>?,
     var onClick: (Int) -> Unit                                     //Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
 
@@ -53,14 +50,14 @@ class PokemonAdapter(
     }
 
     override fun getItemCount(): Int {
-        return pokemonList.size
+        return pokemonList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
-        holder.setId(pokemonList[position].id)
-        holder.setName(pokemonList[position].nombre)
-        holder.setTipo(pokemonList[position].tipo)
-        holder.setImagen(pokemonList[position].imgURL)
+        pokemonList?.get(position)?.let { holder.setId(it.id) }
+        pokemonList?.get(position)?.let { holder.setName(it.nombre) }
+        pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
+        pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
         holder.getCard().setOnClickListener{
             onClick(position)               //
         }
@@ -68,7 +65,7 @@ class PokemonAdapter(
 
     fun deleteItem(position: Int) {
         // Eliminar el objeto en la posición especificada
-        pokemonList.removeAt(position)
+        pokemonList?.removeAt(position)
         notifyItemRemoved(position)
     }
 

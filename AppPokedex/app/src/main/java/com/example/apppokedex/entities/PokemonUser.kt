@@ -5,8 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "pokemonUser")
+@Entity(tableName = "pokemonuser")
 class PokemonUser(
+    id : Int,
     idUser : Int,
     idPokemon : Int,
     mote : String,
@@ -16,6 +17,9 @@ class PokemonUser(
     habilidad : String) {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int
+
     @ColumnInfo(name = "idUser")
     var idUser: Int
 
@@ -38,6 +42,7 @@ class PokemonUser(
     var habilidad: String
 
     init {
+        this.id = id
         this.idUser = idUser
         this.idPokemon = idPokemon
         this.mote = mote

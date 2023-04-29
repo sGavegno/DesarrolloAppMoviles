@@ -1,7 +1,5 @@
 package com.example.apppokedex.fragments
 
-import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,15 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
-import com.example.apppokedex.activity.activity_home
-import com.example.apppokedex.entities.User
+import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.UserDao
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentUser : Fragment() {
-    private var newUser : User = User( 0, "Seba", "1234","Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar",  "01155555555", "Av. Medrano 951")
+//    private var newUser : User = User( 0, "Seba", "1234","Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar",  "01155555555", "Av. Medrano 951")
+
+    private var db: AppDatabase? = null
+    private var userDao: UserDao? = null
 
     lateinit var vista : View
 
@@ -35,7 +34,7 @@ class FragmentUser : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_user, container, false)
         imgUser = vista.findViewById(R.id.imgUser)
         btnActualizar = vista.findViewById(R.id.btnUserActualizar)
@@ -51,12 +50,22 @@ class FragmentUser : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        inputTxtNombre.setText(newUser.name)
-        inputTxtApellido.setText(newUser.lastName)
-        inputTxtEmail.setText(newUser.email)
-        inputTxtPass.setText(newUser.password)
-        inputTxtDireccion.setText(newUser.direccion)
-        inputTxtTelefono.setText(newUser.telefono)
+        db = AppDatabase.getInstance(vista.context)
+        userDao = db?.userDao()
+
+        // Dummy call to pre-populate db
+        userDao?.fetchAllUsers()
+
+        val userFind = userDao?.fetchUserById(1)
+
+        if (userFind != null) {
+            inputTxtNombre.setText(userFind.name)
+            inputTxtApellido.setText(userFind.lastName)
+            inputTxtEmail.setText(userFind.email)
+            inputTxtPass.setText(userFind.password)
+            inputTxtDireccion.setText(userFind.direccion)
+            inputTxtTelefono.setText(userFind.telefono)
+        }
 
         btnActualizar.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
@@ -68,27 +77,28 @@ class FragmentUser : Fragment() {
             val txtTeefono : String = inputTxtTelefono.text.toString()
 
             //Agregar cuadro para confirmar cambios por contraseña actual
-
-            if(txtNombre != ""){
-                newUser.name = txtNombre
+            if (userFind != null) {
+                if(txtNombre != ""){
+                    userFind.name = txtNombre
+                }
+                if(txtApellido != ""){
+                    userFind.lastName = txtApellido
+                }
+                if(txtNombre != ""){
+                    userFind.email = txtEmail
+                }
+                if(txtNombre != ""){
+                    userFind.password = txtPassword
+                }
+                if(txtNombre != ""){
+                    userFind.direccion = txtDireccion
+                }
+                if(txtNombre != ""){
+                    userFind.telefono = txtTeefono
+                }
+                userDao?.updateUser(userFind)
+                Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
             }
-            if(txtApellido != ""){
-                newUser.lastName = txtApellido
-            }
-            if(txtNombre != ""){
-                newUser.email = txtEmail
-            }
-            if(txtNombre != ""){
-                newUser.password = txtPassword
-            }
-            if(txtNombre != ""){
-                newUser.direccion = txtDireccion
-            }
-            if(txtNombre != ""){
-                newUser.telefono = txtTeefono
-            }
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
         }
-
     }
 }

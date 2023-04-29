@@ -216,9 +216,9 @@ class PokemonRepo {
         pokemon.add(Pokemons( 139, "Omastar", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"139.png","", "", "","","\n"+"", 1,138,0, ))
 
         pokemon.add(Pokemons( 140, "Kabuto", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"140.png","", "", "","","\n"+"", 1,0,141))
-        pokemon.add(Pokemons( 141, "Kabutops", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"141.png","", "", "","","\n"+"", 1,140,0,))
+        pokemon.add(Pokemons( 141, "Kabutops", "Roca/Agua","Planta/Electrico/Lucha/Tierra",urlImagen+"141.png","", "", "","","\n"+"", 1,140,0))
 
-        pokemon.add(Pokemons( 142, "Aerodactyl", "Roca/Volador","Acero/Agua/Electrico/Hielo/Roca",urlImagen+"142.png","", "", "","","\n"+"", 1,0,0, ))
+        pokemon.add(Pokemons( 142, "Aerodactyl", "Roca/Volador","Acero/Agua/Electrico/Hielo/Roca",urlImagen+"142.png","", "", "","","\n"+"", 1,0,0 ))
 
         pokemon.add(Pokemons( 143, "Snorlax", "Normal","Lucha",urlImagen+"143.png","", "", "","","\n"+"", 1,0,0))
 

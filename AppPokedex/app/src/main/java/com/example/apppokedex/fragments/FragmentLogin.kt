@@ -67,7 +67,9 @@ class FragmentLogin : Fragment() {
 
             if (userFind != null) {
                 if(userFind.password == inputTxtPass){
+
                     val intent = Intent(activity, activity_home::class.java)
+                    intent.putExtra("idUser", userFind.idUser)
                     startActivity(intent)
                 } else {
                     Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()

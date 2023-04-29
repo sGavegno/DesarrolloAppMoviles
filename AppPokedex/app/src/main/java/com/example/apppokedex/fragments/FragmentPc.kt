@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
+import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.PokemonDao
+import com.example.apppokedex.database.PokemonUserDao
+import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.PokemonRepo
 
@@ -23,6 +27,11 @@ class FragmentPc : Fragment() {
     lateinit var btnAddPokemon : Button
     lateinit var recPokemon : RecyclerView
     lateinit var adapter: PokemonAdapter
+
+    private var db: AppDatabase? = null
+    private var userDao: UserDao? = null
+    private var pokemonDao: PokemonDao? = null
+    private var pokemonUserDao: PokemonUserDao? = null
 
     var pokemonRepository : PokemonRepo = PokemonRepo()
     override fun onCreateView(
@@ -40,6 +49,20 @@ class FragmentPc : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val idUser = activity?.intent?.getIntExtra("idUser", -1)
+
+        db = AppDatabase.getInstance(vista.context)
+        userDao = db?.userDao()
+        pokemonDao = db?.pokemonDao()
+        pokemonUserDao = db?.pokemonUserDao()
+
+        // Dummy call to pre-populate db
+        if (idUser != null) {
+            var user = userDao?.fetchUserById(idUser)
+        }
+        var pokemonList = pokemonDao?.fetchAllPokemon()
+       // var pokemonUser = idUser?.let { pokemonUserDao?.fetchALLPokemonUserByIdUser(it) }
+
         btnAddPokemon.setOnClickListener{
             //crear nueva entrada a la base de datos y pasar la posicion como parametro
             val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(0)
@@ -48,10 +71,9 @@ class FragmentPc : Fragment() {
 
         //Se debe levantar la base de datos del usuario con los pokemons cargados.
         // Esta base de datos solo la puede modificar el propio usuario y solo algunos parametros como el mote, peso y altura
-        adapter = PokemonAdapter(pokemonRepository.pokemon){ position ->
-
+        adapter = PokemonAdapter(pokemonList){ position ->
             val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(
-                pokemonRepository.pokemon[position].id
+                pokemonDao?.fetchPokemonByIdPokemon(position)?.id ?: -1
             )
             findNavController().navigate(action)            //accion de cambiar de pantalla
 //            Snackbar.make(vista, "Clik en ${pokemonRepository.pokemon[position].nombre}",Snackbar.LENGTH_SHORT)

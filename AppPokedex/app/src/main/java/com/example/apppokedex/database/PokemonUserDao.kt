@@ -12,19 +12,22 @@ import com.example.apppokedex.entities.PokemonUser
 interface PokemonUserDao {
 
     @Query("SELECT * FROM PokemonUser ORDER BY idUser")
-    fun fetchAllUsers(): MutableList<PokemonUser?>?
+    fun fetchAllPokemonUser(): MutableList<PokemonUser?>?
 
     @Query("SELECT * FROM PokemonUser WHERE idUser = :idUser")
-    fun fetchUserByIdUser(idUser: Int): PokemonUser?
+    fun fetchALLPokemonUserByIdUser(idUser: Int): MutableList<PokemonUser?>?
+
+    @Query("SELECT * FROM PokemonUser WHERE id = :id")
+    fun fetchPokemonUserById(id: Int): PokemonUser?
 
     @Query("SELECT * FROM PokemonUser WHERE idPokemon = :idPokemon")
-    fun fetchUserByIdPokemon(idPokemon: Int): PokemonUser?
+    fun fetchPokemonUserByIdPokemon(idPokemon: Int): PokemonUser?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(pokemonUser: PokemonUser)
+    fun insertPokemonUser(pokemonUser: PokemonUser)
 
     @Update
-    fun updateUser(pokemonUser: PokemonUser)
+    fun updatePokemonUser(pokemonUser: PokemonUser)
 
     @Delete
     fun delete(pokemonUser: PokemonUser)
