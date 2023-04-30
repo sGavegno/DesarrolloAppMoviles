@@ -8,7 +8,7 @@ import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
 import com.example.apppokedex.entities.User
 
-@Database(entities = [User::class, Pokemons::class, PokemonUser::class], version = 4, exportSchema = false)
+@Database(entities = [User::class, Pokemons::class, PokemonUser::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase()  {
     abstract fun userDao(): UserDao
     abstract fun pokemonDao(): PokemonDao
@@ -34,8 +34,8 @@ abstract class AppDatabase : RoomDatabase()  {
                         "myDB"
                     )
                         .addCallback(StartingUsers(context))
-                        .addCallback(StartingPokemon(context))
-                        .addCallback(StartingPokemonUser(context))
+                        //.addCallback(StartingPokemon(context))
+                        //.addCallback(StartingPokemonUser(context))
                         .fallbackToDestructiveMigration()
                         .allowMainThreadQueries() // No es recomendable que se ejecute en el mainthread
                         .build()

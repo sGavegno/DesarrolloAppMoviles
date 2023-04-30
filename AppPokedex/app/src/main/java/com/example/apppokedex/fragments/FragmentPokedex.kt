@@ -45,7 +45,7 @@ class FragmentPokedex : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val idUser = activity?.intent?.getIntExtra("idUser", -1)
+        val idUser = activity?.intent?.getIntExtra("id", -1)
 
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()

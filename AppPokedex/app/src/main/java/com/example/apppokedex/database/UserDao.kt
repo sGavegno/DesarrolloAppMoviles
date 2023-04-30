@@ -5,11 +5,11 @@ import com.example.apppokedex.entities.User
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM users ORDER BY idUser")
+    @Query("SELECT * FROM users ORDER BY id")
     fun fetchAllUsers(): MutableList<User?>?
 
-    @Query("SELECT * FROM users WHERE idUser = :idUser")
-    fun fetchUserById(idUser: Int): User?
+    @Query("SELECT * FROM users WHERE id = :id")
+    fun fetchUserById(id: Int): User?
 
     @Query("SELECT * FROM users WHERE email = :email")
     fun fetchUserByEmail(email: String): User?

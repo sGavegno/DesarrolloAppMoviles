@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "pokemons")
 class Pokemons(
     id : Int,
+    idPokemon : Int,
     nombre : String,
     tipo : String,
     debilidad : String,
@@ -27,6 +28,9 @@ class Pokemons(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int
+
+    @ColumnInfo(name = "idPokemon")
+    var idPokemon: Int
 
     @ColumnInfo(name = "nombre")
     var nombre: String
@@ -66,6 +70,7 @@ class Pokemons(
 
     init {
         this.id = id
+        this.idPokemon = idPokemon
         this.nombre = nombre
         this.tipo = tipo
         this.debilidad = debilidad

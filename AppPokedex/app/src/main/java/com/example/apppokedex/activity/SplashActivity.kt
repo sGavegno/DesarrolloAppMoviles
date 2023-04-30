@@ -4,24 +4,28 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 
-
 import com.example.apppokedex.R
+import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.PokemonDao
+import com.example.apppokedex.database.UserDao
 
 class SplashActivity : AppCompatActivity() {
 
     lateinit var imgSplash : ImageView
     private val SPLASH_TIME_OUT:Long = 3000 // 3s
 
+    private var db: AppDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
         imgSplash = findViewById(R.id.imgSplash)
         Glide.with(this).load(R.drawable.pokedex_logo).into(imgSplash)
+
+        db = AppDatabase.getInstance(this)
 
         Handler().postDelayed(
             {

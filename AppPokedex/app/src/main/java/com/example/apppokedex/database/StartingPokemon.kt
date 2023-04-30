@@ -33,6 +33,7 @@ class StartingPokemon(private val context: Context): RoomDatabase.Callback() {
                 val item = pokemons.getJSONObject(i)
                 val pokemon = Pokemons(
                     id = 0,
+                    idPokemon = 0,
                     nombre= item.getString("id"),
                     tipo= item.getString("id"),
                     debilidad= item.getString("id"),

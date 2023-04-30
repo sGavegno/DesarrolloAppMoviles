@@ -13,15 +13,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentLogin : Fragment() {
-    var users : MutableList<User> = mutableListOf()
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
+    private var pokemonDao: PokemonDao? = null
 
     lateinit var imgTitulo : ImageView
     lateinit var inputTxtEmail : EditText
@@ -35,9 +36,6 @@ class FragmentLogin : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        users.add(User(1, "Seba","1234","Sebastian", "Gavgeno", "sgavegno@frba.utn.edu.ar","01155555555", "Av. Medrano 951"))
-        users.add(User(2,"a","1","Carlos",  "G", "",  "", ""))
 
         vista = inflater.inflate(R.layout.fragment_fragment_login, container, false)
         imgTitulo = vista.findViewById(R.id.imgLogin)
@@ -55,7 +53,8 @@ class FragmentLogin : Fragment() {
         userDao = db?.userDao()
 
         // Dummy call to pre-populate db
-        userDao?.fetchAllUsers()
+        var userTest = userDao?.fetchAllUsers()
+        pokemonDao?.fetchAllPokemon()
 
         btnNexScreen.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
@@ -69,7 +68,7 @@ class FragmentLogin : Fragment() {
                 if(userFind.password == inputTxtPass){
 
                     val intent = Intent(activity, activity_home::class.java)
-                    intent.putExtra("idUser", userFind.idUser)
+                    intent.putExtra("id", userFind.id)
                     startActivity(intent)
                 } else {
                     Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()

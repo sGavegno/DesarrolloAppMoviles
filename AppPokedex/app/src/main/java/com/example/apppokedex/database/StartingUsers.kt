@@ -28,10 +28,11 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
 
         try {
             val users = loadJSONArray(context)              //Carga tabla ubicada en el json
+            Log.d("StartingUsers JSON", "User JSON database...")
             for (i in 0 until users.length()) {
                 val item = users.getJSONObject(i)
                 val user = User(
-                    idUser = 0,
+                    id = 0,
                     userName = item.getString("userName"),
                     password = item.getString("password"),
                     name = item.getString("name"),
@@ -43,7 +44,6 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
 
                 dao?.insertUser(user)
             }
-            //idem para pokedex
 
         } catch (e: JSONException) {
             Log.e("fillWithStartingNotes", e.toString())
@@ -51,7 +51,7 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
     }
 
     private fun loadJSONArray(context: Context): JSONArray {
-        val inputStream = context.resources.openRawResource(R.raw.users)
+        val inputStream = context.resources.openRawResource(R.raw.user)
 
         BufferedReader(inputStream.reader()).use {
             return JSONArray(it.readText())
