@@ -54,7 +54,7 @@ class PokemonAdapter(
     }
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
-        pokemonList?.get(position)?.let { holder.setId(it.id) }
+        pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
         pokemonList?.get(position)?.let { holder.setName(it.nombre) }
         pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }

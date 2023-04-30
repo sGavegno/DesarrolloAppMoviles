@@ -28,24 +28,24 @@ class StartingPokemon(private val context: Context): RoomDatabase.Callback() {
         val dao = AppDatabase.getInstance(context)?.pokemonDao()
 
         try {
-            val pokemons = loadJSONArray(context)              //Carga tabla ubicada en el json
+            val pokemons = loadJSONArray(context,R.raw.pokedex)              //Carga tabla ubicada en el json
             for (i in 0 until pokemons.length()) {
                 val item = pokemons.getJSONObject(i)
                 val pokemon = Pokemons(
                     id = 0,
-                    idPokemon = 0,
-                    nombre= item.getString("id"),
-                    tipo= item.getString("id"),
-                    debilidad= item.getString("id"),
-                    imgURL= item.getString("id"),
-                    descripcion= item.getString("id"),
-                    altura= item.getString("id"),
-                    peso= item.getString("id"),
-                    categoria= item.getString("id"),
-                    habilidad= item.getString("id"),
-                    generacion= 0,
-                    child = 0,
-                    parent = 0
+                    idPokemon = item.getInt("idPokemon"),
+                    nombre= item.getString("nombre"),
+                    tipo= item.getString("tipo"),
+                    debilidad= item.getString("debilidad"),
+                    imgURL= item.getString("imgURL"),
+                    descripcion= item.getString("descripcion"),
+                    altura= item.getString("altura"),
+                    peso= item.getString("peso"),
+                    categoria= item.getString("categoria"),
+                    habilidad= item.getString("habilidad"),
+                    generacion= item.getInt("generacion"),
+                    child = item.getInt("child"),
+                    parent = item.getInt("parent")
                 )
                 dao?.insertPokemon(pokemon)
             }
@@ -54,9 +54,8 @@ class StartingPokemon(private val context: Context): RoomDatabase.Callback() {
         }
     }
 
-    private fun loadJSONArray(context: Context): JSONArray {
-        val inputStream = context.resources.openRawResource(R.raw.pokedex)
-
+    private fun loadJSONArray(context: Context, id :Int): JSONArray {
+        val inputStream = context.resources.openRawResource(id)
         BufferedReader(inputStream.reader()).use {
             return JSONArray(it.readText())
         }

@@ -28,18 +28,18 @@ class StartingPokemonUser(private val context: Context): RoomDatabase.Callback()
         val dao = AppDatabase.getInstance(context)?.pokemonUserDao()
 
         try {
-            val pokemonsUser = loadJSONArray(context)              //Carga tabla ubicada en el json
+            val pokemonsUser = loadJSONArray(context,R.raw.pokemon_pc)              //Carga tabla ubicada en el json
             for (i in 0 until pokemonsUser.length()) {
                 val item = pokemonsUser.getJSONObject(i)
                 val pokemonUser = PokemonUser(
                     id = 0,
-                    idUser = 0,
-                    idPokemon = 0,
-                    mote = item.getString("id"),
-                    nivel = 0,
-                    altura= item.getString("id"),
-                    peso= item.getString("id"),
-                    habilidad= item.getString("id")
+                    idUser = item.getInt("idUser"),
+                    idPokemon = item.getInt("idPokemon"),
+                    mote = item.getString("mote"),
+                    nivel = item.getInt("nivel"),
+                    altura= item.getString("altura"),
+                    peso= item.getString("peso"),
+                    habilidad= item.getString("habilidad")
                 )
                 dao?.insertPokemonUser(pokemonUser)
             }
@@ -48,9 +48,8 @@ class StartingPokemonUser(private val context: Context): RoomDatabase.Callback()
         }
     }
 
-    private fun loadJSONArray(context: Context): JSONArray {
-        val inputStream = context.resources.openRawResource(R.raw.pokemon_pc)
-
+    private fun loadJSONArray(context: Context, id :Int): JSONArray {
+        val inputStream = context.resources.openRawResource(id)
         BufferedReader(inputStream.reader()).use {
             return JSONArray(it.readText())
         }

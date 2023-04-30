@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.database.AppDatabase
@@ -46,6 +47,8 @@ class FragmentPokedex : Fragment() {
         super.onStart()
 
         val idUser = activity?.intent?.getIntExtra("id", -1)
+
+        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()

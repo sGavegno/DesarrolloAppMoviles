@@ -28,7 +28,7 @@ class User(
     @ColumnInfo(name = "name")
     var name: String
 
-    @ColumnInfo(name = "lastname")
+    @ColumnInfo(name = "lastName")
     var lastName: String
 
     @ColumnInfo(name = "email")
@@ -49,5 +49,4 @@ class User(
         this.telefono = telefono
         this.direccion = direccion
     }
-
 }

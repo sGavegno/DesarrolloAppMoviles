@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.database.AppDatabase
@@ -37,7 +38,7 @@ class FragmentPc : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_pc, container, false)
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTituloPc)
@@ -48,6 +49,9 @@ class FragmentPc : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
+
 
         val idUser = activity?.intent?.getIntExtra("idUser", -1)
 

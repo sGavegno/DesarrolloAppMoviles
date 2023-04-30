@@ -13,8 +13,6 @@ class activity_home : AppCompatActivity() {
     private lateinit var btnNavView : BottomNavigationView
     private lateinit var navHostFagment :NavHostFragment
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
