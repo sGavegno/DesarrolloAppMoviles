@@ -17,7 +17,7 @@ interface PokemonUserDao {
     @Query("SELECT * FROM PokemonUser WHERE (idUser = :idUser and idPokemon = :idPokemon)")
     fun fetchPokemonUserById(idUser: Int, idPokemon: Int): PokemonUser?
 
-    @Query("SELECT * FROM PokemonUser WHERE idUser = :idUser")
+    @Query("SELECT * FROM PokemonUser WHERE idUser = :idUser ORDER BY  idPokemon")
     fun fetchALLPokemonUserByIdUser(idUser: Int): MutableList<PokemonUser?>?
 
     @Query("SELECT * FROM PokemonUser WHERE idPokemon = :idPokemon")

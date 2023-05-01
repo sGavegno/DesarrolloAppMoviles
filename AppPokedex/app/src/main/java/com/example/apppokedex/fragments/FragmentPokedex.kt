@@ -21,6 +21,7 @@ import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
+import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
 
@@ -71,6 +72,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         recPokemon.adapter = adapter
 
         if(user!!.permisos == 1){       // Solo acciones para usuarios con permismo de supervisor Falta agregar el boton para incluir pokemons
+
+
             val swipeHandler = object : ActionLista(adapter, pokemonUserDao, pokemonList, idUser) {
                 override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
                     // Permitir que se deslice solo en ciertos elementos del RecyclerView
@@ -94,8 +97,15 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val idUser = sharedPref?.getInt("UserID", 0)
-        pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser!!,item.idPokemon,item.nombre,0,item.altura,item.peso,item.descripcion))
-//        Snackbar.make(vista, "Has clickeado en el elemento: ${item.nombre}", Snackbar.LENGTH_SHORT).show()
+        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser!!, item.idPokemon)
+        if(checkPokemonUser == null)
+        {
+            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser!!,item.idPokemon,item.nombre,0,item.altura,item.peso,item.descripcion))
+            Snackbar.make(vista, "${item.nombre} a sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(vista, "${item.nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
 }

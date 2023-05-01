@@ -22,7 +22,7 @@ class PokemonUserAdapter(
             this.view = v
         }
         fun setId(id : Int){
-            val txtId : TextView = view.findViewById(R.id.txtIdPokeUser)
+            val txtId : TextView = view.findViewById(R.id.txtIdPokeUserDato)
             txtId.text = id.toString()
         }
         fun setName(name : String){

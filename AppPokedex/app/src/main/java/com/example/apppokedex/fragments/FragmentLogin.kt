@@ -56,12 +56,12 @@ class FragmentLogin : Fragment() {
         btnNexScreen.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
             val inputTxtUserName : String = inputTxtUser.text.toString()
-            val inputTxtPass : String = inputTxtPass.text.toString()
+            val inputTxtUserPass : String = inputTxtPass.text.toString()
 
             val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
 
             if (userFind != null) {
-                if(userFind.password == inputTxtPass){
+                if(userFind.password == inputTxtUserPass){
                     //Cargo el id del usuario
                     val sharedPref = context?.getSharedPreferences(
                         getString(R.string.preference_file_key), Context.MODE_PRIVATE)
@@ -71,7 +71,8 @@ class FragmentLogin : Fragment() {
                             commit()
                         }
                     }
-
+                    inputTxtUser.setText("")
+                    inputTxtPass.setText("")
                     val intent = Intent(activity, activity_home::class.java)
                     startActivity(intent)
                 } else {

@@ -41,12 +41,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Nombre"
             android:textColor="#FFFFFF"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardPokemonUserFondo"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.155" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtIdPokeUser"
@@ -55,6 +57,7 @@
             android:layout_marginTop="16dp"
             android:text="Nº:"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/txtNombrePokeUser"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txtNombrePokeUser"
@@ -67,6 +70,7 @@
             android:layout_marginStart="16dp"
             android:text="id"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/txtIdPokeUser"
             app:layout_constraintStart_toEndOf="@+id/txtIdPokeUser"
             app:layout_constraintTop_toTopOf="@+id/txtIdPokeUser" />
@@ -79,6 +83,7 @@
             android:layout_marginBottom="16dp"
             android:text="Tipo"
             android:textColor="#FFFFFF"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
