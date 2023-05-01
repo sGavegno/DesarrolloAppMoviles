@@ -3,6 +3,7 @@ package com.example.apppokedex.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -13,15 +14,27 @@ import com.example.apppokedex.entities.Pokemons
 
 class PokemonAdapter(
     var pokemonList: MutableList<Pokemons?>?,
-    var onClick: (Int) -> Unit                                     //Funcion como parametro
+    //var onClick: (Int) -> Unit,
+    private val listener: PokemonAdapterListener//Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
 
+    /*
+    interface OnItemClickListener {
+        fun onItemClick(item: Pokemons)
+    }*/
+    interface PokemonAdapterListener {
+        fun onCardViewClick(item: Int)
+        fun onButtonClick(item: Pokemons)
+    }
+
     class PokemonHolder(v: View) : RecyclerView.ViewHolder(v){
+
+        val btnAddPokemon: Button = itemView.findViewById(R.id.btnAddPokemonUser)
+
         private var view :View
         init {
             this.view = v
         }
-
         fun setId(id : Int){
             val txtId : TextView = view.findViewById(R.id.txtId)
             txtId.text = id.toString()
@@ -54,19 +67,22 @@ class PokemonAdapter(
     }
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
+        val item = pokemonList?.get(position)
         pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
         pokemonList?.get(position)?.let { holder.setName(it.nombre) }
         pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
-        holder.getCard().setOnClickListener{
-            onClick(position)               //
+
+        holder.getCard().setOnClickListener {
+            listener.onCardViewClick(position)
+        }
+        holder.btnAddPokemon.setOnClickListener {
+            item?.let { it1 -> listener.onButtonClick(it1) }
         }
     }
-
     fun deleteItem(position: Int) {
         // Eliminar el objeto en la posición especificada
         pokemonList?.removeAt(position)
         notifyItemRemoved(position)
     }
-
 }

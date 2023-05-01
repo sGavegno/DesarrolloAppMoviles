@@ -13,15 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:text="PokeTipo"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPokedexIdDato"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokedexName"
         app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="@+id/txtPokeName"
+        app:layout_constraintStart_toStartOf="@+id/txtPokedexName"
         app:layout_constraintTop_toBottomOf="@+id/txtPokedexIdDato" />
 
     <TextView

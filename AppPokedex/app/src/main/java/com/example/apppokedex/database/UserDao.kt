@@ -9,7 +9,7 @@ interface UserDao {
     fun fetchAllUsers(): MutableList<User?>?
 
     @Query("SELECT * FROM users WHERE id = :id")
-    fun fetchUserById(id: Int): User?
+    fun fetchUserById(id: Int?): User?
 
     @Query("SELECT * FROM users WHERE email = :email")
     fun fetchUserByEmail(email: String): User?

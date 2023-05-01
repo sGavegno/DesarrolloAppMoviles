@@ -14,7 +14,7 @@ class PokemonUser(
     nivel : Int,
     altura : String,
     peso : String,
-    habilidad : String) {
+    descripcion : String) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -38,8 +38,8 @@ class PokemonUser(
     @ColumnInfo(name = "peso")
     var peso: String
 
-    @ColumnInfo(name = "habilidad")
-    var habilidad: String
+    @ColumnInfo(name = "descripcion")
+    var descripcion: String
 
     init {
         this.id = id
@@ -49,7 +49,7 @@ class PokemonUser(
         this.nivel = nivel
         this.altura = altura
         this.peso = peso
-        this.habilidad = habilidad
+        this.descripcion = descripcion
     }
 
 }

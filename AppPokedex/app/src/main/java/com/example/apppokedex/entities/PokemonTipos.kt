@@ -12,6 +12,7 @@ class PokemonTipos(
         return "$name - Debilidades: ${debilidad.joinToString()} | Fortalezas: ${fortaleza.joinToString()}"
     }
     init {
+        /*
         val pokemonTipos = listOf(
             PokemonTipos(1,"Planta", listOf("Fuego", "Hielo", "Veneno", "Volador", "Bicho", "Dragón", "Acero"), listOf("Agua", "Tierra", "Roca")),
             PokemonTipos(2,"Fuego", listOf("Agua", "Tierra", "Roca"), listOf("Planta", "Hielo", "Bicho", "Acero")),
@@ -32,5 +33,7 @@ class PokemonTipos(
             PokemonTipos(17,"Acero", listOf("Fuego", "Lucha", "Tierra"), listOf("Hielo", "Roca", "Hada")),
             PokemonTipos(18,"Hada", listOf("Veneno", "Acero"), listOf("Lucha", "Dragón", "Siniestro"))
         )
+
+         */
     }
 }

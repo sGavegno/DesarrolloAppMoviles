@@ -14,14 +14,18 @@ interface PokemonUserDao {
     @Query("SELECT * FROM PokemonUser ORDER BY idUser")
     fun fetchAllPokemonUser(): MutableList<PokemonUser?>?
 
+    @Query("SELECT * FROM PokemonUser WHERE (idUser = :idUser and idPokemon = :idPokemon)")
+    fun fetchPokemonUserById(idUser: Int, idPokemon: Int): PokemonUser?
+
     @Query("SELECT * FROM PokemonUser WHERE idUser = :idUser")
     fun fetchALLPokemonUserByIdUser(idUser: Int): MutableList<PokemonUser?>?
 
-    @Query("SELECT * FROM PokemonUser WHERE id = :id")
-    fun fetchPokemonUserById(id: Int): PokemonUser?
-
     @Query("SELECT * FROM PokemonUser WHERE idPokemon = :idPokemon")
     fun fetchPokemonUserByIdPokemon(idPokemon: Int): PokemonUser?
+
+    @Query("SELECT * FROM PokemonUser WHERE (idUser = :idUser and idPokemon = :idPokemon)")
+    fun fetchPokemonUserByPokemon(idUser: Int, idPokemon: Int): PokemonUser?
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemonUser(pokemonUser: PokemonUser)

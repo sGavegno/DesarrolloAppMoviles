@@ -27,14 +27,14 @@
         android:id="@+id/txtPokeId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="Nº:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPokeName"
-        app:layout_constraintHorizontal_bias="0.242"
-        app:layout_constraintStart_toStartOf="@+id/txtPokeName"
-        app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toEndOf="@+id/cvImgPokemom"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeMote" />
 
     <TextView
         android:id="@+id/txtPokeIdDato"
@@ -43,13 +43,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
         android:background="@android:color/transparent"
-        android:text="Nº de ID"
+        android:text="ID"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtPokeId"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toEndOf="@+id/txtPokeId"
         app:layout_constraintTop_toTopOf="@+id/txtPokeId"
         app:layout_constraintVertical_bias="0.0" />
@@ -86,7 +86,7 @@
         android:id="@+id/txtPokeTipoDato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
         android:text="PokeTipo"
         android:textAlignment="center"
@@ -282,5 +282,61 @@
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtPokeMoteDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mote"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeMote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toEndOf="@+id/txtPokeMote"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeMote"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokeLvl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lvl:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeIdDato"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintStart_toEndOf="@+id/txtPokeIdDato"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeIdDato"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokeLvlDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lvl"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokeLvl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintStart_toEndOf="@+id/txtPokeLvl"
+        app:layout_constraintTop_toTopOf="@+id/txtPokeLvl"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokeMote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Mote:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toEndOf="@+id/cvImgPokemom"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

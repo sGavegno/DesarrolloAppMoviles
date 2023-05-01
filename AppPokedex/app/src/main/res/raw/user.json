@@ -1,20 +1,22 @@
 [
   {
-    "userName": "user1",
+    "userName": "Sebas",
     "password": "1234",
-    "name": "User1",
-    "lastName": "User1",
+    "name": "Sebastian",
+    "lastName": "Gavegno",
     "email": "email",
     "telefono": "telefono",
-    "direccion": "direccion"
+    "direccion": "direccion",
+    "permisos" : 1
   },
   {
-  "userName": "user2",
-  "password": "5678",
-  "name": "User2",
-  "lastName": "User2",
-  "email": "email",
-  "telefono": "telefono",
-  "direccion": "direccion"
+    "userName": "user2",
+    "password": "5678",
+    "name": "User2",
+    "lastName": "User2",
+    "email": "email",
+    "telefono": "telefono",
+    "direccion": "direccion",
+    "permisos" : 0
   }
 ]

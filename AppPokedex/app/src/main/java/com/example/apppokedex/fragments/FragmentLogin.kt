@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,20 +14,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.UserDao
-import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentLogin : Fragment() {
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
-    private var pokemonDao: PokemonDao? = null
 
-    lateinit var imgTitulo : ImageView
-    lateinit var inputTxtEmail : EditText
-    lateinit var inputTxtPass : EditText
+    private lateinit var imgTitulo : ImageView
+    private lateinit var inputTxtUser : EditText
+    private lateinit var inputTxtPass : EditText
     private lateinit var btnNexScreen : Button
     private lateinit var btnSingin : Button
 
@@ -41,7 +39,7 @@ class FragmentLogin : Fragment() {
         imgTitulo = vista.findViewById(R.id.imgLogin)
         btnNexScreen = vista.findViewById(R.id.btnLogin)
         btnSingin = vista.findViewById(R.id.btnSingin)
-        inputTxtEmail = vista.findViewById(R.id.editTxtEmail)
+        inputTxtUser = vista.findViewById(R.id.editTxtUserName)
         inputTxtPass = vista.findViewById(R.id.editTxtPass)
         return vista
     }
@@ -53,22 +51,28 @@ class FragmentLogin : Fragment() {
         userDao = db?.userDao()
 
         // Dummy call to pre-populate db
-        var userTest = userDao?.fetchAllUsers()
-        pokemonDao?.fetchAllPokemon()
+        userDao?.fetchAllUsers()
 
         btnNexScreen.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos
-            val inputTxtUserName : String = inputTxtEmail.text.toString()
+            val inputTxtUserName : String = inputTxtUser.text.toString()
             val inputTxtPass : String = inputTxtPass.text.toString()
 
-            //val userFind = users.find { it.email == inputTxt1 && it.password == inputTxt2}
             val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
 
             if (userFind != null) {
                 if(userFind.password == inputTxtPass){
+                    //Cargo el id del usuario
+                    val sharedPref = context?.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                    if (sharedPref != null) {
+                        with (sharedPref.edit()) {
+                            putInt("UserID", userFind.id)
+                            commit()
+                        }
+                    }
 
                     val intent = Intent(activity, activity_home::class.java)
-                    intent.putExtra("id", userFind.id)
                     startActivity(intent)
                 } else {
                     Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()

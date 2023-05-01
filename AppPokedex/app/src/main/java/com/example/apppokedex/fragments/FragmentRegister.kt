@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +12,6 @@ import android.widget.TextView
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonUserDao
 import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +22,6 @@ class FragmentRegister : Fragment() {
 
     lateinit var vista : View
 
-    lateinit var txtTitulo : TextView
     lateinit var txtUserName : TextView
     lateinit var txtPassword : TextView
     lateinit var txtPasswordConf : TextView
@@ -33,7 +32,6 @@ class FragmentRegister : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_register, container, false)
-        txtTitulo = vista.findViewById(R.id.txtTituloRegistro)
         txtUserName = vista.findViewById(R.id.txtEditRegUserName)
         txtPassword = vista.findViewById(R.id.txtEditRegPassword)
         txtPasswordConf = vista.findViewById(R.id.txtEditRegPasswordConf)
@@ -61,8 +59,18 @@ class FragmentRegister : Fragment() {
                 val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
 
                 if (userFind == null) {
-                    //si no encuentra este usuario Agregarlo a la base de datos y Cambiar a la Activity
-                    userDao?.insertUser(User(0, inputTxtUserName, inputTxtPass, "", "", "", "",""))
+                    userDao?.insertUser(User(0, inputTxtUserName, inputTxtPass, "", "", "", "","",0))
+                    val user = userDao?.fetchUserByUserName(inputTxtUserName)
+                    //Cargo el id del usuario registrado
+                    val sharedPref = context?.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                    if (sharedPref != null) {
+                        with (sharedPref.edit()) {
+                            user?.let { it1 -> putInt("UserID", it1.id) }
+                            commit()
+                        }
+                    }
+
                     val intent = Intent(activity, activity_home::class.java)
                     startActivity(intent)
                 } else {

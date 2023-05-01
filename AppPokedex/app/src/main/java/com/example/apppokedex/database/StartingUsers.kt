@@ -41,7 +41,8 @@ class StartingUsers(private val context: Context) : RoomDatabase.Callback() {
                     lastName =item.getString("lastName"),
                     email = item.getString("email"),
                     telefono = item.getString("telefono"),
-                    direccion = item.getString("direccion")
+                    direccion = item.getString("direccion"),
+                    permisos = item.getInt("permisos")
                 )
                 daoUser?.insertUser(user)
             }

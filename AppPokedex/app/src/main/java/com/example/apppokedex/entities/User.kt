@@ -13,7 +13,8 @@ class User(
     lastName : String,
     email : String,
     telefono : String,
-    direccion : String) {
+    direccion : String,
+    permisos : Int ) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -39,6 +40,10 @@ class User(
 
     @ColumnInfo(name = "direccion")
     var direccion: String
+
+    @ColumnInfo(name = "permisos")
+    var permisos: Int
+
     init {
         this.id = id
         this.userName = userName
@@ -48,5 +53,6 @@ class User(
         this.email = email
         this.telefono = telefono
         this.direccion = direccion
+        this.permisos = permisos
     }
 }

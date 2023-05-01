@@ -6,7 +6,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.apppokedex.R
 import com.example.apppokedex.entities.PokemonUser
-import com.example.apppokedex.entities.Pokemons
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +38,7 @@ class StartingPokemonUser(private val context: Context): RoomDatabase.Callback()
                     nivel = item.getInt("nivel"),
                     altura= item.getString("altura"),
                     peso= item.getString("peso"),
-                    habilidad= item.getString("habilidad")
+                    descripcion= item.getString("descripcion")
                 )
                 dao?.insertPokemonUser(pokemonUser)
             }

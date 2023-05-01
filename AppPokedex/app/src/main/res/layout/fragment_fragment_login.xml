@@ -9,11 +9,11 @@
     tools:context=".fragments.FragmentLogin">
 
     <EditText
-        android:id="@+id/editTxtEmail"
+        android:id="@+id/editTxtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="email"
+        android:hint="User Name"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -26,14 +26,15 @@
         android:id="@+id/editTxtPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTxtEmail"
-        app:layout_constraintStart_toStartOf="@+id/editTxtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
+        app:layout_constraintEnd_toEndOf="@+id/editTxtUserName"
+        app:layout_constraintStart_toStartOf="@+id/editTxtUserName"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtUserName" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -44,7 +45,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTxtPass"
         app:layout_constraintStart_toStartOf="@+id/editTxtPass"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtPass" />
+        app:layout_constraintTop_toBottomOf="@+id/editTxtPass"
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <Button
         android:id="@+id/btnSingin"
@@ -62,7 +64,7 @@
         android:layout_width="339dp"
         android:layout_height="107dp"
         android:src="@drawable/pokedex_logo"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtEmail"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

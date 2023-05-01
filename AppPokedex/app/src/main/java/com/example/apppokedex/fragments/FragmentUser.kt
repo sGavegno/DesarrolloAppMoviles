@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +15,6 @@ import com.example.apppokedex.database.UserDao
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentUser : Fragment() {
-//    private var newUser : User = User( 0, "Seba", "1234","Sebastian", "Gavegno", "sgavegno@frba.utn.edu.ar",  "01155555555", "Av. Medrano 951")
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -29,7 +29,6 @@ class FragmentUser : Fragment() {
     lateinit var inputTxtDireccion : EditText
     lateinit var inputTxtTelefono : EditText
     private lateinit var btnActualizar : Button
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,13 +49,17 @@ class FragmentUser : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val sharedPref = context?.getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        val idUser = sharedPref?.getInt("UserID", 0)
+
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()
 
         // Dummy call to pre-populate db
         userDao?.fetchAllUsers()
 
-        val userFind = userDao?.fetchUserById(1)
+        val userFind = idUser?.let { userDao?.fetchUserById(it) }
 
         if (userFind != null) {
             inputTxtNombre.setText(userFind.name)
