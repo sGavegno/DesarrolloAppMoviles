@@ -109,7 +109,6 @@
         android:id="@+id/txtPokeEvolucion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Evoluciones:"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -138,7 +137,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPokemonDescripcion"
         android:layout_width="369dp"
-        android:layout_height="96dp"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="16dp"
