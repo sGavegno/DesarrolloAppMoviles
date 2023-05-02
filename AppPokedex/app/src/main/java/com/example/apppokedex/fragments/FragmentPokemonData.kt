@@ -22,6 +22,7 @@ import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
 import com.example.apppokedex.database.UserDao
+import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
@@ -128,8 +129,8 @@ class FragmentPokemonData : Fragment() {
                     val pokemonChild = pokemonDao?.fetchPokemonByChild(pokemon.idPokemon)
                     if(pokemonChild != null)
                     {
-                        for(len in pokemonChild){
-                            PokemonEvolucionList.add(pokemon.idPokemon)
+                        for(poke in pokemonChild){
+                            poke?.let { PokemonEvolucionList.add(it.idPokemon) }
                         }
                     }
                 }

@@ -123,8 +123,8 @@ class FragmentPokedexData : Fragment() {
                     val pokemonChild = pokemonDao?.fetchPokemonByChild(pokemon.idPokemon)
                     if(pokemonChild != null)
                     {
-                        for(len in pokemonChild){
-                            PokemonEvolucionList.add(pokemon.idPokemon)
+                        for(poke in pokemonChild){
+                            poke?.let { PokemonEvolucionList.add(it.idPokemon) }
                         }
                     }
                 }
