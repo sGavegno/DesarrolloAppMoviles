@@ -13,7 +13,7 @@ import com.example.apppokedex.R
 import com.example.apppokedex.entities.Pokemons
 
 class PokemonAdapter(
-    var pokemonList: MutableList<Pokemons?>?,
+    private var pokemonList: MutableList<Pokemons?>?,
     //var onClick: (Int) -> Unit,
     private val listener: PokemonAdapterListener//Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {

@@ -54,7 +54,7 @@ class FragmentLogin : Fragment() {
         userDao?.fetchAllUsers()
 
         btnNexScreen.setOnClickListener{
-            //Analizo si los paraetros estan en la base de datos
+            //Analizo si los parametros estan en la base de datos
             val inputTxtUserName : String = inputTxtUser.text.toString()
             val inputTxtUserPass : String = inputTxtPass.text.toString()
 

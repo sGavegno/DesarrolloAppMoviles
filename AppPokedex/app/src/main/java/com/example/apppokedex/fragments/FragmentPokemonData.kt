@@ -5,13 +5,13 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.text.method.DigitsKeyListener
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,39 +22,39 @@ import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
 import com.example.apppokedex.database.UserDao
-import com.example.apppokedex.entities.PokemonRepo
-import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
+
+
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
     private var pokemonDao: PokemonDao? = null
     private var pokemonUserDao: PokemonUserDao? = null
 
-    lateinit var labelName : TextView
-    lateinit var labelMote : TextView
-    lateinit var labelId : TextView
-    lateinit var labelLvl : TextView
-    lateinit var labelTipo : TextView
-    lateinit var labelDebilidad : TextView
-    lateinit var imgPokemon : ImageView
-    lateinit var labelDescripcion : TextView
-    lateinit var labelAltura : TextView
-    lateinit var labelPeso : TextView
-    lateinit var labelCategoria: TextView
-    lateinit var labelHabilidad : TextView
-    lateinit var txtEvolucion : TextView
-    lateinit var recEvoluciones : RecyclerView
-    lateinit var adapter: EvolucionesAdapter
+    private lateinit var labelName : TextView
+    private lateinit var labelMote : TextView
+    private lateinit var labelId : TextView
+    private lateinit var labelLvl : TextView
+    private lateinit var labelTipo : TextView
+    private lateinit var labelDebilidad : TextView
+    private lateinit var imgPokemon : ImageView
+    private lateinit var labelDescripcion : TextView
+    private lateinit var labelAltura : TextView
+    private lateinit var labelPeso : TextView
+    private lateinit var labelCategoria: TextView
+    private lateinit var labelHabilidad : TextView
+    private lateinit var txtEvolucion : TextView
+    private lateinit var recEvoluciones : RecyclerView
+    private lateinit var adapter: EvolucionesAdapter
 
     lateinit var vista : View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_pokemon_data, container, false)
         labelName = vista.findViewById(R.id.txtPokeName)
         labelMote = vista.findViewById(R.id.txtPokeMoteDato)
@@ -71,8 +71,6 @@ class FragmentPokemonData : Fragment() {
         txtEvolucion = vista.findViewById(R.id.txtPokeEvolucion)
         recEvoluciones = vista.findViewById(R.id.listaEvolucion)
 
-
-
         return vista
     }
 
@@ -88,11 +86,11 @@ class FragmentPokemonData : Fragment() {
         pokemonDao = db?.pokemonDao()
         pokemonUserDao = db?.pokemonUserDao()
 
-        var PokemonEvolucionList: MutableList<Int> = mutableListOf()
+        val PokemonEvolucionList: MutableList<Int> = mutableListOf()
 
-        var idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
-        var pokemon = pokemonDao?.fetchPokemonByIdPokemon(idPokemon)
-        var pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
+        val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
+        val pokemon = pokemonDao?.fetchPokemonByIdPokemon(idPokemon)
+        val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
 
         if(pokemon != null && pokemonUser != null)
         {
@@ -111,16 +109,16 @@ class FragmentPokemonData : Fragment() {
             Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
             if(pokemon.child != 0) {
-                var PokemonChild = pokemonDao?.fetchPokemonByIdPokemon(pokemon.child)
+                val PokemonChild = pokemonDao?.fetchPokemonByIdPokemon(pokemon.child)
                 if (PokemonChild != null && PokemonChild.child != 0) {
                     PokemonEvolucionList.add(PokemonChild.child)
                 }
                 PokemonEvolucionList.add(pokemon.child)
             }
-            PokemonEvolucionList.add(pokemon.id)
+            PokemonEvolucionList.add(pokemon.idPokemon)
             if(pokemon.parent != 0) {
                 PokemonEvolucionList.add(pokemon.parent)
-                var PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
+                val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
                 if (PokemonParent != null && PokemonParent.parent != 0) {
                     PokemonEvolucionList.add(PokemonParent.parent)
                 }
@@ -151,7 +149,7 @@ class FragmentPokemonData : Fragment() {
                         idPokemon)
                     findNavController().navigate(action)
                 } else {
-                    Snackbar.make(vista, "El Pokeon no esta en la lista", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(vista, "El Pokemon no esta en la lista", Snackbar.LENGTH_SHORT).show()
                 }
             }
             recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista

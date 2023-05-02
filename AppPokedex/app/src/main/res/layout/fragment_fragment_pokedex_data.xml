@@ -12,7 +12,7 @@
         android:id="@+id/txtPokedexTipoDato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
         android:text="PokeTipo"
         android:textAlignment="center"
@@ -241,7 +241,7 @@
         android:id="@+id/txtPokedexId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Nº:"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -281,4 +281,29 @@
             android:layout_width="145dp"
             android:layout_height="145dp" />
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtPokedexGeneracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="112dp"
+        android:text="Generacion:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/cvPokemonDescripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtPokedexName"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokedexTipoDato" />
+
+    <TextView
+        android:id="@+id/txtPokedexGeneracionDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Nº Gen"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokedexGeneracion"
+        app:layout_constraintStart_toEndOf="@+id/txtPokedexGeneracion"
+        app:layout_constraintTop_toTopOf="@+id/txtPokedexGeneracion" />
 </androidx.constraintlayout.widget.ConstraintLayout>
