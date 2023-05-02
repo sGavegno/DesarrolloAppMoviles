@@ -22,12 +22,9 @@ interface PokemonDao {
     @Query("SELECT * FROM Pokemons WHERE nombre = :nombre")
     fun fetchPokemonByName(nombre: String): Pokemons?
 
-/*
-    @Query("SELECT PokemonUser.idUser, PokemonUser.idPokemon, Pokemons.idPokemon " +
-            "FROM Pokemons INNER JOIN Users ON Pokemons.idPokemon = PokemonUser.idPokemon " +
-            "Where PokemonUser.idUser = :idUser")
-    fun fetchPokemonUserById(idUser: Int): MutableList<Pokemons?>?
-*/
+    @Query("SELECT * FROM Pokemons WHERE child = :child")
+    fun fetchPokemonByChild(child: Int): MutableList<Pokemons?>?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemon(pokemons: Pokemons)
 

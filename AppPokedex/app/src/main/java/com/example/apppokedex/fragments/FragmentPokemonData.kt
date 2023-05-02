@@ -117,10 +117,21 @@ class FragmentPokemonData : Fragment() {
             }
             PokemonEvolucionList.add(pokemon.idPokemon)
             if(pokemon.parent != 0) {
-                PokemonEvolucionList.add(pokemon.parent)
-                val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
-                if (PokemonParent != null && PokemonParent.parent != 0) {
-                    PokemonEvolucionList.add(PokemonParent.parent)
+                if(pokemon.parent != pokemon.idPokemon){
+                    PokemonEvolucionList.add(pokemon.parent)
+                    val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
+                    if (PokemonParent != null && PokemonParent.parent != 0) {
+                        PokemonEvolucionList.add(PokemonParent.parent)
+                    }
+                } else {
+                    //Tiene más de una segunda evolucion
+                    val pokemonChild = pokemonDao?.fetchPokemonByChild(pokemon.idPokemon)
+                    if(pokemonChild != null)
+                    {
+                        for(len in pokemonChild){
+                            PokemonEvolucionList.add(pokemon.idPokemon)
+                        }
+                    }
                 }
             }
 
@@ -164,7 +175,7 @@ class FragmentPokemonData : Fragment() {
 
         // Crear un cuadro de texto utilizando un AlertDialog.Builder
         val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Altura")
+        alertDialog.setTitle("Modificar Mote")
         alertDialog.setView(editText)
 
         // Agregar un botón "Aceptar" al cuadro de texto
@@ -195,7 +206,7 @@ class FragmentPokemonData : Fragment() {
 
         // Crear un cuadro de texto utilizando un AlertDialog.Builder
         val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Altura")
+        alertDialog.setTitle("Modificar Lvl")
         alertDialog.setView(editText)
 
         // Agregar un botón "Aceptar" al cuadro de texto
@@ -224,7 +235,7 @@ class FragmentPokemonData : Fragment() {
 
         // Crear un cuadro de texto utilizando un AlertDialog.Builder
         val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Altura")
+        alertDialog.setTitle("Modificar Descripcion")
         alertDialog.setView(editText)
 
         // Agregar un botón "Aceptar" al cuadro de texto

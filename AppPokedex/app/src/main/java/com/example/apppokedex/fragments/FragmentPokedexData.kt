@@ -110,11 +110,23 @@ class FragmentPokedexData : Fragment() {
                 PokemonEvolucionList.add(pokemon.child)
             }
             PokemonEvolucionList.add(pokemon.idPokemon)
+
             if(pokemon.parent != 0) {
-                PokemonEvolucionList.add(pokemon.parent)
-                val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
-                if (PokemonParent != null && PokemonParent.parent != 0) {
-                    PokemonEvolucionList.add(PokemonParent.parent)
+                if(pokemon.parent != pokemon.idPokemon){
+                    PokemonEvolucionList.add(pokemon.parent)
+                    val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
+                    if (PokemonParent != null && PokemonParent.parent != 0) {
+                        PokemonEvolucionList.add(PokemonParent.parent)
+                    }
+                } else {
+                    //Tiene más de una segunda evolucion
+                    val pokemonChild = pokemonDao?.fetchPokemonByChild(pokemon.idPokemon)
+                    if(pokemonChild != null)
+                    {
+                        for(len in pokemonChild){
+                            PokemonEvolucionList.add(pokemon.idPokemon)
+                        }
+                    }
                 }
             }
 
