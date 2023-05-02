@@ -1,19 +1,19 @@
 [
   {
-    "userName": "Sebas",
-    "password": "1234",
+    "userName": "admin",
+    "password": "admin",
     "name": "Sebastian",
     "lastName": "Gavegno",
-    "email": "email",
+    "email": "sGavegno@frba.utn.edu.ar",
     "telefono": "telefono",
     "direccion": "direccion",
     "permisos" : 1
   },
   {
-    "userName": "user2",
-    "password": "5678",
-    "name": "User2",
-    "lastName": "User2",
+    "userName": "user",
+    "password": "user",
+    "name": "User",
+    "lastName": "User",
     "email": "email",
     "telefono": "telefono",
     "direccion": "direccion",
