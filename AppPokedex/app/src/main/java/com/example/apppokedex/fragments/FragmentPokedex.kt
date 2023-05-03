@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -81,6 +82,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
 
         adapter = PokemonAdapter(pokemonList, this)
         recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        //recPokemon.layoutManager = GridLayoutManager(context,3)
         recPokemon.scrollToPosition(posPokedex!!)
         recPokemon.adapter = adapter
 

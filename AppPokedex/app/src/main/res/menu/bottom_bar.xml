@@ -3,16 +3,16 @@
     <item
         android:id="@+id/fragmentPokedex"
         android:icon="@drawable/icono_pokedex"
-        android:title="Pokedex"/>
+        android:title="@string/pokedex"/>
 
     <item
         android:id="@+id/fragmentPc"
         android:icon="@drawable/icono_pokeball"
-        android:title="My PC" />
+        android:title="@string/pc" />
 
     <item
         android:id="@+id/fragmentUser"
         android:icon="@drawable/icono_user"
-        android:title="Usuario" />
+        android:title="@string/usuario" />
 
 </menu>

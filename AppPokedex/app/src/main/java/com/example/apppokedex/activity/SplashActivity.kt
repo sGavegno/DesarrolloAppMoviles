@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         imgSplash = findViewById(R.id.imgSplash)
-        Glide.with(this).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgSplash)
+        Glide.with(this).load(R.drawable.pokedex_logo).into(imgSplash)
 
         db = AppDatabase.getInstance(this)
 

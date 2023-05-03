@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
@@ -46,6 +47,8 @@ class FragmentLogin : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        Glide.with(vista).load(R.drawable.pokedex_logo).into(imgTitulo)
 
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()

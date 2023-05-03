@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    android:background="#8805E6"
     tools:context=".fragments.FragmentUser">
 
     <ImageView
@@ -187,11 +187,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="Direccion:"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtEditUserDireccion"
         app:layout_constraintEnd_toStartOf="@+id/txtEditUserDireccion"
         app:layout_constraintTop_toTopOf="@+id/txtEditUserDireccion"
-        app:layout_constraintVertical_bias="0.523"
-        android:textColor="#000000" />
+        app:layout_constraintVertical_bias="0.523" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

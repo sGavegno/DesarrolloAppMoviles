@@ -2,4 +2,7 @@
     <string name="app_name">AppPokedex</string>
     <string name="pos_recycler_view_pokedex">AppPokedex</string>
     <string name="pos_recycler_view_pc">AppPokedex</string>
+    <string name="pc">PC</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="usuario">Usuario</string>
 </resources>
