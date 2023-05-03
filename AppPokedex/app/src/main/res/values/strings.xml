@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppPokedex</string>
+    <string name="pos_recycler_view_pokedex">AppPokedex</string>
+    <string name="pos_recycler_view_pc">AppPokedex</string>
 </resources>

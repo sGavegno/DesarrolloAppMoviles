@@ -21,7 +21,7 @@ import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.ActionListaPokemonUser
 import com.example.apppokedex.entities.Pokemons
 
-class FragmentPc : Fragment() {
+class FragmentPc : Fragment(), PokemonUserAdapter.PokemonUserAdapterListener {
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -55,6 +55,7 @@ class FragmentPc : Fragment() {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val idUser = sharedPref?.getInt("UserID", 0)
+        val posPc = sharedPref?.getInt("pos_recycler_view_pc", 0)
 
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()
@@ -75,25 +76,31 @@ class FragmentPc : Fragment() {
             }
         }
 
-        adapter = PokemonUserAdapter(pokemonList){ position ->
-            val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(
-                pokemonList[position]?.idPokemon ?: -1
-            )
-            findNavController().navigate(action)            //accion de cambiar de pantalla
-        }
+        adapter = PokemonUserAdapter(pokemonList, this)
         recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        recPokemon.scrollToPosition(posPc!!)
         recPokemon.adapter = adapter
 
         val swipeHandler = object : ActionListaPokemonUser(adapter, pokemonUserDao, pokemonList, idUser) {
-            override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-                // Permitir que se deslice solo en ciertos elementos del RecyclerView
-                return super.getSwipeDirs(recyclerView, viewHolder)
-            }
         }
-
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(recPokemon)
+    }
 
+    //Funciones del adapter
+    override fun onCardViewClick(pokemon: Pokemons, position: Int) {
+        val sharedPref = context?.getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            with (sharedPref.edit()) {
+                putInt("pos_recycler_view_pc", position)
+                commit()
+            }
+        }
+        val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(
+            pokemon.idPokemon
+        )
+        findNavController().navigate(action)            //accion de cambiar de pantalla
     }
 
 }

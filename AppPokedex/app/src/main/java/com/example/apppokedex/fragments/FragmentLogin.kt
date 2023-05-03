@@ -68,6 +68,8 @@ class FragmentLogin : Fragment() {
                     if (sharedPref != null) {
                         with (sharedPref.edit()) {
                             putInt("UserID", userFind.id)
+                            putInt("pos_recycler_view_pokedex", 0)
+                            putInt("pos_recycler_view_pc", 0)
                             commit()
                         }
                     }

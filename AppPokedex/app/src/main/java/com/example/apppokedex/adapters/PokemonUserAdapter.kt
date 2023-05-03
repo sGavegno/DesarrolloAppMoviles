@@ -13,8 +13,12 @@ import com.example.apppokedex.entities.Pokemons
 
 class PokemonUserAdapter(
     var pokemonList: MutableList<Pokemons?>?,
-    var onClick: (Int) -> Unit
+    private val listener: PokemonUserAdapterListener
 ) : RecyclerView.Adapter<PokemonUserAdapter.PokemonUserHolder>()  {
+
+    interface PokemonUserAdapterListener {
+        fun onCardViewClick(pokemon: Pokemons, position: Int)
+    }
 
     class PokemonUserHolder(v: View) : RecyclerView.ViewHolder(v){
         private var view : View
@@ -56,7 +60,7 @@ class PokemonUserAdapter(
         pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
         holder.getCard().setOnClickListener{
-            onClick(position)
+            pokemonList?.get(position)?.let { it1 -> listener.onCardViewClick(it1, position) }
         }
     }
     fun deleteItem(position: Int) {

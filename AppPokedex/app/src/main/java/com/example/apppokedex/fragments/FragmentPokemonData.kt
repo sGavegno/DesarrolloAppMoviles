@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
@@ -26,8 +27,6 @@ import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
-
-
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -164,7 +163,9 @@ class FragmentPokemonData : Fragment() {
                     Snackbar.make(vista, "El Pokemon no esta en la lista", Snackbar.LENGTH_SHORT).show()
                 }
             }
-            recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
+            val layoutManager = LinearLayoutManager(context)
+            layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            recEvoluciones.layoutManager = layoutManager
             recEvoluciones.adapter = adapter
         }
     }

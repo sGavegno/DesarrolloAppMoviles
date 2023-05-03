@@ -14,17 +14,12 @@ import com.example.apppokedex.entities.Pokemons
 
 class PokemonAdapter(
     private var pokemonList: MutableList<Pokemons?>?,
-    //var onClick: (Int) -> Unit,
-    private val listener: PokemonAdapterListener//Funcion como parametro
+    private val listener: PokemonAdapterListener          //Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
 
-    /*
-    interface OnItemClickListener {
-        fun onItemClick(item: Pokemons)
-    }*/
     interface PokemonAdapterListener {
-        fun onCardViewClick(item: Int)
-        fun onButtonClick(item: Pokemons)
+        fun onCardViewClick(pokemon: Pokemons,position: Int)
+        fun onButtonClick(pokemon: Pokemons)
     }
 
     class PokemonHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -74,7 +69,7 @@ class PokemonAdapter(
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
 
         holder.getCard().setOnClickListener {
-            listener.onCardViewClick(position)
+            pokemonList?.get(position)?.let { it1 -> listener.onCardViewClick(it1,position) }
         }
         holder.btnAddPokemon.setOnClickListener {
             item?.let { it1 -> listener.onButtonClick(it1) }

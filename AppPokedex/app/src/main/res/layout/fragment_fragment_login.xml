@@ -12,6 +12,7 @@
         android:id="@+id/editTxtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
         android:ems="10"
         android:hint="User Name"
         android:inputType="textEmailAddress"
@@ -63,8 +64,8 @@
         android:id="@+id/imgLogin"
         android:layout_width="339dp"
         android:layout_height="107dp"
+        android:layout_marginTop="128dp"
         android:src="@drawable/pokedex_logo"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

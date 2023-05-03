@@ -1,7 +1,9 @@
 package com.example.apppokedex.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +11,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.apppokedex.R
 import com.example.apppokedex.database.AppDatabase
+import com.example.apppokedex.database.InputDialogListener
 import com.example.apppokedex.database.UserDao
+import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
 
-class FragmentUser : Fragment() {
+class FragmentUser : Fragment(),InputDialogListener {
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -29,6 +36,8 @@ class FragmentUser : Fragment() {
     lateinit var inputTxtDireccion : EditText
     lateinit var inputTxtTelefono : EditText
     private lateinit var btnActualizar : Button
+
+    private var inputDialogListener: InputDialogListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +57,6 @@ class FragmentUser : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val idUser = sharedPref?.getInt("UserID", 0)
@@ -71,37 +79,76 @@ class FragmentUser : Fragment() {
         }
 
         btnActualizar.setOnClickListener{
-            //Analizo si los paraetros estan en la base de datos
-            val txtNombre : String = inputTxtNombre.text.toString()
-            val txtApellido : String = inputTxtApellido.text.toString()
-            val txtEmail : String = inputTxtEmail.text.toString()
-            val txtPassword : String = inputTxtPass.text.toString()
-            val txtDireccion : String = inputTxtDireccion.text.toString()
-            val txtTeefono : String = inputTxtTelefono.text.toString()
-
-            //Agregar cuadro para confirmar cambios por contraseña actual
-            if (userFind != null) {
-                if(txtNombre != ""){
-                    userFind.name = txtNombre
-                }
-                if(txtApellido != ""){
-                    userFind.lastName = txtApellido
-                }
-                if(txtNombre != ""){
-                    userFind.email = txtEmail
-                }
-                if(txtNombre != ""){
-                    userFind.password = txtPassword
-                }
-                if(txtNombre != ""){
-                    userFind.direccion = txtDireccion
-                }
-                if(txtNombre != ""){
-                    userFind.telefono = txtTeefono
-                }
+            if(userFind != null)
+            {
+                userFind.name = inputTxtNombre.text.toString()
+                userFind.lastName = inputTxtApellido.text.toString()
+                userFind.email = inputTxtEmail.text.toString()
+                userFind.password = inputTxtPass.text.toString()
+                userFind.direccion = inputTxtDireccion.text.toString()
+                userFind.telefono = inputTxtTelefono.text.toString()
                 userDao?.updateUser(userFind)
                 Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
+
+    //Funciones del boton add pokemon
+    private fun onClick() {
+        showInputDialog()
+    }
+
+    private fun showInputDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Confirmar Password")
+        val input = EditText(requireContext())
+        alertDialog.setView(input)
+        alertDialog.setPositiveButton("OK") { _, _ ->
+            val password = input.text.toString().toInt()
+            inputDialogListener?.onInputDone(password)
+            refresh()
+        }
+        alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.cancel()
+            refresh()
+        }
+        alertDialog.show()
+    }
+
+    override fun onInputDone(input: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onInputStringDone(input: String) {
+        val sharedPref = context?.getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        val idUser = sharedPref?.getInt("UserID", 0)
+
+        var user = userDao?.fetchUserById(idUser)
+        if(user != null)
+        {
+            user.name = inputTxtNombre.text.toString()
+            user.lastName = inputTxtApellido.text.toString()
+            user.email = inputTxtEmail.text.toString()
+            user.password = inputTxtPass.text.toString()
+            user.direccion = inputTxtDireccion.text.toString()
+            user.telefono = inputTxtTelefono.text.toString()
+            userDao?.updateUser(user)
+            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+        }
+
+        //val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(input)
+        //findNavController().navigate(action)            //accion de cambiar de pantalla
+    }
+
+    fun refresh() {
+        // Crear una nueva instancia del fragment
+        val newFragment = FragmentUser()
+
+        // Reemplazar el fragment actual por la nueva instancia
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentUser, newFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

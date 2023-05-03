@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -62,6 +61,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val idUser = sharedPref?.getInt("UserID", 0)
+        val posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)
+
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
@@ -80,6 +81,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
 
         adapter = PokemonAdapter(pokemonList, this)
         recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        recPokemon.scrollToPosition(posPokedex!!)
         recPokemon.adapter = adapter
 
         btnLogOut.setOnClickListener{
@@ -93,22 +95,23 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
             // Solo acciones para usuarios con permiso de supervisor Falta agregar el boton para incluir pokemons
             btnPokemdexAdd.setOnClickListener{
                 onClick()
-                //showAlertDialogAddPokemon(pokemonDao)
-//                val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(0)
-//                findNavController().navigate(action)            //accion de cambiar de pantalla
             }
-
             val swipeHandler = object : ActionLista(adapter, pokemonDao, pokemonList) {
             }
             val itemTouchHelper = ItemTouchHelper(swipeHandler)
             itemTouchHelper.attachToRecyclerView(recPokemon)
         } else {
-            btnPokemdexAdd.isInvisible
+            btnPokemdexAdd.visibility = View.INVISIBLE
         }
     }
 
     private fun setInputDialogListener(listener: InputDialogListener) {
         this.inputDialogListener = listener
+    }
+
+    //Funciones del boton add pokemon
+    private fun onClick() {
+        showInputDialog()
     }
 
     private fun showInputDialog() {
@@ -140,39 +143,39 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
             Snackbar.make(vista, "El Id: $input ya se encuentra en la base de datos", Snackbar.LENGTH_SHORT).show()
         }
     }
-    private fun onClick() {
-        showInputDialog()
+
+    override fun onInputStringDone(input: String) {
+        TODO("Not yet implemented")
     }
 
-    override fun onCardViewClick(item: Int) {
+    //Funciones del Adapter
+    override fun onCardViewClick(pokemon: Pokemons, position: Int) {
+        val sharedPref = context?.getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            with (sharedPref.edit()) {
+                putInt("pos_recycler_view_pokedex", position)
+                commit()
+            }
+        }
         // Código para atender el clic del CardView del elemento del RecyclerView
-        val pokemonList = pokemonDao?.fetchAllPokemon()
         val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
-            pokemonList?.get(item)?.idPokemon ?: 0
+            pokemon.idPokemon
         )
         findNavController().navigate(action)            //accion de cambiar de pantalla
     }
-    override fun onButtonClick(item: Pokemons) {
+    override fun onButtonClick(pokemon: Pokemons) {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val idUser = sharedPref?.getInt("UserID", 0)
-        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser!!, item.idPokemon)
+        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser!!, pokemon.idPokemon)
         if(checkPokemonUser == null)
         {
-            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser!!,item.idPokemon,item.nombre,0,item.altura,item.peso,item.descripcion))
-            Snackbar.make(vista, "${item.nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
+            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser!!,pokemon.idPokemon,pokemon.nombre,0,pokemon.altura,pokemon.peso,pokemon.descripcion))
+            Snackbar.make(vista, "${pokemon.nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
         } else {
-            Snackbar.make(vista, "${item.nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(vista, "${pokemon.nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
         }
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(
-            "currentPosition",
-            (recPokemon.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        )
     }
 
 }

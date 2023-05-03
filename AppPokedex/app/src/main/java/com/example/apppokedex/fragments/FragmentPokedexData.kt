@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
@@ -137,7 +138,11 @@ class FragmentPokedexData : Fragment() {
                     idPokemon)
                 findNavController().navigate(action)            //accion de cambiar de pantalla
             }
-            recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
+            val layoutManager = LinearLayoutManager(context)
+            layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            recEvoluciones.layoutManager = layoutManager
+
+            //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
             recEvoluciones.adapter = adapter
 
         }
