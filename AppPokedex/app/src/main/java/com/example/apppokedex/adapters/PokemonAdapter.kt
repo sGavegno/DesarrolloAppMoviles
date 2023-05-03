@@ -39,8 +39,8 @@ class PokemonAdapter(
             txtName.text = name
         }
         fun setTipo(tipo : String) {
-            val txtTipo: TextView = view.findViewById(R.id.txtTipo)
-            txtTipo.text = tipo
+ //           val txtTipo: TextView = view.findViewById(R.id.txtTipo)
+ //           txtTipo.text = tipo
         }
         fun setImagen(imagen : String) {
             val imgPoke = view.findViewById<ImageView>(R.id.imgPoke)
@@ -65,7 +65,7 @@ class PokemonAdapter(
         val item = pokemonList?.get(position)
         pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
         pokemonList?.get(position)?.let { holder.setName(it.nombre) }
-        pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
+        //pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
 
         holder.getCard().setOnClickListener {

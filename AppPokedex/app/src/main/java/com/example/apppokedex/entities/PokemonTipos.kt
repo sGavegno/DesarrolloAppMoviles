@@ -33,7 +33,6 @@ class PokemonTipos(
             PokemonTipos(17,"Acero", listOf("Fuego", "Lucha", "Tierra"), listOf("Hielo", "Roca", "Hada")),
             PokemonTipos(18,"Hada", listOf("Veneno", "Acero"), listOf("Lucha", "Dragón", "Siniestro"))
         )
-
          */
     }
 }

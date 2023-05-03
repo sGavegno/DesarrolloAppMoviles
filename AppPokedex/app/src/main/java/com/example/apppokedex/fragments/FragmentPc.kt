@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -77,7 +78,8 @@ class FragmentPc : Fragment(), PokemonUserAdapter.PokemonUserAdapterListener {
         }
 
         adapter = PokemonUserAdapter(pokemonList, this)
-        recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        recPokemon.layoutManager = GridLayoutManager(context,2)
         recPokemon.scrollToPosition(posPc!!)
         recPokemon.adapter = adapter
 

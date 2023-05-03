@@ -81,8 +81,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         val pokemonList = pokemonDao?.fetchAllPokemon()
 
         adapter = PokemonAdapter(pokemonList, this)
-        recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
-        //recPokemon.layoutManager = GridLayoutManager(context,3)
+        //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+        recPokemon.layoutManager = GridLayoutManager(context,2)
         recPokemon.scrollToPosition(posPokedex!!)
         recPokemon.adapter = adapter
 

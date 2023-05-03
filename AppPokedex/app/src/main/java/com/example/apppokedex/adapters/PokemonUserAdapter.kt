@@ -34,8 +34,8 @@ class PokemonUserAdapter(
             txtName.text = name
         }
         fun setTipo(tipo : String) {
-            val txtTipo: TextView = view.findViewById(R.id.txtTipoPokeUser)
-            txtTipo.text = tipo
+        //    val txtTipo: TextView = view.findViewById(R.id.txtTipoPokeUser)
+        //    txtTipo.text = tipo
         }
         fun setImagen(imagen : String) {
             val imgPoke = view.findViewById<ImageView>(R.id.imgPokeUser)
@@ -57,7 +57,7 @@ class PokemonUserAdapter(
     override fun onBindViewHolder(holder: PokemonUserHolder, position: Int) {
         pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
         pokemonList?.get(position)?.let { holder.setName(it.nombre) }
-        pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
+       // pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
         holder.getCard().setOnClickListener{
             pokemonList?.get(position)?.let { it1 -> listener.onCardViewClick(it1, position) }
