@@ -540,6 +540,9 @@ class FragmentPokedexData : Fragment() {
             pokemon.parent = newText2.toInt()
             pokemonDao.updatePokemon(pokemon)
             Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
+            val action = FragmentPokedexDataDirections.actionFragmentPokedexDataSelf(
+                idPokemon)
+            findNavController().navigate(action)            //accion de cambiar de pantalla
         }
         // Agregar un botón "Cancelar" al cuadro de texto
         alertDialog.setNegativeButton("Cancelar", null)

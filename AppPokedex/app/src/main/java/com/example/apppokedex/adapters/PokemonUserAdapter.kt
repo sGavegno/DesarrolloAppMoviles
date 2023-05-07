@@ -1,5 +1,6 @@
 package com.example.apppokedex.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,17 +56,18 @@ class PokemonUserAdapter(
     }
 
     override fun onBindViewHolder(holder: PokemonUserHolder, position: Int) {
+        val pokemon = pokemonList?.get(position)
         pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
         pokemonList?.get(position)?.let { holder.setName(it.nombre) }
-       // pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
         pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
         holder.getCard().setOnClickListener{
             pokemonList?.get(position)?.let { it1 -> listener.onCardViewClick(it1, position) }
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun deleteItem(position: Int) {
         // Eliminar el objeto en la posición especificada
         pokemonList?.removeAt(position)
-        notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 }

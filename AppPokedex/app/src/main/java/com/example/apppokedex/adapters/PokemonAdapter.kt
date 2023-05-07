@@ -1,5 +1,6 @@
 package com.example.apppokedex.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,9 +76,10 @@ class PokemonAdapter(
             item?.let { it1 -> listener.onButtonClick(it1) }
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun deleteItem(position: Int) {
         // Eliminar el objeto en la posición especificada
         pokemonList?.removeAt(position)
-        notifyItemRemoved(position)
+        notifyDataSetChanged()              //actializa el adapter
     }
 }
