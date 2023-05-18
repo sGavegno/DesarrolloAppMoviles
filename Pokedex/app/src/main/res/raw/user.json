@@ -1,0 +1,22 @@
+[
+  {
+    "userName": "admin",
+    "password": "admin",
+    "name": "Sebastian",
+    "lastName": "Gavegno",
+    "email": "sGavegno@frba.utn.edu.ar",
+    "telefono": "telefono",
+    "direccion": "direccion",
+    "permisos" : 1
+  },
+  {
+    "userName": "user",
+    "password": "user",
+    "name": "User",
+    "lastName": "User",
+    "email": "email",
+    "telefono": "telefono",
+    "direccion": "direccion",
+    "permisos" : 0
+  }
+]

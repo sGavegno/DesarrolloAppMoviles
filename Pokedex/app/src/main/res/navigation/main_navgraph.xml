@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/fragmentLogin">
+
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.example.apppokedex.fragments.FragmentLogin"
+        android:label="fragment_fragment_login"
+        tools:layout="@layout/fragment_fragment_login" >
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentRegister"
+            app:destination="@id/fragmentRegister" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.example.apppokedex.fragments.FragmentRegister"
+        android:label="fragment_fragment_register"
+        tools:layout="@layout/fragment_fragment_register" />
+</navigation>

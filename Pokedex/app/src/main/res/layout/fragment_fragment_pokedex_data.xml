@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8805E6"
+    tools:context=".fragments.FragmentPokedexData">
+
+    <TextView
+        android:id="@+id/txtPokedexTipoDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:text="PokeTipo"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokedexName"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="@+id/txtPokedexName"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokedexIdDato" />
+
+    <TextView
+        android:id="@+id/txtPokedexDebilidadDato"
+        android:layout_width="247dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="24dp"
+        android:background="@android:color/transparent"
+        android:text="PokeDebilidad"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokedexDebilidad"
+        app:layout_constraintStart_toEndOf="@+id/txtPokedexDebilidad"
+        app:layout_constraintTop_toTopOf="@+id/txtPokedexDebilidad"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokedexDebilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Debilidad:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listaPokedexEvolucion" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaPokedexEvolucion"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokdexeEvolucion" />
+
+    <TextView
+        android:id="@+id/txtPokdexeEvolucion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Evoluciones:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvPokedexDatos" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPokedexDatos"
+        android:layout_width="411dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="#000000"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvPokemonDescripcion">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtPokedexAltura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Altura:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.049"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPokedexAlturaDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="88dp"
+                android:background="@android:color/transparent"
+                android:text="PokeAltura"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokedexAltura"
+                app:layout_constraintStart_toEndOf="@+id/txtPokedexAltura"
+                app:layout_constraintTop_toTopOf="@+id/txtPokedexAltura"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtPokedexPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Peso:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokedexAltura"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintStart_toStartOf="@+id/txtPokedexAltura"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokedexAltura" />
+
+            <TextView
+                android:id="@+id/txtPokedexHabilidadDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="@android:color/transparent"
+                android:text="PokeHabilidad"
+                android:textAlignment="viewStart"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokedexHabilidad"
+                app:layout_constraintStart_toEndOf="@+id/txtPokedexHabilidad"
+                app:layout_constraintTop_toTopOf="@+id/txtPokedexHabilidad"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtPokedexHabilidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Habilidad:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokedexCategoria"
+                app:layout_constraintStart_toStartOf="@+id/txtPokedexCategoria"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokedexCategoria" />
+
+            <TextView
+                android:id="@+id/txtPokedexPesoDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:background="@android:color/transparent"
+                android:text="PokePeso"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokedexPeso"
+                app:layout_constraintStart_toEndOf="@+id/txtPokedexPeso"
+                app:layout_constraintTop_toTopOf="@+id/txtPokedexPeso"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtPokedexCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Categoria:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokedexPeso"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtPokedexPeso"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokedexPeso" />
+
+            <TextView
+                android:id="@+id/txtPokedexCategoriaDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="@android:color/transparent"
+                android:text="PokeCategoria"
+                android:textAlignment="viewStart"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokedexCategoria"
+                app:layout_constraintStart_toEndOf="@+id/txtPokedexCategoria"
+                app:layout_constraintTop_toTopOf="@+id/txtPokedexCategoria"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPokemonDescripcion"
+        android:layout_width="369dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvImgPokedex">
+
+        <TextView
+            android:id="@+id/txtPokedexDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="Descripcion"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtPokedexIdDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="ID"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokedexId"
+        app:layout_constraintStart_toEndOf="@+id/txtPokedexId"
+        app:layout_constraintTop_toTopOf="@+id/txtPokedexId"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtPokedexId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="#"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPokedexName"
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toStartOf="@+id/txtPokedexName"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokedexName" />
+
+    <TextView
+        android:id="@+id/txtPokedexName"
+        android:layout_width="186dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:text="Nombre"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvImgPokedex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="128dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgPokedexDato"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:background="@drawable/poke_fondo1" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtPokedexGeneracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="112dp"
+        android:text="Generacion:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/cvPokemonDescripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtPokedexName"
+        app:layout_constraintTop_toBottomOf="@+id/txtPokedexTipoDato" />
+
+    <TextView
+        android:id="@+id/txtPokedexGeneracionDato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Nº Gen"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPokedexGeneracion"
+        app:layout_constraintStart_toEndOf="@+id/txtPokedexGeneracion"
+        app:layout_constraintTop_toTopOf="@+id/txtPokedexGeneracion" />
+</androidx.constraintlayout.widget.ConstraintLayout>
