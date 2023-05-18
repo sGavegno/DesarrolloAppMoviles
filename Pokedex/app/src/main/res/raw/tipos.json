@@ -1,0 +1,935 @@
+[
+  {
+    "id": 1,
+    "name": "Normal",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 8,
+          "name": "Fantasma"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 2,
+          "name": "Lucha"
+        }
+      ],
+      "Efectivo": [
+
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "name": "Lucha",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        },
+        {
+          "id": 14,
+          "name": "Psíquico"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 1,
+          "name": "Normal"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        },
+        {
+          "id": 14,
+          "name": "Psíquico"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "name": "Volador",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "name": "Veneno",
+    "damage": {
+      "Inmune": [
+        {
+        }
+      ],
+      "Debil": [
+        {
+          "id": 5,
+          "name": "Tierra"
+        },
+        {
+          "id": 14,
+          "name": "Psíquico"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        },
+        {
+          "id": 8,
+          "name": "Fantasma"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "name": "Tierra",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 12,
+          "name": "Planta"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "name": "Roca",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "name": "Bicho",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        }
+      ],
+      "Efectivo": [
+        {
+          "name": "Planta"
+        },
+        {
+          "id": 14,
+          "name": "Psíquico"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        },
+        {
+          "id": 8,
+          "name": "Fantasma"
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "name": "Fantasma",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 1,
+          "name": "Normal"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 8,
+          "name": "Fantasma"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 14,
+          "name": "Psíquico"
+        },
+        {
+          "id": 8,
+          "name": "Fantasma"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "name": "Acero",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 5,
+          "name": "Tierra"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "name": "Fuego",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "name": "Plana"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "name": "Agua",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "name": "Planta",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "name": "Eléctrico",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 5,
+          "name": "Tierra"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 11,
+          "name": "Agua"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 13,
+          "name": "Eléctrico"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "name": "Psíquico",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 8,
+          "name": "Fantasma"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 14,
+          "name": "Psíquico"
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "name": "Hielo",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 6,
+          "name": "Roca"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 3,
+          "name": "Volador"
+        },
+        {
+          "id": 12,
+          "name": "Planta"
+        },
+        {
+          "id": 5,
+          "name": "Tierra"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 11,
+          "name": "Agua"
+        },
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 10,
+          "name": "Fuego"
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "name": "Dragón",
+    "damage": {
+      "Inmune": [
+      ],
+      "Debil": [
+        {
+          "id": 15,
+          "name": "Hielo"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 9,
+          "name": "Acero"
+        }
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "name": "Siniestro",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 14,
+          "name": "Psíquico"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 7,
+          "name": "Bicho"
+        },
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 14,
+          "name": "Psíquico"
+        },
+        {
+          "id": 8,
+          "name": "Fantasma"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 18,
+          "name": "Hada"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "name": "Hada",
+    "damage": {
+      "Inmune": [
+        {
+          "id": 16,
+          "name": "Dragón"
+        }
+      ],
+      "Debil": [
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ],
+      "Efectivo": [
+        {
+          "id": 2,
+          "name": "Lucha"
+        },
+        {
+          "id": 16,
+          "name": "Dragón"
+        },
+        {
+          "id": 17,
+          "name": "Siniestro"
+        }
+      ],
+      "No_Efectivo": [
+        {
+          "id": 10,
+          "name": "Fuego"
+        },
+        {
+          "id": 9,
+          "name": "Acero"
+        },
+        {
+          "id": 4,
+          "name": "Veneno"
+        }
+      ]
+    }
+  }
+]

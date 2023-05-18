@@ -3,6 +3,7 @@ package com.example.apppokedex.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
@@ -22,6 +24,8 @@ class FragmentLogin : Fragment() {
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
+
+    val viewModel: FragmentLoginViewModel by viewModels()
 
     private lateinit var imgTitulo : ImageView
     private lateinit var inputTxtUser : EditText
@@ -62,6 +66,13 @@ class FragmentLogin : Fragment() {
             val inputTxtUserPass : String = inputTxtPass.text.toString()
 
             val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
+
+            viewModel.user.observe(this) { user ->
+                Log.d("TAG", "user observe")
+                if (user != null){
+
+                }
+            }
 
             if (userFind != null) {
                 if(userFind.password == inputTxtUserPass){

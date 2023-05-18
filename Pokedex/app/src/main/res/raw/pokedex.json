@@ -2,14 +2,26 @@
   {
     "idPokemon": 1,
     "nombre": "Bulbasaur",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
     "descripcion": "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.",
     "altura": "0,7 m",
     "peso": "6,9 Kg",
     "categoria": "Semilla",
-    "habilidad": "Espesura",
+    "habilidad": [
+      {
+        "name": "Espesura"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 2
@@ -17,14 +29,26 @@
   {
     "idPokemon": 2,
     "nombre": "Ivysaur",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png",
     "descripcion": "Cuando le crece bastante el bulbo del lomo, pierde la capacidad de erguirse sobre las patas traseras.",
     "altura": "1,0 m",
     "peso": "13,0 Kg",
     "categoria": "Semilla",
-    "habilidad": "Espesura",
+    "habilidad": [
+      {
+        "name": "Espesura"
+      }
+    ],
     "generacion": 1,
     "child": 1,
     "parent": 3
@@ -32,14 +56,26 @@
   {
     "idPokemon": 3,
     "nombre": "Venusaur",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
     "descripcion": "La planta florece cuando absorbe energía solar, lo cual le obliga a buscar siempre la luz del sol.",
     "altura": "2,0 m",
     "peso": "100,0 Kg",
     "categoria": "Semilla",
-    "habilidad": "Espesura",
+    "habilidad": [
+      {
+        "name": "Espesura"
+      }
+    ],
     "generacion": 1,
     "child": 2,
     "parent": 0
@@ -47,14 +83,22 @@
   {
     "idPokemon": 4,
     "nombre": "Charmander",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png",
     "descripcion": "Prefiere las cosas calientes. Dicen que cuando llueve le sale vapor de la punta de la cola.",
     "altura": "0,6 m",
     "peso": "8,5 Kg",
     "categoria": "Lagartija",
-    "habilidad": "Mar Llamas",
+    "habilidad": [
+      {
+        "name": "Mar Llamas"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 5
@@ -62,14 +106,22 @@
   {
     "idPokemon": 5,
     "nombre": "Charmeleon",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/005.png",
     "descripcion": "Este Pokémon de naturaleza agresiva ataca en combate con su cola llameante y hace trizas al rival con sus afiladas garras.",
     "altura": "1,1 m",
     "peso": "19,0 Kg",
     "categoria": "Llama",
-    "habilidad": "Mar Llamas",
+    "habilidad": [
+      {
+        "name": "Mar Llamas"
+      }
+    ],
     "generacion": 1,
     "child": 4,
     "parent": 6
@@ -77,14 +129,26 @@
   {
     "idPokemon": 6,
     "nombre": "Charizard",
-    "tipo": "Fuego/Volador",
-    "debilidad": "Agua/Electrico/Roca",
+    "tipo":   [
+    {
+      "id": 10,
+      "name": "Fuego"
+    },
+    {
+      "id": 3,
+      "name": "Volador"
+    }
+  ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
     "descripcion": "Escupe un fuego tan caliente que funde las rocas. Causa incendios forestales sin querer.",
     "altura": "1,7 m",
     "peso": "90,5 Kg",
     "categoria": "Llama",
-    "habilidad": "Mar Llamas",
+    "habilidad": [
+      {
+        "name": "Mar Llamas"
+      }
+    ],
     "generacion": 1,
     "child": 5,
     "parent": 0
@@ -92,14 +156,22 @@
   {
     "idPokemon": 7,
     "nombre": "Squirtle",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png",
     "descripcion": "Cuando retrae su largo cuello en el caparazón, dispara agua a una presión increíble.",
     "altura": "0,5 m",
     "peso": "9,0 Kg",
     "categoria": "Tortuguita",
-    "habilidad": "Torrente",
+    "habilidad": [
+      {
+        "name": "Torrente"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 8
@@ -107,14 +179,22 @@
   {
     "idPokemon": 8,
     "nombre": "Wartortle",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/008.png",
     "descripcion": "Se lo considera un símbolo de longevidad. Los ejemplares más ancianos tienen musgo sobre el caparazón.",
     "altura": "1,0 m",
     "peso": "22,5 Kg",
     "categoria": "Tortugua",
-    "habilidad": "Torrente",
+    "habilidad": [
+      {
+        "name": "Torrente"
+      }
+    ],
     "generacion": 1,
     "child": 7,
     "parent": 9
@@ -122,14 +202,22 @@
   {
     "idPokemon": 9,
     "nombre": "Blastoise",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/009.png",
     "descripcion": "Para acabar con su enemigo, lo aplasta con el peso de su cuerpo. En momentos de apuro, se esconde en el caparazón.",
     "altura": "1,6 m",
     "peso": "85,5 Kg",
     "categoria": "Armazón",
-    "habilidad": "Torrente",
+    "habilidad": [
+      {
+        "name": "Torrente"
+      }
+    ],
     "generacion": 1,
     "child": 8,
     "parent": 0
@@ -137,14 +225,22 @@
   {
     "idPokemon": 10,
     "nombre": "Caterpie",
-    "tipo": "Bicho",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/010.png",
     "descripcion": "Para protegerse, despide un hedor horrible por las antenas con el que repele a sus enemigos.",
     "altura": "0.3 m",
     "peso": "2.9 Kg",
     "categoria": "Gusano",
-    "habilidad": "Polvo Escudo",
+    "habilidad": [
+      {
+        "name": "Polvo Escudo"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 11
@@ -152,14 +248,22 @@
   {
     "idPokemon": 11,
     "nombre": "Metapod",
-    "tipo": "Bicho",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/011.png",
     "descripcion": "Como en este estado solo puede endurecer su coraza, permanece inmóvil a la espera de evolucionar.",
     "altura": "0.7 m",
     "peso": "9.9 Kg",
     "categoria": "Capullo",
-    "habilidad": "Mudar",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      }
+    ],
     "generacion": 1,
     "child": 10,
     "parent": 12
@@ -167,14 +271,26 @@
   {
     "idPokemon": 12,
     "nombre": "Butterfree",
-    "tipo": "Bicho/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/012.png",
     "descripcion": "Aletea a gran velocidad para lanzar al aire sus escamas extremadamente tóxicas.",
     "altura": "1.1 m",
     "peso": "32.0 Kg",
     "categoria": "Mariposa",
-    "habilidad": "Ojo Compuesto",
+    "habilidad": [
+      {
+        "name": "Ojo Compuesto"
+      }
+    ],
     "generacion": 1,
     "child": 11,
     "parent": 0
@@ -182,14 +298,26 @@
   {
     "idPokemon": 13,
     "nombre": "Weedle",
-    "tipo": "Bicho/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/013.png",
     "descripcion": "El aguijón de la cabeza es muy puntiagudo. Se alimenta de hojas oculto en la espesura de bosques y praderas.",
     "altura": "0.3 m",
     "peso": "3.2 Kg",
     "categoria": "Oruga",
-    "habilidad": "Polvo Escudo",
+    "habilidad": [
+      {
+        "name": "Polvo Escudo"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 14
@@ -197,14 +325,26 @@
   {
     "idPokemon": 14,
     "nombre": "Kakuna",
-    "tipo": "Bicho/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/014.png",
     "descripcion": "Aunque es casi incapaz de moverse, en caso de sentirse amenazado puede envenenar a los enemigos con su aguijón.",
     "altura": "0.6 m",
     "peso": "10.0 Kg",
     "categoria": "Capullo",
-    "habilidad": "Mudar",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      }
+    ],
     "generacion": 1,
     "child": 13,
     "parent": 15
@@ -212,14 +352,26 @@
   {
     "idPokemon": 15,
     "nombre": "Beedrill",
-    "tipo": "Bicho/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/015.png",
     "descripcion": "Tiene tres aguijones venenosos, dos en las patas anteriores y uno en la parte baja del abdomen, con los que ataca a sus enemigos una y otra vez.",
     "altura": "1.0 m",
     "peso": "29.5 Kg",
     "categoria": "Abeja Veneno",
-    "habilidad": "Enjambre",
+    "habilidad": [
+      {
+        "name": "Enjambre"
+      }
+    ],
     "generacion": 1,
     "child": 14,
     "parent": 0
@@ -227,14 +379,29 @@
   {
     "idPokemon": 16,
     "nombre": "Pidgey",
-    "tipo": "Normal/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/016.png",
     "descripcion": "Su docilidad es tal que suelen defenderse levantando arena en lugar de contraatacar.",
     "altura": "0.3 m",
     "peso": "1.8 Kg",
     "categoria": "Pajarito",
-    "habilidad": "Vista Lince\nTumbos",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      },
+      {
+        "name": "Tumbos"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 17
@@ -242,14 +409,29 @@
   {
     "idPokemon": 17,
     "nombre": "Pidgeotto",
-    "tipo": "Normal/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/017.png",
     "descripcion": "Su extraordinaria vitalidad y resistencia le permiten cubrir grandes distancias del territorio que habita en busca de presas.",
     "altura": "1.1 m",
     "peso": "30.0 Kg",
     "categoria": "Pájaro",
-    "habilidad": "Vista Lince\nTumbos",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      },
+      {
+        "name": "Tumbos"
+      }
+    ],
     "generacion": 1,
     "child": 16,
     "parent": 18
@@ -257,14 +439,29 @@
   {
     "idPokemon": 18,
     "nombre": "Pidgeot",
-    "tipo": "Normal/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/018.png",
     "descripcion": "Este Pokémon vuela a una velocidad de 2 mach en busca de presas. Sus grandes garras son armas muy peligrosas.",
     "altura": "1.5 m",
     "peso": "39.5 Kg",
     "categoria": "Pájaro",
-    "habilidad": "Vista Lince\nTumbos",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      },
+      {
+        "name": "Tumbos"
+      }
+    ],
     "generacion": 1,
     "child": 17,
     "parent": 0
@@ -272,14 +469,25 @@
   {
     "idPokemon": 19,
     "nombre": "Rattata",
-    "tipo": "Normal",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/019.png",
     "descripcion": "Es propenso a hincar los incisivos en cualquier cosa que se le ponga por delante. Si se ve alguno, seguramente haya cuarenta cerca.",
     "altura": "0.3 m",
     "peso": "3.5 Kg",
     "categoria": "Ratón",
-    "habilidad": "Fuga\nAgallas",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Agallas"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 20
@@ -287,14 +495,25 @@
   {
     "idPokemon": 20,
     "nombre": "Raticate",
-    "tipo": "Normal",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/020.png",
     "descripcion": "Gracias a las pequeñas membranas de las patas traseras, puede nadar por los ríos para capturar presas.",
     "altura": "0.7 m",
     "peso": "18.5 Kg",
     "categoria": "Ratón",
-    "habilidad": "Fuga\nAgallas",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Agallas"
+      }
+    ],
     "generacion": 1,
     "child": 19,
     "parent": 0
@@ -302,14 +521,26 @@
   {
     "idPokemon": 21,
     "nombre": "Spearow",
-    "tipo": "Normal/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/021.png",
     "descripcion": "A la hora de proteger su territorio, compensa su incapacidad para volar a gran altura con una increíble velocidad.",
     "altura": "0.3 m",
     "peso": "2.0 Kg",
     "categoria": "Pajarito",
-    "habilidad": "Vista Lince",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 22
@@ -317,14 +548,26 @@
   {
     "idPokemon": 22,
     "nombre": "Fearow",
-    "tipo": "Normal/Volador",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/022.png",
     "descripcion": "Este Pokémon ha existido desde tiempos remotos. Al menor atisbo de peligro, alza el vuelo y huye.",
     "altura": "1.2 m",
     "peso": "38.0 Kg",
     "categoria": "Pico",
-    "habilidad": "Vista Lince",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      }
+    ],
     "generacion": 1,
     "child": 21,
     "parent": 0
@@ -332,14 +575,25 @@
   {
     "idPokemon": 23,
     "nombre": "Ekans",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/023.png",
     "descripcion": "La longitud de este Pokémon aumenta con el tiempo. Por la noche, se enrosca en las ramas de los árboles para descansar.",
     "altura": "2.0 m",
     "peso": "6.9 Kg",
     "categoria": "Serpiente",
-    "habilidad": "Mudar\nIntimidación",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      },
+      {
+        "name": "Intimidación"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 24
@@ -347,14 +601,25 @@
   {
     "idPokemon": 24,
     "nombre": "Arbok",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/024.png",
     "descripcion": "Se han llegado a identificar hasta seis variaciones distintas de los espeluznantes dibujos de su piel.",
     "altura": "3.5 m",
     "peso": "65.0 Kg",
     "categoria": "Cobra",
-    "habilidad": "Mudar\nIntimidación",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      },
+      {
+        "name": "Intimidación"
+      }
+    ],
     "generacion": 1,
     "child": 23,
     "parent": 0
@@ -362,14 +627,22 @@
   {
     "idPokemon": 25,
     "nombre": "Pikachu",
-    "tipo": "Electrico",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png",
     "descripcion": "Cuando se enfada, este Pokémon descarga la energía que almacena en el interior de las bolsas de las mejillas.",
     "altura": "0.4 m",
     "peso": "6.0 Kg",
     "categoria": "Ratón",
-    "habilidad": "Elec. Estática",
+    "habilidad": [
+      {
+        "name": "Elec. Estática"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 26
@@ -377,14 +650,22 @@
   {
     "idPokemon": 26,
     "nombre": "Raichu",
-    "tipo": "Electrico",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/026.png",
     "descripcion": "Su cola actúa como toma de tierra y descarga electricidad al suelo, lo que le protege de los calambrazos.",
     "altura": "0.8 m",
     "peso": "30.0 Kg",
     "categoria": "Ratón",
-    "habilidad": "Elec. Estática",
+    "habilidad": [
+      {
+        "name": "Elec. Estática"
+      }
+    ],
     "generacion": 1,
     "child": 25,
     "parent": 0
@@ -392,14 +673,22 @@
   {
     "idPokemon": 27,
     "nombre": "Sandshrew",
-    "tipo": "Tierra",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/027.png",
     "descripcion": "Le gusta revolcarse por la arena seca para eliminar todo rastro de suciedad y humedad en la piel.",
     "altura": "0.6 m",
     "peso": "12.0 Kg",
     "categoria": "Ratón",
-    "habilidad": "Velo Arena",
+    "habilidad": [
+      {
+        "name": "Velo Arena"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 28
@@ -407,14 +696,22 @@
   {
     "idPokemon": 28,
     "nombre": "Sandslash",
-    "tipo": "Tierra",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/028.png",
     "descripcion": "Cuanto más seco es el terreno en el que habita, más duras y lisas se vuelven las púas que le recubren la espalda.",
     "altura": "1.0 m",
     "peso": "29.5 Kg",
     "categoria": "Ratón",
-    "habilidad": "Velo Arena",
+    "habilidad": [
+      {
+        "name": "Velo Arena"
+      }
+    ],
     "generacion": 1,
     "child": 27,
     "parent": 0
@@ -422,14 +719,25 @@
   {
     "idPokemon": 29,
     "nombre": "Nidoran ♀",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/029.png",
     "descripcion": "Posee un olfato más fino que los Nidoran♂. Usa los bigotes para percibir la dirección del viento y buscar comida a sotavento de sus depredadores.",
     "altura": "0.4 m",
     "peso": "7.0 Kg",
     "categoria": "Pin Veneno",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 30
@@ -437,14 +745,25 @@
   {
     "idPokemon": 30,
     "nombre": "Nidorina",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/030.png",
     "descripcion": "Se cree que el cuerno de la frente se le ha atrofiado para evitar herir a sus crías al alimentarlas.",
     "altura": "0.8 m",
     "peso": "20.0 Kg",
     "categoria": "Pin Veneno",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 29,
     "parent": 31
@@ -452,14 +771,29 @@
   {
     "idPokemon": 31,
     "nombre": "Nidoqueen",
-    "tipo": "Veneno/Tierra",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/031.png",
     "descripcion": "Su defensa destaca sobre la capacidad ofensiva. Usa las escamas del cuerpo como una coraza para proteger a su prole de cualquier ataque.",
     "altura": "1.3 m",
     "peso": "60.0 Kg",
     "categoria": "Taladro",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 30,
     "parent": 0
@@ -467,14 +801,25 @@
   {
     "idPokemon": 32,
     "nombre": "Nidoran ♂",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/032.png",
     "descripcion": "Mantiene sus grandes orejas levantadas, siempre alerta. Si advierte peligro, ataca inoculando una potente toxina con su cuerno frontal.",
     "altura": "0.5 m",
     "peso": "9.0 Kg",
     "categoria": "Pin Veneno",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 33
@@ -482,14 +827,25 @@
   {
     "idPokemon": 33,
     "nombre": "Nidorino",
-    "tipo": "Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/033.png",
     "descripcion": "Dondequiera que va, parte rocas con su cuerno, más duro que un diamante, en busca de una Piedra Lunar.",
     "altura": "0.9 m",
     "peso": "19.5 Kg",
     "categoria": "Pin Veneno",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 32,
     "parent": 34
@@ -497,14 +853,29 @@
   {
     "idPokemon": 34,
     "nombre": "Nidoking",
-    "tipo": "Veneno/Tierra",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/034.png",
     "descripcion": "Una vez que se desboca, no hay quien lo pare. Solo se calma ante Nidoqueen, su compañera de toda la vida.",
     "altura": "1.4 m",
     "peso": "62.0 Kg",
     "categoria": "Taladro",
-    "habilidad": "Punto Tóxico\nRivalidad",
+    "habilidad": [
+      {
+        "name": "Punto Tóxico"
+      },
+      {
+        "name": "Rivalidad"
+      }
+    ],
     "generacion": 1,
     "child": 33,
     "parent": 0
@@ -512,14 +883,25 @@
   {
     "idPokemon": 35,
     "nombre": "Clefairy",
-    "tipo": "Hada",
-    "debilidad": "Acero/Veneno",
+    "tipo": [
+      {
+        "id": 18,
+        "name": "Hada"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/035.png",
     "descripcion": "Se dice que la felicidad llegará a quien vea un grupo de Clefairy bailando a la luz de la luna llena.",
     "altura": "0,6 m",
     "peso": "7,5 Kg",
     "categoria": "Hada",
-    "habilidad": "Gran Encanto\nMuro Magico",
+    "habilidad": [
+      {
+        "name": "Gran Encanto"
+      },
+      {
+        "name": "Muro Magico"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 36
@@ -527,14 +909,25 @@
   {
     "idPokemon": 36,
     "nombre": "Clefable",
-    "tipo": "Hada",
-    "debilidad": "Acero/Veneno",
+    "tipo": [
+      {
+        "id": 18,
+        "name": "Hada"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/036.png",
     "descripcion": "Este Pokémon de aspecto feérico, raramente visto por los humanos, corre a esconderse en cuanto detecta que hay alguien cerca. ",
     "altura": "1,3 m",
     "peso": "40,0 Kg",
     "categoria": "Hada",
-    "habilidad": "Gran Encanto\nMuro Magico",
+    "habilidad": [
+      {
+        "name": "Gran Encanto"
+      },
+      {
+        "name": "Muro Magico"
+      }
+    ],
     "generacion": 1,
     "child": 35,
     "parent": 0
@@ -542,14 +935,22 @@
   {
     "idPokemon": 37,
     "nombre": "Vulpix",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/037.png",
     "descripcion": "De pequeño, tiene seis colas de gran belleza. A medida que crece, le van saliendo más.",
     "altura": "0,6 m",
     "peso": "9,9 Kg",
     "categoria": "Zorro",
-    "habilidad": "Absorbe Fuego",
+    "habilidad": [
+      {
+        "name": "Absorbe Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 38
@@ -557,14 +958,22 @@
   {
     "idPokemon": 38,
     "nombre": "Ninetales",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/038.png",
     "descripcion": "Cuentan que llega a vivir hasta mil años y que cada una de las colas posee poderes sobrenaturales.",
     "altura": "1,1 m",
     "peso": "19,9 Kg",
     "categoria": "Zorro",
-    "habilidad": "Absorbe Fuego",
+    "habilidad": [
+      {
+        "name": "Absorbe Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 37,
     "parent": 0
@@ -572,14 +981,29 @@
   {
     "idPokemon": 39,
     "nombre": "Jigglypuff",
-    "tipo": "Normal/Hada",
-    "debilidad": "Acero/Veneno",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 18,
+        "name": "Hada"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/039.png",
     "descripcion": "Cuando le tiemblan sus redondos y adorables ojos, entona una melodía agradable y misteriosa con la que duerme a sus enemigos. ",
     "altura": "0,5 m",
     "peso": "5,5 Kg",
     "categoria": "Globo",
-    "habilidad": "Gran Encanto\nTenacidad",
+    "habilidad": [
+      {
+        "name": "Gran Encanto"
+      },
+      {
+        "name": "Tenacidad"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 40
@@ -587,14 +1011,29 @@
   {
     "idPokemon": 40,
     "nombre": "Wigglytuff",
-    "tipo": "Normal/Hada",
-    "debilidad": "Acero/Veneno",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 18,
+        "name": "Hada"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/040.png",
     "descripcion": "Tiene un pelaje muy fino. Se recomienda no enfadarlo, o se inflará y golpeará con todo su cuerpo.",
     "altura": "1,0 m",
     "peso": "12,0 kg",
     "categoria": "Globo",
-    "habilidad": "Gran Encanto\nTenacidad",
+    "habilidad": [
+      {
+        "name": "Gran Encanto"
+      },
+      {
+        "name": "Tenacidad"
+      }
+    ],
     "generacion": 1,
     "child": 39,
     "parent": 0
@@ -602,14 +1041,26 @@
   {
     "idPokemon": 41,
     "nombre": "Zubat",
-    "tipo": "Veneno/Volador",
-    "debilidad": "Psiquico/Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/041.png",
     "descripcion": "Emite ondas ultrasónicas por la boca para escrutar el entorno, lo que le permite volar con pericia por cuevas angostas.",
     "altura": "0,8 m",
     "peso": "7,5 kg",
     "categoria": "Murciélago",
-    "habilidad": "Fuerza Mental",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 42
@@ -617,14 +1068,26 @@
   {
     "idPokemon": 42,
     "nombre": "Golbat",
-    "tipo": "Veneno/Volador",
-    "debilidad": "Psiquico/Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/042.png",
     "descripcion": "Le encanta chuparles la sangre a los seres vivos. En ocasiones comparte la preciada colecta con otros congéneres hambrientos.",
     "altura": "1,6 m",
     "peso": "55,0 kg",
     "categoria": "Murciélago",
-    "habilidad": "Fuerza Mental",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      }
+    ],
     "generacion": 1,
     "child": 41,
     "parent": 0
@@ -632,14 +1095,26 @@
   {
     "idPokemon": 43,
     "nombre": "Oddish",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/043.png",
     "descripcion": "Se mueve al exponerse a la luz de la luna. Merodea por la noche para esparcir sus semillas. ",
     "altura": "0,5 m",
     "peso": "5,4 kg",
     "categoria": "Hierbajo",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 44
@@ -647,14 +1122,26 @@
   {
     "idPokemon": 44,
     "nombre": "Gloom",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/044.png",
     "descripcion": "Libera un fétido olor por los pistilos. El fuerte hedor hace perder el conocimiento a cualquiera que se encuentre en un radio de 2 km.",
     "altura": "0,8 m",
     "peso": "8,6 kg",
     "categoria": "Hierbajo",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 43,
     "parent": 45
@@ -662,14 +1149,26 @@
   {
     "idPokemon": 45,
     "nombre": "Vileplume",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/045.png",
     "descripcion": "Tiene los pétalos más grandes del mundo. Al caminar, de ellos se desprenden densas nubes de polen tóxico. ",
     "altura": "1,2 m",
     "peso": "18,6 Kg",
     "categoria": "Flor",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 44,
     "parent": 0
@@ -677,14 +1176,29 @@
   {
     "idPokemon": 46,
     "nombre": "Paras",
-    "tipo": "Bicho/Panta",
-    "debilidad": "Fuego/Volador/Hielo/Veneno/Roca/Bicho",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 12,
+        "name": "Planta"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/046.png",
     "descripcion": "Escarba en el suelo para extraer nutrientes de las raíces de los árboles, que las setas del lomo absorben después casi por completo.",
     "altura": "0,3 m",
     "peso": "5,4 kg",
     "categoria": "Hongo",
-    "habilidad": "Efecto Espora\nPiel Seca",
+    "habilidad": [
+      {
+        "name": "Efecto Espora"
+      },
+      {
+        "name": "Piel Seca"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 47
@@ -692,14 +1206,29 @@
   {
     "idPokemon": 47,
     "nombre": "Parasect",
-    "tipo": "Bicho/Panta",
-    "debilidad": "Fuego/Volador/Hielo/Veneno/Roca/Bicho",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 12,
+        "name": "Planta"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/047.png",
     "descripcion": "Tras largo tiempo absorbiendo la energía del huésped, la seta parásita del lomo es la que parece controlar la voluntad de este Pokémon.",
     "altura": "1,0 m",
     "peso": "29,5 kg",
     "categoria": "Hongo",
-    "habilidad": "Efecto Espora\nPiel Seca",
+    "habilidad": [
+      {
+        "name": "Efecto Espora"
+      },
+      {
+        "name": "Piel Seca"
+      }
+    ],
     "generacion": 1,
     "child": 46,
     "parent": 0
@@ -707,14 +1236,29 @@
   {
     "idPokemon": 48,
     "nombre": "Venonat",
-    "tipo": "Bicho/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Roca",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/048.png",
     "descripcion": "Rezuma veneno por todo su cuerpo. De noche, atrapa y come pequeños Pokémon insecto atraídos por la luz. ",
     "altura": "1,0 m",
     "peso": "30,0 Kg",
     "categoria": "Insecto",
-    "habilidad": "Ojo Compuesto\nCromolente",
+    "habilidad": [
+      {
+        "name": "Ojo Compuesto"
+      },
+      {
+        "name": "Cromolente"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 49
@@ -722,14 +1266,29 @@
   {
     "idPokemon": 49,
     "nombre": "Venomoth",
-    "tipo": "Bicho/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Roca",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/049.png",
     "descripcion": "Tiene las alas cubiertas de escamas. Cada vez que las bate, esparce un polvillo sumamente venenoso",
     "altura": "1,5 m",
     "peso": "12,5 Kg",
     "categoria": "Polilla Venenosa",
-    "habilidad": "Polvo Escudo\nCromolente",
+    "habilidad": [
+      {
+        "name": "Polvo Escudo"
+      },
+      {
+        "name": "Cromolente"
+      }
+    ],
     "generacion": 1,
     "child": 48,
     "parent": 0
@@ -737,14 +1296,25 @@
   {
     "idPokemon": 50,
     "nombre": "Diglett",
-    "tipo": "Tierra",
-    "debilidad": "Agua/Planta/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/050.png",
     "descripcion": "Vive 1 m por debajo del suelo, donde se alimenta de raíces. A veces también aparece en la superficie.",
     "altura": "0,2 m",
     "peso": "0,8 Kg",
     "categoria": "Topo",
-    "habilidad": "Velo Arena\nTrampa Arena",
+    "habilidad": [
+      {
+        "name": "Velo Arena"
+      },
+      {
+        "name": "Trampa Arena"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 51
@@ -752,14 +1322,25 @@
   {
     "idPokemon": 51,
     "nombre": "Dugtrio",
-    "tipo": "Tierra",
-    "debilidad": "Agua/Planta/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/051.png",
     "descripcion": "Sus tres cabezas suben y bajan para remover la tierra cercana y facilitar así la excavación. ",
     "altura": "0,7 m",
     "peso": "33,3 Kg",
     "categoria": "Topo",
-    "habilidad": "Velo Arena\nTrampa Arena",
+    "habilidad": [
+      {
+        "name": "Velo Arena"
+      },
+      {
+        "name": "Trampa Arena"
+      }
+    ],
     "generacion": 1,
     "child": 50,
     "parent": 0
@@ -767,14 +1348,25 @@
   {
     "idPokemon": 52,
     "nombre": "Meowth",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/052.png",
     "descripcion": "Durante el día, se dedica a dormir. De noche, vigila su territorio con un brillo en los ojos. ",
     "altura": "0,4 m",
     "peso": "4,2 Kg",
     "categoria": "Gato Araña",
-    "habilidad": "Recogida\nExperto",
+    "habilidad": [
+      {
+        "name": "Recogida"
+      },
+      {
+        "name": "Experto"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 53
@@ -782,14 +1374,25 @@
   {
     "idPokemon": 53,
     "nombre": "Persian",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/053.png",
     "descripcion": "Aunque es muy admirado por el pelaje, es difícil de entrenar como mascota porque enseguida suelta arañazos.",
     "altura": "1,0 m",
     "peso": "32,0 Kg",
     "categoria": "Gato Felino",
-    "habilidad": "Experto\nFlexibilidad",
+    "habilidad": [
+      {
+        "name": "Experto"
+      },
+      {
+        "name": "Flexibilidad"
+      }
+    ],
     "generacion": 1,
     "child": 52,
     "parent": 0
@@ -797,14 +1400,25 @@
   {
     "idPokemon": 54,
     "nombre": "Psyduck",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/054.png",
     "descripcion": "Padece continuamente dolores de cabeza. Cuando son muy fuertes, empieza a usar misteriosos poderes. ",
     "altura": "0,8 m",
     "peso": "16,6 Kg",
     "categoria": "Pato",
-    "habilidad": "Humedad\nAclimatacion",
+    "habilidad": [
+      {
+        "name": "Humedad"
+      },
+      {
+        "name": "Aclimatacion"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 55
@@ -812,14 +1426,25 @@
   {
     "idPokemon": 55,
     "nombre": "Golduck",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/055.png",
     "descripcion": "Cuando nada a toda velocidad usando sus largas extremidades palmeadas, su frente comienza a brillar.",
     "altura": "1,7 m",
     "peso": "76,6 Kg",
     "categoria": "Pato",
-    "habilidad": "Humedad\nAclimatacion",
+    "habilidad": [
+      {
+        "name": "Humedad"
+      },
+      {
+        "name": "Aclimatacion"
+      }
+    ],
     "generacion": 1,
     "child": 54,
     "parent": 0
@@ -827,14 +1452,25 @@
   {
     "idPokemon": 56,
     "nombre": "Mankey",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/056.png",
     "descripcion": "Vive en grupos en las copas de los árboles. Si pierde de vista a su manada, se siente solo y se enfada.",
     "altura": "0,5 m",
     "peso": "28,0 Kg",
     "categoria": "Mono Cerdo",
-    "habilidad": "Espíritu Vital\nIrascible",
+    "habilidad": [
+      {
+        "name": "Espíritu Vital"
+      },
+      {
+        "name": "Irascible"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 57
@@ -842,14 +1478,25 @@
   {
     "idPokemon": 57,
     "nombre": "Primeape",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/057.png",
     "descripcion": "Se pone furioso si nota que alguien lo está mirando. Persigue a cualquiera que establezca contacto visual con él. ",
     "altura": "1,0 m",
     "peso": "32,0 Kg",
     "categoria": "Mono Cerdo",
-    "habilidad": "Espíritu Vital\nIrascible",
+    "habilidad": [
+      {
+        "name": "Espíritu Vital"
+      },
+      {
+        "name": "Irascible"
+      }
+    ],
     "generacion": 1,
     "child": 56,
     "parent": 0
@@ -857,14 +1504,25 @@
   {
     "idPokemon": 58,
     "nombre": "Growlithe",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/058.png",
     "descripcion": "De naturaleza valiente y honrada, se enfrenta sin miedo a enemigos más grandes y fuertes.",
     "altura": "0,7 m",
     "peso": "19,0 Kg",
     "categoria": "Perrito",
-    "habilidad": "Intimidacion\nAbsorbe Fuego",
+    "habilidad": [
+      {
+        "name": "Intimidacion"
+      },
+      {
+        "name": "Absorbe Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 59
@@ -872,14 +1530,25 @@
   {
     "idPokemon": 59,
     "nombre": "Arcanine",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/059.png",
     "descripcion": "Cuenta un antiguo pergamino que la gente se quedaba fascinada al verlo correr por las praderas.",
     "altura": "1,9 m",
     "peso": "155,0 Kg",
     "categoria": "Leyenda",
-    "habilidad": "Intimidacion\nAbsorbe Fuego",
+    "habilidad": [
+      {
+        "name": "Intimidacion"
+      },
+      {
+        "name": "Absorbe Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 58,
     "parent": 0
@@ -887,14 +1556,25 @@
   {
     "idPokemon": 60,
     "nombre": "Poliwag",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/060.png",
     "descripcion": "Es más ágil en el agua que en la tierra. La espiral de su vientre no es más que parte de sus vísceras que se ven a través de la piel. ",
     "altura": "0,6 m",
     "peso": "12,4 Kg",
     "categoria": "Renacuajo",
-    "habilidad": "Humedad\nAbsorbe Agua",
+    "habilidad": [
+      {
+        "name": "Humedad"
+      },
+      {
+        "name": "Absorbe Agua"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 61
@@ -902,14 +1582,25 @@
   {
     "idPokemon": 61,
     "nombre": "Poliwhirl",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/061.png",
     "descripcion": "Mirar fijamente la espiral de su vientre provoca somnolencia, por lo que puede usarse como alternativa a las nanas para dormir a los niños.",
     "altura": "1,0 m",
     "peso": "20,0 kg",
     "categoria": "Renacuajo",
-    "habilidad": "Humedad\nAbsorbe Agua",
+    "habilidad": [
+      {
+        "name": "Humedad"
+      },
+      {
+        "name": "Absorbe Agua"
+      }
+    ],
     "generacion": 1,
     "child": 60,
     "parent": 62
@@ -917,14 +1608,29 @@
   {
     "idPokemon": 62,
     "nombre": "Poliwrath",
-    "tipo": "Agua/Lucha",
-    "debilidad": "Hada/Planta/Volador/Psiquico/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/062.png",
     "descripcion": "Su cuerpo es puro músculo. Logra abrirse paso por aguas gélidas partiendo el hielo con sus fornidos brazos. ",
     "altura": "1,3 m",
     "peso": "54,0 Kg",
     "categoria": "Renacuajo",
-    "habilidad": "Humedad\nAbsorbe Agua",
+    "habilidad": [
+      {
+        "name": "Humedad"
+      },
+      {
+        "name": "Absorbe Agua"
+      }
+    ],
     "generacion": 1,
     "child": 61,
     "parent": 0
@@ -932,14 +1638,25 @@
   {
     "idPokemon": 63,
     "nombre": "Abra",
-    "tipo": "Psiquico",
-    "debilidad": "Fantasmo/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/063.png",
     "descripcion": "Es capaz de usar sus poderes psíquicos aun estando dormido. Al parecer, el contenido del sueño influye en sus facultades.",
     "altura": "0,9 m",
     "peso": "19,5 Kg",
     "categoria": "Psi",
-    "habilidad": "Fuerza Mental\nSincronia",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      },
+      {
+        "name": "Sincronia"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 64
@@ -947,14 +1664,25 @@
   {
     "idPokemon": 64,
     "nombre": "Kadabra",
-    "tipo": "Psiquico",
-    "debilidad": "Fantasmo/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/064.png",
     "descripcion": "Duerme suspendido en el aire gracias a sus poderes psíquicos. La cola, de una flexibilidad extraordinaria, hace las veces de almohada.",
     "altura": "1,3 m",
     "peso": "56,5 Kg",
     "categoria": "Psi",
-    "habilidad": "Fuerza Mental\nSincronia",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      },
+      {
+        "name": "Sincronia"
+      }
+    ],
     "generacion": 1,
     "child": 63,
     "parent": 65
@@ -962,14 +1690,25 @@
   {
     "idPokemon": 65,
     "nombre": "Alakazam",
-    "tipo": "Psiquico",
-    "debilidad": "Fantasmo/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/065.png",
     "descripcion": "Posee una capacidad intelectual fuera de lo común que le permite recordar todo lo sucedido desde el instante de su nacimiento.",
     "altura": "1,5 m",
     "peso": "48,0 Kg",
     "categoria": "Psi",
-    "habilidad": "Fuerza Mental\nSincronia",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      },
+      {
+        "name": "Sincronia"
+      }
+    ],
     "generacion": 1,
     "child": 64,
     "parent": 0
@@ -977,14 +1716,25 @@
   {
     "idPokemon": 66,
     "nombre": "Machop",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/066.png",
     "descripcion": "Es una masa de músculos y, pese a su pequeño tamaño, tiene fuerza de sobra para levantar en brazos a 100 personas.",
     "altura": "0,8 m",
     "peso": "19,5 kg",
     "categoria": "Superpoder",
-    "habilidad": "Agallas\nIndefenso",
+    "habilidad": [
+      {
+        "name": "Agallas"
+      },
+      {
+        "name": "Indefenso"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 67
@@ -992,14 +1742,25 @@
   {
     "idPokemon": 67,
     "nombre": "Machoke",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/067.png",
     "descripcion": "Su musculoso cuerpo es tan fuerte que usa un cinto antifuerza para controlar sus movimientos.",
     "altura": "1,5 m",
     "peso": "70,5 Kg",
     "categoria": "Superpoder",
-    "habilidad": "Agallas\nIndefenso",
+    "habilidad": [
+      {
+        "name": "Agallas"
+      },
+      {
+        "name": "Indefenso"
+      }
+    ],
     "generacion": 1,
     "child": 66,
     "parent": 68
@@ -1007,14 +1768,25 @@
   {
     "idPokemon": 68,
     "nombre": "Machamp",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/068.png",
     "descripcion": "Mueve rápidamente sus cuatro brazos para asestar incesantes golpes y puñetazos desde todos los ángulos.",
     "altura": "1,6 m",
     "peso": "130,0 kg",
     "categoria": "Superpoder",
-    "habilidad": "Agallas\nIndefenso",
+    "habilidad": [
+      {
+        "name": "Agallas"
+      },
+      {
+        "name": "Indefenso"
+      }
+    ],
     "generacion": 1,
     "child": 67,
     "parent": 0
@@ -1022,14 +1794,26 @@
   {
     "idPokemon": 69,
     "nombre": "Bellsprout",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/069.png",
     "descripcion": "Prefiere lugares cálidos y húmedos. Atrapa pequeños Pokémon insectos con sus lianas para devorarlos",
     "altura": "0,7 m",
     "peso": "4,0 Kg",
     "categoria": "Flor",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 70
@@ -1037,14 +1821,26 @@
   {
     "idPokemon": 70,
     "nombre": "Weepinbell",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/070.png",
     "descripcion": "Cuando tiene hambre, engulle a todo lo que se mueve. La pobre presa acaba disuelta en sus ácidos.",
     "altura": "1,0 m",
     "peso": "6,4 kg",
     "categoria": "Matamoscas",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 69,
     "parent": 71
@@ -1052,14 +1848,26 @@
   {
     "idPokemon": 71,
     "nombre": "Victreebel",
-    "tipo": "Planta/Veneno",
-    "debilidad": "Fuego/Psiquico/Volador/Hielo",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/071.png",
     "descripcion": "Atrae a su presa con un dulce aroma a miel. Una vez atrapada en la boca, la disuelve en tan solo un día, huesos incluidos.",
     "altura": "1,7 m",
     "peso": "15,5 Kg",
     "categoria": "Matamoscas",
-    "habilidad": "Clorofila",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 70,
     "parent": 0
@@ -1067,14 +1875,29 @@
   {
     "idPokemon": 72,
     "nombre": "Tentacool",
-    "tipo": "Agua/Veneno",
-    "debilidad": "Psiquico/Electrico/Tierra",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/072.png",
     "descripcion": "Sus facultades natatorias son más bien escasas, por lo que se limita a flotar a la deriva en aguas poco profundas en busca de alimento.",
     "altura": "0,9 m",
     "peso": "45,5 Kg",
     "categoria": "Medusa",
-    "habilidad": "Cuerpo Puro\nViscosecrecion",
+    "habilidad": [
+      {
+        "name": "Cuerpo Puro"
+      },
+      {
+        "name": "Viscosecrecion"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 73
@@ -1082,14 +1905,29 @@
   {
     "idPokemon": 73,
     "nombre": "Tentacruel",
-    "tipo": "Agua/Veneno",
-    "debilidad": "Psiquico/Electrico/Tierra",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/073.png",
     "descripcion": "Si las esferas rojas que tiene a ambos lados de la cabeza brillan con intensidad, indica que está a punto de lanzar ondas ultrasónicas",
     "altura": "1,6 m",
     "peso": "55,0 Kg",
     "categoria": "Medusa",
-    "habilidad": "Cuerpo Puro\nViscosecrecion",
+    "habilidad": [
+      {
+        "name": "Cuerpo Puro"
+      },
+      {
+        "name": "Viscosecrecion"
+      }
+    ],
     "generacion": 1,
     "child": 72,
     "parent": 0
@@ -1097,14 +1935,29 @@
   {
     "idPokemon": 74,
     "nombre": "Geodude",
-    "tipo": "Roca/Tierra",
-    "debilidad": "Acero/Lucha/Agua/Hielo/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/074.png",
     "descripcion": "Se suele encontrar en senderos de montaña y sitios parecidos. Conviene andar con cuidado para no pisarlo sin querer y provocar su enfado.",
     "altura": "0,4 m",
     "peso": "20,0 Kg",
     "categoria": "Roca",
-    "habilidad": "Cabeza Roca\nRobustez",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Robustez"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 75
@@ -1112,14 +1965,29 @@
   {
     "idPokemon": 75,
     "nombre": "Graveler",
-    "tipo": "Roca/Tierra",
-    "debilidad": "Acero/Lucha/Agua/Hielo/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/075.png",
     "descripcion": "Se le suele ver rodando montaña abajo. No evita los obstáculos, sino que los arrolla.",
     "altura": "1,0 m",
     "peso": "105,0 kg",
     "categoria": "Roca",
-    "habilidad": "Cabeza Roca\nRobustez",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Robustez"
+      }
+    ],
     "generacion": 1,
     "child": 74,
     "parent": 76
@@ -1127,14 +1995,29 @@
   {
     "idPokemon": 76,
     "nombre": "Golem",
-    "tipo": "Roca/Tierra",
-    "debilidad": "Acero/Lucha/Agua/Hielo/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/076.png",
     "descripcion": "Nada más mudar la piel, su cuerpo se vuelve blando y blanquecino, pero se endurece al poco tiempo de entrar en contacto con el aire.",
     "altura": "1,4 m",
     "peso": "300,0 Kg",
     "categoria": "Megatón",
-    "habilidad": "Cabeza Roca\nRobustez",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Robustez"
+      }
+    ],
     "generacion": 1,
     "child": 75,
     "parent": 0
@@ -1142,14 +2025,25 @@
   {
     "idPokemon": 77,
     "nombre": "Ponyta",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/077.png",
     "descripcion": "Al nacer es un poco lento, pero va fortaleciendo las patas paulatinamente al disputar carreras con sus congéneres.",
     "altura": "1,0 m",
     "peso": "30,0 Kg",
     "categoria": "Caballo Fuego",
-    "habilidad": "Fuga\nAbsorber Fuego",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Absorber Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 78
@@ -1157,14 +2051,25 @@
   {
     "idPokemon": 78,
     "nombre": "Rapidash",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/078.png",
     "descripcion": "Su ardiente crin ondea al viento mientras atraviesa extensas praderas a una velocidad de 240 km/h.",
     "altura": "1,7 m",
     "peso": "95,0 Kg",
     "categoria": "Caballo Fuego",
-    "habilidad": "Fuga\nAbsorber Fuego",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Absorber Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 77,
     "parent": 0
@@ -1172,14 +2077,29 @@
   {
     "idPokemon": 79,
     "nombre": "Slowpoke",
-    "tipo": "Agua/Psiquico",
-    "debilidad": "Fantasma/Siniestro/Planta/Electrico/Bicho",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/079.png",
     "descripcion": "Increíblemente lento y torpe. Tarda cinco segundos en sentir dolor si lo atacan.",
     "altura": "1.2 m",
     "peso": "36.0 Kg",
     "categoria": "Atontado",
-    "habilidad": "Despiste\nRitmo Propio",
+    "habilidad": [
+      {
+        "name": "Despiste"
+      },
+      {
+        "name": "Ritmo Propio"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 80
@@ -1187,14 +2107,29 @@
   {
     "idPokemon": 80,
     "nombre": "Slowbro",
-    "tipo": "Agua/Psiquico",
-    "debilidad": "Fantasma/Siniestro/Planta/Electrico/Bicho",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/080.png",
     "descripcion": "Según parece, cuando Slowpoke fue a pescar al mar, un Shellder le mordió la cola y así evolucionó a Slowbro.",
     "altura": "1.6 m",
     "peso": "75.5 Kg",
     "categoria": "Ermitaño",
-    "habilidad": "Despiste\nRitmo Propio",
+    "habilidad": [
+      {
+        "name": "Despiste"
+      },
+      {
+        "name": "Ritmo Propio"
+      }
+    ],
     "generacion": 1,
     "child": 79,
     "parent": 0
@@ -1202,14 +2137,29 @@
   {
     "idPokemon": 81,
     "nombre": "Magnemite",
-    "tipo": "Electrico/Acero",
-    "debilidad": "Fuego/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      },
+      {
+        "id": 9,
+        "name": "Acero"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/081.png",
     "descripcion": "Las unidades laterales crean ondas electromagnéticas que contrarrestan la gravedad y le permiten flotar.",
     "altura": "0.3 m",
     "peso": "6.0 Kg",
     "categoria": "Imán",
-    "habilidad": "Robustez\nImán",
+    "habilidad": [
+      {
+        "name": "Robustez"
+      },
+      {
+        "name": "Imán"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 82
@@ -1217,14 +2167,29 @@
   {
     "idPokemon": 82,
     "nombre": "Magneton",
-    "tipo": "Electrico/Acero",
-    "debilidad": "Fuego/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      },
+      {
+        "id": 9,
+        "name": "Acero"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/082.png",
     "descripcion": "Tres Magnemite se enlazan mediante una intensa fuerza magnética. Provoca un fuerte pitido en los oídos a quien se le acerque.",
     "altura": "1.0 m",
     "peso": "60.0 Kg",
     "categoria": "Imán",
-    "habilidad": "Robustez\nImán",
+    "habilidad": [
+      {
+        "name": "Robustez"
+      },
+      {
+        "name": "Imán"
+      }
+    ],
     "generacion": 1,
     "child": 81,
     "parent": 0
@@ -1232,14 +2197,29 @@
   {
     "idPokemon": 83,
     "nombre": "Farfetch d",
-    "tipo": "Normal/Volador",
-    "debilidad": "Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/083.png",
     "descripcion": "Blande el puerro que sujeta con un ala como si se tratase de una espada para rebanar a su rival. En caso de necesidad, se lo come para nutrirse.",
     "altura": "0.8 m",
     "peso": "15.0 Kg",
     "categoria": "Pato Salvaje",
-    "habilidad": "Vista Lince\nFuerza Menal",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      },
+      {
+        "name": "Fuerza Menal"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1247,14 +2227,29 @@
   {
     "idPokemon": 84,
     "nombre": "Doduo",
-    "tipo": "Normal/Volador",
-    "debilidad": "Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/084.png",
     "descripcion": "Las diminutas alas apenas le permiten volar, pero puede correr a gran velocidad gracias a sus patas hiperdesarrolladas.",
     "altura": "1.4 m",
     "peso": "39.2 Kg",
     "categoria": "Ave Gemela",
-    "habilidad": "Fuga\nMadrugar",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Madrugar"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 85
@@ -1262,14 +2257,29 @@
   {
     "idPokemon": 85,
     "nombre": "Dodrio",
-    "tipo": "Normal/Volador",
-    "debilidad": "Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/085.png",
     "descripcion": "Este Pokémon surge al dividirse una de las cabezas de Doduo. Es capaz de correr por las praderas a 60 km/h.",
     "altura": "1.8 m",
     "peso": "85.2 Kg",
     "categoria": "Ave Triple",
-    "habilidad": "Fuga\nMadrugar",
+    "habilidad": [
+      {
+        "name": "Fuga"
+      },
+      {
+        "name": "Madrugar"
+      }
+    ],
     "generacion": 1,
     "child": 84,
     "parent": 0
@@ -1277,14 +2287,25 @@
   {
     "idPokemon": 86,
     "nombre": "Seel",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/086.png",
     "descripcion": "Le encantan los lugares gélidos y disfruta nadando en aguas a temperaturas en torno a los -10 ºC.",
     "altura": "1.1 m",
     "peso": "90.0 Kg",
     "categoria": "León Marino",
-    "habilidad": "Sebo\nHidratación",
+    "habilidad": [
+      {
+        "name": "Sebo"
+      },
+      {
+        "name": "Hidratación"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 87
@@ -1292,14 +2313,29 @@
   {
     "idPokemon": 87,
     "nombre": "Dewgong",
-    "tipo": "Agua/Hielo",
-    "debilidad": "Planta/Electrico/Lucha/Roca",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 15,
+        "name": "Hielo"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/087.png",
     "descripcion": "Su cuerpo es blanco como la nieve. Puede nadar plácidamente en mares gélidos gracias a su resistencia al frío.",
     "altura": "1.7 m",
     "peso": "120.0 Kg",
     "categoria": "León Marion",
-    "habilidad": "Sebo\nHidratación",
+    "habilidad": [
+      {
+        "name": "Sebo"
+      },
+      {
+        "name": "Hidratación"
+      }
+    ],
     "generacion": 1,
     "child": 86,
     "parent": 0
@@ -1307,14 +2343,25 @@
   {
     "idPokemon": 88,
     "nombre": "Grimer",
-    "tipo": "Veneno",
-    "debilidad": "Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/088.png",
     "descripcion": "Formados a partir de lodo, los Grimer se juntan en lugares sucios para aumentar el número de gérmenes de su cuerpo.",
     "altura": "0.9 m",
     "peso": "30.0 Kg",
     "categoria": "Lodo",
-    "habilidad": "Hedor\nViscosidad",
+    "habilidad": [
+      {
+        "name": "Hedor"
+      },
+      {
+        "name": "Viscosidad"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 89
@@ -1322,14 +2369,25 @@
   {
     "idPokemon": 89,
     "nombre": "Muk",
-    "tipo": "Veneno",
-    "debilidad": "Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/089.png",
     "descripcion": "Está cubierto por un repugnante lodo. Es tan tóxico que hasta su rastro es venenoso.",
     "altura": "1.2 m",
     "peso": "30.0 Kg",
     "categoria": "Lodo",
-    "habilidad": "Hedor\nViscosidad",
+    "habilidad": [
+      {
+        "name": "Hedor"
+      },
+      {
+        "name": "Viscosidad"
+      }
+    ],
     "generacion": 1,
     "child": 88,
     "parent": 0
@@ -1337,14 +2395,25 @@
   {
     "idPokemon": 90,
     "nombre": "Shellder",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/090.png",
     "descripcion": "Está metido en una concha más dura que el diamante, pero tiene un cuerpo muy blando.",
     "altura": "0.3 m",
     "peso": "4.0 Kg",
     "categoria": "Bivalvo",
-    "habilidad": "Caparazón\nEncadenado",
+    "habilidad": [
+      {
+        "name": "Caparazón"
+      },
+      {
+        "name": "Encadenado"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 91
@@ -1352,14 +2421,29 @@
   {
     "idPokemon": 91,
     "nombre": "Cloyster",
-    "tipo": "Agua/Hielo",
-    "debilidad": "Planta/Electrico/Lucha/Roca",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 15,
+        "name": "Hielo"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/091.png",
     "descripcion": "A los Cloyster que viven en las fuertes corrientes marinas les crecen largas y afiladas púas en la concha.",
     "altura": "1.5 m",
     "peso": "132.5 Kg",
     "categoria": "Bivalvo",
-    "habilidad": "Caparazón\nEncadenado",
+    "habilidad": [
+      {
+        "name": "Caparazón"
+      },
+      {
+        "name": "Encadenado"
+      }
+    ],
     "generacion": 1,
     "child": 90,
     "parent": 0
@@ -1367,14 +2451,26 @@
   {
     "idPokemon": 92,
     "nombre": "Gastly",
-    "tipo": "Fantasma/Veneno",
-    "debilidad": "Fantasmo/Siniestro/Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 8,
+        "name": "Fantasma"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/092.png",
     "descripcion": "Su estrategia consiste en envolver al rival con su cuerpo gaseoso y envenenarlo a través de la piel.",
     "altura": "1.3 m",
     "peso": "0.1 Kg",
     "categoria": "Gas",
-    "habilidad": "Leviatación\n",
+    "habilidad": [
+      {
+        "name": "Levitación"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 93
@@ -1382,14 +2478,26 @@
   {
     "idPokemon": 93,
     "nombre": "Haunter",
-    "tipo": "Fantasma/Veneno",
-    "debilidad": "Fantasmo/Siniestro/Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 8,
+        "name": "Fantasma"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/093.png",
     "descripcion": "Le gusta acechar en la oscuridad y tocarles el hombro a sus víctimas con su mano gaseosa. Estas se quedan temblando para siempre.",
     "altura": "1.6 m",
     "peso": "0.1 Kg",
     "categoria": "Gas",
-    "habilidad": "Levitación\n",
+    "habilidad": [
+      {
+        "name": "Levitación"
+      }
+    ],
     "generacion": 1,
     "child": 92,
     "parent": 94
@@ -1397,14 +2505,26 @@
   {
     "idPokemon": 94,
     "nombre": "Gengar",
-    "tipo": "Fantasma/Veneno",
-    "debilidad": "Fantasmo/Siniestro/Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 8,
+        "name": "Fantasma"
+      },
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/094.png",
     "descripcion": "Para quitarle la vida a su presa, se desliza en su sombra y espera su oportunidad en silencio.",
     "altura": "1.5 m",
     "peso": "40.5 Kg",
     "categoria": "Sombra",
-    "habilidad": "Cuerpo Maldito\n",
+    "habilidad": [
+      {
+        "name": "Cuerpo Maldito"
+      }
+    ],
     "generacion": 1,
     "child": 93,
     "parent": 0
@@ -1412,14 +2532,29 @@
   {
     "idPokemon": 95,
     "nombre": "Onix",
-    "tipo": "Roca/Tierra",
-    "debilidad": "Acero/Lucha/Agua/Hielo/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/095.png",
     "descripcion": "Al abrirse paso bajo tierra, va absorbiendo todo lo que encuentra. Eso hace que su cuerpo sea así de sólido.",
     "altura": "8.8 m",
     "peso": "210.0 Kg",
     "categoria": "Serpiente Roca",
-    "habilidad": "Cabeza Roca\nRobustez",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Robustez"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1427,14 +2562,25 @@
   {
     "idPokemon": 96,
     "nombre": "Drowzee",
-    "tipo": "Psiquico",
-    "debilidad": "Fantasmo/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/096.png",
     "descripcion": "Recuerda todos los sueños que engulle. Raramente come sueños de adultos porque los de los niños están más ricos.",
     "altura": "1.0 m",
     "peso": "32.4 Kg",
     "categoria": "Hipnosis",
-    "habilidad": "Insomnio\nAlerta",
+    "habilidad": [
+      {
+        "name": "Insomnio"
+      },
+      {
+        "name": "Alerta"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 97
@@ -1442,14 +2588,25 @@
   {
     "idPokemon": 97,
     "nombre": "Hypno",
-    "tipo": "Psiquico",
-    "debilidad": "Fantasmo/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/097.png",
     "descripcion": "Cuando mira al enemigo, usa diversos poderes psíquicos como la hipnosis.",
     "altura": "1.6 m",
     "peso": "75.6 Kg",
     "categoria": "Hipnosis",
-    "habilidad": "Insomnio\nAlerta",
+    "habilidad": [
+      {
+        "name": "Insomnio"
+      },
+      {
+        "name": "Alerta"
+      }
+    ],
     "generacion": 1,
     "child": 96,
     "parent": 0
@@ -1457,14 +2614,25 @@
   {
     "idPokemon": 98,
     "nombre": "Krabby",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/098.png",
     "descripcion": "Es fácil encontrarlo cerca del mar. Las largas pinzas que tiene vuelven a crecer si se las quitan de su sitio.",
     "altura": "0.4 m",
     "peso": "6.5 Kg",
     "categoria": "Cangrejo",
-    "habilidad": "Caparazóm\nCorte Fuerte",
+    "habilidad": [
+      {
+        "name": "Caparazóm"
+      },
+      {
+        "name": "Corte Fuerte"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 99
@@ -1472,14 +2640,25 @@
   {
     "idPokemon": 99,
     "nombre": "Kingler",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/099.png",
     "descripcion": "La pinza tan grande que tiene posee una fuerza de 10 000 CV, pero le cuesta moverla por su gran tamaño.",
     "altura": "1.3 m",
     "peso": "60.0 Kg",
     "categoria": "Tenza",
-    "habilidad": "Caparazóm\nCorte Fuerte",
+    "habilidad": [
+      {
+        "name": "Caparazóm"
+      },
+      {
+        "name": "Corte Fuerte"
+      }
+    ],
     "generacion": 1,
     "child": 98,
     "parent": 0
@@ -1487,14 +2666,25 @@
   {
     "idPokemon": 100,
     "nombre": "Voltorb",
-    "tipo": "Electrico",
-    "debilidad": "Tierra",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/100.png",
     "descripcion": "Se mueve rodando. Si el terreno es irregular, una chispa provocada por algún bache lo hará explotar.",
     "altura": "0.5 m",
     "peso": "10.4 Kg",
     "categoria": "Bola",
-    "habilidad": "Elec. Estática\nInsonorizar",
+    "habilidad": [
+      {
+        "name": "Elec. Estática"
+      },
+      {
+        "name": "Insonorizar"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 101
@@ -1502,14 +2692,25 @@
   {
     "idPokemon": 101,
     "nombre": "Electrode",
-    "tipo": "Electrico",
-    "debilidad": "Tierra",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/101.png",
     "descripcion": "Cuanta más energía almacena, mayor velocidad alcanza, aunque aumenta también el riesgo de que explote.",
     "altura": "1.2 m",
     "peso": "66.6 Kg",
     "categoria": "Bola",
-    "habilidad": "Elec. Estática\nInsonorizar",
+    "habilidad": [
+      {
+        "name": "Elec. Estática"
+      },
+  {
+    "name": "Insonorizar"
+  }
+    ],
     "generacion": 1,
     "child": 100,
     "parent": 0
@@ -1517,14 +2718,26 @@
   {
     "idPokemon": 102,
     "nombre": "Exeggcute",
-    "tipo": "Planta/Psiquico",
-    "debilidad": "Fantasma/Fuego/Volador/Hielo/Siniestro/Veneno/Bicho",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/102.png",
     "descripcion": "Pese a su aspecto de mera piña de huevos, se trata de un Pokémon. Al parecer, sus cabezas se comunican entre sí por telepatía.",
     "altura": "0.4 m",
     "peso": "2.5 Kg",
     "categoria": "Huevo",
-    "habilidad": "Clorofila\n",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 103
@@ -1532,14 +2745,26 @@
   {
     "idPokemon": 103,
     "nombre": "Exeggutor",
-    "tipo": "Planta/Psiquico",
-    "debilidad": "Fantasma/Fuego/Volador/Hielo/Siniestro/Veneno/Bicho",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/103.png",
     "descripcion": "Cada una de las tres cabezas piensa de forma independiente y apenas muestra interés por el resto.",
     "altura": "2.0 m",
     "peso": "120.0 Kg",
     "categoria": "Coco",
-    "habilidad": "Clorofila\n",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      }
+    ],
     "generacion": 1,
     "child": 102,
     "parent": 0
@@ -1547,14 +2772,25 @@
   {
     "idPokemon": 104,
     "nombre": "Cubone",
-    "tipo": "Tierra",
-    "debilidad": "Agua/Planta/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/104.png",
     "descripcion": "Cuando llora al acordarse de su madre fallecida, su llanto resuena en el cráneo que lleva en la cabeza.",
     "altura": "0.4 m",
     "peso": "6.5 Kg",
     "categoria": "Solitario",
-    "habilidad": "Cabeza Roca\nPararrayos",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Pararrayos"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 105
@@ -1562,14 +2798,25 @@
   {
     "idPokemon": 105,
     "nombre": "Marowak",
-    "tipo": "Tierra",
-    "debilidad": "Agua/Planta/Hielo",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/105.png",
     "descripcion": "Ha evolucionado tras fortalecerse y superar su pena. Ahora lucha con arrojo blandiendo su hueso a modo de arma.",
     "altura": "1.0 m",
     "peso": "45.0 Kg",
     "categoria": "AplilaHesos",
-    "habilidad": "Cabeza Roca\nPararrayos",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Pararrayos"
+      }
+    ],
     "generacion": 1,
     "child": 104,
     "parent": 0
@@ -1577,14 +2824,25 @@
   {
     "idPokemon": 106,
     "nombre": "Hitmonlee",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/106.png",
     "descripcion": "Este Pokémon tiene un sentido del equilibrio increíble. Puede dar patadas desde cualquier posición.",
     "altura": "1.5 m",
     "peso": "49.8 Kg",
     "categoria": "Patada",
-    "habilidad": "Flexibilidad\nAudaz",
+    "habilidad": [
+      {
+        "name": "Flexibilidad"
+      },
+      {
+        "name": "Audaz"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1592,14 +2850,25 @@
   {
     "idPokemon": 107,
     "nombre": "Hitmonchan",
-    "tipo": "Lucha",
-    "debilidad": "Psiquico/Volador/Hada",
+    "tipo": [
+      {
+        "id": 2,
+        "name": "Lucha"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/107.png",
     "descripcion": "Sus puñetazos cortan el aire. Son tan veloces que el mínimo roce podría causar una quemadura.",
     "altura": "1.4 m",
     "peso": "50.2 Kg",
     "categoria": "Puñetazo",
-    "habilidad": "Vista Lince\nPuño Férreo",
+    "habilidad": [
+      {
+        "name": "Vista Lince"
+      },
+      {
+        "name": "Puño Férreo"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1607,14 +2876,25 @@
   {
     "idPokemon": 108,
     "nombre": "Lickitung",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/108.png",
     "descripcion": "Si sus lametones no se tratan a tiempo, su saliva pegajosa y urticante puede provocar picores persistentes.\n\n",
     "altura": "1.2 m",
     "peso": "65.5 Kg",
     "categoria": "Lamento",
-    "habilidad": "Despiste\nRitmo Propio",
+    "habilidad": [
+      {
+        "name": "Despiste"
+      },
+      {
+        "name": "Ritmo Propio"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1622,14 +2902,25 @@
   {
     "idPokemon": 109,
     "nombre": "Koffing",
-    "tipo": "Veneno",
-    "debilidad": "Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/109.png",
     "descripcion": "Su cuerpo está lleno a rebosar de gas venenoso. Acude a los vertederos atraído por el putrefacto olor que emana de los desperdicios.\n\n",
     "altura": "0.6 m",
     "peso": "1.0 Kg",
     "categoria": "Gas Venenoso",
-    "habilidad": "Levitacion\nGas Reactivo",
+    "habilidad": [
+      {
+        "name": "Levitacion"
+      },
+      {
+        "name": "Gas Reactivo"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 110
@@ -1637,14 +2928,25 @@
   {
     "idPokemon": 110,
     "nombre": "Weezing",
-    "tipo": "Veneno",
-    "debilidad": "Psiquico/Tierra",
+    "tipo": [
+      {
+        "id": 4,
+        "name": "Veneno"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/110.png",
     "descripcion": "Usa sus dos cuerpos para mezclar gases. Según parece, en el pasado podían hallarse ejemplares por todos los rincones de Galar.",
     "altura": "1.2 m",
     "peso": "9.5 Kg",
     "categoria": "Gas Venenoso",
-    "habilidad": "Levitacion\nGas Reactivo",
+    "habilidad": [
+      {
+        "name": "Levitacion"
+      },
+      {
+        "name": "Gas Reactivo"
+      }
+    ],
     "generacion": 1,
     "child": 109,
     "parent": 0
@@ -1652,14 +2954,29 @@
   {
     "idPokemon": 111,
     "nombre": "Rhyhorn",
-    "tipo": "Tierra/Roca",
-    "debilidad": "Acero/Hielo/Agua/Lucha/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      },
+      {
+        "id": 6,
+        "name": "Roca"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/111.png",
     "descripcion": "Su inteligencia es limitada, aunque posee una fuerza tan considerable que le permite incluso derribar rascacielos con solo embestirlos.",
     "altura": "1.0 m",
     "peso": "115.0 Kg",
     "categoria": "Clavos",
-    "habilidad": "Cabeza Roca\nPararrayos",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Pararrayos"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 112
@@ -1667,14 +2984,29 @@
   {
     "idPokemon": 112,
     "nombre": "Rhydon",
-    "tipo": "Tierra/Roca",
-    "debilidad": "Acero/Hielo/Agua/Lucha/Planta/Tierra",
+    "tipo": [
+      {
+        "id": 5,
+        "name": "Tierra"
+      },
+      {
+        "id": 6,
+        "name": "Roca"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/112.png",
     "descripcion": "Cuando evoluciona, comienza a andar con las patas traseras. Es capaz de horadar rocas con el cuerno que tiene.",
     "altura": "1.9 m",
     "peso": "120.0 Kg",
     "categoria": "Taladro",
-    "habilidad": "Cabeza Roca\nPararrayos",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Pararrayos"
+      }
+    ],
     "generacion": 1,
     "child": 111,
     "parent": 0
@@ -1682,14 +3014,25 @@
   {
     "idPokemon": 113,
     "nombre": "Chansey",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/113.png",
     "descripcion": "Un generoso Pokémon que pone huevos muy nutritivos y se los da a personas o Pokémon heridos.",
     "altura": "1.1 m",
     "peso": "34.6 Kg",
     "categoria": "Huevo",
-    "habilidad": "Cura Natural\nDicha",
+    "habilidad": [
+      {
+        "name": "Cura Natural"
+      },
+      {
+        "name": "Dicha"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1697,14 +3040,25 @@
   {
     "idPokemon": 114,
     "nombre": "Tangela",
-    "tipo": "Planta",
-    "debilidad": "Fuego/Volador/Hielo/Veneno/Bicho",
+    "tipo": [
+      {
+        "id": 12,
+        "name": "Planta"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/114.png",
     "descripcion": "Sus lianas no dejan de crecer aunque se le desprendan. Aún se desconoce qué aspecto tiene sin ellas.",
     "altura": "1.0 m",
     "peso": "35.0 Kg",
     "categoria": "Enredadera",
-    "habilidad": "Clorofila\nDefensa Hoja",
+    "habilidad": [
+      {
+        "name": "Clorofila"
+      },
+      {
+        "name": "Defensa Hoja"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1712,14 +3066,25 @@
   {
     "idPokemon": 115,
     "nombre": "Kangaskhan",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/115.png",
     "descripcion": "Aunque lleve una cría en el marsupio, su juego de pies no pierde ligereza. Abruma al rival con ráfagas de ágiles puñetazos.",
     "altura": "2.2 m",
     "peso": "80.0 Kg",
     "categoria": "Maternal",
-    "habilidad": "Madrugar\nIntrepido",
+    "habilidad": [
+      {
+        "name": "Madrugar"
+      },
+      {
+        "name": "Intrepido"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1727,14 +3092,25 @@
   {
     "idPokemon": 116,
     "nombre": "Horsea",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/116.png",
     "descripcion": "Habita en mares de aguas tranquilas. Si se siente en peligro, expulsará por la boca una densa tinta negra para poder huir.",
     "altura": "0.4 m",
     "peso": "8.0 Kg",
     "categoria": "Dragón",
-    "habilidad": "Nado Rapido\nFrancotirador",
+    "habilidad": [
+      {
+        "name": "Nado Rapido"
+      },
+      {
+        "name": "Francotirador"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 117
@@ -1742,14 +3118,25 @@
   {
     "idPokemon": 117,
     "nombre": "Seadra",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/117.png",
     "descripcion": "En esta especie, es el macho quien se ocupa de la prole. Durante la época de cría, el veneno de las púas de su espalda se vuelve más potente.",
     "altura": "1.2 m",
     "peso": "25.0 Kg",
     "categoria": "Dragón",
-    "habilidad": "Punto Toxico\nFrancotirador",
+    "habilidad": [
+      {
+        "name": "Punto Toxico"
+      },
+      {
+        "name": "Francotirador"
+      }
+    ],
     "generacion": 1,
     "child": 116,
     "parent": 0
@@ -1757,14 +3144,25 @@
   {
     "idPokemon": 118,
     "nombre": "Goldeen",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/118.png",
     "descripcion": "Sus aletas pectorales, caudal y dorsal ondean gráciles en el agua. Por eso se le llama el Bailarín Acuático.",
     "altura": "0.6 m",
     "peso": "15.0 Kg",
     "categoria": "Pez Color",
-    "habilidad": "Nado Rapido\nVelo Agua",
+    "habilidad": [
+      {
+        "name": "Nado Rapido"
+      },
+      {
+        "name": "Velo Agua"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 119
@@ -1772,14 +3170,25 @@
   {
     "idPokemon": 119,
     "nombre": "Seaking",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/119.png",
     "descripcion": "En otoño gana algo de peso para atraer a posibles parejas y se cubre de llamativos colores.",
     "altura": "1.3 m",
     "peso": "39.0 Kg",
     "categoria": "Pez Color",
-    "habilidad": "Nado Rapido\nVelo Agua",
+    "habilidad": [
+      {
+        "name": "Nado Rapido"
+      },
+      {
+        "name": "Velo Agua"
+      }
+    ],
     "generacion": 1,
     "child": 118,
     "parent": 0
@@ -1787,14 +3196,25 @@
   {
     "idPokemon": 120,
     "nombre": "Staryu",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/120.png",
     "descripcion": "A finales de verano, se pueden ver grupos de Staryu en la orilla de la playa sincronizando el brillo de sus núcleos a ritmo regular.",
     "altura": "0.8 m",
     "peso": "34.5 Kg",
     "categoria": "Estrella",
-    "habilidad": "Cura Natural\nIluminacion",
+    "habilidad": [
+      {
+        "name": "Cura Natural"
+      },
+      {
+        "name": "Iluminacion"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 120
@@ -1802,14 +3222,29 @@
   {
     "idPokemon": 121,
     "nombre": "Starmie",
-    "tipo": "Agua/Psiquico",
-    "debilidad": "Fantasma/Siniestro/Planta/Electrico/Bicho",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/121.png",
     "descripcion": "Su órgano central, conocido como núcleo, brilla con los colores del arcoíris cuando se dispone a liberar sus potentes poderes psíquicos.",
     "altura": "1.1 m",
     "peso": "80.0 Kg",
     "categoria": "Misterioso",
-    "habilidad": "Cura Natural\nIluminacion",
+    "habilidad": [
+      {
+        "name": "Cura Natural"
+      },
+      {
+        "name": "Iluminacion"
+      }
+    ],
     "generacion": 1,
     "child": 120,
     "parent": 0
@@ -1817,14 +3252,29 @@
   {
     "idPokemon": 122,
     "nombre": "Mr. Mime",
-    "tipo": "Psiquico/Hada",
-    "debilidad": "Fantasma/Acero/Veneno",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Psíquico"
+      },
+      {
+        "id": 18,
+        "name": "Hada"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/122.png",
     "descripcion": "Muchos estudiosos sostienen que el desarrollo de sus enormes manos se debe a su afán por practicar la pantomima.",
     "altura": "1.3 m",
     "peso": "54.5 Kg",
     "categoria": "Barrera",
-    "habilidad": "Insonorizar\nFiltro",
+    "habilidad": [
+      {
+        "name": "Insonorizar"
+      },
+      {
+        "name": "Filtro"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1832,14 +3282,29 @@
   {
     "idPokemon": 123,
     "nombre": "Scyther",
-    "tipo": "Bicho/Volador",
-    "debilidad": "Fuego/Volador/Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/123.png",
     "descripcion": "Avanza por la hierba con sus afiladas guadañas, más rápido de lo que el ojo humano puede percibir.",
     "altura": "1.5 m",
     "peso": "56.0 Kg",
     "categoria": "Mantis",
-    "habilidad": "Enjambre\nExperto",
+    "habilidad": [
+      {
+        "name": "Enjambre"
+      },
+      {
+        "name": "Experto"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1847,14 +3312,29 @@
   {
     "idPokemon": 124,
     "nombre": "Jynx",
-    "tipo": "Hielo/Psiquico",
-    "debilidad": "Acero/Fantasma/Fuego/Siniestro/Roca/Bicho",
+    "tipo": [
+      {
+        "id": 15,
+        "name": "Hielo"
+      },
+      {
+        "id": 14,
+        "name": "Psíquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/124.png",
     "descripcion": "En cierta parte de Galar se conocía a Jynx como la Reina del Hielo y se reverenciaba con cierto temor.",
     "altura": "1.4 m",
     "peso": "40.6 Kg",
     "categoria": "Forma Humana",
-    "habilidad": "Despiste\nAlerta",
+    "habilidad": [
+      {
+        "name": "Despiste"
+      },
+      {
+        "name": "Alerta"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1862,14 +3342,22 @@
   {
     "idPokemon": 125,
     "nombre": "Electabuzz",
-    "tipo": "Electrico",
-    "debilidad": "Tierra",
+    "tipo": [
+      {
+      "id": 13,
+      "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/125.png",
     "descripcion": "Es habitual que las centrales eléctricas cuenten con Pokémon de tipo Tierra para hacer frente a los Electabuzz ávidos de electricidad.",
     "altura": "1.1 m",
     "peso": "30.0 Kg",
     "categoria": "Eléctrico",
-    "habilidad": "Elec. Estática\n",
+    "habilidad": [
+      {
+        "name": "Elec. Estática"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1877,14 +3365,22 @@
   {
     "idPokemon": 126,
     "nombre": "Magmar",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/126.png",
     "descripcion": "Abate a sus presas con las llamas que genera y con frecuencia acaba reduciéndolas a carbonilla por accidente.",
     "altura": "1.3 m",
     "peso": "44.5 Kg",
     "categoria": "Escupefuego",
-    "habilidad": "Cuerpo Llama\n",
+    "habilidad": [
+      {
+        "name": "Cuerpo Llama"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1892,14 +3388,25 @@
   {
     "idPokemon": 127,
     "nombre": "Pinsir",
-    "tipo": "Bicho",
-    "debilidad": "Fuego/Volador/Roca",
+    "tipo": [
+      {
+        "id": 7,
+        "name": "Bicho"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/127.png",
     "descripcion": "Los Pinsir se juzgan entre ellos por la robustez de la cornamenta. Cuanto más imponente sea, más agradará a sus congéneres del sexo opuesto.",
     "altura": "1.5 m",
     "peso": "55.0 Kg",
     "categoria": "Escarabajo",
-    "habilidad": "Corte Fuerte\nRompemoldes",
+    "habilidad": [
+      {
+        "name": "Corte Fuerte"
+      },
+      {
+        "name": "Rompemoldes"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1907,14 +3414,25 @@
   {
     "idPokemon": 128,
     "nombre": "Tauros",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/128.png",
     "descripcion": "Cuando elige una presa, embiste sin pensárselo. Este Pokémon es famoso por su carácter violento.",
     "altura": "1.4 m",
     "peso": "88.4 Kg",
     "categoria": "Toro Bravo",
-    "habilidad": "Intimidación\nIrascible",
+    "habilidad": [
+      {
+        "name": "Intimidación"
+      },
+      {
+        "name": "Irascible"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1922,14 +3440,22 @@
   {
     "idPokemon": 129,
     "nombre": "Magikarp",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/129.png",
     "descripcion": "Un Pokémon desvalido y patético. A veces es capaz de saltar alto, pero rara vez más de 2 m.",
     "altura": "0.9 m",
     "peso": "10.0 Kg",
     "categoria": "Pez",
-    "habilidad": "Nado Rápido\n",
+    "habilidad": [
+      {
+        "name": "Nado Rápido"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 130
@@ -1937,14 +3463,26 @@
   {
     "idPokemon": 130,
     "nombre": "Gyarados",
-    "tipo": "Agua/Volador",
-    "debilidad": "Electrico/Roca",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/130.png",
     "descripcion": "Cuando aparece, monta en cólera. No deja de estar furioso hasta que lo destruye todo.",
     "altura": "6.5 m",
     "peso": "235.0 Kg",
     "categoria": "Atrocidad",
-    "habilidad": "Intimidación\n",
+    "habilidad": [
+      {
+        "name": "Intimidación"
+      }
+    ],
     "generacion": 1,
     "child": 129,
     "parent": 0
@@ -1952,14 +3490,29 @@
   {
     "idPokemon": 131,
     "nombre": "Lapras",
-    "tipo": "Agua/Hielo",
-    "debilidad": "Planta/Electrico/Fuego/Roca",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      },
+      {
+        "id": 15,
+        "name": "Hielo"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/131.png",
     "descripcion": "Este Pokémon posee una notable inteligencia y un corazón de oro. Entona un canto melodioso mientras surca el mar.",
     "altura": "2.5 m",
     "peso": "220.0 Kg",
     "categoria": "Transporte",
-    "habilidad": "Absorbe Agua\nCaparazón",
+    "habilidad": [
+      {
+        "name": "Absorbe Agua "
+      },
+      {
+        "name": "Caparazón"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1967,14 +3520,22 @@
   {
     "idPokemon": 132,
     "nombre": "Ditto",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/132.png",
     "descripcion": "Su habilidad para transformarse es perfecta, pero, si se le hace reír, perderá la fuerza y no podrá mantenerse transformado.",
     "altura": "0.3 m",
     "peso": "4.0 Kg",
     "categoria": "Transformación",
-    "habilidad": "Flexibilidad\n",
+    "habilidad": [
+      {
+        "name": "Flexibilidad "
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -1982,14 +3543,25 @@
   {
     "idPokemon": 133,
     "nombre": "Eevee",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/133.png",
     "descripcion": "Es capaz de evolucionar de muchas maneras para adaptarse sin problemas a cualquier medio.",
     "altura": "0.3 m",
     "peso": "6.5 Kg",
     "categoria": "Evolución",
-    "habilidad": "Fuga\nAdaptable",
+    "habilidad": [
+      {
+        "name": "Fuga "
+      },
+      {
+        "name": "Adaptable"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 133
@@ -1997,14 +3569,22 @@
   {
     "idPokemon": 134,
     "nombre": "Vaporeon",
-    "tipo": "Agua",
-    "debilidad": "Planta/Electrico",
+    "tipo": [
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/134.png",
     "descripcion": "Vive cerca del agua. Su cola termina en una aleta parecida a la de un pez, por lo que hay gente que lo confunde con una sirena.",
     "altura": "1.0 m",
     "peso": "29.0 Kg",
     "categoria": "Burbuja",
-    "habilidad": "Absorbe Agua\n",
+    "habilidad": [
+      {
+        "name": "Absorbe Agua"
+      }
+    ],
     "generacion": 1,
     "child": 133,
     "parent": 0
@@ -2012,14 +3592,22 @@
   {
     "idPokemon": 135,
     "nombre": "Jolteon",
-    "tipo": "Electrico",
-    "debilidad": "Tierra",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/135.png",
     "descripcion": "Concentra la débil actividad eléctrica de sus células para lanzar dañinas descargas.",
     "altura": "0.8 m",
     "peso": "24.5 Kg",
     "categoria": "Relámpago",
-    "habilidad": "Absorbe Elec.\n",
+    "habilidad": [
+      {
+        "name": "Absorbe Elec."
+      }
+    ],
     "generacion": 1,
     "child": 133,
     "parent": 0
@@ -2027,14 +3615,22 @@
   {
     "idPokemon": 136,
     "nombre": "Flareon ",
-    "tipo": "Fuego",
-    "debilidad": "Agua/Tierra/Roca",
+    "tipo": [
+      {
+        "id": 10,
+        "name": "Fuego"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/136.png",
     "descripcion": "Calienta el aire que inhala en su saca de fuego y lo expulsa a 1700 ºC.",
     "altura": "0.9 m",
     "peso": "25.0 Kg",
     "categoria": "Llama",
-    "habilidad": "Absorbe Fuego\n",
+    "habilidad": [
+      {
+        "name": "Absorbe Fuego"
+      }
+    ],
     "generacion": 1,
     "child": 133,
     "parent": 0
@@ -2042,14 +3638,25 @@
   {
     "idPokemon": 137,
     "nombre": "Porygon",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/137.png",
     "descripcion": "Se trata del primer Pokémon del mundo creado a partir de códigos de programación gracias al uso de tecnología de vanguardia.",
     "altura": "0.8 m",
     "peso": "36.5 Kg",
     "categoria": "Virtual",
-    "habilidad": "Calco\nDescarga",
+    "habilidad": [
+      {
+        "name": "Calco"
+      },
+      {
+        "name": "Descarga"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2057,14 +3664,29 @@
   {
     "idPokemon": 138,
     "nombre": "Omanyte",
-    "tipo": "Roca/Agua",
-    "debilidad": "Planta/Electrico/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/138.png",
     "descripcion": "Varios ejemplares han escapado o bien han sido liberados tras su restauración, lo que comienza a suscitar una serie de problemas.",
     "altura": "0.4 m",
     "peso": "7.5 Kg",
     "categoria": "Espiral",
-    "habilidad": "Caarazon\nNado Rapido",
+    "habilidad": [
+      {
+        "name": "Caarazon"
+      },
+      {
+        "name": "Nado Rapido"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 139
@@ -2072,14 +3694,29 @@
   {
     "idPokemon": 139,
     "nombre": "Omastar",
-    "tipo": "Roca/Agua",
-    "debilidad": "Planta/Electrico/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/139.png",
     "descripcion": "Se cree que se extinguió porque el excesivo tamaño y peso de su concha le impedían moverse con rapidez para capturar presas.",
     "altura": "1.0 m",
     "peso": "35.0 Kg",
     "categoria": "Espiral",
-    "habilidad": "Caarazon\nNado Rapido",
+    "habilidad": [
+      {
+        "name": "Caarazon"
+      },
+      {
+        "name": "Nado Rapido"
+      }
+    ],
     "generacion": 1,
     "child": 138,
     "parent": 0
@@ -2087,14 +3724,29 @@
   {
     "idPokemon": 140,
     "nombre": "Kabuto",
-    "tipo": "Roca/Agua",
-    "debilidad": "Planta/Electrico/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/140.png",
     "descripcion": "Un Pokémon casi extinto. Cada tres días, muda el caparazón, que se va endureciendo de forma progresiva.",
     "altura": "0.5 m",
     "peso": "11.5 Kg",
     "categoria": "Armazon",
-    "habilidad": "Nado Rapido\nArmadura Batalla",
+    "habilidad": [
+      {
+        "name": "Nado Rapido"
+      },
+      {
+        "name": "Armadura Batalla"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 141
@@ -2102,14 +3754,29 @@
   {
     "idPokemon": 141,
     "nombre": "Kabutops",
-    "tipo": "Roca/Agua",
-    "debilidad": "Planta/Electrico/Lucha/Tierra",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 11,
+        "name": "Agua"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/141.png",
     "descripcion": "Despedaza a las presas que atrapa para sorber sus fluidos y deja los restos para que otros Pokémon den buena cuenta de ellos.",
     "altura": "1.3 m",
     "peso": "40.5 Kg",
     "categoria": "Armazon",
-    "habilidad": "Nado Rapido\nArmadura Batalla",
+    "habilidad": [
+      {
+        "name": "Nado Rapido"
+      },
+      {
+        "name": "Armadura Batalla"
+      }
+    ],
     "generacion": 1,
     "child": 140,
     "parent": 0
@@ -2117,14 +3784,29 @@
   {
     "idPokemon": 142,
     "nombre": "Aerodactyl",
-    "tipo": "Roca/Volador",
-    "debilidad": "Acero/Agua/Electrico/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 6,
+        "name": "Roca"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/142.png",
     "descripcion": "Un feroz Pokémon de la época prehistórica al que no bastan todos los avances tecnológicos actuales para regenerar a la perfección.",
     "altura": "1.8 m",
     "peso": "59.0 Kg",
     "categoria": "Fósil",
-    "habilidad": "Cabeza Roca\nPresión",
+    "habilidad": [
+      {
+        "name": "Cabeza Roca"
+      },
+      {
+        "name": "Presión"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2132,14 +3814,25 @@
   {
     "idPokemon": 143,
     "nombre": "Snorlax",
-    "tipo": "Normal",
-    "debilidad": "Lucha",
+    "tipo": [
+      {
+        "id": 1,
+        "name": "Normal"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/143.png",
     "descripcion": "No se encuentra satisfecho hasta haber ingerido 400 kg de comida cada día. Cuando acaba de comer, se queda dormido.",
     "altura": "2.1 m",
     "peso": "460.0 Kg",
     "categoria": "Dormir",
-    "habilidad": "Sebo\ninmunidad",
+    "habilidad": [
+      {
+        "name": "Sebo"
+      },
+      {
+        "name": "Inmunidad"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2147,14 +3840,26 @@
   {
     "idPokemon": 144,
     "nombre": "Articuno",
-    "tipo": "Hielo/Volador",
-    "debilidad": "Acero/Fuego/Electrico/Roca",
+    "tipo": [
+      {
+        "id": 15,
+        "name": "Hielo"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/144.png",
     "descripcion": "Se dice que sus bellas alas azules se componen de hielo. Vuela en torno a las montañas nevadas con su larga cola al viento.",
     "altura": "1.7 m",
     "peso": "55.4 Kg",
     "categoria": "Congelar",
-    "habilidad": "Presión\n",
+    "habilidad": [
+      {
+        "name": "Presión"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2162,14 +3867,26 @@
   {
     "idPokemon": 145,
     "nombre": "Zapdos",
-    "tipo": "Electrico/Volador",
-    "debilidad": "Hielo/Roca",
+    "tipo": [
+      {
+        "id": 13,
+        "name": "Eléctrico"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/145.png",
     "descripcion": "Posee el poder de controlar la electricidad a su antojo. Según la creencia popular, anida oculto en oscuros nubarrones de tormenta.",
     "altura": "1.6 m",
     "peso": "52.6 Kg",
     "categoria": "Eléctrico",
-    "habilidad": "Presión\n",
+    "habilidad": [
+      {
+        "name": "Presión"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2177,14 +3894,26 @@
   {
     "idPokemon": 146,
     "nombre": "Moltres",
-    "tipo": "Fuego/Volador",
-    "debilidad": "Agua/Electrico/Roca",
+    "tipo":   [
+    {
+      "id": 10,
+      "name": "Fuego"
+    },
+    {
+      "id": 3,
+      "name": "Volador"
+    }
+  ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/146.png",
     "descripcion": "Una de las aves legendarias. Al batir las alas, las llamas que las envuelven emiten un hermoso fulgor rojo.",
     "altura": "2.0 m",
     "peso": "60.0 Kg",
     "categoria": "Llama",
-    "habilidad": "Presión\n",
+    "habilidad": [
+      {
+        "name": "Presión"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2192,14 +3921,22 @@
   {
     "idPokemon": 147,
     "nombre": "Dratini",
-    "tipo": "Dragon",
-    "debilidad": "Hada/Hielo/Dragon",
+    "tipo": [
+      {
+        "id": 16,
+        "name": "Dragón"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/147.png",
     "descripcion": "Durante la etapa de crecimiento, muda muchas veces de piel y se protege mediante una cascada.",
     "altura": "1.8 m",
     "peso": "3.3 Kg",
     "categoria": "Dragón",
-    "habilidad": "Mudar\n",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 148
@@ -2207,14 +3944,22 @@
   {
     "idPokemon": 148,
     "nombre": "Dragonair",
-    "tipo": "Dragon",
-    "debilidad": "Hada/Hielo/Dragon",
+    "tipo": [
+      {
+        "id": 16,
+        "name": "Dragón"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/148.png",
     "descripcion": "Dicen que, cuando su cuerpo desprende un aura, el tiempo empieza a cambiar inmediatamente.",
     "altura": "4.0 m",
     "peso": "16.5 Kg",
     "categoria": "Dragón",
-    "habilidad": "Mudar\n",
+    "habilidad": [
+      {
+        "name": "Mudar"
+      }
+    ],
     "generacion": 1,
     "child": 147,
     "parent": 149
@@ -2222,14 +3967,26 @@
   {
     "idPokemon": 149,
     "nombre": "Dragonite",
-    "tipo": "Dragon/Volador",
-    "debilidad": "Hada/Dragon/Hielo/Roca",
+    "tipo": [
+      {
+        "id": 16,
+        "name": "Dragón"
+      },
+      {
+        "id": 3,
+        "name": "Volador"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/149.png",
     "descripcion": "Dicen que viven en una isla en algún lugar del océano que solo ellos habitan.",
     "altura": "2.2 m",
     "peso": "210.0 Kg",
     "categoria": "Dragón",
-    "habilidad": "Fuerza Mental\n",
+    "habilidad": [
+      {
+        "name": "Fuerza Mental"
+      }
+    ],
     "generacion": 1,
     "child": 148,
     "parent": 0
@@ -2237,14 +3994,22 @@
   {
     "idPokemon": 150,
     "nombre": "Mewtwo",
-    "tipo": "Písquico",
-    "debilidad": "Fantasma/Siniestro/Bicho",
+    "tipo": [
+      {
+        "id": 14,
+        "name": "Písquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/150.png",
     "descripcion": "Su ADN es casi el mismo que el de Mew. Sin embargo, su tamaño y carácter son muy diferentes.",
     "altura": "2,0 m",
     "peso": "122,0 Kg",
     "categoria": "Genetico",
-    "habilidad": "Presión",
+    "habilidad": [
+      {
+        "name": "Presión"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
@@ -2252,14 +4017,22 @@
   {
     "idPokemon": 151,
     "nombre": "Mew",
-    "tipo": "Písquico",
-    "debilidad": "Fantasma/Siniestro/Bicho",
+    "tipo":  [
+      {
+        "id": 14,
+        "name": "Písquico"
+      }
+    ],
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/151.png",
     "descripcion": "Si se observa a través de un microscopio, puede distinguirse cuán corto, fino y delicado es el pelaje de este Pokémon.",
     "altura": "0,4 m",
     "peso": "4,0 Kg",
     "categoria": "Nueva Especie",
-    "habilidad": "Sincronía",
+    "habilidad": [
+      {
+        "name": "Sincronia"
+      }
+    ],
     "generacion": 1,
     "child": 0,
     "parent": 0
