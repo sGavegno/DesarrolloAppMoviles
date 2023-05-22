@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,9 @@ import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputDialogListener {
     private lateinit var imgTitulo : ImageView
@@ -36,7 +40,6 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     lateinit var vista : View
 
     private var db: AppDatabase? = null
-    private var userDao: UserDao? = null
     private var pokemonDao: PokemonDao? = null
     private var pokemonUserDao: PokemonUserDao? = null
 
@@ -60,14 +63,15 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         setInputDialogListener(this)
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getInt("UserID", 0)
+        val idUser = sharedPref?.getString("UserID", "")
         val posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)
-
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
+        val dbFb = Firebase.firestore
+        var userFb : DocumentSnapshot? = null
+
         db = AppDatabase.getInstance(vista.context)
-        userDao = db?.userDao()
         pokemonDao = db?.pokemonDao()
         pokemonUserDao = db?.pokemonUserDao()
 
@@ -75,7 +79,22 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         pokemonUserDao?.fetchAllPokemonUser()
 
         // Dummy call to pre-populate db
-        val user = userDao?.fetchUserById(idUser)
+        //Buscar si exciste en la base de datos
+        dbFb.collection("user")
+            .whereEqualTo("id", idUser.toString())
+            .get()
+            .addOnSuccessListener { documents ->
+                if(!documents.isEmpty){
+                    Snackbar.make(vista, "Usuario ya registrado", Snackbar.LENGTH_SHORT).show()
+                    userFb = documents.documents[0]
+                    for (document in documents) {
+                        Log.d("Firebase", "${document.id} => ${document.data}")
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Firebase", "Error getting documents: ", exception)
+            }
 
         val pokemonList = pokemonDao?.fetchAllPokemon()
 
@@ -92,7 +111,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
             startActivity(intent)
         }
 
-        if(user!!.permisos == 1){
+        val permisoUser = userFb?.getString("permisos")?.toInt()?: 0
+        if(permisoUser == 1){
             // Solo acciones para usuarios con permiso de supervisor Falta agregar el boton para incluir pokemons
             btnPokemdexAdd.setOnClickListener{
                 onClick()
@@ -168,11 +188,11 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     override fun onButtonClick(pokemon: Pokemons) {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getInt("UserID", 0)
-        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser!!, pokemon.idPokemon)
+        val idUser = sharedPref?.getString("UserID", "")
+        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser.toString(), pokemon.idPokemon)
         if(checkPokemonUser == null)
         {
-            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser!!,pokemon.idPokemon,pokemon.nombre,0,pokemon.altura,pokemon.peso,pokemon.descripcion))
+            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser.toString(),pokemon.idPokemon,pokemon.nombre,0,pokemon.altura,pokemon.peso,pokemon.descripcion))
             Snackbar.make(vista, "${pokemon.nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
         } else {
             Snackbar.make(vista, "${pokemon.nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()

@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.text.method.DigitsKeyListener
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -22,13 +22,14 @@ import com.example.apppokedex.adapters.EvolucionesAdapter
 import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
-import com.example.apppokedex.database.UserDao
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FragmentPokedexData : Fragment() {
 
     private var db: AppDatabase? = null
-    private var userDao: UserDao? = null
     private var pokemonDao: PokemonDao? = null
     private var pokemonUserDao: PokemonUserDao? = null
 
@@ -75,10 +76,9 @@ class FragmentPokedexData : Fragment() {
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getInt("UserID", 0)
+        val idUser = sharedPref?.getString("UserID", "")
 
         db = AppDatabase.getInstance(vista.context)
-        userDao = db?.userDao()
         pokemonDao = db?.pokemonDao()
         pokemonUserDao = db?.pokemonUserDao()
 
@@ -133,9 +133,9 @@ class FragmentPokedexData : Fragment() {
 
             adapter = EvolucionesAdapter(PokemonEvolucionList){ position ->
                 //Guardar datos actualizados
-                val idPokemon = PokemonEvolucionList[position]
+                val idPoke = PokemonEvolucionList[position]
                 val action = FragmentPokedexDataDirections.actionFragmentPokedexDataSelf(
-                    idPokemon)
+                    idPoke)
                 findNavController().navigate(action)            //accion de cambiar de pantalla
             }
             val layoutManager = LinearLayoutManager(context)
@@ -144,12 +144,25 @@ class FragmentPokedexData : Fragment() {
 
             //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
             recEvoluciones.adapter = adapter
-
         }
 
-        val user = userDao?.fetchUserById(idUser)
-        if(user!!.permisos == 1){       // Solo acciones para usuarios con permismo de supervisor Falta agregar el boton para incluir pokemons
+        val dbFb = Firebase.firestore
+        var userFb : DocumentSnapshot? = null
 
+        dbFb.collection("user")
+            .whereEqualTo("id", idUser.toString())
+            .get()
+            .addOnSuccessListener { documents ->
+                if(!documents.isEmpty){
+                    userFb = documents.documents[0]
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Firebase", "Error getting documents: ", exception)
+            }
+
+        val permisoUser = userFb?.getString("permisos")?.toInt()?: 0
+        if(permisoUser == 1){       // Solo acciones para usuarios con permismo de supervisor Falta agregar el boton para incluir pokemons
             labelName.setOnClickListener {
                 showAlertDialogName(pokemonDao,idPokemon)
             }

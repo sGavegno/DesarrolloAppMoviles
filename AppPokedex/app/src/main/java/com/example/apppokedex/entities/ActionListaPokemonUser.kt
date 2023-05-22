@@ -9,7 +9,7 @@ import com.example.apppokedex.adapters.PokemonUserAdapter
 import com.example.apppokedex.database.PokemonUserDao
 import com.google.android.material.internal.ContextUtils.getActivity
 
-open class ActionListaPokemonUser(private val adapter: PokemonUserAdapter, private val dao: PokemonUserDao?, private val pokeList: MutableList<Pokemons?>?, private val idUser: Int?) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)  {
+open class ActionListaPokemonUser(private val adapter: PokemonUserAdapter, private val dao: PokemonUserDao?, private val pokeList: MutableList<Pokemons?>?, private val idUser: String?) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)  {
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         // No implementamos el movimiento

@@ -12,24 +12,16 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.adapters.EvolucionesAdapter
 import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
-import com.example.apppokedex.database.UserDao
-import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentPokemonData : Fragment() {
 
     private var db: AppDatabase? = null
-    private var userDao: UserDao? = null
     private var pokemonDao: PokemonDao? = null
     private var pokemonUserDao: PokemonUserDao? = null
 
@@ -40,14 +32,7 @@ class FragmentPokemonData : Fragment() {
     private lateinit var labelTipo : TextView
     private lateinit var labelDebilidad : TextView
     private lateinit var imgPokemon : ImageView
-    private lateinit var labelDescripcion : TextView
-    private lateinit var labelAltura : TextView
-    private lateinit var labelPeso : TextView
-    private lateinit var labelCategoria: TextView
     private lateinit var labelHabilidad : TextView
-    private lateinit var txtEvolucion : TextView
-    private lateinit var recEvoluciones : RecyclerView
-    private lateinit var adapter: EvolucionesAdapter
 
     lateinit var vista : View
 
@@ -56,20 +41,15 @@ class FragmentPokemonData : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_pokemon_data, container, false)
-        labelName = vista.findViewById(R.id.txtPokeName)
+
+        labelLvl = vista.findViewById(R.id.txtPokeLvlDato)
         labelMote = vista.findViewById(R.id.txtPokeMoteDato)
         labelId = vista.findViewById(R.id.txtPokeIdDato)
-        labelLvl = vista.findViewById(R.id.txtPokeLvlDato)
+        labelName = vista.findViewById(R.id.txtPokeName)
         labelTipo = vista.findViewById(R.id.txtPokeTipoDato)
-        labelDebilidad = vista.findViewById(R.id.txtPokeDebilidadDato)
-        labelDescripcion = vista.findViewById(R.id.txtPokeDescripcion)
-        imgPokemon = vista.findViewById(R.id.imgPokeDato)
-        labelAltura = vista.findViewById(R.id.txtPokeAlturaDato)
-        labelPeso = vista.findViewById(R.id.txtPokePesoDato)
-        labelCategoria = vista.findViewById(R.id.txtPokeCategoriaDato)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
-        txtEvolucion = vista.findViewById(R.id.txtPokeEvolucion)
-        recEvoluciones = vista.findViewById(R.id.listaEvolucion)
+        labelDebilidad = vista.findViewById(R.id.txtPokeDebilidadDato)
+        imgPokemon = vista.findViewById(R.id.imgPokeDato)
 
         return vista
     }
@@ -79,98 +59,39 @@ class FragmentPokemonData : Fragment() {
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getInt("UserID", 0)
+        val idUser = sharedPref?.getString("UserID", "")
 
         db = AppDatabase.getInstance(vista.context)
-        userDao = db?.userDao()
         pokemonDao = db?.pokemonDao()
         pokemonUserDao = db?.pokemonUserDao()
 
-        val PokemonEvolucionList: MutableList<Int> = mutableListOf()
-
         val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
         val pokemon = pokemonDao?.fetchPokemonByIdPokemon(idPokemon)
-        val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
+        val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser.toString(),idPokemon)
 
         if(pokemon != null && pokemonUser != null)
         {
-            labelName.text = pokemon.nombre
+            labelLvl.text = pokemonUser.nivel.toString()
             labelMote.text = pokemonUser.mote
             labelId.text =pokemon.idPokemon.toString()
-            labelLvl.text = pokemonUser.nivel.toString()
+            labelName.text = pokemon.nombre
             labelTipo.text =pokemon.tipo
-            labelDebilidad.text = pokemon.debilidad
-            labelDescripcion.text = pokemonUser.descripcion
-            labelAltura.text = pokemonUser.altura
-            labelPeso.text = pokemonUser.peso
-            labelCategoria.text = pokemon.categoria
             labelHabilidad.text = pokemon.habilidad
+            labelDebilidad.text = pokemon.debilidad
 
             Glide.with(vista).load(pokemon.imgURL).into(imgPokemon)
 
-            if(pokemon.child != 0) {
-                val PokemonChild = pokemonDao?.fetchPokemonByIdPokemon(pokemon.child)
-                if (PokemonChild != null && PokemonChild.child != 0) {
-                    PokemonEvolucionList.add(PokemonChild.child)
-                }
-                PokemonEvolucionList.add(pokemon.child)
-            }
-            PokemonEvolucionList.add(pokemon.idPokemon)
-            if(pokemon.parent != 0) {
-                if(pokemon.parent != pokemon.idPokemon){
-                    PokemonEvolucionList.add(pokemon.parent)
-                    val PokemonParent = pokemonDao?.fetchPokemonByIdPokemon(pokemon.parent)
-                    if (PokemonParent != null && PokemonParent.parent != 0) {
-                        PokemonEvolucionList.add(PokemonParent.parent)
-                    }
-                } else {
-                    //Tiene más de una segunda evolucion
-                    val pokemonChild = pokemonDao?.fetchPokemonByChild(pokemon.idPokemon)
-                    if(pokemonChild != null)
-                    {
-                        for(poke in pokemonChild){
-                            poke?.let { PokemonEvolucionList.add(it.idPokemon) }
-                        }
-                    }
-                }
-            }
 
-            labelAltura.setOnClickListener {
-                showAlertDialogAltura(pokemonUserDao,idUser,idPokemon)
-            }
-            labelPeso.setOnClickListener {
-                showAlertDialogPeso(pokemonUserDao,idUser,idPokemon)
-            }
             labelMote.setOnClickListener {
-                showAlertDialogMote(pokemonUserDao,idUser,idPokemon)
+                showAlertDialogMote(pokemonUserDao,idUser.toString(),idPokemon)
             }
             labelLvl.setOnClickListener {
-                showAlertDialogLvl(pokemonUserDao,idUser,idPokemon)
+                showAlertDialogLvl(pokemonUserDao,idUser.toString(),idPokemon)
             }
-            labelDescripcion.setOnClickListener {
-                showAlertDialogDescripcion(pokemonUserDao,idUser,idPokemon)
-            }
-
-            adapter = EvolucionesAdapter(PokemonEvolucionList){ position ->
-                val idPokemon = PokemonEvolucionList[position]
-                val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
-                if(pokemonUser != null)
-                {
-                    val action = FragmentPokemonDataDirections.actionFragmentPokemonDataSelf(
-                        idPokemon)
-                    findNavController().navigate(action)
-                } else {
-                    Snackbar.make(vista, "El Pokemon no esta en la lista", Snackbar.LENGTH_SHORT).show()
-                }
-            }
-            val layoutManager = LinearLayoutManager(context)
-            layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-            recEvoluciones.layoutManager = layoutManager
-            recEvoluciones.adapter = adapter
         }
     }
 
-    private fun showAlertDialogMote(pokemonUserDao: PokemonUserDao?, idUser: Int?, idPokemon: Int) {
+    private fun showAlertDialogMote(pokemonUserDao: PokemonUserDao?, idUser: String?, idPokemon: Int) {
         // Crear un EditText para obtener el nuevo texto
         val editText = EditText(requireContext())
         editText.setText(labelMote.text)
@@ -199,7 +120,7 @@ class FragmentPokemonData : Fragment() {
         alertDialog.show()
     }
 
-    private fun showAlertDialogLvl(pokemonUserDao: PokemonUserDao?, idUser: Int?, idPokemon: Int) {
+    private fun showAlertDialogLvl(pokemonUserDao: PokemonUserDao?, idUser: String?, idPokemon: Int) {
         // Crear un EditText para obtener el nuevo texto
         val editText = EditText(requireContext())
         editText.setText(labelLvl.text)
@@ -220,90 +141,6 @@ class FragmentPokemonData : Fragment() {
             val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
             if (pokemonUser != null) {
                 pokemonUser.nivel = newText.toInt()
-                pokemonUserDao.updatePokemonUser(pokemonUser)
-            }
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-
-    private fun showAlertDialogDescripcion(pokemonUserDao: PokemonUserDao?, idUser: Int?, idPokemon: Int) {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelDescripcion.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Descripcion")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelDescripcion.text = newText
-
-            val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
-            if (pokemonUser != null) {
-                pokemonUser.descripcion = newText
-                pokemonUserDao.updatePokemonUser(pokemonUser)
-            }
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-    private fun showAlertDialogAltura(pokemonUserDao: PokemonUserDao?, idUser: Int?, idPokemon: Int) {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelAltura.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Altura")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelAltura.text = newText
-
-            val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
-            if (pokemonUser != null) {
-                pokemonUser.altura = newText
-                pokemonUserDao.updatePokemonUser(pokemonUser)
-            }
-            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-        }
-        // Agregar un botón "Cancelar" al cuadro de texto
-        alertDialog.setNegativeButton("Cancelar", null)
-        // Mostrar el cuadro de texto
-        alertDialog.show()
-    }
-    private fun showAlertDialogPeso(pokemonUserDao: PokemonUserDao?, idUser: Int?, idPokemon: Int) {
-        // Crear un EditText para obtener el nuevo texto
-        val editText = EditText(requireContext())
-        editText.setText(labelPeso.text)
-
-        // Crear un cuadro de texto utilizando un AlertDialog.Builder
-        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
-        alertDialog.setTitle("Modificar Peso")
-        alertDialog.setView(editText)
-
-        // Agregar un botón "Aceptar" al cuadro de texto
-        alertDialog.setPositiveButton("Aceptar") { _, _ ->
-            // Obtener el nuevo texto del EditText y establecerlo en el TextView
-            val newText = editText.text.toString()
-            labelPeso.text = newText
-            val pokemonUser = pokemonUserDao?.fetchPokemonUserById(idUser!!,idPokemon)
-            if (pokemonUser != null) {
-                pokemonUser.peso = newText
                 pokemonUserDao.updatePokemonUser(pokemonUser)
             }
             Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()

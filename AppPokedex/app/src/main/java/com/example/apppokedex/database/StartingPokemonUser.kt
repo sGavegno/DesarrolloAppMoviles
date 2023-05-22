@@ -32,7 +32,7 @@ class StartingPokemonUser(private val context: Context): RoomDatabase.Callback()
                 val item = pokemonsUser.getJSONObject(i)
                 val pokemonUser = PokemonUser(
                     id = 0,
-                    idUser = item.getInt("idUser"),
+                    idUser = item.getString("idUser"),
                     idPokemon = item.getInt("idPokemon"),
                     mote = item.getString("mote"),
                     nivel = item.getInt("nivel"),

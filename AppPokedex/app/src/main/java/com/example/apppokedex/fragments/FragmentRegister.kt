@@ -3,6 +3,7 @@ package com.example.apppokedex.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,9 @@ import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.UserDao
-import com.example.apppokedex.entities.User
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FragmentRegister : Fragment() {
     private var db: AppDatabase? = null
@@ -42,6 +44,9 @@ class FragmentRegister : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val dbFb = Firebase.firestore
+        var userFb : String? = null
+
         db = AppDatabase.getInstance(vista.context)
         userDao = db?.userDao()
 
@@ -54,32 +59,61 @@ class FragmentRegister : Fragment() {
             val inputTxtPass : String = txtPassword.text.toString()
             val inputTxtPassConf : String = txtPasswordConf.text.toString()
 
-            if(inputTxtPass == inputTxtPassConf){
+            if(inputTxtPass == inputTxtPassConf) {
                 //Buscar si exciste en la base de datos
-                val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
-
-                if (userFind == null) {
-                    userDao?.insertUser(User(0, inputTxtUserName, inputTxtPass, "", "", "", "","",0))
-                    val user = userDao?.fetchUserByUserName(inputTxtUserName)
-                    //Cargo el id del usuario registrado
-                    val sharedPref = context?.getSharedPreferences(
-                        getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-                    if (sharedPref != null) {
-                        with (sharedPref.edit()) {
-                            user?.let { it1 -> putInt("UserID", it1.id) }
-                            commit()
+                dbFb.collection("user")
+                    .whereEqualTo("userName", inputTxtUserName)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        if(documents.isEmpty){
+                            // Create a new user with a first and last name
+                            val user = hashMapOf(
+                                "userName" to inputTxtUserName,
+                                "password" to inputTxtPass,
+                                "name" to "name",
+                                "lastName" to "name",
+                                "email" to "email",
+                                "telefono" to "telefono",
+                                "direccion" to "direccion",
+                                "permisos" to 0
+                            )
+                            // Add a new document with a generated ID
+                            dbFb.collection("user")
+                                .add(user)
+                                .addOnSuccessListener { documentReference ->
+                                    Log.d("Firebase", "DocumentSnapshot added with ID: ${documentReference.id}")
+                                    userFb = documentReference.id
+                                    dbFb.collection("user").document(userFb!!)
+                                        .update("id",userFb)
+                                        .addOnSuccessListener { Log.d("Firebase", "DocumentSnapshot successfully updated!")
+                                            //Cargo el id del usuario registrado
+                                            val sharedPref = context?.getSharedPreferences(
+                                                getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                                            if (sharedPref != null) {
+                                                with (sharedPref.edit()) {
+                                                    putString("UserID", userFb)
+                                                    commit()
+                                                }
+                                            }
+                                            val intent = Intent(activity, activity_home::class.java)
+                                            startActivity(intent)
+                                        }
+                                        .addOnFailureListener { e -> Log.w("Firebase", "Error updating document", e) }
+                                }
+                                .addOnFailureListener { e -> Log.w("Firebase", "Error adding document", e) }
+                        }
+                        else
+                        {
+                            Snackbar.make(vista, "Usuario ya registrado", Snackbar.LENGTH_SHORT).show()
+                            for (document in documents) {
+                                Log.d("Firebase", "${document.id} => ${document.data}")
+                            }
                         }
                     }
-
-                    val intent = Intent(activity, activity_home::class.java)
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(vista, "Usuario ya registrado", Snackbar.LENGTH_SHORT).show()
-                }
+                    .addOnFailureListener { exception -> Log.w("Firebase", "Error getting documents: ", exception) }
             } else {
-                Snackbar.make(vista, "La contraseña no coinide", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(vista, "La contraseña no coincide", Snackbar.LENGTH_SHORT).show()
             }
-
         }
     }
 }

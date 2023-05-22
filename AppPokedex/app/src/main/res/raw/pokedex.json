@@ -466,7 +466,7 @@
   },
   {
     "idPokemon": 32,
-    "nombre": "Nidoran ♂",
+      "nombre": "Nidoran ♂",
     "tipo": "Veneno",
     "debilidad": "Fuego/Psiquico/Volador/Hielo",
     "imgURL": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/032.png",

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "pokemonuser")
 class PokemonUser(
     id : Int,
-    idUser : Int,
+    idUser : String,
     idPokemon : Int,
     mote : String,
     nivel : Int,
@@ -21,7 +21,7 @@ class PokemonUser(
     var id: Int
 
     @ColumnInfo(name = "idUser")
-    var idUser: Int
+    var idUser: String
 
     @ColumnInfo(name = "idPokemon")
     var idPokemon: Int

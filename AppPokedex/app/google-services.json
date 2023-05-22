@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "383462085810",
+    "project_id": "utnmovil-be4db",
+    "storage_bucket": "utnmovil-be4db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383462085810:android:0b326aec87c3c78c62a5ab",
+        "android_client_info": {
+          "package_name": "com.example.apppokedex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383462085810-betc2a2hcbu1rfh50js6kegqiv4j1aed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjglJhwp9h3kbm_K0KULFwlq7853OachU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383462085810-betc2a2hcbu1rfh50js6kegqiv4j1aed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

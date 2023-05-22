@@ -55,7 +55,7 @@ class FragmentPc : Fragment(), PokemonUserAdapter.PokemonUserAdapterListener {
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getInt("UserID", 0)
+        val idUser = sharedPref?.getString("UserID", "")
         val posPc = sharedPref?.getInt("pos_recycler_view_pc", 0)
 
         db = AppDatabase.getInstance(vista.context)

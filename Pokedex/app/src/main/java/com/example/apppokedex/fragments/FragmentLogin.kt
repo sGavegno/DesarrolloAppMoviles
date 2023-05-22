@@ -25,7 +25,7 @@ class FragmentLogin : Fragment() {
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
 
-    val viewModel: FragmentLoginViewModel by viewModels()
+//    val viewModel: FragmentLoginViewModel by viewModels()
 
     private lateinit var imgTitulo : ImageView
     private lateinit var inputTxtUser : EditText
@@ -67,12 +67,12 @@ class FragmentLogin : Fragment() {
 
             val userFind = userDao?.fetchUserByUserName(inputTxtUserName)
 
-            viewModel.user.observe(this) { user ->
-                Log.d("TAG", "user observe")
-                if (user != null){
-
-                }
-            }
+//            viewModel.user.observe(this) { user ->
+//                Log.d("TAG", "user observe")
+//                if (user != null){
+//
+//                }
+//            }
 
             if (userFind != null) {
                 if(userFind.password == inputTxtUserPass){

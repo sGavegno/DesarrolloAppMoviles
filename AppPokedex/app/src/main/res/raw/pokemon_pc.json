@@ -1,20 +1,26 @@
 [
   {
-    "idUser": 1,
+    "idUser": "0",
     "idPokemon": 4,
     "mote": "Pepe",
-    "nivel": 42,
-    "altura": "0.7 m",
-    "peso": "10.0 Kg",
-    "descripcion": "Lagarto"
+    "nivel": 9,
+    "objeto": "",
+    "sexo": "Macho",
+    "ataque1": "Arañazo",
+    "ataque2": "Gruñido",
+    "ataque3": "Ascuas",
+    "ataque4": ""
   },
   {
-    "idUser": 1,
+    "idUser": "1",
     "idPokemon": 6,
     "mote": "Pepe",
     "nivel": 90,
-    "altura": "1.9 m",
-    "peso": "90.0 Kg",
-    "descripcion": "Dragon"
+    "objeto": "",
+    "sexo": "Hembra",
+    "ataque1": "Arañazo",
+    "ataque2": "Gruñido",
+    "ataque3": "Ascuas",
+    "ataque4": ""
   }
 ]

@@ -17,13 +17,13 @@ class FragmentLoginViewModel : ViewModel() {
     lateinit var user : LiveData<User>
     fun getUserData(userName : String) {
 
-        db = AppDatabase.getInstance()
-        userDao = db?.userDao()
+        //db = AppDatabase.getInstance()
+        //userDao = db?.userDao()
 
         // Dummy call to pre-populate db
-        userDao?.fetchAllUsers()
+        //userDao?.fetchAllUsers()
 
-        val userAux = userDao?.fetchUserByUserName(userName)
+        //val userAux = userDao?.fetchUserByUserName(userName)
 
     }
 
