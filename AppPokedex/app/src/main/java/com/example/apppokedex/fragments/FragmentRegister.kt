@@ -19,8 +19,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class FragmentRegister : Fragment() {
-    private var db: AppDatabase? = null
-    private var userDao: UserDao? = null
 
     lateinit var vista : View
 
@@ -46,12 +44,6 @@ class FragmentRegister : Fragment() {
 
         val dbFb = Firebase.firestore
         var userFb : String? = null
-
-        db = AppDatabase.getInstance(vista.context)
-        userDao = db?.userDao()
-
-        // Dummy call to pre-populate db
-        userDao?.fetchAllUsers()
 
         btnSingIn.setOnClickListener{
             //Analizo si los paraetros estan en la base de datos

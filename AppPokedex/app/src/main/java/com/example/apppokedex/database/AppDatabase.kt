@@ -6,11 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
-import com.example.apppokedex.entities.User
 
-@Database(entities = [User::class, Pokemons::class, PokemonUser::class], version = 1, exportSchema = false)
+@Database(entities = [Pokemons::class, PokemonUser::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase()  {
-    abstract fun userDao(): UserDao
     abstract fun pokemonDao(): PokemonDao
     abstract fun pokemonUserDao(): PokemonUserDao
 
@@ -33,7 +31,6 @@ abstract class AppDatabase : RoomDatabase()  {
                         AppDatabase::class.java,
                         "myDB"
                     )
-                        .addCallback(StartingUsers(context))
                         .addCallback(StartingPokemon(context))
                         .addCallback(StartingPokemonUser(context))
                         .fallbackToDestructiveMigration()
