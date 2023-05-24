@@ -3,7 +3,6 @@ package com.example.apppokedex.fragments
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.apppokedex.entities.Users
 import com.example.apppokedex.entities.Usuarios
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -19,7 +18,7 @@ class FragmentLoginViewModel @Inject constructor(): ViewModel() {
     fun getUser(userName:String, password:String){
         state.postValue(State.LOADING)
         val dbFb = Firebase.firestore
-        var users : Usuarios = Usuarios( "", "", "", "", "", "", "", "", false)
+        var users = Usuarios( "", "", "", "", "", "", "", "", false)
 
         dbFb.collection("user")
             .whereEqualTo("userName", userName)

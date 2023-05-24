@@ -23,6 +23,11 @@ import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.database.*
 import com.example.apppokedex.entities.ActionLista
+import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonDetalle
+import com.example.apppokedex.entities.PokemonHabilidad
+import com.example.apppokedex.entities.PokemonStats
+import com.example.apppokedex.entities.PokemonTipo
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
