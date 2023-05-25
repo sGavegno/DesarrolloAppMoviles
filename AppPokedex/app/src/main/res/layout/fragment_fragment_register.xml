@@ -12,7 +12,7 @@
         android:id="@+id/txtEditRegPasswordConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Confirmar Password"
         android:inputType="textPassword"
@@ -27,30 +27,30 @@
         android:id="@+id/txtEditRegUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="User Name"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/txtEditRegPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditRegUserName"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEditRegUserName"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditRegUserName" />
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegEmail" />
 
     <Button
         android:id="@+id/btnRegistro"
@@ -67,9 +67,50 @@
         android:id="@+id/imageView"
         android:layout_width="339dp"
         android:layout_height="107dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtEditRegUserName"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/pokedex_logo" />
+
+    <EditText
+        android:id="@+id/txtEditRegNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegUserName"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegUserName"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegUserName" />
+
+    <EditText
+        android:id="@+id/txtEditRegApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="text"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegNombre"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegNombre"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegNombre" />
+
+    <EditText
+        android:id="@+id/txtEditRegEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegApellido"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegApellido"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegApellido" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

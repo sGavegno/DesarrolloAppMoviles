@@ -8,7 +8,7 @@ class EvolucionesDetalle(
     belleza: Int?,
     afecto: Int?,
     horaDelDia: String,
-    evolucionItem: Items?
+    evolucionItem: PokemonItems?
 ){
 
     val idTipoEvolucion: Int
@@ -18,7 +18,7 @@ class EvolucionesDetalle(
     val belleza: Int?
     val afecto: Int?
     val horaDelDia: String
-    val evolucionItem: Items?
+    val evolucionItem: PokemonItems?
 
     init {
         this.idTipoEvolucion = idTipoEvolucion

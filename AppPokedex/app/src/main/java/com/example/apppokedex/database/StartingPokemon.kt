@@ -6,7 +6,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.apppokedex.R
 import com.example.apppokedex.entities.Pokemons
-import com.example.apppokedex.entities.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

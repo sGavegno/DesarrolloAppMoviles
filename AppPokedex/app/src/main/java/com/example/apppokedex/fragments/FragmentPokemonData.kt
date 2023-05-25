@@ -18,7 +18,9 @@ import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentPokemonData : Fragment() {
 
     private var db: AppDatabase? = null
@@ -48,7 +50,7 @@ class FragmentPokemonData : Fragment() {
         labelName = vista.findViewById(R.id.txtPokeName)
         labelTipo = vista.findViewById(R.id.txtPokeTipoDato)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
-        labelDebilidad = vista.findViewById(R.id.txtPokeDebilidadDato)
+//        labelDebilidad = vista.findViewById(R.id.txtPokeDebilidadDato)
         imgPokemon = vista.findViewById(R.id.imgPokeDato)
 
         return vista

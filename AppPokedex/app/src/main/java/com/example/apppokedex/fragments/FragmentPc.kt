@@ -10,7 +10,6 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
@@ -18,14 +17,14 @@ import com.example.apppokedex.adapters.PokemonUserAdapter
 import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.database.PokemonUserDao
-import com.example.apppokedex.database.UserDao
 import com.example.apppokedex.entities.ActionListaPokemonUser
 import com.example.apppokedex.entities.Pokemons
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentPc : Fragment(), PokemonUserAdapter.PokemonUserAdapterListener {
 
     private var db: AppDatabase? = null
-    private var userDao: UserDao? = null
     private var pokemonDao: PokemonDao? = null
     private var pokemonUserDao: PokemonUserDao? = null
 
@@ -59,7 +58,6 @@ class FragmentPc : Fragment(), PokemonUserAdapter.PokemonUserAdapterListener {
         val posPc = sharedPref?.getInt("pos_recycler_view_pc", 0)
 
         db = AppDatabase.getInstance(vista.context)
-        userDao = db?.userDao()
         pokemonDao = db?.pokemonDao()
         pokemonUserDao = db?.pokemonUserDao()
 

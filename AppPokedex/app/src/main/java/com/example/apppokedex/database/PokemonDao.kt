@@ -7,8 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.apppokedex.entities.Pokemons
-import com.example.apppokedex.entities.PokemonUser
-import com.example.apppokedex.entities.User
 
 @Dao
 interface PokemonDao {

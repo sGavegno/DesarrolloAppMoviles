@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
+import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,6 +70,9 @@ class FragmentLogin : Fragment() {
                 }
                 State.LOADING ->{
                     Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                }
+                null ->{
+
                 }
             }
         }

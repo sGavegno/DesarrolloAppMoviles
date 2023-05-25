@@ -9,22 +9,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
-import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.UserDao
+import com.example.apppokedex.entities.State
+import com.example.apppokedex.entities.Usuarios
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentRegister : Fragment() {
+
+    val viewModel: FragmentRegisterViewModel by viewModels()
 
     lateinit var vista : View
 
-    lateinit var txtUserName : TextView
-    lateinit var txtPassword : TextView
-    lateinit var txtPasswordConf : TextView
+    lateinit var txtUserName : EditText
+    lateinit var txtNombre : EditText
+    lateinit var txtApellido : EditText
+    lateinit var txtEmail : EditText
+    lateinit var txtPassword : EditText
+    lateinit var txtPasswordConf : EditText
     lateinit var btnSingIn : Button
 
     override fun onCreateView(
@@ -33,6 +42,9 @@ class FragmentRegister : Fragment() {
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_register, container, false)
         txtUserName = vista.findViewById(R.id.txtEditRegUserName)
+        txtNombre = vista.findViewById(R.id.txtEditRegNombre)
+        txtApellido = vista.findViewById(R.id.txtEditRegApellido)
+        txtEmail = vista.findViewById(R.id.txtEditRegEmail)
         txtPassword = vista.findViewById(R.id.txtEditRegPassword)
         txtPasswordConf = vista.findViewById(R.id.txtEditRegPasswordConf)
         btnSingIn = vista.findViewById(R.id.btnRegistro)
@@ -43,68 +55,46 @@ class FragmentRegister : Fragment() {
         super.onStart()
 
         val dbFb = Firebase.firestore
-        var userFb : String? = null
+        var userFb : String?
 
         btnSingIn.setOnClickListener{
-            //Analizo si los paraetros estan en la base de datos
-            val inputTxtUserName : String = txtUserName.text.toString()
-            val inputTxtPass : String = txtPassword.text.toString()
-            val inputTxtPassConf : String = txtPasswordConf.text.toString()
+            var userNew = Usuarios(
+                "",
+                txtUserName.text.toString(),
+                txtPassword.text.toString(),
+                txtNombre.text.toString(),
+                txtApellido.text.toString(),
+                txtEmail.text.toString(),
+                "",
+                "",
+                false)
 
-            if(inputTxtPass == inputTxtPassConf) {
-                //Buscar si exciste en la base de datos
-                dbFb.collection("user")
-                    .whereEqualTo("userName", inputTxtUserName)
-                    .get()
-                    .addOnSuccessListener { documents ->
-                        if(documents.isEmpty){
-                            // Create a new user with a first and last name
-                            val user = hashMapOf(
-                                "userName" to inputTxtUserName,
-                                "password" to inputTxtPass,
-                                "name" to "name",
-                                "lastName" to "name",
-                                "email" to "email",
-                                "telefono" to "telefono",
-                                "direccion" to "direccion",
-                                "permisos" to 0
-                            )
-                            // Add a new document with a generated ID
-                            dbFb.collection("user")
-                                .add(user)
-                                .addOnSuccessListener { documentReference ->
-                                    Log.d("Firebase", "DocumentSnapshot added with ID: ${documentReference.id}")
-                                    userFb = documentReference.id
-                                    dbFb.collection("user").document(userFb!!)
-                                        .update("id",userFb)
-                                        .addOnSuccessListener { Log.d("Firebase", "DocumentSnapshot successfully updated!")
-                                            //Cargo el id del usuario registrado
-                                            val sharedPref = context?.getSharedPreferences(
-                                                getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-                                            if (sharedPref != null) {
-                                                with (sharedPref.edit()) {
-                                                    putString("UserID", userFb)
-                                                    commit()
-                                                }
-                                            }
-                                            val intent = Intent(activity, activity_home::class.java)
-                                            startActivity(intent)
-                                        }
-                                        .addOnFailureListener { e -> Log.w("Firebase", "Error updating document", e) }
-                                }
-                                .addOnFailureListener { e -> Log.w("Firebase", "Error adding document", e) }
-                        }
-                        else
-                        {
-                            Snackbar.make(vista, "Usuario ya registrado", Snackbar.LENGTH_SHORT).show()
-                            for (document in documents) {
-                                Log.d("Firebase", "${document.id} => ${document.data}")
-                            }
-                        }
-                    }
-                    .addOnFailureListener { exception -> Log.w("Firebase", "Error getting documents: ", exception) }
+            val inputTxtPassConf : String = txtPasswordConf.text.toString()
+            if(userNew.password == inputTxtPassConf) {
+                //Analizo si los paraetros estan en la base de datos
+                viewModel.addUser(userNew)
+
             } else {
                 Snackbar.make(vista, "La contraseña no coincide", Snackbar.LENGTH_SHORT).show()
+            }
+
+        }
+
+        viewModel.state.observe(this){
+            when(it){
+                State.SUCCESS ->{
+                    val intent = Intent(activity, activity_home::class.java)
+                    startActivity(intent)
+                }
+                State.FAILURE ->{
+                    Snackbar.make(vista, "El usuario ya existe", Snackbar.LENGTH_SHORT).show()
+                }
+                State.LOADING ->{
+                    Snackbar.make(vista, "Analizando", Snackbar.LENGTH_SHORT).show()
+                }
+                null ->{
+
+                }
             }
         }
     }

@@ -9,11 +9,8 @@ import com.bumptech.glide.Glide
 
 import com.example.apppokedex.R
 import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonDao
-import com.example.apppokedex.database.UserDao
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class SplashActivity : AppCompatActivity() {
 
     lateinit var imgSplash : ImageView

@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -34,8 +35,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputDialogListener {
+
+    val viewModel: FragmentPokedexViewModel by viewModels()
+
     private lateinit var imgTitulo : ImageView
     private lateinit var btnLogOut : Button
     private lateinit var btnPokemdexAdd : Button

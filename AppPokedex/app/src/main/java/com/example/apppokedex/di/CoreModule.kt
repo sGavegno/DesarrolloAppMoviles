@@ -2,6 +2,7 @@ package com.example.apppokedex.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.apppokedex.PreferencesManager
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -14,13 +15,12 @@ import dagger.hilt.components.SingletonComponent
 object CoreModule {
 
     @Provides
-    fun provideGsonInsance():Gson = Gson()
+    fun provideGsonInstance(): Gson = Gson()
 
     @Provides
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
-        context.getSharedPreferences("MyPreferences",Context.MODE_PRIVATE)
+        context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
 
-    //@Provides
-    //fun providePreferencesManager(sharedPreferences: SharedPreferences, gson: Gson) = PreferencesManager(sharedPreferences, gson)
-
+    @Provides
+    fun providePreferencesManager(sharedPreferences: SharedPreferences, gson: Gson) = PreferencesManager(sharedPreferences, gson)
 }

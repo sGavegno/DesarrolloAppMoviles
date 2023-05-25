@@ -1,10 +1,8 @@
 package com.example.apppokedex.fragments
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +10,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.fragment.app.viewModels
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.State
+import com.example.apppokedex.entities.Usuarios
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentUser : Fragment() {
+
+    val viewModel: FragmentUserViewModel by viewModels()
 
     lateinit var vista : View
 
@@ -49,55 +51,39 @@ class FragmentUser : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val sharedPref = context?.getSharedPreferences(
-            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getString("UserID", "")
 
-        val dbFb = Firebase.firestore
-        var userFb : DocumentSnapshot?
+        val user = viewModel.getUserData()
+        inputTxtNombre.setText(user.name)
+        inputTxtApellido.setText(user.lastName)
+        inputTxtEmail.setText(user.email)
+        inputTxtPass.setText(user.password)
+        inputTxtDireccion.setText(user.direccion)
+        inputTxtTelefono.setText(user.telefono)
 
-        dbFb.collection("user")
-            .whereEqualTo("id", idUser)
-            .get()
-            .addOnSuccessListener { documents ->
-                if(!documents.isEmpty){
-                    userFb = documents.documents[0]
-                    inputTxtNombre.setText(userFb?.getString("name") )
-                    inputTxtApellido.setText(userFb?.getString("lastName"))
-                    inputTxtEmail.setText(userFb?.getString("email"))
-                    inputTxtPass.setText(userFb?.getString("password"))
-                    inputTxtDireccion.setText(userFb?.getString("direccion"))
-                    inputTxtTelefono.setText(userFb?.getString("telefono"))
+        viewModel.state.observe(this){state ->
+            when(state){
+                State.SUCCESS ->{
+                    Snackbar.make(vista, "Actualizacion Exitosa", Snackbar.LENGTH_SHORT).show()
+                }
+                State.FAILURE ->{
+                    Snackbar.make(vista, "Actualizacion Fallida", Snackbar.LENGTH_SHORT).show()
+                }
+                State.LOADING ->{
+                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                }
+                null ->{
+
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.w("Firebase", "Error getting documents: ", exception)
-            }
-
-/*
-        btnActualizar.setOnClickListener{
-            if(userFind != null)
-            {
-                userFind.name = inputTxtNombre.text.toString()
-                userFind.lastName = inputTxtApellido.text.toString()
-                userFind.email = inputTxtEmail.text.toString()
-                userFind.password = inputTxtPass.text.toString()
-                userFind.direccion = inputTxtDireccion.text.toString()
-                userFind.telefono = inputTxtTelefono.text.toString()
-                userDao?.updateUser(userFind)
-                Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-            }
-        }*/
+        }
 
         btnActualizar.setOnClickListener {
-            showAlertDialogConfigPasword(idUser.toString())
+            showAlertDialogConfigPasword(viewModel.getUserId())
         }
     }
 
     //Funciones del boton actualizar
     private fun showAlertDialogConfigPasword( idUser: String) {
-        val dbFb = Firebase.firestore
-        var userFb : DocumentSnapshot?
 
         // Crear un EditText para obtener el nuevo texto
         val editText = EditText(requireContext())
@@ -111,35 +97,23 @@ class FragmentUser : Fragment() {
         alertDialog.setPositiveButton("Aceptar") { _, _ ->
             // Obtener el nuevo texto del EditText y establecerlo en el TextView
             val newText = editText.text.toString()
-
-            dbFb.collection("user")
-                .whereEqualTo("id", idUser)
-                .get()
-                .addOnSuccessListener { documents ->
-                    if(!documents.isEmpty){
-                        userFb = documents.documents[0]
-                        val password = userFb?.getString("password")
-                        if(password == newText){
-                            dbFb.collection("user").document( idUser)
-                                .update(
-                                    mapOf(
-                                        "password" to inputTxtPass.text.toString(),
-                                        "name" to inputTxtNombre.text.toString(),
-                                        "lastName" to inputTxtApellido.text.toString(),
-                                        "email" to inputTxtEmail.text.toString(),
-                                        "telefono" to inputTxtTelefono.text.toString(),
-                                        "direccion" to inputTxtDireccion.text.toString(),
-                                    ),
-                                )
-                            Snackbar.make(vista, "Datos actualizados", Snackbar.LENGTH_SHORT).show()
-                        } else {
-                            Snackbar.make(vista, "Clave Incorrecta", Snackbar.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.w("Firebase", "Error getting documents: ", exception)
-                }
+            val password = viewModel.getUserPassword()
+            if(password == newText){
+                val user = Usuarios(
+                    idUser,
+                    viewModel.getUserName(),
+                    inputTxtPass.text.toString(),
+                    inputTxtNombre.text.toString(),
+                    inputTxtApellido.text.toString(),
+                    inputTxtEmail.text.toString(),
+                    inputTxtTelefono.text.toString(),
+                    inputTxtDireccion.text.toString(),
+                    viewModel.getUserPermisos()
+                )
+                viewModel.updateUserData(user)
+            } else {
+                Snackbar.make(vista, "Clave Incorrecta", Snackbar.LENGTH_SHORT).show()
+            }
         }
         // Agregar un botón "Cancelar" al cuadro de texto
         alertDialog.setNegativeButton("Cancelar", null)

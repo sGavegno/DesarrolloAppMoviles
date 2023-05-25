@@ -3,19 +3,27 @@ package com.example.apppokedex.fragments
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.PokemonDetalle
 import com.example.apppokedex.entities.PokemonHabilidad
 import com.example.apppokedex.entities.PokemonStats
 import com.example.apppokedex.entities.PokemonTipo
+import com.example.apppokedex.entities.State
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FragmentPokedexViewModel : ViewModel() {
+@HiltViewModel
+class FragmentPokedexViewModel @Inject constructor(
+    private val preferencesManager: PreferencesManager
+): ViewModel() {
 
+    val state : MutableLiveData<State> = MutableLiveData()
     ////////////////////////////////////////////////////////////////////////////////////////////
     fun getPokedex(){
-        val state : MutableLiveData<State> = MutableLiveData()
+
         //Lista que contiene todos los pokemons de la base de datos
         var pokemonsList : MutableList<Pokemon> = mutableListOf()
         //Variable pokemon para levantar los datos y cargarlos en la lista
@@ -35,6 +43,7 @@ class FragmentPokedexViewModel : ViewModel() {
         val dbFb = Firebase.firestore
 
         dbFb.collection("Pokedex")
+            .limit(1008)
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){
