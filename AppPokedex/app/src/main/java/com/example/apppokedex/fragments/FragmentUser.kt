@@ -1,6 +1,7 @@
 package com.example.apppokedex.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.example.apppokedex.R
+import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuarios
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +34,7 @@ class FragmentUser : Fragment() {
     lateinit var inputTxtDireccion : EditText
     lateinit var inputTxtTelefono : EditText
     private lateinit var btnActualizar : Button
+    private lateinit var btnLogOut : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,9 @@ class FragmentUser : Fragment() {
         inputTxtPass = vista.findViewById(R.id.txtEditUserPassword)
         inputTxtDireccion = vista.findViewById(R.id.txtEditUserDireccion)
         inputTxtTelefono = vista.findViewById(R.id.txtEditUserTelefono)
+
+        btnLogOut = vista.findViewById(R.id.btnPokedexLogOut)
+
         return vista
     }
 
@@ -79,6 +85,13 @@ class FragmentUser : Fragment() {
 
         btnActualizar.setOnClickListener {
             showAlertDialogConfigPasword(viewModel.getUserId())
+        }
+
+        btnLogOut.setOnClickListener{
+            //Funcion para deslogearce
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 

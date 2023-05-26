@@ -1,39 +1,14 @@
 package com.example.apppokedex.entities
 
-class PokemonDetalle(
-    idCadenaEvolutiva: Int,
-    idEvolucionaDe: Int?,
-    felicidadBase: Int,
-    ratioCaptura: Int,
-    variantes: Boolean,
-    tasaGenero: Int,
-    idGeneracion: Int,
-    bebe: Boolean,
-    legendario: Boolean,
-    mitico: Boolean
-){
-
-    var idCadenaEvolutiva: Int
-    var idEvolucionaDe: Int?
-    var felicidadBase: Int
-    var ratioCaptura: Int
-    var variantes: Boolean
-    var tasaGenero: Int
-    var idGeneracion: Int
-    var bebe: Boolean
-    var legendario: Boolean
-    var mitico: Boolean
-
-    init {
-        this.idCadenaEvolutiva = idCadenaEvolutiva
-        this.idEvolucionaDe = idEvolucionaDe
-        this.felicidadBase = felicidadBase
-        this.ratioCaptura = ratioCaptura
-        this.variantes = variantes
-        this.tasaGenero = tasaGenero
-        this.idGeneracion = idGeneracion
-        this.bebe = bebe
-        this.legendario = legendario
-        this.mitico = mitico
-    }
-}
+data class PokemonDetalle(
+    val Bebe: Boolean? = null,
+    val FelicidadBase: Int? = null,
+    val Legendario: Boolean? = null,
+    val Mitico: Boolean? = null,
+    val RatioCaptura: Int? = null,
+    val TasaGenero: Int? = null,
+    val Variantes: Boolean? = null,
+    val IdGeneracion: Int? = null,
+    val Id_CadenaEvolutiva: Int? = null,
+    val Id_EvolucionaDe: Int? = null,
+)

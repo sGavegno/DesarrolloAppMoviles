@@ -1,16 +1,11 @@
 package com.example.apppokedex.fragments
 
-import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
-import com.example.apppokedex.R
-import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuarios
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -53,14 +48,13 @@ class FragmentRegisterViewModel @Inject constructor(
                             Log.d("Firebase", "DocumentSnapshot added with ID: ${documentReference.id}")
 
                             //agrego el Id en la BD
-                            val userFb = documentReference.id
-                            dbFb.collection("user").document(userFb!!)
-                                .update("id",userFb)
+                            val userId = documentReference.id
+                            userNew.id = userId
+                            dbFb.collection("user").document(userId)
+                                .update("id",userId)
                                 .addOnSuccessListener { Log.d("Firebase", "DocumentSnapshot successfully updated!")
 
                                     state.postValue(State.SUCCESS)
-
-                                    userNew.id = documents.documents[0].id
                                     //Guardar en SP
                                     preferencesManager.saveUser(userNew)
                                 }

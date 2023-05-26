@@ -1,24 +1,9 @@
 package com.example.apppokedex.entities
 
-class EvolucionesVariante(
-    id: Int,
-    nombre: String,
-    altura: Int,
-    peso: Int,
-    expBase: Int
-){
-
-    val id: Int
-    val nombre: String
-    val altura: Int
-    val peso: Int
-    val expBase: Int
-
-    init {
-        this.id = id
-        this.nombre = nombre
-        this.altura = altura
-        this.peso = peso
-        this.expBase = expBase
-    }
-}
+data class EvolucionesVariante(
+    val Id: Int? = null,
+    val Nombre: String? = null,
+    val Altura: Int? = null,
+    val Peso: Int? = null,
+    val ExpBase: Int? = null
+)

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +24,6 @@ import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.database.*
 import com.example.apppokedex.entities.ActionLista
 import com.example.apppokedex.entities.Pokemon
-import com.example.apppokedex.entities.PokemonDetalle
-import com.example.apppokedex.entities.PokemonHabilidad
-import com.example.apppokedex.entities.PokemonStats
-import com.example.apppokedex.entities.PokemonTipo
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
@@ -43,7 +38,6 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     val viewModel: FragmentPokedexViewModel by viewModels()
 
     private lateinit var imgTitulo : ImageView
-    private lateinit var btnLogOut : Button
     private lateinit var btnPokemdexAdd : Button
     private lateinit var recPokemon : RecyclerView
     private lateinit var adapter: PokemonAdapter
@@ -63,7 +57,6 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         vista = inflater.inflate(R.layout.fragment_fragment_pokedex, container, false)
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTitulo)
-        btnLogOut = vista.findViewById(R.id.btnPokedexLogOut)
         btnPokemdexAdd = vista.findViewById(R.id.btnPokedexAdd)
 
         return vista
@@ -74,13 +67,13 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         setInputDialogListener(this)
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getString("UserID", "")
         val posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)
 
-        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
+        //Implementar a futuro, No todos los usuarios van a ver los mismos pokemon en la Pokedex
+        val idUser = viewModel.getIdUser()
+        //////////////////////////////////////////////////////////////////////////////////////
 
-        val dbFb = Firebase.firestore
-        var userFb : DocumentSnapshot? = null
+        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
         db = AppDatabase.getInstance(vista.context)
         pokemonDao = db?.pokemonDao()
@@ -89,52 +82,21 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
         pokemonDao?.fetchAllPokemon()
         pokemonUserDao?.fetchAllPokemonUser()
 
-        // Dummy call to pre-populate db
-        //Buscar si exciste en la base de datos
-        dbFb.collection("user")
-            .whereEqualTo("id", idUser.toString())
-            .get()
-            .addOnSuccessListener { documents ->
-                if(!documents.isEmpty){
-                    Snackbar.make(vista, "Usuario ya registrado", Snackbar.LENGTH_SHORT).show()
-                    userFb = documents.documents[0]
-                    for (document in documents) {
-                        Log.d("Firebase", "${document.id} => ${document.data}")
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("Firebase", "Error getting documents: ", exception)
-            }
+        viewModel.getPokedex()
 
-        val pokemonList = pokemonDao?.fetchAllPokemon()
-
-        adapter = PokemonAdapter(pokemonList, this)
-        //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
-        recPokemon.layoutManager = GridLayoutManager(context,2)
-        recPokemon.scrollToPosition(posPokedex!!)
-        recPokemon.adapter = adapter
-
-        btnLogOut.setOnClickListener{
-            //Funcion para deslogearce
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+        viewModel.pokedex.observe(this){
+            val adapterPokedex = it.pokemons
+            adapter = PokemonAdapter(adapterPokedex, this)
+            //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+            recPokemon.layoutManager = GridLayoutManager(context,2)
+            recPokemon.scrollToPosition(posPokedex!!)
+            recPokemon.adapter = adapter
+        }
+        btnPokemdexAdd.visibility = View.INVISIBLE
+        btnPokemdexAdd.setOnClickListener{
+            onClick()
         }
 
-        val permisoUser = userFb?.getString("permisos")?.toInt()?: 0
-        if(permisoUser == 1){
-            // Solo acciones para usuarios con permiso de supervisor Falta agregar el boton para incluir pokemons
-            btnPokemdexAdd.setOnClickListener{
-                onClick()
-            }
-            val swipeHandler = object : ActionLista(adapter, pokemonDao, pokemonList) {
-            }
-            val itemTouchHelper = ItemTouchHelper(swipeHandler)
-            itemTouchHelper.attachToRecyclerView(recPokemon)
-        } else {
-            btnPokemdexAdd.visibility = View.INVISIBLE
-        }
     }
 
     private fun setInputDialogListener(listener: InputDialogListener) {
@@ -181,7 +143,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     }
 
     //Funciones del Adapter
-    override fun onCardViewClick(pokemon: Pokemons, position: Int) {
+    override fun onCardViewClick(pokemon: Pokemon, position: Int) {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         if (sharedPref != null) {
@@ -190,23 +152,29 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
                 commit()
             }
         }
-        // Código para atender el clic del CardView del elemento del RecyclerView
-        val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
-            pokemon.idPokemon
-        )
-        findNavController().navigate(action)            //accion de cambiar de pantalla
+        if(pokemon.Id != null){
+            // Código para atender el clic del CardView del elemento del RecyclerView
+            val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
+                pokemon.Id
+            )
+            findNavController().navigate(action)            //accion de cambiar de pantalla
+        }
     }
-    override fun onButtonClick(pokemon: Pokemons) {
-        val sharedPref = context?.getSharedPreferences(
-            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val idUser = sharedPref?.getString("UserID", "")
-        val checkPokemonUser = pokemonUserDao?.fetchPokemonUserByPokemon(idUser.toString(), pokemon.idPokemon)
+    override fun onButtonClick(pokemon: Pokemon) {
+
+        val idUser = viewModel.getIdUser()
+
+        val checkPokemonUser =
+            pokemon.Id?.let { pokemonUserDao?.fetchPokemonUserByPokemon(idUser, it) }
         if(checkPokemonUser == null)
         {
-            pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser.toString(),pokemon.idPokemon,pokemon.nombre,0,pokemon.altura,pokemon.peso,pokemon.descripcion))
-            Snackbar.make(vista, "${pokemon.nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
+            val idPokemon = pokemon.Id
+            if(idPokemon != null){
+                pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser,idPokemon, "mote",0,"10","10","pokemon.descripcion"))
+                Snackbar.make(vista, "${pokemon.Nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
+            }
         } else {
-            Snackbar.make(vista, "${pokemon.nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(vista, "${pokemon.Nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
         }
     }
 

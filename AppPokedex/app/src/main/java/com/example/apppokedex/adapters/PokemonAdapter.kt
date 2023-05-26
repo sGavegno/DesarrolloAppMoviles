@@ -11,16 +11,17 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.entities.Pokemons
+import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonTipo
 
 class PokemonAdapter(
-    private var pokemonList: MutableList<Pokemons?>?,
+    private var pokemonList: MutableList<Pokemon>,
     private val listener: PokemonAdapterListener          //Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
 
     interface PokemonAdapterListener {
-        fun onCardViewClick(pokemon: Pokemons,position: Int)
-        fun onButtonClick(pokemon: Pokemons)
+        fun onCardViewClick(pokemon: Pokemon,position: Int)
+        fun onButtonClick(pokemon: Pokemon)
     }
 
     class PokemonHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -39,7 +40,7 @@ class PokemonAdapter(
             val txtName : TextView = view.findViewById(R.id.txtName)
             txtName.text = name
         }
-        fun setTipo(tipo : String) {
+        fun setTipo(tipo: List<PokemonTipo>?) {
  //           val txtTipo: TextView = view.findViewById(R.id.txtTipo)
  //           txtTipo.text = tipo
         }
@@ -59,27 +60,34 @@ class PokemonAdapter(
     }
 
     override fun getItemCount(): Int {
-        return pokemonList?.size ?: 0
+        return pokemonList.size
     }
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
-        val item = pokemonList?.get(position)
-        pokemonList?.get(position)?.let { holder.setId(it.idPokemon) }
-        pokemonList?.get(position)?.let { holder.setName(it.nombre) }
-        //pokemonList?.get(position)?.let { holder.setTipo(it.tipo) }
-        pokemonList?.get(position)?.let { holder.setImagen(it.imgURL) }
+        val item = pokemonList[position]
+        item.let { it.Id?.let { it1 -> holder.setId(it1) } }
+        item.let { it.Nombre?.let { it1 -> holder.setName(it1) } }
+        //item?.let { holder.setTipo(it.Tipo) }
+        val id = item.Id ?: 0
+        if(id < 10){
+            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png") }
+        }else if(id < 100){
+            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png") }
+        }else{
+            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png") }
+        }
 
         holder.getCard().setOnClickListener {
-            pokemonList?.get(position)?.let { it1 -> listener.onCardViewClick(it1,position) }
+            pokemonList[position].let { it1 -> listener.onCardViewClick(it1,position) }
         }
         holder.btnAddPokemon.setOnClickListener {
-            item?.let { it1 -> listener.onButtonClick(it1) }
+            item.let { it1 -> listener.onButtonClick(it1) }
         }
     }
     @SuppressLint("NotifyDataSetChanged")
     fun deleteItem(position: Int) {
         // Eliminar el objeto en la posición especificada
-        pokemonList?.removeAt(position)
+        pokemonList.removeAt(position)
         notifyDataSetChanged()              //actializa el adapter
     }
 }

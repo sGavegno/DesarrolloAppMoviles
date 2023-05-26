@@ -1,6 +1,6 @@
 package com.example.apppokedex.entities
 
-data class PokemonTipo(
+data class TablaTipoDetalle(
     val Id_Tipo: Int? = null,
-    val Detalle: PokemonTipoDetalle? = null
+    val Tipo: String? = null
 )

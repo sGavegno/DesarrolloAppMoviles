@@ -1,6 +1,6 @@
 package com.example.apppokedex.entities
 
-class Evoluciones(
-    val id: Int,
-    val CadenaEvolutiva: List<EvolucionesCadena>
+data class Evoluciones(
+    val Id: Int? = null,
+    val CadenaEvolutiva: List<EvolucionesCadena>? = null
 )

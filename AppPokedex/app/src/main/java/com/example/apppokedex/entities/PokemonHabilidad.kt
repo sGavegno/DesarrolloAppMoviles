@@ -1,14 +1,6 @@
 package com.example.apppokedex.entities
 
-class PokemonHabilidad(
-    idHabilidades: Int,
-    detalle: String
-){
-    var idHabilidades: Int
-    var detalle: String
-
-    init {
-        this.idHabilidades = idHabilidades
-        this.detalle = detalle
-    }
-}
+data class PokemonHabilidad(
+    val Detalle: PokemonHabilidadDetalle? = null,
+    val Id_Habilidades: Int? = null
+)

@@ -1,21 +1,8 @@
 package com.example.apppokedex.entities
 
-class PokemonItems(
-    id: Int,
-    nombre: String,
-    idCategoriaItem: Int,
-    precio: Int
-){
-
-    val id: Int
-    val nombre: String
-    val idCategoriaItem: Int
-    val precio: Int
-
-    init {
-        this.id = id
-        this.nombre = nombre
-        this.idCategoriaItem = idCategoriaItem
-        this.precio = precio
-    }
-}
+data class PokemonItems(
+    val Id: Int? = null,
+    val Nombre: String? = null,
+    val Id_CategoriaItem: Int? = null,
+    val Precio: Int? = null
+)

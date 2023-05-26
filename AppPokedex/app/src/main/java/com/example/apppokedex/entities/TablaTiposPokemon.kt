@@ -1,18 +1,7 @@
 package com.example.apppokedex.entities
 
-class TablaTiposPokemon(
-    idTipo: Int,
-    tipo: String,
-    tablaTipos: TablaTiposEfectividad
-){
-
-    val idTipo: Int
-    val tipo: String
-    val tablaTipos: TablaTiposEfectividad
-
-    init {
-        this.idTipo = idTipo
-        this.tipo = tipo
-        this.tablaTipos = tablaTipos
-    }
-}
+data class TablaTiposPokemon(
+    val Id_Tipo: Int? = null,
+    val Tipo: String? = null,
+    val Danio: TablaTiposEfectividad? = null
+)

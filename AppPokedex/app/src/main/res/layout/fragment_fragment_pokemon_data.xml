@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout3"
+    android:id="@+id/framePokemonData"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8805E6"
+    android:background="#B5C7ED"
     tools:context=".fragments.FragmentPokemonData">
 
     <androidx.cardview.widget.CardView
@@ -27,284 +27,6 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvPokemonDatos"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="64dp"
-        app:cardBackgroundColor="#000000"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLvlUp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPokemonHablidades"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="PS"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Ataque"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Defensa"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="At. Esp."
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Def. Esp."
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Velocidad"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPokemonInfo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
-
-            <TextView
-                android:id="@+id/txtPokeId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="24dp"
-                android:text="Nº."
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtPokeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:text="Nombre"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtPokeId"
-                app:layout_constraintStart_toStartOf="@+id/txtPokeId"
-                app:layout_constraintTop_toBottomOf="@+id/txtPokeId" />
-
-            <TextView
-                android:id="@+id/txtPokeTipoDato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:text="PokeTipo"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtPokeName"
-                app:layout_constraintStart_toStartOf="@+id/txtPokeName"
-                app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
-
-            <TextView
-                android:id="@+id/txtPokeHabilidadDato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:text="PokeHabilidad"
-                android:textAlignment="viewStart"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtPokeTipoDato"
-                app:layout_constraintStart_toStartOf="@+id/txtPokeTipoDato"
-                app:layout_constraintTop_toBottomOf="@+id/txtPokeTipoDato" />
-
-            <TextView
-                android:id="@+id/txtPokeObjeto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Objeto:"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtPokeHabilidadDato"
-                app:layout_constraintStart_toStartOf="@+id/txtPokeHabilidadDato"
-                app:layout_constraintTop_toBottomOf="@+id/txtPokeHabilidadDato" />
-
-            <TextView
-                android:id="@+id/txtPokeIdDato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="90dp"
-                android:background="@android:color/transparent"
-                android:text="ID"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPokeId"
-                app:layout_constraintStart_toEndOf="@+id/txtPokeId"
-                app:layout_constraintTop_toTopOf="@+id/txtPokeId" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPokeName"
-                app:layout_constraintStart_toStartOf="@+id/txtPokeIdDato"
-                app:layout_constraintTop_toTopOf="@+id/txtPokeName" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#FAF8F8"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPokeTipoDato"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toTopOf="@+id/txtPokeTipoDato" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPokeHabilidadDato"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toTopOf="@+id/txtPokeHabilidadDato" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No Tiene"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPokeObjeto"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toTopOf="@+id/txtPokeObjeto" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:cardCornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPokeObjeto">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
-                        android:text="Notas Entrenador"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Estas son las notas del entrenador. Ej: donde se capturo y con que lvl"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/btnLvlUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Lvl. Up"
-        app:cornerRadius="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvPokeMote" />
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/cvPokeMote"
         android:layout_width="361dp"
         android:layout_height="51dp"
@@ -315,6 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cvImgPokemom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPoke"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -332,7 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/txtGeneroDato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -370,6 +93,17 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/btnLvlUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lvl. Up"
+        app:cornerRadius="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvPokeMote" />
+
+    <Button
         android:id="@+id/btnObjeto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -379,5 +113,426 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnLvlUp"
         app:layout_constraintStart_toEndOf="@+id/btnLvlUp"
         app:layout_constraintTop_toTopOf="@+id/btnLvlUp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPokemonDatos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
+        app:cardBackgroundColor="#000000"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLvlUp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPokemonHablidades"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtPs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:text="PS"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtAtaque"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Ataque"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/txtPs"
+                app:layout_constraintTop_toBottomOf="@+id/txtPs" />
+
+            <TextView
+                android:id="@+id/txtDefensa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Defensa"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/txtAtaque"
+                app:layout_constraintTop_toBottomOf="@+id/txtAtaque" />
+
+            <TextView
+                android:id="@+id/txtAtEsp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="At. Esp."
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/txtDefensa"
+                app:layout_constraintTop_toBottomOf="@+id/txtDefensa" />
+
+            <TextView
+                android:id="@+id/txtDefEsp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Def. Esp."
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/txtAtEsp"
+                app:layout_constraintTop_toBottomOf="@+id/txtAtEsp" />
+
+            <TextView
+                android:id="@+id/txtVelocidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Velocidad"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/txtDefEsp"
+                app:layout_constraintTop_toBottomOf="@+id/txtDefEsp" />
+
+            <TextView
+                android:id="@+id/txtPsDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPs"
+                app:layout_constraintStart_toEndOf="@+id/txtPs"
+                app:layout_constraintTop_toTopOf="@+id/txtPs" />
+
+            <TextView
+                android:id="@+id/txtAtaqueDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAtaque"
+                app:layout_constraintStart_toStartOf="@+id/txtPsDato"
+                app:layout_constraintTop_toTopOf="@+id/txtAtaque" />
+
+            <TextView
+                android:id="@+id/txtDefensaDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDefensa"
+                app:layout_constraintStart_toStartOf="@+id/txtAtaqueDato"
+                app:layout_constraintTop_toTopOf="@+id/txtDefensa" />
+
+            <TextView
+                android:id="@+id/txtAtEspDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAtEsp"
+                app:layout_constraintStart_toStartOf="@+id/txtDefensaDato"
+                app:layout_constraintTop_toTopOf="@+id/txtAtEsp" />
+
+            <TextView
+                android:id="@+id/txtDefEspDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDefEsp"
+                app:layout_constraintStart_toStartOf="@+id/txtAtEspDato"
+                app:layout_constraintTop_toTopOf="@+id/txtDefEsp" />
+
+            <TextView
+                android:id="@+id/txtVelocidadDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="##"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtVelocidad"
+                app:layout_constraintStart_toStartOf="@+id/txtDefEspDato"
+                app:layout_constraintTop_toTopOf="@+id/txtVelocidad" />
+
+            <ProgressBar
+                android:id="@+id/progressBarPs"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="48dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="100"
+                android:progressTint="#FF0000"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPsDato"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtPsDato" />
+
+            <ProgressBar
+                android:id="@+id/progressBarAtaque"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="45"
+                android:progressTint="#FF4800"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAtaqueDato"
+                app:layout_constraintStart_toStartOf="@+id/progressBarPs"
+                app:layout_constraintTop_toTopOf="@+id/txtAtaqueDato" />
+
+            <ProgressBar
+                android:id="@+id/progressBarDefensa"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="60"
+                android:progressTint="#0040FF"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDefensaDato"
+                app:layout_constraintStart_toStartOf="@+id/progressBarAtaque"
+                app:layout_constraintTop_toTopOf="@+id/txtDefensaDato" />
+
+            <ProgressBar
+                android:id="@+id/progressBarVelocidad"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="80"
+                android:progressTint="#0ABF13"
+                app:layout_constraintBottom_toBottomOf="@+id/txtVelocidadDato"
+                app:layout_constraintStart_toStartOf="@+id/progressBarDefEsp"
+                app:layout_constraintTop_toTopOf="@+id/txtVelocidadDato" />
+
+            <ProgressBar
+                android:id="@+id/progressBarDefEsp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="56"
+                android:progressTint="#00D9FF"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDefEspDato"
+                app:layout_constraintStart_toStartOf="@+id/progressBarAtEsp"
+                app:layout_constraintTop_toTopOf="@+id/txtDefEspDato" />
+
+            <ProgressBar
+                android:id="@+id/progressBarAtEsp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="125dp"
+                android:layout_height="14dp"
+                android:background="#FFFFFF"
+                android:max="100"
+                android:progress="54"
+                android:progressTint="#9500FF"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAtEspDato"
+                app:layout_constraintStart_toStartOf="@+id/progressBarDefensa"
+                app:layout_constraintTop_toTopOf="@+id/txtAtEspDato" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPokemonInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/txtPokeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="24dp"
+                android:text="Nº."
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPokeIdDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:background="@android:color/transparent"
+                android:text="ID"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokeId"
+                app:layout_constraintStart_toEndOf="@+id/txtPokeId"
+                app:layout_constraintTop_toTopOf="@+id/txtPokeId" />
+
+            <TextView
+                android:id="@+id/txtPokeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Nombre"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokeId"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeId"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokeId" />
+
+            <TextView
+                android:id="@+id/txtPokeNameDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokeName"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeIdDato"
+                app:layout_constraintTop_toTopOf="@+id/txtPokeName" />
+
+            <TextView
+                android:id="@+id/txtPokeTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="PokeTipo"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokeName"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeName"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokeName" />
+
+            <ImageView
+                android:id="@+id/imgPokemonTipo1"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokeTipo"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeNameDato"
+                app:layout_constraintTop_toTopOf="@+id/txtPokeTipo" />
+
+            <ImageView
+                android:id="@+id/imgPokemonTipo2"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPokemonTipo1"
+                app:layout_constraintStart_toEndOf="@+id/imgPokemonTipo1"
+                app:layout_constraintTop_toTopOf="@+id/imgPokemonTipo1" />
+
+            <TextView
+                android:id="@+id/txtPokeHabilidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="PokeHabilidad"
+                android:textAlignment="viewStart"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokeTipo"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeTipo"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokeTipo" />
+
+            <TextView
+                android:id="@+id/txtPokeHabilidadDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokeHabilidad"
+                app:layout_constraintStart_toStartOf="@+id/imgPokemonTipo1"
+                app:layout_constraintTop_toTopOf="@+id/txtPokeHabilidad" />
+
+            <TextView
+                android:id="@+id/txtPokeObjeto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Objeto:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPokeHabilidad"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeHabilidad"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokeHabilidad" />
+
+            <TextView
+                android:id="@+id/txtPokeObjetoDato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tiene"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPokeObjeto"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeHabilidadDato"
+                app:layout_constraintTop_toTopOf="@+id/txtPokeObjeto" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvNotas"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible"
+                app:cardCornerRadius="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPokeObjeto">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clNotas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtNotas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="Notas Entrenador"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtNotasDato"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Estas son las notas del entrenador. Ej: donde se capturo y con que lvl"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtNotas" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

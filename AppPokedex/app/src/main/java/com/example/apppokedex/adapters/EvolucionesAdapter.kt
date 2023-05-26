@@ -11,9 +11,10 @@ import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.database.AppDatabase
 import com.example.apppokedex.database.PokemonDao
+import com.example.apppokedex.entities.EvolucionesCadena
 
 class EvolucionesAdapter(
-    private var evolucionList: List <Int>,
+    private var evolucionList: List<EvolucionesCadena>?,
     var onClick: (Int) -> Unit                                     //Funcion como parametro
     ) : RecyclerView.Adapter<EvolucionesAdapter.EvolucionHolder>() {
 
@@ -27,19 +28,27 @@ class EvolucionesAdapter(
             this.vista = v
         }
 
-        fun setEvolucion(id : Int){
-
-            db = AppDatabase.getInstance(vista.context)
-            pokemonDao = db?.pokemonDao()
+        fun setEvolucion(pokemon : EvolucionesCadena){
 
             val txtEvolucion : TextView = vista.findViewById(R.id.txtEvolucion)
             val imgEvolucion : ImageView = vista.findViewById(R.id.imgEvolucion)
-            val pokemonFind = pokemonDao?.fetchPokemonByIdPokemon(id)
-            if(pokemonFind != null)
-            {
-                txtEvolucion.text = pokemonFind.nombre
-                Glide.with(vista).load(pokemonFind.imgURL).into(imgEvolucion)
+
+            txtEvolucion.text = pokemon.Nombre
+
+            val id = pokemon.Id
+            if(id != null){
+                if(id < 10){
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00$id.png").into(imgEvolucion)
+                    imgEvolucion.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00$id.png"
+                }else if(id < 100){
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0$id.png").into(imgEvolucion)
+                    imgEvolucion.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0$id.png"
+                }else{
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$id.png").into(imgEvolucion)
+                    imgEvolucion.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$id.png"
+                }
             }
+
         }
         fun getCard(): CardView {
             return vista.findViewById(R.id.cardEvolucion)
@@ -53,14 +62,14 @@ class EvolucionesAdapter(
     }
 
     override fun onBindViewHolder(holder: EvolucionHolder, position: Int) {
-        holder.setEvolucion(evolucionList[position])
+        evolucionList?.get(position)?.let { holder.setEvolucion(it) }
         holder.getCard().setOnClickListener{
             onClick(position)               //
         }
     }
 
     override fun getItemCount(): Int {
-        return evolucionList.size
+        return evolucionList?.size ?: 0
     }
 
 }
