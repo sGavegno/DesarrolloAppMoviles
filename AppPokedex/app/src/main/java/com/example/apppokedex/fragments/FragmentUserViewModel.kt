@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.Usuarios
+import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ class FragmentUserViewModel @Inject constructor(
 
     val state : MutableLiveData<State> = MutableLiveData()
 
-    fun getUserData():Usuarios{
+    fun getUserData(): Usuario {
         return preferencesManager.getUserLogin()
     }
 
@@ -36,7 +36,7 @@ class FragmentUserViewModel @Inject constructor(
         return preferencesManager.getPasswordUser()
     }
 
-    fun updateUserData(user : Usuarios){
+    fun updateUserData(user : Usuario){
 
         state.postValue(State.LOADING)
 

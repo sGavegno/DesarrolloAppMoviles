@@ -33,9 +33,9 @@ class EvolucionesAdapter(
             val txtEvolucion : TextView = vista.findViewById(R.id.txtEvolucion)
             val imgEvolucion : ImageView = vista.findViewById(R.id.imgEvolucion)
 
-            txtEvolucion.text = pokemon.Nombre
+            txtEvolucion.text = pokemon.nombre
 
-            val id = pokemon.Id
+            val id = pokemon.id
             if(id != null){
                 if(id < 10){
                     Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00$id.png").into(imgEvolucion)

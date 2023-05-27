@@ -1,7 +1,8 @@
 package com.example.apppokedex
 
 import android.content.SharedPreferences
-import com.example.apppokedex.entities.Usuarios
+import com.example.apppokedex.entities.Pc
+import com.example.apppokedex.entities.Usuario
 import com.google.gson.Gson
 import org.json.JSONObject
 
@@ -36,15 +37,24 @@ class PreferencesManager(private val sharedPreferences: SharedPreferences, priva
         return pureJsonUser?.getString("password") ?: ""
     }
 
-    fun getUserLogin(): Usuarios{
+    fun getUserPokemon(idPokemon: Int): Pc? {
         val gson: Gson = Gson()
         val uJson = sharedPreferences.getString("UsuarioLogIn", null)
-        return gson.fromJson(uJson, Usuarios::class.java)
+        val user = gson.fromJson(uJson, Usuario::class.java)
+        return user.pokedex?.filter{ item -> item.idPokemon == idPokemon }?.get(0)
     }
 
-    fun saveUser(user: Usuarios) {
+    fun getUserLogin(): Usuario{
+        val gson: Gson = Gson()
+        val uJson = sharedPreferences.getString("UsuarioLogIn", null)
+        return gson.fromJson(uJson, Usuario::class.java)
+    }
+
+    fun saveUser(user: Usuario) {
         val uJson = gson.toJson(user)
         sharedPreferences.edit().putString("UsuarioLogIn", uJson).apply()
     }
+
+
 
 }

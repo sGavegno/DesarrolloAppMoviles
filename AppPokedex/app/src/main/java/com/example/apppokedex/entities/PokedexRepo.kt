@@ -8,5 +8,5 @@ import kotlinx.parcelize.IgnoredOnParcel
 class PokedexRepo : Parcelable {
 
     @IgnoredOnParcel
-    var pokemons = mutableListOf<Pokemon>()
+    var pokedex = mutableListOf<Pokedex>()
 }

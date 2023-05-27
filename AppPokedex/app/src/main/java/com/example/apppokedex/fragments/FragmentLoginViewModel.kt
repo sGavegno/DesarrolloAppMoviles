@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.Usuarios
+import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,28 +22,17 @@ class FragmentLoginViewModel @Inject constructor(
     fun getUser(userName:String, password:String){
         state.postValue(State.LOADING)
         val dbFb = Firebase.firestore
-        var user = Usuarios( "", "", "", "", "", "", "", "", false)
 
-        dbFb.collection("user")
+        dbFb.collection("Usuarios")
             .whereEqualTo("userName", userName)
             .whereEqualTo("password", password)
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){
                     state.postValue(State.SUCCESS)
-
-                    val usuarioAux = documents.documents[0]
-                    user.id = usuarioAux.id
-                    user.userName = usuarioAux.getString("userName").toString()
-                    user.password = usuarioAux.getString("password").toString()
-                    user.name = usuarioAux.getString("name").toString()
-                    user.lastName = usuarioAux.getString("lastName").toString()
-                    user.email = usuarioAux.getString("email").toString()
-                    user.telefono = usuarioAux.getString("telefono").toString()
-                    user.direccion = usuarioAux.getString("direccion").toString()
-                    user.permisos = usuarioAux.getBoolean("permisos") == true
+                    val user = documents.toObjects<Usuario>()
                     //Guardar en SP
-                    preferencesManager.saveUser(user)
+                    preferencesManager.saveUser(user[0])
                 } else {
                     state.postValue(State.FAILURE)
                 }

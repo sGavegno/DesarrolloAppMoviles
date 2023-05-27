@@ -13,19 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonDao
-import com.example.apppokedex.database.PokemonUserDao
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentPokemonData : Fragment() {
 
     val viewModel: FragmentPokemonDataViewModel by viewModels()
-
-    private var db: AppDatabase? = null
-    private var pokemonDao: PokemonDao? = null
-    private var pokemonUserDao: PokemonUserDao? = null
 
     private lateinit var imgPokemon : ImageView
     private lateinit var labelLvl : TextView
@@ -98,25 +91,19 @@ class FragmentPokemonData : Fragment() {
 
         val idUser = viewModel.getIdUser()
 
-        db = AppDatabase.getInstance(vista.context)
-        pokemonDao = db?.pokemonDao()
-        pokemonUserDao = db?.pokemonUserDao()
-
         val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
 
         viewModel.getPokemonById(idPokemon)
-        viewModel.getPokemonUserById(idUser, idPokemon)
+        val userPokemon = viewModel.getUserPokemonById(idPokemon)
 
-        viewModel.pokemonUserData.observe(this){
-/*
-            labelLvl.text = pokemonUser.nivel.toString()
-            labelMote.text = pokemonUser.mote
-            if(true){
+        if (userPokemon != null) {
+            labelLvl.text = userPokemon.nivel.toString()
+            labelMote.text = userPokemon.mote
+            if(userPokemon.genero == true){
                 labelGenero.text = "♂"
             }else{
                 labelGenero.text = "♀"
             }
-*/
         }
 
         viewModel.pokemonData.observe(this){

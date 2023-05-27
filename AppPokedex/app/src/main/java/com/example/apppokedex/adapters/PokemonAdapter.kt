@@ -4,45 +4,101 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.entities.Pokemon
-import com.example.apppokedex.entities.PokemonTipo
+import com.example.apppokedex.entities.Pokedex
+import com.example.apppokedex.entities.Tipo
+import java.util.Locale
 
-class PokemonAdapter(
-    private var pokemonList: MutableList<Pokemon>,
+class PokemonAdapter (
+    private var pokemonList: MutableList<Pokedex>,
     private val listener: PokemonAdapterListener          //Funcion como parametro
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
 
     interface PokemonAdapterListener {
-        fun onCardViewClick(pokemon: Pokemon,position: Int)
-        fun onButtonClick(pokemon: Pokemon)
+        fun onCardViewClick(pokemon: Pokedex, position: Int)
+        fun onButtonClick(pokemon: Pokedex)
     }
 
     class PokemonHolder(v: View) : RecyclerView.ViewHolder(v){
-
-        val btnAddPokemon: Button = itemView.findViewById(R.id.btnAddPokemonUser)
 
         private var view :View
         init {
             this.view = v
         }
+        fun setAdapter(pokedex: Pokedex){
+            val txtId : TextView = view.findViewById(R.id.txtId)
+            txtId.text = pokedex.id.toString()
+
+            val txtName: TextView = view.findViewById(R.id.txtName)
+            val nombre = pokedex.name!!.uppercase(Locale.getDefault())
+            txtName.text = nombre
+
+            if(nombre != "??????"){
+                val id = pokedex.id
+                if(id!! < 10){
+                    setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokedex.id}.png")
+                }else if(id < 100){
+                    setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokedex.id}.png")
+                }else{
+                    setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokedex.id}.png")
+                }
+            } else {
+                setImagen("https://img2.freepng.es/20171217/d5b/question-mark-png-5a3698322ab363.8566429715135273461749.jpg")
+            }
+
+            val img = mutableListOf(0,0)
+            var cont = 0
+            for (id in pokedex.tipo!!){
+                img[cont] = id.idTipo?.let { getImgTipo(it) }!!
+                cont += 1
+            }
+            val imgTipo1 = view.findViewById<ImageView>(R.id.imgPokedexAdapterTipo1)
+            val imgTipo2 = view.findViewById<ImageView>(R.id.imgPokedexAdapterTipo2)
+            if(img[0] != 0){
+                Glide.with(view).load(img[0]).into(imgTipo1)
+                imgTipo1.visibility = View.VISIBLE
+            } else {
+                imgTipo1.visibility = View.INVISIBLE
+            }
+            if(img[1] != 0){
+                Glide.with(view).load(img[1]).into(imgTipo2)
+                imgTipo2.visibility = View.VISIBLE
+            } else {
+                imgTipo2.visibility = View.INVISIBLE
+            }
+
+        }
         fun setId(id : Int){
             val txtId : TextView = view.findViewById(R.id.txtId)
             txtId.text = id.toString()
         }
-        fun setName(name : String){
-            val txtName : TextView = view.findViewById(R.id.txtName)
-            txtName.text = name
+        fun setName(name: String) {
+            val txtName: TextView = view.findViewById(R.id.txtName)
+            txtName.text = name.uppercase(Locale.getDefault())
         }
-        fun setTipo(tipo: List<PokemonTipo>?) {
- //           val txtTipo: TextView = view.findViewById(R.id.txtTipo)
- //           txtTipo.text = tipo
+        fun setTipo(tipo: List<Tipo>?) {
+
+            if(tipo != null){
+                val img = mutableListOf(0,0)
+                var cont = 0
+                for (id in tipo){
+                    img[cont] = id.idTipo?.let { getImgTipo(it) }!!
+                    cont += 1
+                }
+                val imgTipo1 = view.findViewById<ImageView>(R.id.imgPokedexAdapterTipo1)
+                val imgTipo2 = view.findViewById<ImageView>(R.id.imgPokedexAdapterTipo2)
+                if(img[0] != 0){
+                    Glide.with(view).load(img[0]).into(imgTipo1)
+                }
+                if(img[1] != 0){
+                    Glide.with(view).load(img[1]).into(imgTipo2)
+                }
+            }
         }
         fun setImagen(imagen : String) {
             val imgPoke = view.findViewById<ImageView>(R.id.imgPoke)
@@ -52,6 +108,68 @@ class PokemonAdapter(
         fun getCard():CardView{
             return view.findViewById(R.id.cardPokemon)
         }
+
+        private fun getImgTipo(idTipo : Int): Int{
+            var tipo = 0
+            when(idTipo){
+                1->{
+                    tipo = R.drawable.tipo_normal
+                }
+                2->{
+                    tipo = R.drawable.tipo_lucha
+                }
+                3->{
+                    tipo = R.drawable.tipo_volador
+                }
+                4->{
+                    tipo = R.drawable.tipo_veneno
+                }
+                5->{
+                    tipo = R.drawable.tipo_tierra
+                }
+                6->{
+                    tipo = R.drawable.tipo_roca
+                }
+                7->{
+                    tipo = R.drawable.tipo_bicho
+                }
+                8->{
+                    tipo = R.drawable.tipo_fantasma
+                }
+                9->{
+                    tipo = R.drawable.tipo_acero
+                }
+                10->{
+                    tipo = R.drawable.tipo_fuego
+                }
+                11->{
+                    tipo = R.drawable.tipo_agua
+                }
+                12->{
+                    tipo = R.drawable.tipo_planta
+                }
+                13->{
+                    tipo = R.drawable.tipo_electrico
+                }
+                14->{
+                    tipo = R.drawable.tipo_psiquico
+                }
+                15->{
+                    tipo = R.drawable.tipo_hielo
+                }
+                16->{
+                    tipo = R.drawable.tipo_dragon
+                }
+                17->{
+                    tipo = R.drawable.tipo_siniestro
+                }
+                18->{
+                    tipo = R.drawable.tipo_hada
+                }
+            }
+            return tipo
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonHolder {
@@ -65,23 +183,15 @@ class PokemonAdapter(
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
         val item = pokemonList[position]
-        item.let { it.Id?.let { it1 -> holder.setId(it1) } }
-        item.let { it.Nombre?.let { it1 -> holder.setName(it1) } }
-        //item?.let { holder.setTipo(it.Tipo) }
-        val id = item.Id ?: 0
-        if(id < 10){
-            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png") }
-        }else if(id < 100){
-            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png") }
-        }else{
-            pokemonList[position].let { holder.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png") }
-        }
+        holder.setAdapter(item)
+        /*
+        item.let { it.id?.let { it1 -> holder.setId(it1) } }
+        item.let { it.name?.let { it1 -> holder.setName(it1) } }
+        item.let { holder.setTipo(it.tipo) }
+        */
 
         holder.getCard().setOnClickListener {
             pokemonList[position].let { it1 -> listener.onCardViewClick(it1,position) }
-        }
-        holder.btnAddPokemon.setOnClickListener {
-            item.let { it1 -> listener.onButtonClick(it1) }
         }
     }
     @SuppressLint("NotifyDataSetChanged")
@@ -90,4 +200,6 @@ class PokemonAdapter(
         pokemonList.removeAt(position)
         notifyDataSetChanged()              //actializa el adapter
     }
+
+
 }

@@ -79,16 +79,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-        <Button
-            android:id="@+id/btnAddPokemonUser"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="+"
-            app:cornerRadius="360dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/imgPokedexAdapterTipo1"
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/cardFondoPokemon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtId" />
+
+        <ImageView
+            android:id="@+id/imgPokedexAdapterTipo2"
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgPokedexAdapterTipo1"
+            app:layout_constraintStart_toStartOf="@+id/imgPokedexAdapterTipo1"
+            app:layout_constraintTop_toBottomOf="@+id/imgPokedexAdapterTipo1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

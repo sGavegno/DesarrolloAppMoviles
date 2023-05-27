@@ -58,11 +58,6 @@ class FragmentLogin : Fragment() {
                 commit()
             }
         }
-//////////////////////////////////////////////////////////////////
-        //Eliminar estas lineas
-        val intent = Intent(activity, activity_home::class.java)
-        startActivity(intent)
-//////////////////////////////////////////////////////////////////
 
         btnNexScreen.setOnClickListener{
             //Analizo si los parametros estan en la base de datos

@@ -1,24 +1,19 @@
 package com.example.apppokedex.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.activity_home
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.Usuarios
+import com.example.apppokedex.entities.Usuario
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,11 +49,9 @@ class FragmentRegister : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val dbFb = Firebase.firestore
-        var userFb : String?
 
         btnSingIn.setOnClickListener{
-            var userNew = Usuarios(
+            val userNew = Usuario(
                 "",
                 txtUserName.text.toString(),
                 txtPassword.text.toString(),
@@ -67,17 +60,16 @@ class FragmentRegister : Fragment() {
                 txtEmail.text.toString(),
                 "",
                 "",
-                false)
+                emptyList()
+            )
 
             val inputTxtPassConf : String = txtPasswordConf.text.toString()
             if(userNew.password == inputTxtPassConf) {
                 //Analizo si los paraetros estan en la base de datos
                 viewModel.addUser(userNew)
-
             } else {
                 Snackbar.make(vista, "La contraseña no coincide", Snackbar.LENGTH_SHORT).show()
             }
-
         }
 
         viewModel.state.observe(this){

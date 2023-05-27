@@ -4,12 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.PokedexRepo
-import com.example.apppokedex.entities.Pokemon
-import com.example.apppokedex.entities.PokemonDetalle
 import com.example.apppokedex.entities.State
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,38 +19,29 @@ class FragmentPokedexViewModel @Inject constructor(
 
     val state : MutableLiveData<State> = MutableLiveData()
 
-    val pokedex : MutableLiveData<PokedexRepo> = MutableLiveData()
+    //val pokedex : MutableLiveData<PokedexRepo> = MutableLiveData()
+    val pokedex: MutableLiveData<PokedexRepo> = MutableLiveData()
 
     fun getPokedex(){
         state.postValue(State.LOADING)
         val dbFb = Firebase.firestore
         //Lista que contiene todos los pokemons de la base de datos
-        val pokemonsList = PokedexRepo()
+        val pokedexRepo = PokedexRepo()
 
-        dbFb.collection("Pokedex")
-            .orderBy("Id")
-            .limit(251) //1008
-            .get()
-            .addOnSuccessListener { documents ->
-                if(!documents.isEmpty){
-                    state.postValue(State.SUCCESS)
-
-                    val pokemon = documents.toObjects<Pokemon>()
-                    for (poke in pokemon) {
-                        pokemonsList.pokemons.add(poke)
-                        Log.d("Firebase", "${poke.Id} => ${poke.Nombre}")
-                    }
-                    //cargar pokemonsList a Shared
-                    pokedex.postValue(pokemonsList)
-                    //preferencesManager.savePokedex(pokemonAux)
+        //Traer los datos del usuario y completar el nombre del pokemon
+        val user = preferencesManager.getUserLogin()
+        val pokedexUser = user.pokedex
+        for(i in 1..1008){
+            val pokemonUser = pokedexUser?.filter { item -> item.idPokemon == i }
+            if (pokemonUser != null) {
+                if(pokemonUser.isNotEmpty()){
+                    pokedexRepo.pokedex.add(Pokedex( i, pokemonUser[0].nombre, pokemonUser[0].tipo))
                 } else {
-                    state.postValue(State.FAILURE)
+                    pokedexRepo.pokedex.add(Pokedex( i, "??????", emptyList()))
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.w("Firebase", "Error getting documents: ", exception)
-                state.postValue(State.FAILURE)
-            }
+        }
+        pokedex.postValue(pokedexRepo)
     }
 
     fun getIdUser():String{

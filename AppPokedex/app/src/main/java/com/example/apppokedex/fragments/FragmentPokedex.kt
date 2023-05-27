@@ -2,7 +2,6 @@ package com.example.apppokedex.fragments
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -15,27 +14,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.adapters.PokemonAdapter
 import com.example.apppokedex.database.*
-import com.example.apppokedex.entities.ActionLista
-import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.PokemonUser
 import com.example.apppokedex.entities.Pokemons
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputDialogListener {
 
-    val viewModel: FragmentPokedexViewModel by viewModels()
+    private val viewModel: FragmentPokedexViewModel by viewModels()
 
     private lateinit var imgTitulo : ImageView
     private lateinit var btnPokemdexAdd : Button
@@ -43,10 +36,6 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     private lateinit var adapter: PokemonAdapter
 
     lateinit var vista : View
-
-    private var db: AppDatabase? = null
-    private var pokemonDao: PokemonDao? = null
-    private var pokemonUserDao: PokemonUserDao? = null
 
     private var inputDialogListener: InputDialogListener? = null
 
@@ -75,17 +64,10 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
-        db = AppDatabase.getInstance(vista.context)
-        pokemonDao = db?.pokemonDao()
-        pokemonUserDao = db?.pokemonUserDao()
-
-        pokemonDao?.fetchAllPokemon()
-        pokemonUserDao?.fetchAllPokemonUser()
-
         viewModel.getPokedex()
 
         viewModel.pokedex.observe(this){
-            val adapterPokedex = it.pokemons
+            val adapterPokedex = it.pokedex
             adapter = PokemonAdapter(adapterPokedex, this)
             //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
             recPokemon.layoutManager = GridLayoutManager(context,2)
@@ -93,6 +75,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
             recPokemon.adapter = adapter
         }
         btnPokemdexAdd.visibility = View.INVISIBLE
+
         btnPokemdexAdd.setOnClickListener{
             onClick()
         }
@@ -127,15 +110,17 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     override fun onInputDone(input: Int) {
         val imgUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$input.png"
         val newPokemon = Pokemons(0,input,"Nombre","tipo","debilidad",imgUrl,"Descripcion","Altura","Peso","categoria","Habilidad",0,0,0)
+/*
         val pokemon = pokemonDao?.fetchPokemonByIdPokemon(input)
         if(pokemon == null)
         {
-            pokemonDao?.insertPokemon(newPokemon)
+            //pokemonDao?.insertPokemon(newPokemon)
             val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(input)
             findNavController().navigate(action)            //accion de cambiar de pantalla
         } else {
             Snackbar.make(vista, "El Id: $input ya se encuentra en la base de datos", Snackbar.LENGTH_SHORT).show()
         }
+*/
     }
 
     override fun onInputStringDone(input: String) {
@@ -143,7 +128,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
     }
 
     //Funciones del Adapter
-    override fun onCardViewClick(pokemon: Pokemon, position: Int) {
+    override fun onCardViewClick(pokemon: Pokedex, position: Int) {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         if (sharedPref != null) {
@@ -152,30 +137,32 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener,InputD
                 commit()
             }
         }
-        if(pokemon.Id != null){
+        if(pokemon.id != null){
             // Código para atender el clic del CardView del elemento del RecyclerView
             val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
-                pokemon.Id
+                pokemon.id
             )
             findNavController().navigate(action)            //accion de cambiar de pantalla
         }
     }
-    override fun onButtonClick(pokemon: Pokemon) {
+
+    //Agrega el pokemon a la lista del usuario No se usa más
+    override fun onButtonClick(pokemon: Pokedex) {
 
         val idUser = viewModel.getIdUser()
-
-        val checkPokemonUser =
-            pokemon.Id?.let { pokemonUserDao?.fetchPokemonUserByPokemon(idUser, it) }
+/*
+        val checkPokemonUser = checkUserPokemon(id)
         if(checkPokemonUser == null)
         {
-            val idPokemon = pokemon.Id
+            val idPokemon = pokemon.id
             if(idPokemon != null){
-                pokemonUserDao?.insertPokemonUser(PokemonUser(0,idUser,idPokemon, "mote",0,"10","10","pokemon.descripcion"))
-                Snackbar.make(vista, "${pokemon.Nombre} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
+
+                Snackbar.make(vista, "${pokemon.name} ha sido agregado correctamente", Snackbar.LENGTH_SHORT).show()
             }
         } else {
-            Snackbar.make(vista, "${pokemon.Nombre} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(vista, "${pokemon.name} ya esa en la lista.", Snackbar.LENGTH_SHORT).show()
         }
+*/
     }
 
 }

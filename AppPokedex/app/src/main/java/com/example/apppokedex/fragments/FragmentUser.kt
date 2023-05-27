@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.Usuarios
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -110,19 +109,15 @@ class FragmentUser : Fragment() {
         alertDialog.setPositiveButton("Aceptar") { _, _ ->
             // Obtener el nuevo texto del EditText y establecerlo en el TextView
             val newText = editText.text.toString()
-            val password = viewModel.getUserPassword()
-            if(password == newText){
-                val user = Usuarios(
-                    idUser,
-                    viewModel.getUserName(),
-                    inputTxtPass.text.toString(),
-                    inputTxtNombre.text.toString(),
-                    inputTxtApellido.text.toString(),
-                    inputTxtEmail.text.toString(),
-                    inputTxtTelefono.text.toString(),
-                    inputTxtDireccion.text.toString(),
-                    viewModel.getUserPermisos()
-                )
+            var user = viewModel.getUserData()
+            if(user.password == newText){
+                user.password = inputTxtPass.text.toString()
+                user.name = inputTxtNombre.text.toString()
+                user.lastName = inputTxtApellido.text.toString()
+                user.email = inputTxtEmail.text.toString()
+                user.telefono = inputTxtTelefono.text.toString()
+                user.direccion =inputTxtDireccion.text.toString()
+
                 viewModel.updateUserData(user)
             } else {
                 Snackbar.make(vista, "Clave Incorrecta", Snackbar.LENGTH_SHORT).show()

@@ -10,3 +10,7 @@ data class PoekemonAtaques(
     val id_Tipo: Int? = null,
     val Tipo: PoekemonAtaquesTipoDetalle? = null
 )
+
+data class PoekemonAtaquesTipoDetalle(
+    val Nombre: String? = null
+)

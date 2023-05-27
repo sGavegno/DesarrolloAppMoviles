@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.Usuarios
+import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,34 +19,22 @@ class FragmentRegisterViewModel @Inject constructor(
     val state : MutableLiveData<State> = MutableLiveData()
 
     val dbFb = Firebase.firestore
-    fun addUser(userNew: Usuarios){
+    fun addUser(userNew: Usuario){
 
         state.postValue(State.LOADING)
 
         //Buscar si exciste en la base de datos
-        dbFb.collection("user")
+        dbFb.collection("Usuarios")
             .whereEqualTo("userName", userNew.userName)
             .get()
             .addOnSuccessListener { documents ->
                 if(documents.isEmpty){
-                    // Create a new user with a first and last name
-                    val user = hashMapOf(
-                        "userName" to userNew.userName,
-                        "password" to userNew.password,
-                        "name" to userNew.name,
-                        "lastName" to userNew.lastName,
-                        "email" to userNew.email,
-                        "telefono" to userNew.telefono,
-                        "direccion" to userNew.direccion,
-                        "permisos" to false
-                    )
                     // Add a new document with a generated ID
                     dbFb.collection("user")
-                        .add(user)
+                        .add(userNew)
                         .addOnSuccessListener { documentReference ->
 
                             Log.d("Firebase", "DocumentSnapshot added with ID: ${documentReference.id}")
-
                             //agrego el Id en la BD
                             val userId = documentReference.id
                             userNew.id = userId

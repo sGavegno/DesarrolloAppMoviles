@@ -118,12 +118,12 @@ class FragmentPokedexData : Fragment() {
         }
 
         viewModel.pokemonEvolucionData.observe(this){
-            val evolcuinesLista = it.CadenaEvolutiva?.sortedBy { it.Id }
+            val evolcuinesLista = it.CadenaEvolutiva?.sortedBy { it.id }
             if(evolcuinesLista != null){
 
                 adapter = EvolucionesAdapter(evolcuinesLista){ position ->
                     //Guardar datos actualizados
-                    val idPoke = evolcuinesLista[position].Id
+                    val idPoke = evolcuinesLista[position].id
                     val action = FragmentPokedexDataDirections.actionFragmentPokedexDataSelf(
                         idPoke!!
                     )
