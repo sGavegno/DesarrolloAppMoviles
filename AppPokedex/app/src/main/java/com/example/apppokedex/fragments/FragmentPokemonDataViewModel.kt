@@ -28,7 +28,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
         statePokemon.postValue(State.LOADING)
 
         dbFb.collection("Pokedex")
-            .whereEqualTo("Id", idPokemon)
+            .whereEqualTo("id", idPokemon)
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){

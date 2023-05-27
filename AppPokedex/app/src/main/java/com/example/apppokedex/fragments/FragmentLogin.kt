@@ -61,8 +61,10 @@ class FragmentLogin : Fragment() {
 
         btnNexScreen.setOnClickListener{
             //Analizo si los parametros estan en la base de datos
-            val inputTxtUserName : String = inputTxtUser.text.toString()
-            val inputTxtUserPass : String = inputTxtPass.text.toString()
+//            val inputTxtUserName : String = inputTxtUser.text.toString()
+//            val inputTxtUserPass : String = inputTxtPass.text.toString()
+            val inputTxtUserName : String = "admin"
+            val inputTxtUserPass : String = "admin"
 
             viewModel.getUser(inputTxtUserName, inputTxtUserPass)
         }

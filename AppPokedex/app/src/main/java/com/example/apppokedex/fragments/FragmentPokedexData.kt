@@ -76,49 +76,49 @@ class FragmentPokedexData : Fragment() {
 
         viewModel.pokemonData.observe(this){
 
-            labelName.text = it.Nombre
-            labelId.text = it.Id.toString()
+            labelName.text = it.nombre
+            labelId.text = it.id.toString()
             var cont = 0
-            for(tipo in it.Tipo!!){
-                tipo.Id_Tipo?.let { it1 -> setImgTipo(it1, cont) }
+            for(tipo in it.tipo!!){
+                tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
                 cont += 1
             }
 
-            labelGeneracion.text = it.Detalle?.IdGeneracion.toString()
+            labelGeneracion.text = it.detalle?.idGeneracion.toString()
             labelDebilidad.text = "Implementar Tabla PokemonTipos"
             labelDescripcion.text = "pokemon.descripcion"
-            var altura = it.Altura
+            val altura = it.altura
             val alturaString = (altura?.div(10)).toString() + "," + (altura?.rem(10)).toString() + " m"
             labelAltura.text = alturaString
-            var peso = it.Peso
+            val peso = it.peso
             val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
             labelPeso.text = pesoString
 
             var habilidadString = ""
-            for(habilidad in it.Habilidades!!){
-                habilidadString += (habilidad.Detalle?.Nombre ?: "Habilidad")
+            for(habilidad in it.habilidades!!){
+                habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
                 habilidadString += "\n"
             }
             labelHabilidad.text = habilidadString
 
-            val id = it.Id
+            val id = it.id
             if(id != null){
                 if(id < 10){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png"
                 }else if(id < 100){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png"
                 }else{
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png"
                 }
             }
-            it.Detalle?.Id_CadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
+            it.detalle?.idCadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
         }
 
         viewModel.pokemonEvolucionData.observe(this){
-            val evolcuinesLista = it.CadenaEvolutiva?.sortedBy { it.id }
+            val evolcuinesLista = it.cadenaEvolutiva?.sortedBy { it.id }
             if(evolcuinesLista != null){
 
                 adapter = EvolucionesAdapter(evolcuinesLista){ position ->

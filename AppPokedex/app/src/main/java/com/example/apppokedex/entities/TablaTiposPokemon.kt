@@ -1,19 +1,19 @@
 package com.example.apppokedex.entities
 
 data class TablaTiposPokemon(
-    val Id_Tipo: Int? = null,
-    val Tipo: String? = null,
-    val Danio: TablaTiposEfectividad? = null
+    val idTipo: Int? = null,
+    val tipo: String? = null,
+    val danio: TablaTiposEfectividad? = null
 )
 
 data class TablaTiposEfectividad(
-    val Inmune: List<TablaTipoDetalle>? = null,
-    val Debil: List<TablaTipoDetalle>? = null,
-    val Efectivo: List<TablaTipoDetalle>? = null,
-    val No_Efectivo: List<TablaTipoDetalle>? = null
+    val inmune: List<TablaTipoDetalle>? = null,
+    val debil: List<TablaTipoDetalle>? = null,
+    val efectivo: List<TablaTipoDetalle>? = null,
+    val noEfectivo: List<TablaTipoDetalle>? = null
 )
 
 data class TablaTipoDetalle(
-    val Id_Tipo: Int? = null,
-    val Tipo: String? = null
+    val idTipo: Int? = null,
+    val tipo: String? = null
 )

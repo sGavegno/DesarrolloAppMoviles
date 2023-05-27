@@ -2,7 +2,7 @@ package com.example.apppokedex.entities
 
 data class Evoluciones(
     val id: Int? = null,
-    val CadenaEvolutiva: List<EvolucionesCadena>? = null
+    val cadenaEvolutiva: List<EvolucionesCadena>? = null
 )
 
 data class EvolucionesCadena(

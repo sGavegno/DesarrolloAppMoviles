@@ -39,7 +39,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPoke"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/txtPokeMoteDato"
@@ -423,7 +424,7 @@
 
             <ImageView
                 android:id="@+id/imgPokemonTipo1"
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokeTipo"
                 app:layout_constraintStart_toStartOf="@+id/txtPokeNameDato"
@@ -431,7 +432,7 @@
 
             <ImageView
                 android:id="@+id/imgPokemonTipo2"
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgPokemonTipo1"
@@ -460,7 +461,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/txtPokeHabilidad"
-                app:layout_constraintStart_toStartOf="@+id/imgPokemonTipo1"
+                app:layout_constraintStart_toStartOf="@+id/txtPokeNameDato"
                 app:layout_constraintTop_toTopOf="@+id/txtPokeHabilidad" />
 
             <TextView
@@ -501,7 +502,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clNotas"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
 
                     <TextView
                         android:id="@+id/txtNotas"

@@ -29,18 +29,18 @@
             app:cardCornerRadius="128dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtIdPokeUserDato"
+            app:layout_constraintStart_toEndOf="@+id/txtIdPokePcDato"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imgPokeUser"
+                android:id="@+id/imgPokePc"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:background="@drawable/poke_fondo1" />
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/txtNombrePokeUser"
+            android:id="@+id/txtNombrePokePcDato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -61,10 +61,10 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombrePokeUser" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNombrePokePcDato" />
 
         <TextView
-            android:id="@+id/txtIdPokeUserDato"
+            android:id="@+id/txtIdPokePcDato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="id"
@@ -73,6 +73,24 @@
             app:layout_constraintBottom_toBottomOf="@+id/txtIdPokeUser"
             app:layout_constraintStart_toEndOf="@+id/txtIdPokeUser"
             app:layout_constraintTop_toTopOf="@+id/txtIdPokeUser" />
+
+        <ImageView
+            android:id="@+id/imgPcAdapterTipo1"
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/cardPokemonUserFondo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtIdPokePcDato" />
+
+        <ImageView
+            android:id="@+id/imgPcAdapterTipo2"
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgPcAdapterTipo1"
+            app:layout_constraintStart_toStartOf="@+id/imgPcAdapterTipo1"
+            app:layout_constraintTop_toBottomOf="@+id/imgPcAdapterTipo1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

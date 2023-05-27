@@ -30,7 +30,7 @@ class FragmentPokedexDataViewModel @Inject constructor(
         val dbFb = Firebase.firestore
 
         dbFb.collection("Pokedex")
-            .whereEqualTo("Id", idPokemon)
+            .whereEqualTo("id", idPokemon)
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){

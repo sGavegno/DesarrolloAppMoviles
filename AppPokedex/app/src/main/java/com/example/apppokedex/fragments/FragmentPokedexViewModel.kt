@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.PokedexRepo
+import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
+import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,13 +21,14 @@ class FragmentPokedexViewModel @Inject constructor(
 ): ViewModel() {
 
     val state : MutableLiveData<State> = MutableLiveData()
+    val stateUsuario : MutableLiveData<State> = MutableLiveData()
+    val statePokemon : MutableLiveData<State> = MutableLiveData()
 
-    //val pokedex : MutableLiveData<PokedexRepo> = MutableLiveData()
     val pokedex: MutableLiveData<PokedexRepo> = MutableLiveData()
+    val pokemonData : MutableLiveData<Pokemon> = MutableLiveData()
 
     fun getPokedex(){
         state.postValue(State.LOADING)
-        val dbFb = Firebase.firestore
         //Lista que contiene todos los pokemons de la base de datos
         val pokedexRepo = PokedexRepo()
 
@@ -44,8 +48,55 @@ class FragmentPokedexViewModel @Inject constructor(
         pokedex.postValue(pokedexRepo)
     }
 
+    fun getPokemonById(idPokemon: Int){
+        statePokemon.postValue(State.LOADING)
+        val dbFb = Firebase.firestore
+
+        dbFb.collection("Pokedex")
+            .whereEqualTo("id", idPokemon)
+            .get()
+            .addOnSuccessListener { documents ->
+                if(!documents.isEmpty){
+                    statePokemon.postValue(State.SUCCESS)
+                    val pokemon = documents.toObjects<Pokemon>()
+                    pokemonData.postValue(pokemon[0])
+                } else {
+                    statePokemon.postValue(State.FAILURE)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Firebase", "Error getting documents: ", exception)
+                statePokemon.postValue(State.FAILURE)
+            }
+    }
+
+    fun updateUserData(user : Usuario){
+
+        stateUsuario.postValue(State.LOADING)
+
+        val dbFb = Firebase.firestore
+        val usersCollection = dbFb.collection("Usuarios")
+
+        val id = preferencesManager.getIdUser()
+
+        user.id = id
+        usersCollection.document(id)
+            .set(user)
+            .addOnSuccessListener {
+                preferencesManager.saveUser(user)
+                stateUsuario.postValue(State.SUCCESS)
+            }
+            .addOnFailureListener { exception ->
+                stateUsuario.postValue(State.FAILURE)
+            }
+    }
+
     fun getIdUser():String{
         return preferencesManager.getIdUser()
+    }
+
+    fun getUser():Usuario{
+        return preferencesManager.getUserLogin()
     }
 
 }

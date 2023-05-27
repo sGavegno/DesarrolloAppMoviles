@@ -41,7 +41,7 @@ class FragmentUserViewModel @Inject constructor(
         state.postValue(State.LOADING)
 
         val dbFb = Firebase.firestore
-        val usersCollection = dbFb.collection("user")
+        val usersCollection = dbFb.collection("Usuarios")
 
         val id = preferencesManager.getIdUser()
 

@@ -60,7 +60,7 @@ class FragmentRegister : Fragment() {
                 txtEmail.text.toString(),
                 "",
                 "",
-                emptyList()
+                mutableListOf()
             )
 
             val inputTxtPassConf : String = txtPasswordConf.text.toString()

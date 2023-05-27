@@ -67,7 +67,7 @@ class FragmentPokemonData : Fragment() {
         imgTipo2 = vista.findViewById(R.id.imgPokemonTipo2)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
         labelObjeto = vista.findViewById(R.id.txtPokeObjetoDato)
-        labelNotas = vista.findViewById(R.id.txtNotas)
+        labelNotas = vista.findViewById(R.id.txtNotasDato)
 
         labelPs = vista.findViewById(R.id.txtPsDato)
         barrPs = vista.findViewById(R.id.progressBarPs)
@@ -108,17 +108,17 @@ class FragmentPokemonData : Fragment() {
 
         viewModel.pokemonData.observe(this){
 
-            labelId.text = it.Id.toString()
-            labelName.text = it.Nombre
+            labelId.text = it.id.toString()
+            labelName.text = it.nombre
             var cont = 0
-            for(tipo in it.Tipo!!){
-                tipo.Id_Tipo?.let { it1 -> setImgTipo(it1, cont) }
+            for(tipo in it.tipo!!){
+                tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
                 cont += 1
             }
 
             var habilidadString = ""
-            for(habilidad in it.Habilidades!!){
-                habilidadString += (habilidad.Detalle?.Nombre ?: "Habilidad")
+            for(habilidad in it.habilidades!!){
+                habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
                 habilidadString += "\n"
             }
             labelHabilidad.text = habilidadString
@@ -126,25 +126,25 @@ class FragmentPokemonData : Fragment() {
             labelNotas.text = "Test. Se captuo en... al nivle ##"
 
             //
-            for(state in it.Stats!!){
-                state.Detalle?.Nombre?.let { it1 ->
-                    state.Stats_Base?.let { it2 ->
+            for(state in it.stats!!){
+                state.detalle?.nombre?.let { it1 ->
+                    state.statsBase?.let { it2 ->
                         setStats(it1,it2)
                     }
                 }
             }
 
-            val id = it.Id
+            val id = it.id
             if(id != null){
                 if(id < 10){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png"
                 }else if(id < 100){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png"
                 }else{
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+ it.Id +".png"
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png"
                 }
             }
         }

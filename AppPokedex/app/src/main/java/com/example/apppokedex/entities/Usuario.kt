@@ -9,13 +9,13 @@ data class Usuario(
     var email: String? = null,
     var telefono: String? = null,
     var direccion: String? = null,
-    var pokedex: List<Pc>? = null
+    var pokedex: MutableList<Pc>? = null
 )
 
 data class Pc(
     var idPokemon: Int? = null,
     var nombre: String? = null,
-    var tipo: List<Tipo>? = null,
+    var tipo: List<PokemonTipo>? = null,
     var inPc: Boolean? = null,
     var mote: String? = null,
     var nivel: Int? = null,
@@ -28,7 +28,4 @@ data class Pc(
     var ataque4: String? = null
 )
 
-data class Tipo(
-    var idTipo: Int? = null
-)
 

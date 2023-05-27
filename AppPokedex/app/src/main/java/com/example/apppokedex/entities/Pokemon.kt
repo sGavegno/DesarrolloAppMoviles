@@ -1,53 +1,53 @@
 package com.example.apppokedex.entities
 
 data class Pokemon(
-    val Id: Int? = null,
-    val Nombre: String? = null,
-    val Tipo: List<PokemonTipo>? = null,
-    val Altura: Int? = null,
-    val Peso: Int? = null,
-    val ExpBase: Int? = null,
-    val Stats: List<PokemonStats>? = null,
-    val Detalle: PokemonDetalle? = null,
-    val Habilidades: List<PokemonHabilidad>? = null
+    val id: Int? = null,
+    val nombre: String? = null,
+    val tipo: List<PokemonTipo>? = null,
+    val altura: Int? = null,
+    val peso: Int? = null,
+    val expBase: Int? = null,
+    val stats: List<PokemonStats>? = null,
+    val detalle: PokemonDetalle? = null,
+    val habilidades: List<PokemonHabilidad>? = null
 )
 
 data class PokemonTipo(
-    val Id_Tipo: Int? = null,
-    val Detalle: PokemonTipoDetalle? = null
+    val idTipo: Int? = null,
+    val detalle: PokemonTipoDetalle? = null
 )
 
 data class PokemonTipoDetalle(
-    val Nombre: String? = null
+    val nombre: String? = null
 )
 
 data class PokemonStats(
-    val Stats_Base: Int? = null,
-    val Id_Stats: Int? = null,
-    val Detalle: PokemonStatsDetalle? = null
+    val statsBase: Int? = null,
+    val idStats: Int? = null,
+    val detalle: PokemonStatsDetalle? = null
 )
 data class PokemonStatsDetalle(
-    val Nombre: String? = null
+    val nombre: String? = null
 )
 
 data class PokemonDetalle(
-    val Bebe: Boolean? = null,
-    val FelicidadBase: Int? = null,
-    val Legendario: Boolean? = null,
-    val Mitico: Boolean? = null,
-    val RatioCaptura: Int? = null,
-    val TasaGenero: Int? = null,
-    val Variantes: Boolean? = null,
-    val IdGeneracion: Int? = null,
-    val Id_CadenaEvolutiva: Int? = null,
-    val Id_EvolucionaDe: Int? = null,
+    val bebe: Boolean? = null,
+    val felicidadBase: Int? = null,
+    val legendario: Boolean? = null,
+    val mitico: Boolean? = null,
+    val ratioCaptura: Int? = null,
+    val tasaGenero: Int? = null,
+    val variantes: Boolean? = null,
+    val idGeneracion: Int? = null,
+    val idCadenaEvolutiva: Int? = null,
+    val idEvolucionaDe: Int? = null,
 )
 
 data class PokemonHabilidad(
-    val Detalle: PokemonHabilidadDetalle? = null,
-    val Id_Habilidades: Int? = null
+    val detalle: PokemonHabilidadDetalle? = null,
+    val idHabilidades: Int? = null
 )
 
 data class PokemonHabilidadDetalle(
-    val Nombre: String? = null
+    val nombre: String? = null
 )
