@@ -69,8 +69,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
             recPokemon.scrollToPosition(posPokedex!!)
             recPokemon.adapter = adapter
         }
-        btnPokemdexAdd.visibility = View.VISIBLE
-
+        btnPokemdexAdd.visibility = View.INVISIBLE
+/*
         btnPokemdexAdd.setOnClickListener{
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setTitle("Ingrese el ID del Pokemon Capturado")
@@ -133,7 +133,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
                 else -> {}
             }
         }
-
+*/
     }
 
     //Funciones del Adapter

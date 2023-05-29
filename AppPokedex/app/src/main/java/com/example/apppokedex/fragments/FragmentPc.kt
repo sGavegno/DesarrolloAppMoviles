@@ -1,11 +1,15 @@
 package com.example.apppokedex.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,7 +20,10 @@ import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonPcAdapter
 import com.example.apppokedex.entities.ActionListaPC
+import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokedex
+import com.example.apppokedex.entities.State
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +34,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
     lateinit var vista : View
     lateinit var imgTitulo : ImageView
     lateinit var recPokemon : RecyclerView
+    private lateinit var btnPcAdd : Button
     lateinit var adapter: PokemonPcAdapter
 
     override fun onCreateView(
@@ -36,6 +44,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
         vista = inflater.inflate(R.layout.fragment_fragment_pc, container, false)
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTituloPc)
+        btnPcAdd = vista.findViewById(R.id.btnPcAdd)
         return vista
 
     }
@@ -63,6 +72,65 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
             }
             val itemTouchHelper = ItemTouchHelper(swipeHandler)
             itemTouchHelper.attachToRecyclerView(recPokemon)
+        }
+
+        btnPcAdd.setOnClickListener{
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle("Ingrese el ID del Pokemon Capturado")
+            val input = EditText(requireContext())
+            input.inputType = InputType.TYPE_CLASS_NUMBER
+            alertDialog.setView(input)
+            alertDialog.setPositiveButton("OK") { _, _ ->
+                val idPoke = input.text.toString().toInt()
+                viewModel.getPokemonById(idPoke)
+            }
+            alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.cancel()
+            }
+            alertDialog.show()
+        }
+        var idPokemon = 0
+        viewModel.pokemonData.observe(this){
+            idPokemon = it.id!!
+            val user = viewModel.getUser()
+            val pokedexUser = user.pokedex
+            if (pokedexUser != null) {
+                val pokemon = Pc(
+                    it.id,
+                    it.nombre,
+                    it.tipo,
+                    true,
+                    it.nombre,         //Falta dar la opcion de agregar un Mote
+                    12,             //Falta configurar el nivel
+                    null,
+                    null,
+                    true,
+                    "",
+                    "",
+                    "",
+                    ""
+                )
+                user.pokedex!!.add(pokemon)
+                viewModel.updateUserData(user)
+            }
+        }
+
+        viewModel.stateUsuario.observe(this){
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Procesando captura", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS->{
+                    Snackbar.make(vista, "Carga Exitosa", Snackbar.LENGTH_SHORT).show()
+                    //Refrescar pantalla
+                    val action = FragmentPcDirections.actionFragmentPcToFragmentPokemonData(idPokemon)
+                    findNavController().navigate(action)            //accion de cambiar de pantalla
+                }
+                State.FAILURE->{
+                    Snackbar.make(vista, "Error en la carga del pokemon", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
         }
 
     }

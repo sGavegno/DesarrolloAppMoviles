@@ -8,6 +8,17 @@
     android:background="#B5C7ED"
     tools:context=".fragments.FragmentPc">
 
+    <Button
+        android:id="@+id/btnPcAdd"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="64dp"
+        android:text="+"
+        app:cornerRadius="360dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/imgTituloPc"
         android:layout_width="0dp"
