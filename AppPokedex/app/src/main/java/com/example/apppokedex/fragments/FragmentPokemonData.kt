@@ -117,13 +117,15 @@ class FragmentPokemonData : Fragment() {
                 tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
                 cont += 1
             }
-
+/*
             var habilidadString = ""
             for(habilidad in it.habilidades!!){
                 habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
                 habilidadString += "\n"
             }
             labelHabilidad.text = habilidadString
+*/
+            labelHabilidad.text = it.habilidades?.get(0)?.detalle?.nombre ?: ""
 
             labelNotas.text = "Test. Se captuo en... al nivle ##"
 

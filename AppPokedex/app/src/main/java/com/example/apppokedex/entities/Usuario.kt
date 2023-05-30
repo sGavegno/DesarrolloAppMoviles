@@ -19,6 +19,7 @@ data class Pc(
     var mote: String? = null,
     var tipo: List<PokemonTipo>? = null,
     var nivel: Int? = null,
+    var habilidad: String? = null,
     var objeto: String? = null,
     var idObjeto: Int? = null,
     var genero: Boolean? = null,

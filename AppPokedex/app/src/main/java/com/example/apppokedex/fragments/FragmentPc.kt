@@ -24,6 +24,7 @@ import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonHabilidad
 import com.example.apppokedex.entities.Pokemons
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.UserPokedex
@@ -57,7 +58,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
 
     override fun onStart() {
         super.onStart()
-
+        setInputDialogListener(this)
         Glide.with(vista)
             .load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png")
             .into(imgTitulo)
@@ -86,24 +87,10 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
 
         btnPcAdd.setOnClickListener {
 
-            val alertDialog = AlertDialog.Builder(requireContext())
-            alertDialog.setTitle("Ingrese el ID del Pokemon Capturado")
-            val input = EditText(requireContext())
-            input.inputType = InputType.TYPE_CLASS_NUMBER
-            alertDialog.setView(input)
-            alertDialog.setPositiveButton("OK") { _, _ ->
-                val idPoke = input.text.toString().toInt()
-                viewModel.getPokemonById(idPoke)
-            }
-            alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
-                dialog.cancel()
-            }
-            alertDialog.show()
+            onClick()
 
             var idPokemon = 0
             viewModel.pokemonData.observe(this) {
-
-//                onClick()
 
                 idPokemon = it.id!!
                 val user = viewModel.getUser()
@@ -120,28 +107,15 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
                         12,                 //Falta configurar el nivel
                         null,
                         null,
+                        null,
                         true,
                         "",
                         "",
                         "",
                         ""
                     )
-                    onClick(pokemonPc)
-                    user.pc!!.add(pokemonPc)
+                    onClick2(pokemonPc, it)
                 }
-                val pokedexUser = user.pokedex
-                if (pokedexUser != null) {
-                    val pokedexAux = pokedexUser.filter { item -> item.idPokemon == it.id }
-                    if (pokedexAux.isEmpty()) {
-                        val pokedex = UserPokedex(
-                            it.id,
-                            it.nombre,
-                            it.tipo
-                        )
-                        user.pokedex!!.add(pokedex)
-                    }
-                }
-                viewModel.updateUserData(user)
             }
 
             viewModel.stateUsuario.observe(this) {
@@ -197,14 +171,23 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
     }
 
     //Funciones del boton add pokemon
-    private fun onClick(poke: Pc) {
-        //showInputDialog(poke)
-        showInputDialogMote(poke)
+    private fun onClick() {
+        showInputDialogId()
+        //showInputDialogMote(poke, pokemon)
         //showInputDialogNivel(poke)
         //showInputDialogGenero(poke)
+        //showInputDialogHabilidad(poke)
     }
 
-    private fun showInputDialog(poke: Pc) {
+    private fun onClick2(poke: Pc,pokemon: Pokemon) {
+//        showInputDialogId()
+        showInputDialogMote(poke, pokemon)
+        //showInputDialogNivel(poke)
+        //showInputDialogGenero(poke)
+        //showInputDialogHabilidad(poke)
+    }
+
+    private fun showInputDialog(Id: Int) {
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setTitle("Ingrese el ID del Pokemon")
         val input = EditText(requireContext())
@@ -220,25 +203,42 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
         alertDialog.show()
     }
 
-    private fun showInputDialogMote(poke: Pc) {
+    private fun showInputDialogId() {
         val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle("Ingrese Mote del Pokemon")
+        alertDialog.setTitle("Ingrese el ID del Pokemon Capturado")
         val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        alertDialog.setView(input)
+        alertDialog.setPositiveButton("OK") { _, _ ->
+            val idPoke = input.text.toString().toInt()
+            viewModel.getPokemonById(idPoke)
+        }
+        alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.cancel()
+        }
+        alertDialog.show()
+    }
+
+    private fun showInputDialogMote(poke: Pc,pokemon: Pokemon) {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Ingrese un Mote del Pokemon")
+        val input = EditText(requireContext())
+        input.setText(pokemon.nombre)
         alertDialog.setView(input)
         alertDialog.setPositiveButton("Confirmar") { _, _ ->
             poke.mote = input.text.toString()
-            inputDialogListener?.onInputMoteDone(poke)
+            inputDialogListener?.onInputMoteDone(poke, pokemon)
         }
         alertDialog.setNegativeButton("Cancelar") { _, _ ->
-            inputDialogListener?.onInputMoteDone(poke)
+            inputDialogListener?.onInputMoteDone(poke, pokemon)
 //            dialog.cancel()
         }
         alertDialog.show()
     }
 
-    private fun showInputDialogNivel(poke: Pc) {
+    private fun showInputDialogNivel(poke: Pc, pokemon: Pokemon) {
         val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle("Ingrese el ID del Pokemon")
+        alertDialog.setTitle("Ingrese el NIvel del Pokemon")
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_NUMBER
         input.keyListener =
@@ -246,26 +246,43 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
         alertDialog.setView(input)
         alertDialog.setPositiveButton("OK") { _, _ ->
             poke.nivel = input.text.toString().toInt()
-            inputDialogListener?.onInputNivelDone(poke)
-        }
-        alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.cancel()
+            inputDialogListener?.onInputNivelDone(poke, pokemon)
         }
         alertDialog.show()
     }
 
-    private fun showInputDialogGenero(poke: Pc) {
+    private fun showInputDialogGenero(poke: Pc, pokemon: Pokemon) {
+        val options = arrayOf("Masculino", "Femenino")
+
         val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle("Ingrese el ID del Pokemon")
+        alertDialog.setTitle("Seleccione el genero del Pokemon")
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_NUMBER
         alertDialog.setView(input)
-        alertDialog.setPositiveButton("OK") { _, _ ->
-//            poke.genero = input.text.toString().toInt()
-            inputDialogListener?.onInputGeneroDone(poke)
+        alertDialog.setItems(options) { dialog, which ->
+            poke.genero = which == 1
+            inputDialogListener?.onInputGeneroDone(poke, pokemon)
         }
-        alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.cancel()
+        alertDialog.show()
+    }
+
+    private fun showInputDialogHabilidad(poke: Pc, pokemon: Pokemon) {
+        val habilidadAux: MutableList<String> = mutableListOf()
+
+        for (habilidad in pokemon.habilidades!!){
+            habilidadAux.add(habilidad.detalle?.nombre.toString())
+        }
+
+        val options = habilidadAux.toTypedArray()
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Seleccione la habilidad del Pokemon")
+        val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        alertDialog.setView(input)
+        alertDialog.setItems(options) { dialog, which ->
+            poke.habilidad = options[which]
+            inputDialogListener?.onInputHabilidadDone(poke, pokemon)
         }
         alertDialog.show()
     }
@@ -287,16 +304,35 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener,InputDi
         */
     }
 
-    override fun onInputMoteDone(poke: Pc) {
-        showInputDialogNivel(poke)
+    override fun onInputMoteDone(poke: Pc, pokemon: Pokemon) {
+        showInputDialogNivel(poke, pokemon)
     }
 
-    override fun onInputNivelDone(poke: Pc) {
-        showInputDialogGenero(poke)
+    override fun onInputNivelDone(poke: Pc, pokemon: Pokemon) {
+        showInputDialogGenero(poke, pokemon)
     }
 
-    override fun onInputGeneroDone(poke: Pc) {
-        TODO("Not yet implemented")
+    override fun onInputGeneroDone(poke: Pc, pokemon: Pokemon) {
+        showInputDialogHabilidad(poke, pokemon)
+    }
+
+    override fun onInputHabilidadDone(poke: Pc, pokemon: Pokemon){
+        val user = viewModel.getUser()
+        user.pc!!.add(poke)
+
+        val pokedexUser = user.pokedex
+        if (pokedexUser != null) {
+            val pokedexAux = pokedexUser.filter { item -> item.idPokemon == pokemon.id }
+            if (pokedexAux.isEmpty()) {
+                val pokedex = UserPokedex(
+                    pokemon.id,
+                    pokemon.nombre,
+                    pokemon.tipo
+                )
+                user.pokedex!!.add(pokedex)
+            }
+        }
+        viewModel.updateUserData(user)
     }
 
     override fun onInputStringDone(input: String) {
