@@ -67,25 +67,25 @@ class FragmentLogin : Fragment() {
             val inputTxtUserPass : String = "admin"
 
             viewModel.getUser(inputTxtUserName, inputTxtUserPass)
-        }
 
-        viewModel.state.observe(this){state ->
-            when(state){
-                State.SUCCESS ->{
-                    inputTxtUser.setText("")
-                    inputTxtPass.setText("")
+            viewModel.state.observe(this){state ->
+                when(state){
+                    State.SUCCESS ->{
+                        inputTxtUser.setText("")
+                        inputTxtPass.setText("")
 
-                    val intent = Intent(activity, activity_home::class.java)
-                    startActivity(intent)
-                }
-                State.FAILURE ->{
-                    Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
-                }
-                State.LOADING ->{
-                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
-                }
-                null ->{
+                        val intent = Intent(activity, activity_home::class.java)
+                        startActivity(intent)
+                    }
+                    State.FAILURE ->{
+                        Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
+                    }
+                    State.LOADING ->{
+                        Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                    }
+                    null ->{
 
+                    }
                 }
             }
         }

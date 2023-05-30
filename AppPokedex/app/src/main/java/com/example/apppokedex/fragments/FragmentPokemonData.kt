@@ -11,8 +11,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.State
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +27,7 @@ class FragmentPokemonData : Fragment() {
     private lateinit var labelLvl : TextView
     private lateinit var labelMote : TextView
     private lateinit var labelGenero : TextView
+    private lateinit var btnLiberar : Button
     private lateinit var btnLevlUp : Button
     private lateinit var btnAddObjeto : Button
     private lateinit var labelId : TextView
@@ -59,6 +63,7 @@ class FragmentPokemonData : Fragment() {
         labelLvl = vista.findViewById(R.id.txtPokeLvlDato)
         labelMote = vista.findViewById(R.id.txtPokeMoteDato)
         labelGenero = vista.findViewById(R.id.txtGeneroDato)
+        btnLiberar = vista.findViewById(R.id.btnLiberar)
         btnLevlUp = vista.findViewById(R.id.btnLvlUp)
         btnAddObjeto = vista.findViewById(R.id.btnObjeto)
         labelId = vista.findViewById(R.id.txtPokeIdDato)
@@ -89,8 +94,6 @@ class FragmentPokemonData : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val idUser = viewModel.getIdUser()
-
         val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
 
         viewModel.getPokemonById(idPokemon)
@@ -107,7 +110,6 @@ class FragmentPokemonData : Fragment() {
         }
 
         viewModel.pokemonData.observe(this){
-
             labelId.text = it.id.toString()
             labelName.text = it.nombre
             var cont = 0
@@ -149,12 +151,34 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
+        btnLiberar.setOnClickListener{
+            userPokemon?.id?.let { it1 -> viewModel.remuvePokemonPc(it1) }
+
+            viewModel.stateUsuario.observe(this){
+                when(it){
+                    State.LOADING->{
+                        Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    }
+                    State.SUCCESS->{
+                        Snackbar.make(vista, "Liberado", Snackbar.LENGTH_SHORT).show()
+                        //Refrescar pantalla
+                        findNavController().navigateUp()            //accion de cambiar de pantalla
+                    }
+                    State.FAILURE->{
+                        Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
+                    }
+                    else -> {}
+                }
+            }
+        }
+
         btnAddObjeto.setOnClickListener {
 
         }
         btnLevlUp.setOnClickListener {
 
         }
+
     }
 
     private fun setStats(stat:String, datoStat:Int){

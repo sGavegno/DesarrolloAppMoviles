@@ -537,4 +537,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/btnLiberar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FF0000"
+        android:text="Liberar"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="180dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLvlUp"
+        app:layout_constraintEnd_toStartOf="@+id/btnLvlUp"
+        app:layout_constraintTop_toTopOf="@+id/btnLvlUp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,10 +22,11 @@ class FragmentPcViewModel @Inject constructor(
 
     val state : MutableLiveData<State> = MutableLiveData()
     val statePokemon : MutableLiveData<State> = MutableLiveData()
+    val stateUsuario : MutableLiveData<State> = MutableLiveData()
 
     val pokemonPC: MutableLiveData<PokedexRepo> = MutableLiveData()
     val pokemonData : MutableLiveData<Pokemon> = MutableLiveData()
-    val stateUsuario : MutableLiveData<State> = MutableLiveData()
+
 
     fun getPokemonPC(){
         state.postValue(State.LOADING)
@@ -34,13 +35,11 @@ class FragmentPcViewModel @Inject constructor(
 
         //Traer los datos del usuario y completar el nombre del pokemon
         val user = preferencesManager.getUserLogin()
-        val pokemonUser = user.pokedex
+        val pokemonUser = user.pc
 
         if (pokemonUser != null) {
             for(pokemon in pokemonUser){
-                if(pokemon.inPc == true){
-                    pokedexRepo.pokedex.add(Pokedex( pokemon.idPokemon, pokemon.nombre, pokemon.tipo))
-                }
+                pokedexRepo.pokedex.add(Pokedex( pokemon.idPokemon, pokemon.mote, pokemon.tipo))
             }
         }
         pokemonPC.postValue(pokedexRepo)
