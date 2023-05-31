@@ -86,7 +86,7 @@ class FragmentPokedexViewModel @Inject constructor(
                 preferencesManager.saveUser(user)
                 stateUsuario.postValue(State.SUCCESS)
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 stateUsuario.postValue(State.FAILURE)
             }
     }

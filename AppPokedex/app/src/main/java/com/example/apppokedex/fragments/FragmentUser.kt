@@ -109,7 +109,7 @@ class FragmentUser : Fragment() {
         alertDialog.setPositiveButton("Aceptar") { _, _ ->
             // Obtener el nuevo texto del EditText y establecerlo en el TextView
             val newText = editText.text.toString()
-            var user = viewModel.getUserData()
+            val user = viewModel.getUserData()
             if(user.password == newText){
                 user.password = inputTxtPass.text.toString()
                 user.name = inputTxtNombre.text.toString()

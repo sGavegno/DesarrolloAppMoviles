@@ -52,7 +52,7 @@ class FragmentUserViewModel @Inject constructor(
                 preferencesManager.saveUser(user)
                 state.postValue(State.SUCCESS)
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 state.postValue(State.FAILURE)
             }
     }

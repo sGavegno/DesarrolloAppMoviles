@@ -9,8 +9,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonDao
 import com.example.apppokedex.entities.EvolucionesCadena
 
 class EvolucionesAdapter(
@@ -20,8 +18,6 @@ class EvolucionesAdapter(
 
     class EvolucionHolder(v: View) : RecyclerView.ViewHolder(v){
 
-        private var db: AppDatabase? = null
-        private var pokemonDao: PokemonDao? = null
 
         private var vista : View
         init{

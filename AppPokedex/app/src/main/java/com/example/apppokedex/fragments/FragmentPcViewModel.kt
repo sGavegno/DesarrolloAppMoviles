@@ -1,9 +1,12 @@
 package com.example.apppokedex.fragments
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.entities.Pc
+import com.example.apppokedex.entities.PcRepo
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.PokedexRepo
 import com.example.apppokedex.entities.Pokemon
@@ -24,14 +27,12 @@ class FragmentPcViewModel @Inject constructor(
     val statePokemon : MutableLiveData<State> = MutableLiveData()
     val stateUsuario : MutableLiveData<State> = MutableLiveData()
 
-    val pokemonPC: MutableLiveData<PokedexRepo> = MutableLiveData()
-    val pokemonData : MutableLiveData<Pokemon> = MutableLiveData()
-
+    val pokemonPC: MutableLiveData<PcRepo> = MutableLiveData()
 
     fun getPokemonPC(){
         state.postValue(State.LOADING)
         //Lista que contiene todos los pokemons de la base de datos
-        val pokedexRepo = PokedexRepo()
+        val pokedexRepo = PcRepo()
 
         //Traer los datos del usuario y completar el nombre del pokemon
         val user = preferencesManager.getUserLogin()
@@ -39,7 +40,7 @@ class FragmentPcViewModel @Inject constructor(
 
         if (pokemonUser != null) {
             for(pokemon in pokemonUser){
-                pokedexRepo.pokedex.add(Pokedex( pokemon.idPokemon, pokemon.mote, pokemon.tipo))
+                pokedexRepo.pc.add(pokemon)
             }
         }
         pokemonPC.postValue(pokedexRepo)
@@ -54,9 +55,10 @@ class FragmentPcViewModel @Inject constructor(
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){
-                    statePokemon.postValue(State.SUCCESS)
                     val pokemon = documents.toObjects<Pokemon>()
-                    pokemonData.postValue(pokemon[0])
+//                    pokemonData.postValue(pokemon[0])
+                    preferencesManager.savePokemon(pokemon[0])
+                    statePokemon.postValue(State.SUCCESS)
                 } else {
                     statePokemon.postValue(State.FAILURE)
                 }
@@ -95,7 +97,7 @@ class FragmentPcViewModel @Inject constructor(
                 preferencesManager.saveUser(user)
                 stateUsuario.postValue(State.SUCCESS)
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 stateUsuario.postValue(State.FAILURE)
             }
     }

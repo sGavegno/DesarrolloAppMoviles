@@ -94,10 +94,9 @@ class FragmentPokemonData : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
+        val idPcPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
 
-        viewModel.getPokemonById(idPokemon)
-        val userPokemon = viewModel.getUserPokemonById(idPokemon)
+        val userPokemon = viewModel.getPcPokemonByIdPokemon(idPcPokemon)
 
         if (userPokemon != null) {
             labelLvl.text = userPokemon.nivel.toString()
@@ -107,9 +106,14 @@ class FragmentPokemonData : Fragment() {
             }else{
                 labelGenero.text = "♀"
             }
+            labelHabilidad.text = userPokemon.habilidad
+            labelNotas.text = "Test. Se captuo en... al nivle ##"
         }
 
+        viewModel.getPokemonById(userPokemon?.idPokemon!!)
+
         viewModel.pokemonData.observe(this){
+
             labelId.text = it.id.toString()
             labelName.text = it.nombre
             var cont = 0
@@ -117,19 +121,7 @@ class FragmentPokemonData : Fragment() {
                 tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
                 cont += 1
             }
-/*
-            var habilidadString = ""
-            for(habilidad in it.habilidades!!){
-                habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
-                habilidadString += "\n"
-            }
-            labelHabilidad.text = habilidadString
-*/
-            labelHabilidad.text = it.habilidades?.get(0)?.detalle?.nombre ?: ""
 
-            labelNotas.text = "Test. Se captuo en... al nivle ##"
-
-            //
             for(state in it.stats!!){
                 state.detalle?.nombre?.let { it1 ->
                     state.statsBase?.let { it2 ->
@@ -154,7 +146,7 @@ class FragmentPokemonData : Fragment() {
         }
 
         btnLiberar.setOnClickListener{
-            userPokemon?.id?.let { it1 -> viewModel.remuvePokemonPc(it1) }
+            userPokemon.id?.let { it1 -> viewModel.remuvePokemonPc(it1) }
 
             viewModel.stateUsuario.observe(this){
                 when(it){

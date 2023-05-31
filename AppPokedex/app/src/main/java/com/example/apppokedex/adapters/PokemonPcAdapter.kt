@@ -10,18 +10,19 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.fragments.FragmentPc
 import java.util.Locale
 
 class PokemonPcAdapter(
-    var pokemonList: MutableList<Pokedex>,
+    var pokemonList: MutableList<Pc>,
     private val listener: FragmentPc
 ) : RecyclerView.Adapter<PokemonPcAdapter.PokemonPcHolder>()  {
 
     interface PokemonPcAdapterListener {
-        fun onCardViewClick(pokemon: Pokedex, position: Int)
-        fun onButtonClick(pokemon: Pokedex)
+        fun onCardViewClick(pokemonPc: Pc, position: Int)
+        fun onButtonClick(pokemonPc: Pc)
     }
 
     class PokemonPcHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -29,27 +30,27 @@ class PokemonPcAdapter(
         init {
             this.view = v
         }
-        fun setAdapter(pokedex: Pokedex){
+        fun setAdapter(pokemonPc: Pc){
             //setId
             val txtId : TextView = view.findViewById(R.id.txtIdPokePcDato)
-            txtId.text = pokedex.id.toString()
+            txtId.text = pokemonPc.idPokemon.toString()
             //setName
             val txtName: TextView = view.findViewById(R.id.txtNombrePokePcDato)
-            val nombre = pokedex.name!!.uppercase(Locale.getDefault())
+            val nombre = pokemonPc.mote!!.uppercase(Locale.getDefault())
             txtName.text = nombre
             //setImg
-            val id = pokedex.id
+            val id = pokemonPc.idPokemon
             if(id!! < 10){
-                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokedex.id}.png")
+                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemonPc.idPokemon}.png")
             }else if(id < 100){
-                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokedex.id}.png")
+                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemonPc.idPokemon}.png")
             }else{
-                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokedex.id}.png")
+                setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemonPc.idPokemon}.png")
             }
             //setTipo
             val img = mutableListOf(0,0)
             var cont = 0
-            for (idTipo in pokedex.tipo!!){
+            for (idTipo in pokemonPc.tipo!!){
                 img[cont] = idTipo.idTipo?.let { getImgTipo(it) }!!
                 cont += 1
             }

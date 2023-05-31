@@ -8,7 +8,6 @@ import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -76,7 +75,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                             preferencesManager.saveUser(usuario)
                             stateUsuario.postValue(State.SUCCESS)
                         }
-                        .addOnFailureListener { exception ->
+                        .addOnFailureListener {
                             // Ocurrió un error al eliminar el elemento
                             stateUsuario.postValue(State.FAILURE)
                         }
@@ -85,44 +84,15 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 // El documento no existe
                 stateUsuario.postValue(State.FAILURE)
             }
-        }.addOnFailureListener { exception ->
+        }.addOnFailureListener {
             // Ocurrió un error al obtener el documento
             stateUsuario.postValue(State.FAILURE)
         }
 
     }
 
-    fun updateUserData(user : Usuario){
-
-        stateUsuario.postValue(State.LOADING)
-
-        val dbFb = Firebase.firestore
-        val usersCollection = dbFb.collection("Usuarios")
-
-        val id = preferencesManager.getIdUser()
-
-        user.id = id
-        usersCollection.document(id)
-            .set(user)
-            .addOnSuccessListener {
-                preferencesManager.saveUser(user)
-                stateUsuario.postValue(State.SUCCESS)
-            }
-            .addOnFailureListener { exception ->
-                stateUsuario.postValue(State.FAILURE)
-            }
-    }
-
-    fun getIdUser():String{
-        return preferencesManager.getIdUser()
-    }
-
-    fun getUserPokemonById(idPokemon: Int) : Pc? {
+    fun getPcPokemonByIdPokemon(idPokemon: Int) : Pc? {
         return preferencesManager.getUserPokemon(idPokemon)
-    }
-
-    fun getUser(): Usuario {
-        return preferencesManager.getUserLogin()
     }
 
 }

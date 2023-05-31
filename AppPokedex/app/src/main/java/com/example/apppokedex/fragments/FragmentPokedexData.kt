@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.EvolucionesAdapter
-import com.example.apppokedex.database.AppDatabase
-import com.example.apppokedex.database.PokemonDao
-import com.example.apppokedex.database.PokemonUserDao
+import com.example.apppokedex.entities.Pokemon
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,63 +59,11 @@ class FragmentPokedexData : Fragment() {
         txtEvolucion = vista.findViewById(R.id.txtPokdexeEvolucion)
         recEvoluciones = vista.findViewById(R.id.listaPokedexEvolucion)
 
-        return vista
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun onStart() {
-        super.onStart()
-
-        val idUser = viewModel.getIdUser()
-
-        val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
-
-        viewModel.getPokemonById(idPokemon)
-
-        viewModel.pokemonData.observe(this){
-
-            labelName.text = it.nombre
-            labelId.text = it.id.toString()
-            var cont = 0
-            for(tipo in it.tipo!!){
-                tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
-                cont += 1
-            }
-
-            labelGeneracion.text = it.detalle?.idGeneracion.toString()
-            labelDebilidad.text = "Implementar Tabla PokemonTipos"
-            labelDescripcion.text = "pokemon.descripcion"
-            val altura = it.altura
-            val alturaString = (altura?.div(10)).toString() + "," + (altura?.rem(10)).toString() + " m"
-            labelAltura.text = alturaString
-            val peso = it.peso
-            val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
-            labelPeso.text = pesoString
-
-            var habilidadString = ""
-            for(habilidad in it.habilidades!!){
-                habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
-                habilidadString += "\n"
-            }
-            labelHabilidad.text = habilidadString
-
-            val id = it.id
-            if(id != null){
-                if(id < 10){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png"
-                }else if(id < 100){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png"
-                }else{
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png"
-                }
-            }
-            it.detalle?.idCadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
+        viewModel.pokemonData.observe(viewLifecycleOwner){
+            setPokemonData(it)
         }
 
-        viewModel.pokemonEvolucionData.observe(this){
+        viewModel.pokemonEvolucionData.observe(viewLifecycleOwner){
             val evolcuinesLista = it.cadenaEvolutiva?.sortedBy { it.id }
             if(evolcuinesLista != null){
 
@@ -136,8 +82,63 @@ class FragmentPokedexData : Fragment() {
                 //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
                 recEvoluciones.adapter = adapter
             }
-
         }
+
+        return vista
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onStart() {
+        super.onStart()
+
+        val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
+
+        viewModel.getPokemonById(idPokemon)
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setPokemonData(pokemon: Pokemon){
+        labelName.text = pokemon.nombre
+        labelId.text = pokemon.id.toString()
+        var cont = 0
+        for(tipo in pokemon.tipo!!){
+            tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
+            cont += 1
+        }
+
+        labelGeneracion.text = pokemon.detalle?.idGeneracion.toString()
+        labelDebilidad.text = "Implementar Tabla PokemonTipos"
+        labelDescripcion.text = "pokemon.descripcion"
+        val altura = pokemon.altura
+        val alturaString = (altura?.div(10)).toString() + "," + (altura?.rem(10)).toString() + " m"
+        labelAltura.text = alturaString
+        val peso = pokemon.peso
+        val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
+        labelPeso.text = pesoString
+
+        var habilidadString = ""
+        for(habilidad in pokemon.habilidades!!){
+            habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
+            habilidadString += "\n"
+        }
+        labelHabilidad.text = habilidadString
+
+        val id = pokemon.id
+        if(id != null){
+            if(id < 10){
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png"
+            }else if(id < 100){
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png"
+            }else{
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png"
+            }
+        }
+        pokemon.detalle?.idCadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
+
     }
 
     private fun setImgTipo(idTipo : Int, imgN: Int){

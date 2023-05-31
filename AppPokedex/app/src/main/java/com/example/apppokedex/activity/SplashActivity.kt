@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.apppokedex.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,15 +11,14 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 import com.example.apppokedex.R
-import com.example.apppokedex.database.AppDatabase
 
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var imgSplash : ImageView
-    private val SPLASH_TIME_OUT:Long = 3000 // 3s
+    private lateinit var imgSplash : ImageView
+    private val splashTimeout:Long = 3000 // 3s
 
-    private var db: AppDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -24,14 +26,12 @@ class SplashActivity : AppCompatActivity() {
         imgSplash = findViewById(R.id.imgSplash)
         Glide.with(this).load(R.drawable.pokedex_logo).into(imgSplash)
 
-        db = AppDatabase.getInstance(this)
-
         Handler().postDelayed(
             {
                 //Intent parametros origen y destino. Salta a la otra activity
                 startActivity(Intent(this,MainActivity::class.java))
                 finish()    //Destruye la activity.
             }
-            , SPLASH_TIME_OUT)
+            , splashTimeout)
     }
 }

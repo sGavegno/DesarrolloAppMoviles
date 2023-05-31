@@ -37,7 +37,7 @@ class PreferencesManager(private val sharedPreferences: SharedPreferences, priva
     fun getUserPokemon(idPokemon: Int): Pc? {
         val uJson = sharedPreferences.getString("UsuarioLogIn", null)
         val user = gson.fromJson(uJson, Usuario::class.java)
-        return user.pc?.filter{ item -> item.idPokemon == idPokemon }?.get(0)
+        return user.pc?.filter{ item -> item.id == idPokemon }?.get(0)
     }
 
     fun getUserLogin(): Usuario{
