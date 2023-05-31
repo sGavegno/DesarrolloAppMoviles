@@ -1,5 +1,6 @@
 package com.example.apppokedex.entities
 
+
 data class Pokemon(
     val id: Int? = null,
     val nombre: String? = null,

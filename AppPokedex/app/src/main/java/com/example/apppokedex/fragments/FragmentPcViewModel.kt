@@ -67,6 +67,10 @@ class FragmentPcViewModel @Inject constructor(
             }
     }
 
+    fun savePokemon(pokemon: Pokemon){
+        preferencesManager.savePokemon(pokemon)
+    }
+
     fun getIdUser():String{
         return preferencesManager.getIdUser()
     }
