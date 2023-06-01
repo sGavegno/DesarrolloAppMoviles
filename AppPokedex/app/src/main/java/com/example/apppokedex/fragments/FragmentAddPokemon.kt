@@ -42,6 +42,8 @@ class FragmentAddPokemon : Fragment() {
     private lateinit var spinnerHabilidad: Spinner
     private lateinit var imgPokemon: ImageView
 
+    private var idNewPc: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +60,22 @@ class FragmentAddPokemon : Fragment() {
         spinnerHabilidad = vista.findViewById(R.id.spinnerHabilidad)
 
         imgPokemon = vista.findViewById(R.id.imgPokemonAdd)
+
+        viewModel.stateUsuario.observe(viewLifecycleOwner) {
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS->{
+                    val action = FragmentAddPokemonDirections.actionFragmentAddPokemonToFragmentPokemonData(idNewPc)
+                    findNavController().navigate(action)            //accion de cambiar de pantalla
+                }
+                State.FAILURE->{
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
 
         return vista
     }
@@ -122,7 +140,7 @@ class FragmentAddPokemon : Fragment() {
         spinnerHabilidad.adapter = adapter
 
         btnPcAdd.setOnClickListener {
-            var idNewPc = 0
+
             val user = viewModel.getUser()
             val pokemonUser = user.pc
             if (pokemonUser != null) {
@@ -154,6 +172,7 @@ class FragmentAddPokemon : Fragment() {
                 } else {
                     pokemonPc.nivel = 1
                 }
+                //Si es legendario no tiene genero
                 val generoPokemon = spinnerGenero.selectedItem.toString()
                 pokemonPc.genero = generoPokemon == "Masculino"
                 val habilidadPokemon = spinnerHabilidad.selectedItem.toString()
@@ -173,21 +192,6 @@ class FragmentAddPokemon : Fragment() {
                 }
             }
             viewModel.updateUserData(user)
-            viewModel.stateUsuario.observe(this) {
-                when(it){
-                    State.LOADING->{
-                        Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
-                    }
-                    State.SUCCESS->{
-                        val action = FragmentAddPokemonDirections.actionFragmentAddPokemonToFragmentPokemonData(idNewPc)
-                        findNavController().navigate(action)            //accion de cambiar de pantalla
-                    }
-                    State.FAILURE->{
-                        Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
-                    }
-                    else -> {}
-                }
-            }
         }
 
         btnPcExit.setOnClickListener {

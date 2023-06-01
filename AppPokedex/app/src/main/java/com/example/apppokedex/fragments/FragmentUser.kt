@@ -51,6 +51,20 @@ class FragmentUser : Fragment() {
 
         btnLogOut = vista.findViewById(R.id.btnPokedexLogOut)
 
+        viewModel.state.observe(viewLifecycleOwner){state ->
+            when(state){
+                State.SUCCESS ->{
+                    Snackbar.make(vista, "Actualizacion Exitosa", Snackbar.LENGTH_SHORT).show()
+                }
+                State.FAILURE ->{
+                    Snackbar.make(vista, "Actualizacion Fallida", Snackbar.LENGTH_SHORT).show()
+                }
+                State.LOADING ->{
+                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return vista
     }
 
@@ -64,23 +78,6 @@ class FragmentUser : Fragment() {
         inputTxtPass.setText(user.password)
         inputTxtDireccion.setText(user.direccion)
         inputTxtTelefono.setText(user.telefono)
-
-        viewModel.state.observe(this){state ->
-            when(state){
-                State.SUCCESS ->{
-                    Snackbar.make(vista, "Actualizacion Exitosa", Snackbar.LENGTH_SHORT).show()
-                }
-                State.FAILURE ->{
-                    Snackbar.make(vista, "Actualizacion Fallida", Snackbar.LENGTH_SHORT).show()
-                }
-                State.LOADING ->{
-                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
-                }
-                null ->{
-
-                }
-            }
-        }
 
         btnActualizar.setOnClickListener {
             showAlertDialogConfigPasword(viewModel.getUserId())

@@ -3,6 +3,7 @@ package com.example.apppokedex.fragments
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
@@ -15,7 +16,7 @@ class FragmentUserViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ): ViewModel() {
 
-    val state : MutableLiveData<State> = MutableLiveData()
+    val state = SingleLiveEvent<State>()
 
     fun getUserData(): Usuario {
         return preferencesManager.getUserLogin()
@@ -23,17 +24,6 @@ class FragmentUserViewModel @Inject constructor(
 
     fun getUserId(): String{
         return preferencesManager.getIdUser()
-    }
-    fun getUserPermisos(): Boolean{
-        return preferencesManager.getPermisosUser()
-    }
-
-    fun getUserName(): String{
-        return preferencesManager.getNameUser()
-    }
-
-    fun getUserPassword(): String{
-        return preferencesManager.getPasswordUser()
     }
 
     fun updateUserData(user : Usuario){

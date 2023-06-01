@@ -43,6 +43,22 @@ class FragmentRegister : Fragment() {
         txtPassword = vista.findViewById(R.id.txtEditRegPassword)
         txtPasswordConf = vista.findViewById(R.id.txtEditRegPasswordConf)
         btnSingIn = vista.findViewById(R.id.btnRegistro)
+
+        viewModel.state.observe(viewLifecycleOwner){
+            when(it){
+                State.SUCCESS ->{
+                    val intent = Intent(activity, activity_home::class.java)
+                    startActivity(intent)
+                }
+                State.FAILURE ->{
+                    Snackbar.make(vista, "El usuario ya existe", Snackbar.LENGTH_SHORT).show()
+                }
+                State.LOADING ->{
+                    Snackbar.make(vista, "Analizando", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return vista
     }
 
@@ -72,22 +88,5 @@ class FragmentRegister : Fragment() {
             }
         }
 
-        viewModel.state.observe(this){
-            when(it){
-                State.SUCCESS ->{
-                    val intent = Intent(activity, activity_home::class.java)
-                    startActivity(intent)
-                }
-                State.FAILURE ->{
-                    Snackbar.make(vista, "El usuario ya existe", Snackbar.LENGTH_SHORT).show()
-                }
-                State.LOADING ->{
-                    Snackbar.make(vista, "Analizando", Snackbar.LENGTH_SHORT).show()
-                }
-                null ->{
-
-                }
-            }
-        }
     }
 }

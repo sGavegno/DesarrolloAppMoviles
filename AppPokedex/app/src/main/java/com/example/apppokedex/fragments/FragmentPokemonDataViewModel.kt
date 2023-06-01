@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
@@ -19,10 +20,10 @@ class FragmentPokemonDataViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ): ViewModel() {
 
-    val statePokemon : MutableLiveData<State> = MutableLiveData()
-    val stateUsuario : MutableLiveData<State> = MutableLiveData()
+    val statePokemon = SingleLiveEvent<State>()
+    val stateUsuario = SingleLiveEvent<State>()
 
-    val pokemonData : MutableLiveData<Pokemon> = MutableLiveData()
+    val pokemonData = SingleLiveEvent<Pokemon>()
 
     val dbFb = Firebase.firestore
 
@@ -34,9 +35,11 @@ class FragmentPokemonDataViewModel @Inject constructor(
             .get()
             .addOnSuccessListener { documents ->
                 if(!documents.isEmpty){
-                    statePokemon.postValue(State.SUCCESS)
+
                     val pokemon = documents.toObjects<Pokemon>()
                     pokemonData.postValue(pokemon[0])
+//                    preferencesManager.savePokemon(pokemon[0])
+                    statePokemon.postValue(State.SUCCESS)
                 } else {
                     statePokemon.postValue(State.FAILURE)
                 }

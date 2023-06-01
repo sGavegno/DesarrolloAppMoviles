@@ -87,33 +87,26 @@ class FragmentPokemonData : Fragment() {
         labelVelocidad = vista.findViewById(R.id.txtVelocidadDato)
         barrVelocidad = vista.findViewById(R.id.progressBarVelocidad)
 
-        return vista
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun onStart() {
-        super.onStart()
-
-        val idPcPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
-
-        val userPokemon = viewModel.getPcPokemonByIdPokemon(idPcPokemon)
-
-        if (userPokemon != null) {
-            labelLvl.text = userPokemon.nivel.toString()
-            labelMote.text = userPokemon.mote
-            if(userPokemon.genero == true){
-                labelGenero.text = "♂"
-            }else{
-                labelGenero.text = "♀"
+        viewModel.stateUsuario.observe(viewLifecycleOwner){
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS->{
+                    Snackbar.make(vista, "Liberado", Snackbar.LENGTH_SHORT).show()
+                    //Refrescar pantalla
+                    findNavController().navigateUp()            //accion de cambiar de pantalla
+                }
+                State.FAILURE->{
+                    Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
-            labelHabilidad.text = userPokemon.habilidad
-            labelNotas.text = "Test. Se captuo en... al nivle ##"
         }
 
-        viewModel.getPokemonById(userPokemon?.idPokemon!!)
+        viewModel.pokemonData.observe(viewLifecycleOwner){
 
-        viewModel.pokemonData.observe(this){
-
+            //Agregar Funcion
             labelId.text = it.id.toString()
             labelName.text = it.nombre
             var cont = 0
@@ -145,25 +138,33 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
+        return vista
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onStart() {
+        super.onStart()
+
+        val idPcPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
+
+        val userPokemon = viewModel.getPcPokemonByIdPokemon(idPcPokemon)
+
+        if (userPokemon != null) {
+            labelLvl.text = userPokemon.nivel.toString()
+            labelMote.text = userPokemon.mote
+            if(userPokemon.genero == true){
+                labelGenero.text = "♂"
+            }else{
+                labelGenero.text = "♀"
+            }
+            labelHabilidad.text = userPokemon.habilidad
+            labelNotas.text = "Test. Se captuo en... al nivle ##"
+        }
+
+        viewModel.getPokemonById(userPokemon?.idPokemon!!)
+
         btnLiberar.setOnClickListener{
             userPokemon.id?.let { it1 -> viewModel.remuvePokemonPc(it1) }
-
-            viewModel.stateUsuario.observe(this){
-                when(it){
-                    State.LOADING->{
-                        Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
-                    }
-                    State.SUCCESS->{
-                        Snackbar.make(vista, "Liberado", Snackbar.LENGTH_SHORT).show()
-                        //Refrescar pantalla
-                        findNavController().navigateUp()            //accion de cambiar de pantalla
-                    }
-                    State.FAILURE->{
-                        Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
-                    }
-                    else -> {}
-                }
-            }
         }
 
         btnAddObjeto.setOnClickListener {

@@ -138,7 +138,6 @@ class FragmentPokedexData : Fragment() {
             }
         }
         pokemon.detalle?.idCadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
-
     }
 
     private fun setImgTipo(idTipo : Int, imgN: Int){

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
 import com.google.firebase.firestore.ktx.firestore
@@ -17,7 +18,7 @@ class FragmentLoginViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ): ViewModel() {
 
-    val state : MutableLiveData<State> = MutableLiveData()
+    val state = SingleLiveEvent<State>()
 
     fun getUser(userName:String, password:String){
         state.postValue(State.LOADING)

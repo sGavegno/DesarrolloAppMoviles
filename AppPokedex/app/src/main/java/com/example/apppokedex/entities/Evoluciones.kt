@@ -18,12 +18,12 @@ data class EvolucionesDetalle(
     val idEvolucionItem: Int? = null,
     val idTipoEvolucion: Int? = null,
     val nivel: Int? = null,
-    val felicIdad: Int? = null,
+    val felicidad: Int? = null,
     val belleza: Int? = null,
     val afecto: Int? = null,
     val horaDelDia: String? = null,
     val tipoEvolucion: EvolucionTipo? = null,
-    val evolucionItem: Int? = null
+    val evolucionItem: EvolucionItem? = null
 )
 
 data class EvolucionTipo(
@@ -37,4 +37,10 @@ data class EvolucionesVariante(
     val altura: Int? = null,
     val peso: Int? = null,
     val expBase: Int? = null
+)
+
+data class EvolucionItem(
+    val id: Int? = null,
+    val nombre: String? = null,
+    val idItemCategoria: Int? = null,
 )

@@ -3,6 +3,7 @@ package com.example.apppokedex.fragments
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
@@ -16,9 +17,8 @@ class FragmentAddPokemonViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ): ViewModel() {
 
-    val state : MutableLiveData<State> = MutableLiveData()
-    val stateUsuario : MutableLiveData<State> = MutableLiveData()
-
+    val state = SingleLiveEvent<State>()
+    val stateUsuario = SingleLiveEvent<State>()
 
     fun getUser(): Usuario {
         return preferencesManager.getUserLogin()

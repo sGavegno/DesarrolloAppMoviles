@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apppokedex.PreferencesManager
+import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.PcRepo
 import com.example.apppokedex.entities.Pokedex
@@ -23,11 +24,10 @@ class FragmentPcViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ): ViewModel() {
 
-    val state : MutableLiveData<State> = MutableLiveData()
-    val statePokemon : MutableLiveData<State> = MutableLiveData()
-    val stateUsuario : MutableLiveData<State> = MutableLiveData()
+    val state = SingleLiveEvent<State>()
+    val statePokemon = SingleLiveEvent<State>()
 
-    val pokemonPC: MutableLiveData<PcRepo> = MutableLiveData()
+    val pokemonPC = SingleLiveEvent<PcRepo>()
 
     fun getPokemonPC(){
         state.postValue(State.LOADING)
@@ -49,7 +49,6 @@ class FragmentPcViewModel @Inject constructor(
     fun getPokemonById(idPokemon: Int){
         statePokemon.postValue(State.LOADING)
         val dbFb = Firebase.firestore
-
         dbFb.collection("Pokedex")
             .whereEqualTo("id", idPokemon)
             .get()
@@ -79,27 +78,6 @@ class FragmentPcViewModel @Inject constructor(
 
     fun getUser(): Usuario {
         return preferencesManager.getUserLogin()
-    }
-
-    fun updateUserData(user : Usuario){
-
-        stateUsuario.postValue(State.LOADING)
-
-        val dbFb = Firebase.firestore
-        val usersCollection = dbFb.collection("Usuarios")
-
-        val id = preferencesManager.getIdUser()
-
-        user.id = id
-        usersCollection.document(id)
-            .set(user)
-            .addOnSuccessListener {
-                preferencesManager.saveUser(user)
-                stateUsuario.postValue(State.SUCCESS)
-            }
-            .addOnFailureListener {
-                stateUsuario.postValue(State.FAILURE)
-            }
     }
 
 }
