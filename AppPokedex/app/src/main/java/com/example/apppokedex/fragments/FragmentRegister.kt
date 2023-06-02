@@ -24,8 +24,6 @@ class FragmentRegister : Fragment() {
     lateinit var vista : View
 
     lateinit var txtUserName : EditText
-    lateinit var txtNombre : EditText
-    lateinit var txtApellido : EditText
     lateinit var txtEmail : EditText
     lateinit var txtPassword : EditText
     lateinit var txtPasswordConf : EditText
@@ -37,8 +35,6 @@ class FragmentRegister : Fragment() {
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_register, container, false)
         txtUserName = vista.findViewById(R.id.txtEditRegUserName)
-        txtNombre = vista.findViewById(R.id.txtEditRegNombre)
-        txtApellido = vista.findViewById(R.id.txtEditRegApellido)
         txtEmail = vista.findViewById(R.id.txtEditRegEmail)
         txtPassword = vista.findViewById(R.id.txtEditRegPassword)
         txtPasswordConf = vista.findViewById(R.id.txtEditRegPasswordConf)
@@ -51,10 +47,19 @@ class FragmentRegister : Fragment() {
                     startActivity(intent)
                 }
                 State.FAILURE ->{
-                    Snackbar.make(vista, "El usuario ya existe", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
                 }
                 State.LOADING ->{
                     Snackbar.make(vista, "Analizando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.USEREXISTS ->{
+                    Snackbar.make(vista, "Mail ya registrado", Snackbar.LENGTH_SHORT).show()
+                }
+                State.PASNOTEQUAL ->{
+                    Snackbar.make(vista, "La password no coincide", Snackbar.LENGTH_SHORT).show()
+                }
+                State.PASSLENGTH ->{
+                    Snackbar.make(vista, "Tamaño del password incorrecto", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
@@ -65,7 +70,22 @@ class FragmentRegister : Fragment() {
     override fun onStart() {
         super.onStart()
 
-
+        btnSingIn.setOnClickListener{
+            val userNew = Usuario(
+                "",
+                txtUserName.text.toString(),
+                "",
+                "",
+                "",
+                txtEmail.text.toString(),
+                "",
+                "",
+                mutableListOf(),
+                mutableListOf()
+            )
+            viewModel.regUserAuth( userNew, txtEmail.text.toString(), txtPassword.text.toString(), txtPasswordConf.text.toString())
+        }
+        /*
         btnSingIn.setOnClickListener{
             val userNew = Usuario(
                 "",
@@ -87,6 +107,7 @@ class FragmentRegister : Fragment() {
                 Snackbar.make(vista, "La contraseña no coincide", Snackbar.LENGTH_SHORT).show()
             }
         }
+        */
 
     }
 }

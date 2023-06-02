@@ -48,7 +48,6 @@ class FragmentLogin : Fragment() {
                 State.SUCCESS ->{
                     inputTxtUser.setText("")
                     inputTxtPass.setText("")
-
                     val intent = Intent(activity, activity_home::class.java)
                     startActivity(intent)
                 }
@@ -58,6 +57,7 @@ class FragmentLogin : Fragment() {
                 State.LOADING ->{
                     Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
                 }
+                else ->{}
             }
         }
 
@@ -80,12 +80,12 @@ class FragmentLogin : Fragment() {
 
         btnNexScreen.setOnClickListener{
             //Analizo si los parametros estan en la base de datos
-//            val inputTxtUserName : String = inputTxtUser.text.toString()
-//            val inputTxtUserPass : String = inputTxtPass.text.toString()
+            /*
             val inputTxtUserName : String = "admin"
             val inputTxtUserPass : String = "admin"
-
-            viewModel.getUser(inputTxtUserName, inputTxtUserPass)
+            viewModel.getUser(inputTxtUser.text.toString(), inputTxtPass.text.toString())
+            */
+            viewModel.userLogin(inputTxtUser.text.toString(),inputTxtPass.text.toString())
         }
 
         btnSingin.setOnClickListener{

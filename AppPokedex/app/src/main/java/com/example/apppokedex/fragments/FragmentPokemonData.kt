@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Switch
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +54,12 @@ class FragmentPokemonData : Fragment() {
     private lateinit var labelVelocidad : TextView
     private lateinit var barrVelocidad : ProgressBar
 
+    private lateinit var switchDatos: Switch
+
+    private lateinit var clDatos: ConstraintLayout
+    private lateinit var clStats: ConstraintLayout
+
+
     lateinit var vista : View
 
     override fun onCreateView(
@@ -87,6 +96,10 @@ class FragmentPokemonData : Fragment() {
         labelVelocidad = vista.findViewById(R.id.txtVelocidadDato)
         barrVelocidad = vista.findViewById(R.id.progressBarVelocidad)
 
+        switchDatos = vista.findViewById(R.id.swDatos)
+        clDatos = vista.findViewById(R.id.clPokemonInfo)
+        clStats = vista.findViewById(R.id.clPokemonStats)
+
         viewModel.stateUsuario.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
@@ -94,47 +107,33 @@ class FragmentPokemonData : Fragment() {
                 }
                 State.SUCCESS->{
                     Snackbar.make(vista, "Liberado", Snackbar.LENGTH_SHORT).show()
-                    //Refrescar pantalla
                     findNavController().navigateUp()            //accion de cambiar de pantalla
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
                 }
-                else -> {}
             }
         }
 
         viewModel.pokemonData.observe(viewLifecycleOwner){
+            setInfoPokemon(it)
+        }
 
-            //Agregar Funcion
-            labelId.text = it.id.toString()
-            labelName.text = it.nombre
-            var cont = 0
-            for(tipo in it.tipo!!){
-                tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
-                cont += 1
-            }
+        //Set editText Mote
+        switchDatos.isChecked = false
+        clDatos.visibility = View.VISIBLE
+        clStats.visibility = View.INVISIBLE
+        switchDatos.setOnCheckedChangeListener { _, isChecked ->
+            // Realiza acciones según el estado del Switch
+            if (isChecked) {
+                // El Switch está activado
+                clDatos.visibility = View.INVISIBLE
+                clStats.visibility = View.VISIBLE
 
-            for(state in it.stats!!){
-                state.detalle?.nombre?.let { it1 ->
-                    state.statsBase?.let { it2 ->
-                        setStats(it1,it2)
-                    }
-                }
-            }
-
-            val id = it.id
-            if(id != null){
-                if(id < 10){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${it.id}.png"
-                }else if(id < 100){
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${it.id}.png"
-                }else{
-                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png").into(imgPokemon)
-                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${it.id}.png"
-                }
+            } else {
+                // El Switch está desactivado
+                clDatos.visibility = View.VISIBLE
+                clStats.visibility = View.INVISIBLE
             }
         }
 
@@ -179,7 +178,7 @@ class FragmentPokemonData : Fragment() {
     private fun setStats(stat:String, datoStat:Int){
 
         when(stat){
-            "Ps" ->{
+            "hp" ->{
                 labelPs.text = datoStat.toString()
                 barrPs.progress = datoStat
             }
@@ -191,11 +190,11 @@ class FragmentPokemonData : Fragment() {
                 labelDefensa.text = datoStat.toString()
                 barrDefensa.progress = datoStat
             }
-            "AtEsp" ->{
+            "Ataque Especial" ->{
                 labelAtEsp.text = datoStat.toString()
                 barrAtEsp.progress = datoStat
             }
-            "DefEsp" ->{
+            "Defensa Especial" ->{
                 labelDefEsp.text = datoStat.toString()
                 barrDefEsp.progress = datoStat
             }
@@ -266,6 +265,38 @@ class FragmentPokemonData : Fragment() {
             }
             18->{
                 Glide.with(vista).load(R.drawable.tipo_hada).into(imgTipo)
+            }
+        }
+    }
+
+    private fun setInfoPokemon(pokemon: Pokemon){
+        labelId.text = pokemon.id.toString()
+        labelName.text = pokemon.nombre
+        var cont = 0
+        for(tipo in pokemon.tipo!!){
+            tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
+            cont += 1
+        }
+
+        for(state in pokemon.stats!!){
+            state.detalle?.nombre?.let { it1 ->
+                state.statsBase?.let { it2 ->
+                    setStats(it1,it2)
+                }
+            }
+        }
+
+        val id = pokemon.id
+        if(id != null){
+            if(id < 10){
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png"
+            }else if(id < 100){
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png"
+            }else{
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png"
             }
         }
     }

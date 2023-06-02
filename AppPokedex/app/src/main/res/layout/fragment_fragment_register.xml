@@ -74,33 +74,6 @@
         tools:src="@drawable/pokedex_logo" />
 
     <EditText
-        android:id="@+id/txtEditRegNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditRegUserName"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/txtEditRegUserName"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditRegUserName" />
-
-    <EditText
-        android:id="@+id/txtEditRegApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Apellido"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditRegNombre"
-        app:layout_constraintStart_toStartOf="@+id/txtEditRegNombre"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditRegNombre" />
-
-    <EditText
         android:id="@+id/txtEditRegEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,8 +82,8 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditRegApellido"
-        app:layout_constraintStart_toStartOf="@+id/txtEditRegApellido"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditRegApellido" />
+        app:layout_constraintEnd_toEndOf="@+id/txtEditRegUserName"
+        app:layout_constraintStart_toStartOf="@+id/txtEditRegUserName"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditRegUserName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
