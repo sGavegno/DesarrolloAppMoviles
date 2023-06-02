@@ -27,10 +27,10 @@ class FragmentRegisterViewModel @Inject constructor(
     val state = SingleLiveEvent<State>()
     val dbFb = Firebase.firestore
 
-    fun regUserAuth(userNew:Usuario, email: String, password: String, confirmPassword:String): FirebaseUser?{
+    fun regUserAuth(userName:String, email: String, password: String, confirmPassword:String): FirebaseUser?{
         state.postValue(State.LOADING)
 
-        if ((userNew.userName?.length ?: 0) < 6) {
+        if (userName.length < 6) {
             state.postValue(State.PASSLENGTH)
             return null
         }
@@ -51,7 +51,8 @@ class FragmentRegisterViewModel @Inject constructor(
                     if (user == null) {
                         newUser = createUserAuth(email, password)
                         if (newUser != null) { //Save user into the Shared Preference
-                            preferencesManager.saveUser(userNew)
+                            val userNew = Usuario("", userName, "", "", "", password, "", "", mutableListOf(), mutableListOf())
+                            addUserFireBase(userNew)
                             state.postValue(State.SUCCESS)
                         }
                     } else {
@@ -95,16 +96,44 @@ class FragmentRegisterViewModel @Inject constructor(
         }
     }
 
-    fun addUser(userNew: Usuario){
+    private fun addUserFireBase(userNew: Usuario){
+        // Add a new document with a generated ID
+        dbFb.collection("Usuarios")
+            .add(userNew)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Firebase", "DocumentSnapshot added with ID: ${documentReference.id}")
+                //agrego el Id en la BD
+                val userId = documentReference.id
+                userNew.id = userId
+                dbFb.collection("user").document(userId)
+                    .update("id",userId)
+                    .addOnSuccessListener { Log.d("Firebase", "DocumentSnapshot successfully updated!")
+                        state.postValue(State.SUCCESS)
+                        //Guardar en SP
+                        preferencesManager.saveUser(userNew)
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("Firebase", "Error updating document", e)
+                        state.postValue(State.FAILURE)
+                    }
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firebase", "Error adding document", e)
+                state.postValue(State.FAILURE)
+            }
+    }
+
+/*
+    fun addUserFireBase(userNew: Usuario){
         state.postValue(State.LOADING)
         //Buscar si exciste en la base de datos
         dbFb.collection("Usuarios")
-            .whereEqualTo("userName", userNew.userName)
+            .whereEqualTo("email", userNew.email)
             .get()
             .addOnSuccessListener { documents ->
                 if(documents.isEmpty){
                     // Add a new document with a generated ID
-                    dbFb.collection("user")
+                    dbFb.collection("Usuarios")
                         .add(userNew)
                         .addOnSuccessListener { documentReference ->
 
@@ -144,5 +173,5 @@ class FragmentRegisterViewModel @Inject constructor(
                 state.postValue(State.FAILURE)
             }
     }
-
+*/
 }

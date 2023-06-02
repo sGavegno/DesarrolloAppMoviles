@@ -27,7 +27,6 @@ class FragmentLoginViewModel @Inject constructor(
 
     val state = SingleLiveEvent<State>()
 
-
     fun userLogin(email: String, password: String): FirebaseUser? {
         state.postValue(State.LOADING)
         return try {
@@ -36,6 +35,9 @@ class FragmentLoginViewModel @Inject constructor(
                 result = getUserAuth(email, password)
                 Log.d("myFirebaseLogin - Resultado", "$result")
                 if(result!=null) {
+                    //Aplicar Corutina
+                    result!!.email?.let { getUserFireBase(it) }
+                    //////////////////
                     state.postValue(State.SUCCESS)
                 }
                 else{
@@ -51,35 +53,37 @@ class FragmentLoginViewModel @Inject constructor(
     }
 
     suspend fun getUserAuth(email: String, password: String): FirebaseUser? {
-        val dbFb = Firebase.firestore
+
         return try {
             var result: FirebaseUser?= null
             val auth: FirebaseAuth = Firebase.auth
             result = (auth.signInWithEmailAndPassword(email, password).await()).user
             if (result != null) { //Save user into the Shared Preference
-                //Aplicar Corutina
-                dbFb.collection("Usuarios")
-                    .whereEqualTo("email", email)
-                    .get()
-                    .addOnSuccessListener { documents ->
-                        if(!documents.isEmpty){
 
-                            val userLogin = documents.toObjects<Usuario>()
-                            //Guardar en SP
-                            preferencesManager.saveUser(userLogin[0])
-                        } else {
-                        }
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.w("Firebase", "Error getting documents: ", exception)
-                    }
-                //////////////////
             }
             result
         } catch (e: Exception) {
             Log.d("getAuthFrom", "Raised Exception")
             null
         }
+    }
+
+    private fun getUserFireBase(email: String){
+        val dbFb = Firebase.firestore
+        dbFb.collection("Usuarios")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if(!documents.isEmpty){
+                    val userLogin = documents.toObjects<Usuario>()
+                    //Guardar en SP
+                    preferencesManager.saveUser(userLogin[0])
+                } else {
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Firebase", "Error getting documents: ", exception)
+            }
     }
 
     fun getUser(userName:String, password:String){

@@ -112,6 +112,7 @@ class FragmentPokemonData : Fragment() {
                 State.FAILURE->{
                     Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
                 }
+                else -> {}
             }
         }
 

@@ -71,19 +71,7 @@ class FragmentRegister : Fragment() {
         super.onStart()
 
         btnSingIn.setOnClickListener{
-            val userNew = Usuario(
-                "",
-                txtUserName.text.toString(),
-                "",
-                "",
-                "",
-                txtEmail.text.toString(),
-                "",
-                "",
-                mutableListOf(),
-                mutableListOf()
-            )
-            viewModel.regUserAuth( userNew, txtEmail.text.toString(), txtPassword.text.toString(), txtPasswordConf.text.toString())
+            viewModel.regUserAuth( txtUserName.text.toString(), txtEmail.text.toString(), txtPassword.text.toString(), txtPasswordConf.text.toString())
         }
         /*
         btnSingIn.setOnClickListener{

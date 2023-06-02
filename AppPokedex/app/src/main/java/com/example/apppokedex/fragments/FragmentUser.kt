@@ -62,6 +62,7 @@ class FragmentUser : Fragment() {
                 State.LOADING ->{
                     Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
                 }
+                else -> {}
             }
         }
 

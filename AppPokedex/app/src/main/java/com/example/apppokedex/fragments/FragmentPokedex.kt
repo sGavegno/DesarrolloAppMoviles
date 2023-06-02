@@ -39,6 +39,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTitulo)
 
+        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
+
         viewModel.pokedex.observe(viewLifecycleOwner){
             val adapterPokedex = it.pokedex
             adapter = PokemonAdapter(adapterPokedex, this)
@@ -57,8 +59,6 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)!!
-
-        Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
         viewModel.getPokedex()
 
