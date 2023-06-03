@@ -1,5 +1,6 @@
 package com.example.apppokedex.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -32,6 +33,7 @@ class FragmentLogin : Fragment() {
 
     lateinit var vista : View
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +42,7 @@ class FragmentLogin : Fragment() {
         imgTitulo = vista.findViewById(R.id.imgLogin)
         btnNexScreen = vista.findViewById(R.id.btnLogin)
         btnSingin = vista.findViewById(R.id.btnSingin)
-        inputTxtUser = vista.findViewById(R.id.editTxtUserName)
+        inputTxtUser = vista.findViewById(R.id.editTxtEmail)
         inputTxtPass = vista.findViewById(R.id.editTxtPass)
 
         viewModel.state.observe(viewLifecycleOwner){state ->
@@ -61,6 +63,9 @@ class FragmentLogin : Fragment() {
             }
         }
 
+        inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
+        inputTxtPass.setText("123456789")
+
         return vista
     }
 
@@ -80,11 +85,6 @@ class FragmentLogin : Fragment() {
 
         btnNexScreen.setOnClickListener{
             //Analizo si los parametros estan en la base de datos
-            /*
-            val inputTxtUserName : String = "admin"
-            val inputTxtUserPass : String = "admin"
-            viewModel.getUser(inputTxtUser.text.toString(), inputTxtPass.text.toString())
-            */
             viewModel.userLogin(inputTxtUser.text.toString(),inputTxtPass.text.toString())
         }
 

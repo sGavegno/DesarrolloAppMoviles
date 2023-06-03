@@ -53,13 +53,16 @@ class FragmentRegister : Fragment() {
                     Snackbar.make(vista, "Analizando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.USEREXISTS ->{
-                    Snackbar.make(vista, "Mail ya registrado", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(vista, "Email ya registrado", Snackbar.LENGTH_SHORT).show()
                 }
                 State.PASNOTEQUAL ->{
                     Snackbar.make(vista, "La password no coincide", Snackbar.LENGTH_SHORT).show()
                 }
                 State.PASSLENGTH ->{
                     Snackbar.make(vista, "Tamaño del password incorrecto", Snackbar.LENGTH_SHORT).show()
+                }
+                State.USERLENGTH ->{
+                    Snackbar.make(vista, "Tamaño del User Name incorrecto", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

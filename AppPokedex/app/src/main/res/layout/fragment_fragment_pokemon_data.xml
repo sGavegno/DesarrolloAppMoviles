@@ -98,7 +98,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="#FFFFFF"
         android:text="Lvl. Up"
+        android:textColor="#000000"
         app:cornerRadius="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +111,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:backgroundTint="#FFFFFF"
         android:text="Add Objeto"
+        android:textColor="#000000"
         app:cornerRadius="180dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnLvlUp"
         app:layout_constraintStart_toEndOf="@+id/btnLvlUp"
@@ -144,7 +148,7 @@
             android:id="@+id/clPokemonStats"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtPs"
@@ -326,7 +330,7 @@
                 android:layout_width="125dp"
                 android:layout_height="14dp"
                 android:background="#FFFFFF"
-                android:max="100"
+                android:max="255"
                 android:progress="80"
                 android:progressTint="#0ABF13"
                 app:layout_constraintBottom_toBottomOf="@+id/txtVelocidadDato"
@@ -365,7 +369,7 @@
             android:id="@+id/clPokemonInfo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/txtPokeId"
@@ -455,7 +459,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
-                android:text="PokeHabilidad"
+                android:text="Habilidad"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"

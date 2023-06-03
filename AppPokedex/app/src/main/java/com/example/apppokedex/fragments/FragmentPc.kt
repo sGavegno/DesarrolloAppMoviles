@@ -47,13 +47,24 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
         imgTitulo = vista.findViewById(R.id.imgTituloPc)
         btnPcAdd = vista.findViewById(R.id.btnPcAdd)
 
-        viewModel.pokemonPC.observe(viewLifecycleOwner) {
-            val adapterPokedex = it.pc
-            adapter = PokemonPcAdapter(adapterPokedex, this)
-            //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
-            recPokemon.layoutManager = GridLayoutManager(context, 2)
-            recPokemon.scrollToPosition(posPc)
-            recPokemon.adapter = adapter
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                State.LOADING -> {
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS -> {
+                    val adapterPokedex = viewModel.getPc()!!.pc
+                    adapter = PokemonPcAdapter(adapterPokedex, this)
+                    //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+                    recPokemon.layoutManager = GridLayoutManager(context, 2)
+                    recPokemon.scrollToPosition(posPc)
+                    recPokemon.adapter = adapter
+                }
+                State.FAILURE -> {
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
         }
 
         viewModel.statePokemon.observe(viewLifecycleOwner) {
@@ -61,12 +72,10 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
                 State.LOADING -> {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
-
                 State.SUCCESS -> {
                     val action = FragmentPcDirections.actionFragmentPcToFragmentAddPokemon()
                     findNavController().navigate(action)
                 }
-
                 State.FAILURE -> {
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
                 }
@@ -92,7 +101,6 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
         viewModel.getPokemonPC()
 
         btnPcAdd.setOnClickListener {
-
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setTitle("Ingrese el ID del Pokemon")
             val input = EditText(requireContext())
@@ -106,7 +114,6 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
                 dialog.cancel()
             }
             alertDialog.show()
-
         }
 
     }

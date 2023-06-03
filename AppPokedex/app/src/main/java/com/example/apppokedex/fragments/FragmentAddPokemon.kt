@@ -61,7 +61,7 @@ class FragmentAddPokemon : Fragment() {
 
         imgPokemon = vista.findViewById(R.id.imgPokemonAdd)
 
-        viewModel.stateUsuario.observe(viewLifecycleOwner) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when(it){
                 State.LOADING->{
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
@@ -145,7 +145,11 @@ class FragmentAddPokemon : Fragment() {
             val pokemonUser = user.pc
             if (pokemonUser != null) {
                 val size = pokemonUser.size
-                idNewPc = pokemonUser[size - 1].id!!.plus(1)
+                idNewPc = if(size > 0){
+                    pokemonUser[size - 1].id!!.plus(1)
+                } else {
+                    1
+                }
                 val pokemonPc = Pc(
                     idNewPc,
                     pokemon.id,

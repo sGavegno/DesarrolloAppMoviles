@@ -6,5 +6,6 @@ enum class State {
     FAILURE,
     PASNOTEQUAL,
     PASSLENGTH,
-    USEREXISTS
+    USEREXISTS,
+    USERLENGTH
 }

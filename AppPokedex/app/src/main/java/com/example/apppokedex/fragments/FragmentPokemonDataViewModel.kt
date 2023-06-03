@@ -3,6 +3,7 @@ package com.example.apppokedex.fragments
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Pc
@@ -13,6 +14,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,79 +27,84 @@ class FragmentPokemonDataViewModel @Inject constructor(
     val statePokemon = SingleLiveEvent<State>()
     val stateUsuario = SingleLiveEvent<State>()
 
-    val pokemonData = SingleLiveEvent<Pokemon>()
-
-    val dbFb = Firebase.firestore
-
     fun getPokemonById(idPokemon: Int){
         statePokemon.postValue(State.LOADING)
-
-        dbFb.collection("Pokedex")
-            .whereEqualTo("id", idPokemon)
-            .get()
-            .addOnSuccessListener { documents ->
-                if(!documents.isEmpty){
-
-                    val pokemon = documents.toObjects<Pokemon>()
-                    pokemonData.postValue(pokemon[0])
-//                    preferencesManager.savePokemon(pokemon[0])
+        try {
+            var pokemon: Pokemon? = null
+            viewModelScope.launch(Dispatchers.IO) {
+                pokemon = getPokemonFireBase(idPokemon)
+                if (pokemon != null) {
+                    preferencesManager.savePokemon(pokemon!!)
                     statePokemon.postValue(State.SUCCESS)
                 } else {
                     statePokemon.postValue(State.FAILURE)
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.w("Firebase", "Error getting documents: ", exception)
-                statePokemon.postValue(State.FAILURE)
+        } catch (e: Exception) {
+            Log.d("myFireBaseLogin", "A ver $e")
+            statePokemon.postValue(State.FAILURE)
+        }
+    }
+
+    private suspend fun getPokemonFireBase(id: Int): Pokemon?{
+        val dbFb = Firebase.firestore
+        return try {
+            val documents = dbFb.collection("Pokedex").whereEqualTo("id", id).get().await()
+            if(!documents.isEmpty){
+                val pokemon = documents.toObjects<Pokemon>()
+                return pokemon[0]
             }
+            null
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: ")
+            null
+        }
     }
 
     fun remuvePokemonPc(id: Int){
         stateUsuario.postValue(State.LOADING)
-
-        val dbFb = Firebase.firestore
-        val usersCollection = dbFb.collection("Usuarios")
-        val idUser = preferencesManager.getIdUser()
-
-        val docRef = usersCollection.document(idUser)
-
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-            if (documentSnapshot.exists()) {
-                val usuario = documentSnapshot.toObject(Usuario::class.java)
-
-                // Obtén la MutableList `pc` del objeto Usuario
-                val pcList = usuario?.pc
-
-                // Elimina el elemento deseado de la lista
-                pcList?.removeIf { pc -> pc.id == id }
-
-                // Guarda los cambios en el documento
-                usuario?.pc = pcList
-                if (usuario != null) {
-                    docRef.set(usuario)
-                        .addOnSuccessListener {
-                            // El elemento ha sido eliminado exitosamente
-                            preferencesManager.saveUser(usuario)
-                            stateUsuario.postValue(State.SUCCESS)
-                        }
-                        .addOnFailureListener {
-                            // Ocurrió un error al eliminar el elemento
-                            stateUsuario.postValue(State.FAILURE)
-                        }
+        try {
+            var user: Usuario? = null
+            viewModelScope.launch(Dispatchers.IO) {
+                user = remuvePokemonPcFireBase(id)
+                if (user != null) {
+                    preferencesManager.saveUser(user!!)
+                    stateUsuario.postValue(State.SUCCESS)
+                } else {
+                    stateUsuario.postValue(State.FAILURE)
                 }
-            } else {
-                // El documento no existe
-                stateUsuario.postValue(State.FAILURE)
             }
-        }.addOnFailureListener {
-            // Ocurrió un error al obtener el documento
+        } catch (e: Exception) {
+            Log.d("myFireBaseLogin", "A ver $e")
             stateUsuario.postValue(State.FAILURE)
         }
 
     }
 
+    private suspend fun remuvePokemonPcFireBase(id: Int): Usuario?{
+        val dbFb = Firebase.firestore
+        // Obtén la MutableList `pc` del objeto Usuario
+        val user = preferencesManager.getUserLogin()
+
+        return try {
+            // Elimina el elemento deseado de la lista
+            user.pc?.removeIf { pc -> pc.id == id }
+            // Guarda los cambios en el documento
+            user.id?.let { dbFb.collection("Usuarios").document(it).set(user).await() }
+            preferencesManager.saveUser(user)
+            user
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: ")
+            null
+        }
+    }
+
     fun getPcPokemonByIdPokemon(idPokemon: Int) : Pc? {
         return preferencesManager.getUserPokemon(idPokemon)
+    }
+
+    fun getPokemon() : Pokemon {
+        return preferencesManager.getPokemon()
     }
 
 }

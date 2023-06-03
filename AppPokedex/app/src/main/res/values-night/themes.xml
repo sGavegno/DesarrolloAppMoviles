@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.AppPokedex" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/Acero</item>
         <item name="colorPrimaryVariant">#000000</item>
         <item name="colorOnPrimary">@color/Negro</item>
         <!-- Secondary brand color. -->

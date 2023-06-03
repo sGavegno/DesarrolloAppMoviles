@@ -116,8 +116,21 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
-        viewModel.pokemonData.observe(viewLifecycleOwner){
-            setInfoPokemon(it)
+        viewModel.statePokemon.observe(viewLifecycleOwner){
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS ->{
+                    val pokemon = viewModel.getPokemon()
+                    setInfoPokemon(pokemon)
+                }
+                State.FAILURE->{
+                    Snackbar.make(vista, "Error al cargar datos del pokemon", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+
         }
 
         //Set editText Mote
@@ -146,9 +159,7 @@ class FragmentPokemonData : Fragment() {
         super.onStart()
 
         val idPcPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
-
         val userPokemon = viewModel.getPcPokemonByIdPokemon(idPcPokemon)
-
         if (userPokemon != null) {
             labelLvl.text = userPokemon.nivel.toString()
             labelMote.text = userPokemon.mote
