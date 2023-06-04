@@ -15,7 +15,7 @@
             app:destination="@id/fragmentPokemonData"
             app:popUpTo="@id/fragmentPc" />
         <argument
-            android:name="idPokemon"
+            android:name="id"
             app:argType="integer" />
     </fragment>
     <fragment
@@ -68,5 +68,8 @@
             android:id="@+id/action_fragmentAddPokemon_to_fragmentPokemonData"
             app:destination="@id/fragmentPokemonData"
             app:popUpTo="@id/fragmentPc" />
+        <argument
+            android:name="idPokemon"
+            app:argType="integer" />
     </fragment>
 </navigation>

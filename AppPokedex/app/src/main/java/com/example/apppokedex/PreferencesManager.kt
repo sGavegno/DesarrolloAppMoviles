@@ -1,10 +1,13 @@
 package com.example.apppokedex
 
 import android.content.SharedPreferences
+import com.example.apppokedex.entities.Evoluciones
+import com.example.apppokedex.entities.EvolucionesCadena
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.PcRepo
 import com.example.apppokedex.entities.PokedexRepo
 import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.TablaTiposRepo
 import com.example.apppokedex.entities.Usuario
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -56,6 +59,16 @@ class PreferencesManager(private val sharedPreferences: SharedPreferences, priva
         return gson.fromJson(uJson, Pokemon::class.java)
     }
 
+    fun savePcPokemon(pc: Pc) {
+        val uJson = gson.toJson(pc)
+        sharedPreferences.edit().putString("PcPokemon", uJson).apply()
+    }
+
+    fun getPcPokemon(): Pc {
+        val uJson = sharedPreferences.getString("PcPokemon", null)
+        return gson.fromJson(uJson, Pc::class.java)
+    }
+
     fun savePc(pc: PcRepo) {
         val uJson = gson.toJson(pc)
         sharedPreferences.edit().putString("Pc", uJson).apply()
@@ -74,6 +87,35 @@ class PreferencesManager(private val sharedPreferences: SharedPreferences, priva
     fun getPokedex(): PokedexRepo? {
         val uJson = sharedPreferences.getString("Pokedex", null)
         return gson.fromJson(uJson, PokedexRepo::class.java)
+    }
+
+    fun saveEvoluciones(evoluciones: Evoluciones) {
+        val uJson = gson.toJson(evoluciones)
+        sharedPreferences.edit().putString("Evoluciones", uJson).apply()
+    }
+
+    fun getEvoluciones(): Evoluciones {
+        val uJson = sharedPreferences.getString("Evoluciones", null)
+        return gson.fromJson(uJson, Evoluciones::class.java)
+    }
+
+    fun saveEvolucionA(evolucionesA: Pokemon?) {
+        val uJson = gson.toJson(evolucionesA)
+        sharedPreferences.edit().putString("EvolucionA", uJson).apply()
+    }
+
+    fun getEvolucionA(): Pokemon {
+        val uJson = sharedPreferences.getString("EvolucionA", null)
+        return gson.fromJson(uJson, Pokemon::class.java)
+    }
+    fun saveTablaTiposPokemon(tipo: TablaTiposRepo) {
+        val uJson = gson.toJson(tipo)
+        sharedPreferences.edit().putString("TablaTiposPokemon", uJson).apply()
+    }
+
+    fun getTablaTiposPokemon(): TablaTiposRepo {
+        val uJson = sharedPreferences.getString("TablaTiposPokemon", null)
+        return gson.fromJson(uJson, TablaTiposRepo::class.java)
     }
 
 }

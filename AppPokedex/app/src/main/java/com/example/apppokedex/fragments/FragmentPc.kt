@@ -53,12 +53,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS -> {
-                    val adapterPokedex = viewModel.getPc()!!.pc
-                    adapter = PokemonPcAdapter(adapterPokedex, this)
-                    //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
-                    recPokemon.layoutManager = GridLayoutManager(context, 2)
-                    recPokemon.scrollToPosition(posPc)
-                    recPokemon.adapter = adapter
+                    Snackbar.make(vista, "Carga Exitosa", Snackbar.LENGTH_SHORT).show()
                 }
                 State.FAILURE -> {
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
@@ -67,13 +62,22 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
             }
         }
 
+        viewModel.pokemonPc.observe(viewLifecycleOwner) {
+            val adapterPokedex = it.pc
+            adapter = PokemonPcAdapter(adapterPokedex, this)
+            //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+            recPokemon.layoutManager = GridLayoutManager(context, 2)
+            recPokemon.scrollToPosition(posPc)
+            recPokemon.adapter = adapter
+        }
+/*
         viewModel.statePokemon.observe(viewLifecycleOwner) {
             when (it) {
                 State.LOADING -> {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS -> {
-                    val action = FragmentPcDirections.actionFragmentPcToFragmentAddPokemon()
+                    val action = FragmentPcDirections.actionFragmentPcToFragmentAddPokemon(0)
                     findNavController().navigate(action)
                 }
                 State.FAILURE -> {
@@ -82,6 +86,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
                 else -> {}
             }
         }
+        */
 
         return vista
     }
@@ -108,7 +113,8 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
             alertDialog.setView(input)
             alertDialog.setPositiveButton("OK") { _, _ ->
                 val idPoke = input.text.toString().toInt()
-                viewModel.getPokemonById(idPoke)
+                val action = FragmentPcDirections.actionFragmentPcToFragmentAddPokemon(idPoke)
+                findNavController().navigate(action)
             }
             alertDialog.setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.cancel()

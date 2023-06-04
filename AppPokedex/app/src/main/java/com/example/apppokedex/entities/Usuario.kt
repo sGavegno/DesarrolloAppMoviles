@@ -3,12 +3,9 @@ package com.example.apppokedex.entities
 data class Usuario(
     var id: String? = null,
     var userName: String? = null,
-    var password: String? = null,
     var name: String? = null,
     var lastName: String? = null,
     var email: String? = null,
-    var telefono: String? = null,
-    var direccion: String? = null,
     var pokedex: MutableList<UserPokedex>? = null,
     var pc: MutableList<Pc>? = null
 )
@@ -19,6 +16,9 @@ data class Pc(
     var mote: String? = null,
     var tipo: List<PokemonTipo>? = null,
     var nivel: Int? = null,
+    var felicidad: Int? = null,
+    var belleza: Int? = null,
+    var afecto: Int? = null,
     var habilidad: String? = null,
     var objeto: String? = null,
     var idObjeto: Int? = null,

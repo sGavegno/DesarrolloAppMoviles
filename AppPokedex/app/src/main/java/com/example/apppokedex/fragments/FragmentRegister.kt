@@ -62,8 +62,9 @@ class FragmentRegister : Fragment() {
                     Snackbar.make(vista, "Tamaño del password incorrecto", Snackbar.LENGTH_SHORT).show()
                 }
                 State.USERLENGTH ->{
-                    Snackbar.make(vista, "Tamaño del User Name incorrecto", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(vista, "Tamaño del UserName incorrecto", Snackbar.LENGTH_SHORT).show()
                 }
+                else->{}
             }
         }
 
@@ -76,29 +77,5 @@ class FragmentRegister : Fragment() {
         btnSingIn.setOnClickListener{
             viewModel.regUserAuth( txtUserName.text.toString(), txtEmail.text.toString(), txtPassword.text.toString(), txtPasswordConf.text.toString())
         }
-        /*
-        btnSingIn.setOnClickListener{
-            val userNew = Usuario(
-                "",
-                txtUserName.text.toString(),
-                txtPassword.text.toString(),
-                txtNombre.text.toString(),
-                txtApellido.text.toString(),
-                txtEmail.text.toString(),
-                "",
-                "",
-                mutableListOf()
-            )
-
-            val inputTxtPassConf : String = txtPasswordConf.text.toString()
-            if(userNew.password == inputTxtPassConf) {
-                //Analizo si los paraetros estan en la base de datos
-                viewModel.addUser(userNew)
-            } else {
-                Snackbar.make(vista, "La contraseña no coincide", Snackbar.LENGTH_SHORT).show()
-            }
-        }
-        */
-
     }
 }

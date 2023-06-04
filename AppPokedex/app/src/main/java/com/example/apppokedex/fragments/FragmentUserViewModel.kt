@@ -1,16 +1,16 @@
 package com.example.apppokedex.fragments
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,31 +29,46 @@ class FragmentUserViewModel @Inject constructor(
         return preferencesManager.getUserLogin()
     }
 
-    fun getUserId(): String{
-        return preferencesManager.getIdUser()
-    }
-
-    fun updateUserData(user : Usuario):Usuario?{
+    fun updateUserData(email: String, password: String, usuario: Usuario): FirebaseUser?{
         state.postValue(State.LOADING)
+        var user: FirebaseUser? = null
+        //Check if user exists
         return try {
-            var result: Usuario? = null
             viewModelScope.launch(Dispatchers.IO) {
-                result = updateUserFireBase(user)
-                if (result != null) {
-                    state.postValue(State.SUCCESS)
+                user = getUserAuth(email, password)
+                if (user == null) {
+                    state.postValue(State.PASNOTEQUAL)
                 } else {
-                    state.postValue(State.FAILURE)
+                    val result = updateUserFireBase(usuario)
+                    if (result != null) {
+                        state.postValue(State.SUCCESS)
+                    } else {
+                        state.postValue(State.FAILURE)
+                    }
                 }
             }
-            result
+            user
         } catch (e: Exception) {
-            Log.d("myFireBaseLogin", "A ver $e")
             state.postValue(State.FAILURE)
+            Log.d("getAuthFrom", "Raised Exception")
             null
         }
     }
 
-    suspend fun updateUserFireBase(user: Usuario):Usuario?{
+    private suspend fun getUserAuth(email: String, password: String): FirebaseUser? {
+
+        return try {
+            val user: FirebaseUser?
+            val auth: FirebaseAuth = Firebase.auth
+            user = (auth.signInWithEmailAndPassword(email, password).await()).user
+            user
+        } catch (e: Exception) {
+            Log.d("getUserAuth", "Raised Exception")
+            null
+        }
+    }
+
+    private suspend fun updateUserFireBase(user: Usuario):Usuario?{
         val dbFb = Firebase.firestore
         val id = preferencesManager.getIdUser()
         user.id = id

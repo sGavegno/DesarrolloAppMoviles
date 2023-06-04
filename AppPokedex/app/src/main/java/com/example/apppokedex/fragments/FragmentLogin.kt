@@ -63,14 +63,15 @@ class FragmentLogin : Fragment() {
             }
         }
 
-        inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
-        inputTxtPass.setText("123456789")
-
         return vista
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
+
+        inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
+        inputTxtPass.setText("123456789")
 
         Glide.with(vista).load(R.drawable.pokedex_logo).into(imgTitulo)
 

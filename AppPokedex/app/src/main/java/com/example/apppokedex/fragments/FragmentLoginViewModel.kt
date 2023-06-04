@@ -1,7 +1,6 @@
 package com.example.apppokedex.fragments
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
@@ -53,7 +52,7 @@ class FragmentLoginViewModel @Inject constructor(
     suspend fun getUserAuth(email: String, password: String): FirebaseUser? {
 
         return try {
-            var result: FirebaseUser?= null
+            val result: FirebaseUser?
             val auth: FirebaseAuth = Firebase.auth
             result = (auth.signInWithEmailAndPassword(email, password).await()).user
             result

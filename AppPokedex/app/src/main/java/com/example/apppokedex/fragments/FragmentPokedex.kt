@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
+import com.example.apppokedex.adapters.PokemonPcAdapter
 import com.example.apppokedex.entities.Pokedex
+import com.example.apppokedex.entities.State
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,9 +44,24 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
+        viewModel.state.observe(viewLifecycleOwner){
+            when (it) {
+                State.LOADING -> {
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS -> {
+                    Snackbar.make(vista, "Carga Completa", Snackbar.LENGTH_SHORT).show()
+                }
+                State.FAILURE -> {
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+
         viewModel.pokedex.observe(viewLifecycleOwner){
-            val adapterPokedex = it.pokedex
-            adapter = PokemonAdapter(adapterPokedex, this)
+            val pokedex = it.pokedex
+            adapter = PokemonAdapter(pokedex, this)
             //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
             recPokemon.layoutManager = GridLayoutManager(context,2)
             recPokemon.scrollToPosition(posPokedex)
@@ -60,8 +78,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)!!
 
-        viewModel.getPokedex()
-
+        viewModel.loadPokedex()
     }
 
     //Funciones del Adapter

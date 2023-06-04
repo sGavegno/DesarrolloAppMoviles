@@ -42,8 +42,6 @@ class FragmentAddPokemon : Fragment() {
     private lateinit var spinnerHabilidad: Spinner
     private lateinit var imgPokemon: ImageView
 
-    private var idNewPc: Int = 0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,8 +65,7 @@ class FragmentAddPokemon : Fragment() {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
-                    val action = FragmentAddPokemonDirections.actionFragmentAddPokemonToFragmentPokemonData(idNewPc)
-                    findNavController().navigate(action)            //accion de cambiar de pantalla
+
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
@@ -77,34 +74,72 @@ class FragmentAddPokemon : Fragment() {
             }
         }
 
-        return vista
-    }
+        viewModel.pcPokemon.observe(viewLifecycleOwner){
 
-    override fun onStart() {
-        super.onStart()
+            val action = FragmentAddPokemonDirections.actionFragmentAddPokemonToFragmentPokemonData(
+                it.id!!
+            )
+            findNavController().navigate(action)            //accion de cambiar de pantalla
+        }
 
-        Glide.with(vista)
-            .load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png")
-            .into(imgTitulo)
-
-        val pokemon = viewModel.getPokemon()
-
-        val id = pokemon.id
-        if(id != null){
-            if(id < 10){
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png"
-            }else if(id < 100){
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png"
-            }else{
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png"
+        viewModel.statePokemon.observe(viewLifecycleOwner) {
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS->{
+                    Snackbar.make(vista, "Carga Exitosa", Snackbar.LENGTH_SHORT).show()
+                }
+                State.FAILURE->{
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
         }
 
-        //Set editText Mote
-        switchMote.isChecked = true
+        viewModel.pokemon.observe(viewLifecycleOwner){
+            val id = it.id
+            if(id != null){
+                if(id < 10){
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${id}.png"
+                }else if(id < 100){
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png"
+                }else{
+                    Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png").into(imgPokemon)
+                    imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png"
+                }
+            }
+
+            //Get Habilidad
+            val spinnerHabilidadItem = mutableListOf<String>()
+            for (habilidad in it.habilidades!!){
+                spinnerHabilidadItem.add(habilidad.detalle!!.nombre.toString().uppercase(Locale.getDefault()))
+            }
+            // Crea un adaptador para el Spinner
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerHabilidadItem)
+            // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Asigna el adaptador al Spinner
+            spinnerHabilidad.adapter = adapter
+
+            val spinnerGeneroItems: MutableList<String> = mutableListOf()
+            if (it.detalle?.legendario == false){
+                //set Spinner Genero
+                spinnerGeneroItems.add("Masculino")
+                spinnerGeneroItems.add("Femenino")
+            } else {
+                spinnerGeneroItems.add("Legendario")
+            }
+            // Crea un adaptador para el Spinner
+            val adapterGenero = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerGeneroItems)
+            // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
+            adapterGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Asigna el adaptador al Spinner
+            spinnerGenero.adapter = adapterGenero
+        }
+
         switchMote.setOnCheckedChangeListener { _, isChecked ->
             // Realiza acciones según el estado del Switch
             if (isChecked) {
@@ -118,84 +153,50 @@ class FragmentAddPokemon : Fragment() {
             }
         }
 
-        //set Spinner Genero
-        val spinnerGeneroItems = listOf("Masculino", "Femenino")
-        // Crea un adaptador para el Spinner
-        val adapterGenero = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerGeneroItems)
-        // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
-        adapterGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Asigna el adaptador al Spinner
-        spinnerGenero.adapter = adapterGenero
+        return vista
+    }
 
-        //Get Habilidad
-        val spinnerHabilidadItem = mutableListOf<String>()
-        for (habilidad in pokemon.habilidades!!){
-            spinnerHabilidadItem.add(habilidad.detalle!!.nombre.toString().uppercase(Locale.getDefault()))
-        }
-        // Crea un adaptador para el Spinner
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerHabilidadItem)
-        // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Asigna el adaptador al Spinner
-        spinnerHabilidad.adapter = adapter
+    override fun onStart() {
+        super.onStart()
+
+        Glide.with(vista)
+            .load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png")
+            .into(imgTitulo)
+
+        val idPcPokemon = FragmentAddPokemonArgs.fromBundle(requireArguments()).idPokemon
+        viewModel.getPokemonById(idPcPokemon)
+
+        //Set editText Mote
+        switchMote.isChecked = true
+
 
         btnPcAdd.setOnClickListener {
 
-            val user = viewModel.getUser()
-            val pokemonUser = user.pc
-            if (pokemonUser != null) {
-                val size = pokemonUser.size
-                idNewPc = if(size > 0){
-                    pokemonUser[size - 1].id!!.plus(1)
-                } else {
-                    1
-                }
-                val pokemonPc = Pc(
-                    idNewPc,
-                    pokemon.id,
-                    pokemon.nombre,
-                    pokemon.tipo,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    "",
-                    "",
-                    "",
-                    ""
-                )
-                val isSwitchOn = switchMote.isChecked
-                if (isSwitchOn) {
-                    // El Switch está activado
-                    pokemonPc.mote = editMote.text.toString()
-                }
-                val nivel = editNivel.text.toString().toInt()
-                if(nivel > 0){
-                    pokemonPc.nivel = nivel
-                } else {
-                    pokemonPc.nivel = 1
-                }
-                //Si es legendario no tiene genero
-                val generoPokemon = spinnerGenero.selectedItem.toString()
-                pokemonPc.genero = generoPokemon == "Masculino"
-                val habilidadPokemon = spinnerHabilidad.selectedItem.toString()
-                pokemonPc.habilidad = habilidadPokemon
-                user.pc!!.add(pokemonPc)
+            var mote: String? = null
+            val isSwitchOn = switchMote.isChecked
+            if (isSwitchOn) {
+                // El Switch está activado
+                mote = editMote.text.toString()
             }
-            val pokedexUser = user.pokedex
-            if (pokedexUser != null) {
-                val pokedexAux = pokedexUser.filter { item -> item.idPokemon == pokemon.id }
-                if (pokedexAux.isEmpty()) {
-                    val pokedex = UserPokedex(
-                        pokemon.id,
-                        pokemon.nombre,
-                        pokemon.tipo
-                    )
-                    user.pokedex!!.add(pokedex)
+            val nivelAux = editNivel.text.toString().toInt()
+            var nivel: Int = 1
+            if(nivelAux > 0){
+                nivel = nivelAux
+            }
+            //Si es legendario no tiene genero
+            val genero:Boolean? = when(spinnerGenero.selectedItem.toString()){
+                "Masculino"->{
+                    true
+                }
+                "Femenino"->{
+                    false
+                }
+                else->{
+                    null
                 }
             }
-            viewModel.updateUserData(user)
+            val habilidadPokemon = spinnerHabilidad.selectedItem.toString()
+            viewModel.addUserPokemon(idPcPokemon, mote, nivel, genero, habilidadPokemon)
         }
 
         btnPcExit.setOnClickListener {

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.entities.EvolucionesCadena
+import com.example.apppokedex.entities.Pc
 
 class EvolucionesAdapter(
-    private var evolucionList: List<EvolucionesCadena>?,
-    var onClick: (Int) -> Unit                                     //Funcion como parametro
+    private var evolucionList: List<EvolucionesCadena>?
     ) : RecyclerView.Adapter<EvolucionesAdapter.EvolucionHolder>() {
 
     class EvolucionHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -59,9 +59,6 @@ class EvolucionesAdapter(
 
     override fun onBindViewHolder(holder: EvolucionHolder, position: Int) {
         evolucionList?.get(position)?.let { holder.setEvolucion(it) }
-        holder.getCard().setOnClickListener{
-            onClick(position)               //
-        }
     }
 
     override fun getItemCount(): Int {

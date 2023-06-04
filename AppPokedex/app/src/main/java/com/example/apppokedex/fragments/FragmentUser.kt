@@ -26,12 +26,10 @@ class FragmentUser : Fragment() {
     lateinit var vista : View
 
     lateinit var imgUser : ImageView
+    lateinit var inputTxtUserName : EditText
     lateinit var inputTxtNombre : EditText
     lateinit var inputTxtApellido : EditText
-    lateinit var inputTxtEmail : EditText
     lateinit var inputTxtPass : EditText
-    lateinit var inputTxtDireccion : EditText
-    lateinit var inputTxtTelefono : EditText
     private lateinit var btnActualizar : Button
     private lateinit var btnLogOut : Button
 
@@ -42,12 +40,9 @@ class FragmentUser : Fragment() {
         vista = inflater.inflate(R.layout.fragment_fragment_user, container, false)
         imgUser = vista.findViewById(R.id.imgUser)
         btnActualizar = vista.findViewById(R.id.btnUserActualizar)
-        inputTxtNombre = vista.findViewById(R.id.txtEditUserNombre)
-        inputTxtApellido = vista.findViewById(R.id.txtEditUserApellido)
-        inputTxtEmail = vista.findViewById(R.id.txtEditUserEmail)
-        inputTxtPass = vista.findViewById(R.id.txtEditUserPassword)
-        inputTxtDireccion = vista.findViewById(R.id.txtEditUserDireccion)
-        inputTxtTelefono = vista.findViewById(R.id.txtEditUserTelefono)
+        inputTxtUserName = vista.findViewById(R.id.txtEditUserName)
+        inputTxtNombre = vista.findViewById(R.id.txtEditNombre)
+        inputTxtApellido = vista.findViewById(R.id.txtEditApellido)
 
         btnLogOut = vista.findViewById(R.id.btnPokedexLogOut)
 
@@ -75,13 +70,9 @@ class FragmentUser : Fragment() {
         val user = viewModel.getUserData()
         inputTxtNombre.setText(user.name)
         inputTxtApellido.setText(user.lastName)
-        inputTxtEmail.setText(user.email)
-        inputTxtPass.setText(user.password)
-        inputTxtDireccion.setText(user.direccion)
-        inputTxtTelefono.setText(user.telefono)
 
         btnActualizar.setOnClickListener {
-            showAlertDialogConfigPasword(viewModel.getUserId())
+            showAlertDialogConfigPassword()
         }
 
         btnLogOut.setOnClickListener{
@@ -93,7 +84,7 @@ class FragmentUser : Fragment() {
     }
 
     //Funciones del boton actualizar
-    private fun showAlertDialogConfigPasword( idUser: String) {
+    private fun showAlertDialogConfigPassword() {
 
         // Crear un EditText para obtener el nuevo texto
         val editText = EditText(requireContext())
@@ -108,18 +99,11 @@ class FragmentUser : Fragment() {
             // Obtener el nuevo texto del EditText y establecerlo en el TextView
             val newText = editText.text.toString()
             val user = viewModel.getUserData()
-            if(user.password == newText){
-                user.password = inputTxtPass.text.toString()
-                user.name = inputTxtNombre.text.toString()
-                user.lastName = inputTxtApellido.text.toString()
-                user.email = inputTxtEmail.text.toString()
-                user.telefono = inputTxtTelefono.text.toString()
-                user.direccion =inputTxtDireccion.text.toString()
+            user.userName = inputTxtUserName.text.toString()
+            user.name = inputTxtNombre.text.toString()
+            user.lastName = inputTxtApellido.text.toString()
+            viewModel.updateUserData(user.email.toString(), newText, user)
 
-                viewModel.updateUserData(user)
-            } else {
-                Snackbar.make(vista, "Clave Incorrecta", Snackbar.LENGTH_SHORT).show()
-            }
         }
         // Agregar un botón "Cancelar" al cuadro de texto
         alertDialog.setNegativeButton("Cancelar", null)

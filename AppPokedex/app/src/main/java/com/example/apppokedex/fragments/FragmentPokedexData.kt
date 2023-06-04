@@ -16,7 +16,11 @@ import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.EvolucionesAdapter
 import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonTipo
+import com.example.apppokedex.entities.State
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class FragmentPokedexData : Fragment() {
@@ -40,6 +44,7 @@ class FragmentPokedexData : Fragment() {
     private lateinit var imgTipo2 : ImageView
 
     lateinit var vista : View
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,28 +64,62 @@ class FragmentPokedexData : Fragment() {
         txtEvolucion = vista.findViewById(R.id.txtPokdexeEvolucion)
         recEvoluciones = vista.findViewById(R.id.listaPokedexEvolucion)
 
-        viewModel.pokemonData.observe(viewLifecycleOwner){
-            setPokemonData(it)
+        viewModel.statePokemon.observe(viewLifecycleOwner){
+            when (it) {
+                State.LOADING -> {
+                    Snackbar.make(vista, "Procesando Datos", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS -> {
+                    val pokemon = viewModel.getPokemon()
+                    setPokemonData(pokemon)
+                }
+                State.FAILURE -> {
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+
         }
 
-        viewModel.pokemonEvolucionData.observe(viewLifecycleOwner){
-            val evolcuinesLista = it.cadenaEvolutiva?.sortedBy { it.id }
-            if(evolcuinesLista != null){
-
-                adapter = EvolucionesAdapter(evolcuinesLista){ position ->
-                    //Guardar datos actualizados
-                    val idPoke = evolcuinesLista[position].id
-                    val action = FragmentPokedexDataDirections.actionFragmentPokedexDataSelf(
-                        idPoke!!
-                    )
-                    findNavController().navigate(action)            //accion de cambiar de pantalla
+        viewModel.stateEvolucion.observe(viewLifecycleOwner){
+            when (it) {
+                State.LOADING -> {
+                    Snackbar.make(vista, "Procesando Evoluciones", Snackbar.LENGTH_SHORT).show()
                 }
-                val layoutManager = LinearLayoutManager(context)
-                layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-                recEvoluciones.layoutManager = layoutManager
+                State.SUCCESS -> {
+                    val evolucionesLista = viewModel.getEvoluciones().cadenaEvolutiva
+                    if(evolucionesLista != null){
+                        adapter = EvolucionesAdapter(evolucionesLista)
+                        val layoutManager = LinearLayoutManager(context)
+                        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+                        recEvoluciones.layoutManager = layoutManager
+                        //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
+                        recEvoluciones.adapter = adapter
+                    }
+                }
+                State.FAILURE -> {
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
 
-                //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
-                recEvoluciones.adapter = adapter
+        viewModel.stateTablaTipo.observe(viewLifecycleOwner){
+            when (it) {
+                State.LOADING -> {
+                    Snackbar.make(vista, "Procesando Evoluciones", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS -> {
+                    Snackbar.make(vista, "Tipos Cargaos", Snackbar.LENGTH_SHORT).show()
+                    val tiposPokemon = viewModel.getTablaTiposPokemon().tipos
+                    val pokemon = viewModel.getPokemon()
+                    //Buscar los tipos que coincidan con el tipo del pokemon
+                    labelDebilidad.text = "Implementar Tabla PokemonTipos"
+                }
+                State.FAILURE -> {
+                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
         }
 
@@ -91,19 +130,21 @@ class FragmentPokedexData : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val idPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).idPokemon
-
+        val idPokemon = FragmentPokedexDataArgs.fromBundle(requireArguments()).idPokemon
         viewModel.getPokemonById(idPokemon)
 
     }
 
     @SuppressLint("SetTextI18n")
     private fun setPokemonData(pokemon: Pokemon){
-        labelName.text = pokemon.nombre
+        val auxTipo :MutableList<PokemonTipo> = mutableListOf()
+
+        labelName.text = pokemon.nombre!!.uppercase(Locale.getDefault())
         labelId.text = pokemon.id.toString()
         var cont = 0
         for(tipo in pokemon.tipo!!){
             tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
+            auxTipo.add(tipo)
             cont += 1
         }
 

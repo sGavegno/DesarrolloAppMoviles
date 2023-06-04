@@ -12,17 +12,17 @@
         android:id="@+id/btnPokedexLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="32dp"
         android:text="Log Out"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUserActualizar" />
 
     <ImageView
         android:id="@+id/imgUser"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="160dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -30,178 +30,95 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtEditUserDireccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Direccion"
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditUserTelefono"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEditUserTelefono"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserTelefono" />
-
-    <EditText
-        android:id="@+id/txtEditUserEmail"
+        android:id="@+id/txtEditApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Apellido"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditUserApellido"
+        app:layout_constraintEnd_toEndOf="@+id/txtEditNombre"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEditUserApellido"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserApellido" />
+        app:layout_constraintStart_toStartOf="@+id/txtEditNombre"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditNombre" />
 
     <EditText
-        android:id="@+id/txtEditUserApellido"
+        android:id="@+id/txtEditNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Apellido"
+        android:hint="Nombre"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/txtEditUserNombre"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserNombre" />
+        app:layout_constraintStart_toStartOf="@+id/txtEditUserName"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditUserName" />
 
     <EditText
-        android:id="@+id/txtEditUserPassword"
+        android:id="@+id/txtEditUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditUserEmail"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEditUserEmail"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserEmail" />
-
-    <EditText
-        android:id="@+id/txtEditUserTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Telefono"
-        android:inputType="phone"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEditUserPassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEditUserPassword"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserPassword" />
-
-    <EditText
-        android:id="@+id/txtEditUserNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:ems="10"
-        android:hint="Nombre"
+        android:hint="UserName"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.805"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgUser" />
 
     <Button
         android:id="@+id/btnUserActualizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="Actualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditUserDireccion" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEditApellido" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:text="Nombre:"
+        android:layout_marginEnd="24dp"
+        android:text="UserName:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserNombre"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserNombre"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserNombre"
+        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserName"
+        app:layout_constraintEnd_toStartOf="@+id/txtEditUserName"
+        app:layout_constraintTop_toTopOf="@+id/txtEditUserName"
         app:layout_constraintVertical_bias="0.523" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:text="Apellido:"
+        android:text="Nobmre:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserApellido"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserApellido"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserApellido"
+        app:layout_constraintBottom_toBottomOf="@+id/txtEditNombre"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/txtEditNombre"
         app:layout_constraintVertical_bias="0.428" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:text="Email:"
+        android:text="Apellido:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserEmail"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserEmail"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserEmail"
+        app:layout_constraintBottom_toBottomOf="@+id/txtEditApellido"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/txtEditApellido"
         app:layout_constraintVertical_bias="0.619" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="Password:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserPassword"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserPassword"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserPassword"
-        app:layout_constraintVertical_bias="0.476" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="Telefono:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserTelefono"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserTelefono"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserTelefono" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Direccion:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEditUserDireccion"
-        app:layout_constraintEnd_toStartOf="@+id/txtEditUserDireccion"
-        app:layout_constraintTop_toTopOf="@+id/txtEditUserDireccion"
-        app:layout_constraintVertical_bias="0.523" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
