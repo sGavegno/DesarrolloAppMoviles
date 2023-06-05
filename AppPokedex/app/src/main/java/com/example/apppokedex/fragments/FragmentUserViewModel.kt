@@ -55,6 +55,34 @@ class FragmentUserViewModel @Inject constructor(
         }
     }
 
+    fun removePokemonUser( email: String, password: String, usuario: Usuario): FirebaseUser?{
+        state.postValue(State.LOADING)
+        var user: FirebaseUser? = null
+        //Check if user exists
+        return try {
+            viewModelScope.launch(Dispatchers.IO) {
+                user = getUserAuth(email, password)
+                if (user == null) {
+                    state.postValue(State.PASNOTEQUAL)
+                } else {
+                    usuario.pokedex = mutableListOf()
+                    usuario.pc = mutableListOf()
+                    val result = updateUserFireBase(usuario)
+                    if (result != null) {
+                        state.postValue(State.SUCCESS)
+                    } else {
+                        state.postValue(State.FAILURE)
+                    }
+                }
+            }
+            user
+        } catch (e: Exception) {
+            state.postValue(State.FAILURE)
+            Log.d("getAuthFrom", "Raised Exception")
+            null
+        }
+    }
+
     private suspend fun getUserAuth(email: String, password: String): FirebaseUser? {
 
         return try {

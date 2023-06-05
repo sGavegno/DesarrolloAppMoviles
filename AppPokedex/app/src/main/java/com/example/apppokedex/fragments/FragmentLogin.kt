@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -28,6 +29,7 @@ class FragmentLogin : Fragment() {
     private lateinit var imgTitulo : ImageView
     private lateinit var inputTxtUser : EditText
     private lateinit var inputTxtPass : EditText
+    private lateinit var progressBarLouding : ProgressBar
     private lateinit var btnNexScreen : Button
     private lateinit var btnSingin : Button
 
@@ -44,6 +46,9 @@ class FragmentLogin : Fragment() {
         btnSingin = vista.findViewById(R.id.btnSingin)
         inputTxtUser = vista.findViewById(R.id.editTxtEmail)
         inputTxtPass = vista.findViewById(R.id.editTxtPass)
+        progressBarLouding = vista.findViewById(R.id.progBarLogin)
+
+        Glide.with(vista).load(R.drawable.pokedex_logo).into(imgTitulo)
 
         viewModel.state.observe(viewLifecycleOwner){state ->
             when(state){
@@ -54,10 +59,15 @@ class FragmentLogin : Fragment() {
                     startActivity(intent)
                 }
                 State.FAILURE ->{
+                    inputTxtUser.visibility = View.VISIBLE
+                    inputTxtPass.visibility = View.VISIBLE
+                    progressBarLouding.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
                 }
                 State.LOADING ->{
-                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+                    inputTxtUser.visibility = View.INVISIBLE
+                    inputTxtPass.visibility = View.INVISIBLE
+                    progressBarLouding.visibility = View.VISIBLE
                 }
                 else ->{}
             }
@@ -70,10 +80,11 @@ class FragmentLogin : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        inputTxtUser.visibility = View.VISIBLE
+        inputTxtPass.visibility = View.VISIBLE
+        progressBarLouding.visibility = View.INVISIBLE
         inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
         inputTxtPass.setText("123456789")
-
-        Glide.with(vista).load(R.drawable.pokedex_logo).into(imgTitulo)
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)

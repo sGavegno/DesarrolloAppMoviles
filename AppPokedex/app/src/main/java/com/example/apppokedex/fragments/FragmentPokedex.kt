@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -28,6 +29,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
 
     private lateinit var imgTitulo : ImageView
     private lateinit var recPokemon : RecyclerView
+    private lateinit var progressPokedex : ProgressBar
     private lateinit var adapter: PokemonAdapter
 
     lateinit var vista : View
@@ -41,16 +43,19 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         vista = inflater.inflate(R.layout.fragment_fragment_pokedex, container, false)
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTitulo)
+        progressPokedex = vista.findViewById(R.id.progressBarPokedex)
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
         viewModel.state.observe(viewLifecycleOwner){
             when (it) {
                 State.LOADING -> {
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    progressPokedex.visibility = View.VISIBLE
+                    recPokemon.visibility = View.INVISIBLE
                 }
                 State.SUCCESS -> {
-                    Snackbar.make(vista, "Carga Completa", Snackbar.LENGTH_SHORT).show()
+                    progressPokedex.visibility = View.INVISIBLE
+                    recPokemon.visibility = View.VISIBLE
                 }
                 State.FAILURE -> {
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()

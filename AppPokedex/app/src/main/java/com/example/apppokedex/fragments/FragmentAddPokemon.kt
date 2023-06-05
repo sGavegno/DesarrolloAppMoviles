@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Switch
 import androidx.fragment.app.viewModels
@@ -41,6 +42,8 @@ class FragmentAddPokemon : Fragment() {
     private lateinit var spinnerGenero: Spinner
     private lateinit var spinnerHabilidad: Spinner
     private lateinit var imgPokemon: ImageView
+    private lateinit var progressBarLouding : ProgressBar
+    private lateinit var editDescripcion: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,18 +59,33 @@ class FragmentAddPokemon : Fragment() {
         editNivel = vista.findViewById(R.id.editTextNivel)
         spinnerGenero = vista.findViewById(R.id.spinnerGenero)
         spinnerHabilidad = vista.findViewById(R.id.spinnerHabilidad)
+        editDescripcion = vista.findViewById(R.id.editTextDescripcion)
 
         imgPokemon = vista.findViewById(R.id.imgPokemonAdd)
+        progressBarLouding = vista.findViewById(R.id.progressBarAddPokemon)
+
+        Glide.with(vista)
+            .load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png")
+            .into(imgTitulo)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when(it){
                 State.LOADING->{
+                    switchMote.visibility = View.INVISIBLE
+                    progressBarLouding.visibility = View.VISIBLE
+                    editMote.visibility = View.INVISIBLE
+                    editNivel.visibility = View.INVISIBLE
+                    spinnerGenero.visibility = View.INVISIBLE
+                    spinnerHabilidad.visibility = View.INVISIBLE
+                    editDescripcion.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
+                    progressBarLouding.visibility = View.INVISIBLE
 
                 }
                 State.FAILURE->{
+                    progressBarLouding.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
@@ -75,7 +93,6 @@ class FragmentAddPokemon : Fragment() {
         }
 
         viewModel.pcPokemon.observe(viewLifecycleOwner){
-
             val action = FragmentAddPokemonDirections.actionFragmentAddPokemonToFragmentPokemonData(
                 it.id!!
             )
@@ -85,12 +102,25 @@ class FragmentAddPokemon : Fragment() {
         viewModel.statePokemon.observe(viewLifecycleOwner) {
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    switchMote.visibility = View.INVISIBLE
+                    progressBarLouding.visibility = View.VISIBLE
+                    editMote.visibility = View.INVISIBLE
+                    editNivel.visibility = View.INVISIBLE
+                    spinnerGenero.visibility = View.INVISIBLE
+                    spinnerHabilidad.visibility = View.INVISIBLE
+                    editDescripcion.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
-                    Snackbar.make(vista, "Carga Exitosa", Snackbar.LENGTH_SHORT).show()
+                    switchMote.visibility = View.VISIBLE
+                    progressBarLouding.visibility = View.INVISIBLE
+                    editMote.visibility = View.VISIBLE
+                    editNivel.visibility = View.VISIBLE
+                    spinnerGenero.visibility = View.VISIBLE
+                    spinnerHabilidad.visibility = View.VISIBLE
+                    editDescripcion.visibility = View.VISIBLE
                 }
                 State.FAILURE->{
+                    progressBarLouding.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
@@ -159,30 +189,24 @@ class FragmentAddPokemon : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        Glide.with(vista)
-            .load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png")
-            .into(imgTitulo)
+        switchMote.isChecked = true
+        progressBarLouding.visibility = View.VISIBLE
 
         val idPcPokemon = FragmentAddPokemonArgs.fromBundle(requireArguments()).idPokemon
         viewModel.getPokemonById(idPcPokemon)
-
-        //Set editText Mote
-        switchMote.isChecked = true
-
 
         btnPcAdd.setOnClickListener {
 
             var mote: String? = null
             val isSwitchOn = switchMote.isChecked
             if (isSwitchOn) {
-                // El Switch está activado
                 mote = editMote.text.toString()
             }
-            val nivelAux = editNivel.text.toString().toInt()
-            var nivel: Int = 1
-            if(nivelAux > 0){
-                nivel = nivelAux
+            var nivel = 1
+            if(editNivel.text.isNotEmpty()){
+                nivel = editNivel.text.toString().toInt()
             }
+
             //Si es legendario no tiene genero
             val genero:Boolean? = when(spinnerGenero.selectedItem.toString()){
                 "Masculino"->{
@@ -195,8 +219,19 @@ class FragmentAddPokemon : Fragment() {
                     null
                 }
             }
+            var textDescripcion = ""
+            if(editDescripcion.text.isNotEmpty()){
+                textDescripcion = editDescripcion.text.toString()
+            }
             val habilidadPokemon = spinnerHabilidad.selectedItem.toString()
-            viewModel.addUserPokemon(idPcPokemon, mote, nivel, genero, habilidadPokemon)
+            viewModel.addUserPokemon(
+                idPcPokemon,
+                mote,
+                nivel,
+                genero,
+                habilidadPokemon,
+                textDescripcion
+            )
         }
 
         btnPcExit.setOnClickListener {

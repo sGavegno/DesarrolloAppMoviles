@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +33,7 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
     lateinit var vista: View
     lateinit var imgTitulo: ImageView
     lateinit var recPokemon: RecyclerView
+    private lateinit var progressPc: ProgressBar
     private lateinit var btnPcAdd: Button
     lateinit var adapter: PokemonPcAdapter
 
@@ -46,14 +48,17 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTituloPc)
         btnPcAdd = vista.findViewById(R.id.btnPcAdd)
+        progressPc = vista.findViewById(R.id.progressBarPc)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 State.LOADING -> {
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    progressPc.visibility = View.VISIBLE
+                    recPokemon.visibility = View.INVISIBLE
                 }
                 State.SUCCESS -> {
-                    Snackbar.make(vista, "Carga Exitosa", Snackbar.LENGTH_SHORT).show()
+                    progressPc.visibility = View.INVISIBLE
+                    recPokemon.visibility = View.VISIBLE
                 }
                 State.FAILURE -> {
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
@@ -70,23 +75,6 @@ class FragmentPc : Fragment(), PokemonPcAdapter.PokemonPcAdapterListener {
             recPokemon.scrollToPosition(posPc)
             recPokemon.adapter = adapter
         }
-/*
-        viewModel.statePokemon.observe(viewLifecycleOwner) {
-            when (it) {
-                State.LOADING -> {
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
-                }
-                State.SUCCESS -> {
-                    val action = FragmentPcDirections.actionFragmentPcToFragmentAddPokemon(0)
-                    findNavController().navigate(action)
-                }
-                State.FAILURE -> {
-                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-        */
 
         return vista
     }

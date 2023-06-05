@@ -26,7 +26,9 @@ data class Pc(
     var ataque1: String? = null,
     var ataque2: String? = null,
     var ataque3: String? = null,
-    var ataque4: String? = null
+    var ataque4: String? = null,
+    var stats: List<PokemonStats>? = null,
+    var descripcion: String? = null
 )
 
 data class UserPokedex(

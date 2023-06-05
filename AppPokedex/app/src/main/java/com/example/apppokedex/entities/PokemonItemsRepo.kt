@@ -6,8 +6,7 @@ import kotlinx.parcelize.IgnoredOnParcel
 
 @Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
-class TablaTiposRepo: Parcelable {
-
+class PokemonItemsRepo : Parcelable {
     @IgnoredOnParcel
-    var tipos = mutableListOf<TablaTiposPokemon>()
+    var itemList = mutableListOf<String>()
 }

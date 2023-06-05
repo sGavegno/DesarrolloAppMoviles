@@ -50,5 +50,5 @@ data class PokemonHabilidad(
 )
 
 data class PokemonHabilidadDetalle(
-    val nombre: String? = null
+    var nombre: String? = null
 )

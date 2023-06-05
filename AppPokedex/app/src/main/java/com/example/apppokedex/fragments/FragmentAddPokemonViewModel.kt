@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
+import com.example.apppokedex.entities.Habilidades
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.PokedexRepo
 import com.example.apppokedex.entities.Pokemon
@@ -39,6 +40,10 @@ class FragmentAddPokemonViewModel @Inject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 result = getPokemonFireBase(idPokemon)
                 if (result != null) {
+                    for(item in result!!.habilidades!!){
+                        val habilidad = getHabilidadFireBase(item.idHabilidades!!)
+                        item.detalle?.nombre = habilidad?.nombre
+                    }
                     //preferencesManager.savePokemon(result!!)
                     pokemon.postValue(result!!)
                     statePokemon.postValue(State.SUCCESS)
@@ -67,7 +72,22 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    fun addUserPokemon(idPokemon: Int, mote:String?, nivel:Int, genero:Boolean?, habilidad: String){
+    private suspend fun getHabilidadFireBase(idHabilidad: Int):Habilidades?{
+        val dbFb = Firebase.firestore
+        return try {
+            val documents = dbFb.collection("Habilidades").whereEqualTo("idHabilidad", idHabilidad).get().await()
+            if(!documents.isEmpty){
+                val habilidad = documents.toObjects<Habilidades>()
+                return habilidad[0]
+            }
+            null
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: Habilidades")
+            null
+        }
+    }
+
+    fun addUserPokemon(idPokemon: Int, mote:String?, nivel:Int, genero:Boolean?, habilidad: String,descripcion: String){
         state.postValue(State.LOADING)
         try {
             var usuario: Usuario?
@@ -83,12 +103,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                     } else {
                         1
                     }
-                    var nombre: String? = null
-                    if(mote != null){
-                        nombre = mote
-                    } else {
-                        nombre = pokemonAux?.nombre
-                    }
+                    val nombre: String? = mote ?: pokemonAux?.nombre
                     pokemonPc.id = idNewPc
                     pokemonPc.idPokemon = pokemonAux?.id
                     pokemonPc.mote = nombre
@@ -105,6 +120,8 @@ class FragmentAddPokemonViewModel @Inject constructor(
                     pokemonPc.ataque2 = ""
                     pokemonPc.ataque3 = ""
                     pokemonPc.ataque4 = ""
+                    pokemonPc.stats = pokemonAux?.stats
+                    pokemonPc.descripcion = descripcion
                     user.pc!!.add(pokemonPc)
                 }
                 val pokedexUser = user.pokedex

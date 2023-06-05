@@ -8,9 +8,12 @@ import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Evoluciones
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonItems
+import com.example.apppokedex.entities.PokemonItemsRepo
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.UserPokedex
 import com.example.apppokedex.entities.Usuario
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -26,15 +29,18 @@ class FragmentPokemonDataViewModel @Inject constructor(
 ): ViewModel() {
 
     val state = SingleLiveEvent<State>()
-    val stateEvolucionCheck = SingleLiveEvent<State>()
     val stateEvolucion = SingleLiveEvent<State>()
     val statePokemon = SingleLiveEvent<State>()
     val stateRemove = SingleLiveEvent<State>()
     val stateLvl = SingleLiveEvent<State>()
+    val stateItems = SingleLiveEvent<State>()
+
 
     val pokemonData = SingleLiveEvent<Pokemon>()
     val pokemonPcData = SingleLiveEvent<Pc>()
     val pokemonEvolucionA = SingleLiveEvent<Pokemon>()
+    val items = SingleLiveEvent<PokemonItems>()
+    val itemsList = SingleLiveEvent<PokemonItemsRepo>()
 
     fun getPokemonById(idPokemon: Int){
         statePokemon.postValue(State.LOADING)
@@ -69,23 +75,6 @@ class FragmentPokemonDataViewModel @Inject constructor(
         }
     }
 
-    fun updateUserData(user : Usuario){
-        state.postValue(State.LOADING)
-        try {
-            var result: Usuario?
-            viewModelScope.launch(Dispatchers.IO) {
-                result = updateUserFireBase(user)
-                if (result != null) {
-                    state.postValue(State.SUCCESS)
-                } else {
-                    state.postValue(State.FAILURE)
-                }
-            }
-        } catch (e: Exception) {
-            Log.d("myFireBaseLogin", "A ver $e")
-            state.postValue(State.FAILURE)
-        }
-    }
     private suspend fun updateUserFireBase(user: Usuario):Usuario?{
         val dbFb = Firebase.firestore
         val id = preferencesManager.getIdUser()
@@ -152,7 +141,8 @@ class FragmentPokemonDataViewModel @Inject constructor(
                     }
                     val result = updateUserFireBase(user)
                     if (result != null) {
-                        pokemonPcData.postValue(pokeAux!!)
+                        //pokemonPcData.postValue(pokeAux!!)
+                        preferencesManager.savePcPokemon(pokeAux)
                         stateLvl.postValue(State.SUCCESS)
                     } else {
                         stateLvl.postValue(State.FAILURE)
@@ -167,46 +157,13 @@ class FragmentPokemonDataViewModel @Inject constructor(
         }
     }
 
-    private suspend fun chekEvolucion(pokemon: Pc):Pokemon?{
-        stateEvolucionCheck.postValue(State.LOADING)
-        return try{
-            var evolucionA:Pokemon?=null
-            val idCadenaEvolutiva = getIdCadenaEvolutiva(pokemon.idPokemon!!)
-            val evolucion = idCadenaEvolutiva?.let { getPokemonEvolucionFireBase(it)?.cadenaEvolutiva }
-            val evolucionDe = evolucion?.filter { item -> item.idEvolucionaDe == pokemon.idPokemon!! }
-            if (evolucionDe != null){
-                for (item in evolucionDe){
-                    for (detalle in item.detalles!!){
-                        when(detalle.idTipoEvolucion){
-                            1->{
-                                val level = detalle.nivel
-                                val felicidad = detalle.felicidad
-                                if (level != null){
-                                    if (pokemon.nivel!! >= level ){
-                                        evolucionA = getPokemonFireBase(item.id!!)
-                                    }
-                                } else if (felicidad != null){
-                                    if (pokemon.felicidad!! >= felicidad){
-                                        evolucionA = getPokemonFireBase(item.id!!)
-                                    }
-                                }
-                            }
-                            else->{}
-                        }
-                    }
-                }
-            }
-            evolucionA
-        } catch (e: Exception){
-            Log.d("upLevelPokemon", "Error upLevelPokemon ")
-            null
-        }
-    }
-
     fun evolucionPokemon(pokemon: Pc, poke:Pokemon){
         stateEvolucion.postValue(State.LOADING)
         try {
             viewModelScope.launch(Dispatchers.IO) {
+                val evolucionList = getPokemonEvolucionFireBase(poke.detalle!!.idCadenaEvolutiva!!)?.cadenaEvolutiva
+                val evolucionA = evolucionList?.filter { item -> item.id == poke.id!! }?.get(0)
+
                 val evolucionDe = getPokemonFireBase(pokemon.idPokemon!!)
                 if (evolucionDe != null){
                     val user = preferencesManager.getUserLogin()
@@ -217,6 +174,14 @@ class FragmentPokemonDataViewModel @Inject constructor(
                             pokemonPc.mote = poke.nombre
                         }
                         pokemonPc.tipo = poke.tipo
+                        for (evol in evolucionA!!.detalles!!){
+                            if(evol.idTipoEvolucion == 3){
+                                if(pokemonPc.idObjeto == evol.evolucionItem?.id){
+                                    pokemonPc.objeto = null
+                                    pokemonPc.idObjeto = null
+                                }
+                            }
+                        }
                         preferencesManager.savePcPokemon(pokemonPc)
                         //pokemonPcData.postValue(pokemonPc!!)
                         val pokedexUser = user.pokedex
@@ -249,6 +214,96 @@ class FragmentPokemonDataViewModel @Inject constructor(
         }
     }
 
+    fun addObjeto(id: Int, objeto:String){
+        stateItems.postValue(State.LOADING)
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val user = preferencesManager.getUserLogin()
+                val pokemonPc = user.pc?.filter { item -> item.id == id }?.get(0)
+                if (pokemonPc != null) {
+                    val itemAux = getPokemonItemsFireBase(objeto)
+                    if(itemAux != null){
+                        pokemonPc.objeto = itemAux.nombre
+                        pokemonPc.idObjeto = itemAux.id
+                        preferencesManager.savePcPokemon(pokemonPc)
+                        val evolucionA = chekEvolucion(pokemonPc)
+                        if (evolucionA != null){
+                            pokemonEvolucionA.postValue(evolucionA!!)
+                        }
+                        val result = updateUserFireBase(user)
+                        if (result != null) {
+                            //items.postValue(itemAux!!)
+                            stateItems.postValue(State.SUCCESS)
+                        } else {
+                            stateItems.postValue(State.FAILURE)
+                        }
+                    } else{
+                        stateItems.postValue(State.FAILURE)
+                    }
+                }
+            }
+        } catch (e: Exception){
+            Log.d("upLevelPokemon", "Error upLevelPokemon ")
+            stateItems.postValue(State.FAILURE)
+        }
+    }
+
+    fun addItem(id: Int, objeto:String){
+        stateItems.postValue(State.LOADING)
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val user = preferencesManager.getUserLogin()
+                val pokemonPc = user.pc?.filter { item -> item.id == id }?.get(0)
+                if (pokemonPc != null) {
+                    val itemAux = getPokemonItemsFireBase(objeto)
+                    if(itemAux != null){
+                        pokemonPc.objeto = itemAux.nombre
+                        pokemonPc.idObjeto = itemAux.id
+                        preferencesManager.savePcPokemon(pokemonPc)
+                        val evolucionA = chekEvolucion(pokemonPc)
+                        if (evolucionA != null){
+                            pokemonEvolucionA.postValue(evolucionA!!)
+                        }
+                        val result = updateUserFireBase(user)
+                        if (result != null) {
+                            //items.postValue(itemAux!!)
+                            stateItems.postValue(State.SUCCESS)
+                        } else {
+                            stateItems.postValue(State.FAILURE)
+                        }
+                    } else{
+                        stateItems.postValue(State.FAILURE)
+                    }
+                }
+            }
+        } catch (e: Exception){
+            Log.d("upLevelPokemon", "Error upLevelPokemon ")
+            stateItems.postValue(State.FAILURE)
+        }
+    }
+
+    fun getObjetos(){
+        stateItems.postValue(State.LOADING)
+        try {
+            val itemRepo = PokemonItemsRepo()
+            viewModelScope.launch(Dispatchers.IO) {
+                val itemAux = getItemsFireBase()
+                if(itemAux != null){
+                    for(item in itemAux){
+                        itemRepo.itemList.add(item.nombre.toString())
+                    }
+                    itemsList.postValue(itemRepo)
+                    stateItems.postValue(State.SUCCESS)
+                } else{
+                    stateItems.postValue(State.FAILURE)
+                }
+            }
+        } catch (e: Exception){
+            Log.d("getObjetos", "Error getObjetos ")
+            stateItems.postValue(State.FAILURE)
+        }
+    }
+
     private suspend fun getIdCadenaEvolutiva(idPokemon: Int): Int?{
         val dbFb = Firebase.firestore
         return try {
@@ -275,6 +330,79 @@ class FragmentPokemonDataViewModel @Inject constructor(
             null
         } catch (e: Exception) {
             Log.d("Firebase", "Error getting documents: ")
+            null
+        }
+    }
+
+    private suspend fun getPokemonItemsFireBase(item:String): PokemonItems?{
+        val dbFb = Firebase.firestore
+        return try {
+            val documents = dbFb.collection("PokemonItems").whereEqualTo("nombre", item).get().await()
+            if(!documents.isEmpty) {
+                val itemAux = documents.toObjects<PokemonItems>()
+                return itemAux[0]
+            }
+            null
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: ")
+            null
+        }
+    }
+
+    private suspend fun getItemsFireBase(): List<PokemonItems>?{
+        val dbFb = Firebase.firestore
+        return try {
+            val documents = dbFb.collection("PokemonItems").orderBy("id", Query.Direction.ASCENDING).limit(1658).get().await()
+            if(!documents.isEmpty) {
+                return documents.toObjects()
+            }
+            null
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: ")
+            null
+        }
+    }
+
+    private suspend fun chekEvolucion(pokemon: Pc):Pokemon?{
+        return try{
+            var evolucionA:Pokemon?=null
+            val idCadenaEvolutiva = getIdCadenaEvolutiva(pokemon.idPokemon!!)
+            val evolucionList = idCadenaEvolutiva?.let { getPokemonEvolucionFireBase(it)?.cadenaEvolutiva }
+            val evolucionDe = evolucionList?.filter { item -> item.idEvolucionaDe == pokemon.idPokemon!! }
+            if (evolucionDe != null){
+                for (item in evolucionDe){
+                    for (detalle in item.detalles!!){
+                        when(detalle.idTipoEvolucion){
+                            1->{
+                                val level = detalle.nivel
+                                val felicidad = detalle.felicidad
+                                if (level != null){
+                                    if (pokemon.nivel!! >= level ){
+                                        evolucionA = getPokemonFireBase(item.id!!)
+                                    }
+                                } else if (felicidad != null){
+                                    if (pokemon.felicidad!! >= felicidad){
+                                        //chequear si es de dia o noche
+                                        evolucionA = getPokemonFireBase(item.id!!)
+                                    }
+                                }
+                            }
+                            3->{
+                                val idObjeto = detalle.idEvolucionItem
+                                if (idObjeto != null){
+                                    if (pokemon.idObjeto!! == idObjeto ){
+                                        evolucionA = getPokemonFireBase(item.id!!)
+                                    }
+                                }
+                            }
+                            else->{}
+                        }
+                    }
+                }
+            }
+            evolucionA
+        } catch (e: Exception){
+            Log.d("upLevelPokemon", "Error upLevelPokemon ")
             null
         }
     }

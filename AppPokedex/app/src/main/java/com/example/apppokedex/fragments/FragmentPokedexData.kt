@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,7 +24,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class FragmentPokedexData : Fragment() {
 
-    val viewModel: FragmentPokedexDataViewModel by viewModels()
+    private val viewModel: FragmentPokedexDataViewModel by viewModels()
 
     private lateinit var labelName : TextView
     private lateinit var labelId : TextView

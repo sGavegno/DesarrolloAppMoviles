@@ -3,14 +3,16 @@ package com.example.apppokedex.fragments
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.MultiAutoCompleteTextView
 import android.widget.ProgressBar
 import android.widget.Switch
 import android.widget.TextView
@@ -29,7 +31,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class FragmentPokemonData : Fragment() {
 
-    val viewModel: FragmentPokemonDataViewModel by viewModels()
+    private val viewModel: FragmentPokemonDataViewModel by viewModels()
 
     private lateinit var imgPokemon : ImageView
     private lateinit var labelLvl : TextView
@@ -58,20 +60,25 @@ class FragmentPokemonData : Fragment() {
     private lateinit var barrDefEsp : ProgressBar
     private lateinit var labelVelocidad : TextView
     private lateinit var barrVelocidad : ProgressBar
-
+    private lateinit var progressBarLouding : ProgressBar
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switchDatos: Switch
 
+    private lateinit var constLayaut: ConstraintLayout
     private lateinit var clDatos: ConstraintLayout
     private lateinit var clStats: ConstraintLayout
 
-
     lateinit var vista : View
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_pokemon_data, container, false)
+
+        constLayaut=vista.findViewById(R.id.fragmentPokemon)
+        progressBarLouding = vista.findViewById(R.id.progressBarPokemonData)
 
         imgPokemon = vista.findViewById(R.id.imgPokeDato)
         labelLvl = vista.findViewById(R.id.txtPokeLvlDato)
@@ -105,13 +112,25 @@ class FragmentPokemonData : Fragment() {
         clDatos = vista.findViewById(R.id.clPokemonInfo)
         clStats = vista.findViewById(R.id.clPokemonStats)
 
+        val animation = ScaleAnimation(
+            0.5f, 1.5f, // Factor de escala en el eje X (desde 1 hasta 1.5)
+            0.5f, 1.5f, // Factor de escala en el eje Y (desde 1 hasta 1.5)
+            Animation.RELATIVE_TO_SELF, 0.5f, // Punto pivote para el escalado en el eje X (50% del ancho de la imagen)
+            Animation.RELATIVE_TO_SELF, 0.5f // Punto pivote para el escalado en el eje Y (50% de la altura de la imagen)
+        ).apply {
+            duration = 1000 // Duración de la animación (en milisegundos)
+            repeatCount = Animation.INFINITE // Repetir la animación indefinidamente
+            repeatMode = Animation.REVERSE // Revertir la animación al finalizar cada ciclo
+        }
+
+
         viewModel.stateRemove.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    progressBarLouding.visibility = View.VISIBLE
+                    constLayaut.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
-                    Snackbar.make(vista, "Liberado", Snackbar.LENGTH_SHORT).show()
                     findNavController().navigateUp()            //accion de cambiar de pantalla
                 }
                 State.FAILURE->{
@@ -121,17 +140,14 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
-        viewModel.pokemonData.observe(viewLifecycleOwner){
-            setInfoPokemon(it)
-        }
-
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Cargando", Snackbar.LENGTH_SHORT).show()
+
                 }
                 State.SUCCESS ->{
-
+                    progressBarLouding.visibility = View.INVISIBLE
+                    constLayaut.visibility = View.VISIBLE
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error al cargar datos del pokemon", Snackbar.LENGTH_SHORT).show()
@@ -140,32 +156,21 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
+        viewModel.pokemonData.observe(viewLifecycleOwner){
+            setInfoPokemon(it)
+        }
+
         viewModel.state.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    progressBarLouding.visibility = View.VISIBLE
+                    constLayaut.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
 
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-
-        viewModel.stateLvl.observe(viewLifecycleOwner){
-            when(it){
-                State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
-                }
-                State.SUCCESS->{
-
-
-                }
-                State.FAILURE->{
-                    Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -179,20 +184,28 @@ class FragmentPokemonData : Fragment() {
                 labelGenero.text = "♂"
             }else if (it.genero == false){
                 labelGenero.text = "♀"
+            }else{
+                labelGenero.text = "-"
             }
             labelHabilidad.text = it.habilidad
-            labelNotas.text = "Test. Se captuo en... al nivle ##"
+            if(it.objeto != null){
+                labelObjeto.text = it.objeto
+            } else {
+                labelObjeto.text = "No Tiene"
+            }
+            labelNotas.text = it.descripcion
 
             viewModel.getPokemonById(it.idPokemon!!)
         }
 
-        viewModel.stateEvolucionCheck.observe(viewLifecycleOwner){
+        viewModel.stateLvl.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+
                 }
                 State.SUCCESS->{
-
+                    val pokemonPc = viewModel.getPcPokemon()
+                    labelLvl.text = pokemonPc.nivel.toString()
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -202,15 +215,15 @@ class FragmentPokemonData : Fragment() {
         }
 
         viewModel.pokemonEvolucionA.observe(viewLifecycleOwner){
-
+            imgPokemon.startAnimation(animation)
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setTitle("El pokemon esta intentando evolucionar")
             alertDialog.setPositiveButton("ACEPTAR") { _, _ ->
                 val pcPokemon = viewModel.getPcPokemon()
-                //Activar Animacion
                 viewModel.evolucionPokemon(pcPokemon,it)
             }
             alertDialog.setNegativeButton("CANCELAR") { dialog, _ ->
+                imgPokemon.clearAnimation()
                 dialog.cancel()
             }
             alertDialog.show()
@@ -219,16 +232,77 @@ class FragmentPokemonData : Fragment() {
         viewModel.stateEvolucion.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    //Animacion de Evolucion
+                    //Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
-
+                    val pokemonAux = labelMote.text
                     val pokemon = viewModel.getPokemon()
                     setInfoPokemon(pokemon)
                     val pokemonPc = viewModel.getPcPokemon()
                     labelLvl.text = pokemonPc.nivel.toString()
                     labelMote.text = pokemonPc.mote!!.uppercase(Locale.getDefault())
+                    if(pokemonPc.objeto != null){
+                        labelObjeto.text = pokemonPc.objeto
+                    } else {
+                        labelObjeto.text = "No Tiene"
+                    }
 
+                    val alertDialog = AlertDialog.Builder(requireContext())
+                    alertDialog.setTitle("Felizidade ${pokemonAux} \na evolucionado en ${pokemon.nombre!!.uppercase(Locale.getDefault())}")
+                    alertDialog.setPositiveButton("OK") { _, _ ->
+                    }
+                    alertDialog.show()
+                    //Finalizar Animacion de Evolucion
+                    imgPokemon.clearAnimation()
+                }
+                State.FAILURE->{
+                    imgPokemon.clearAnimation()
+                    Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+
+        viewModel.stateItems.observe(viewLifecycleOwner){
+            when(it){
+                State.LOADING->{
+                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                }
+                State.SUCCESS->{
+                    val pokemonPc = viewModel.getPcPokemon()
+                    if(pokemonPc.objeto != null) {
+                        if (pokemonPc.idObjeto == 45) {
+                            //Mas PS aumnta la Salud en +10
+
+                        }else if(pokemonPc.idObjeto == 46) {
+                            //Proteina aumnta Ataque en +10
+
+                        }else if(pokemonPc.idObjeto == 47) {
+                            //Hierro aumnta la defensa en +10
+
+                        }else if(pokemonPc.idObjeto == 48) {
+                            //Carrburante aumnta la Velocidad en +10
+
+                        }else if(pokemonPc.idObjeto == 49) {
+                            //Calcio aumnta la At. Esp en +10
+
+                        }else if(pokemonPc.idObjeto == 50) {
+                            //Si el item es un caramelo raro aumentar el nivel
+                            viewModel.upLevelPokemon(pokemonPc.id!!)
+                        }else if(pokemonPc.idObjeto == 51) {
+                            //Mas PP aumnta un 20% de los PPs de un ataque
+
+                        }else if(pokemonPc.idObjeto == 52) {
+                            //Zinc aumnta la De. Esp en +10
+
+                        }else if(pokemonPc.idObjeto == 53) {
+                            //PP Maximos aumnta un 60% de los PPs de un ataque
+
+                        }else{
+                            labelObjeto.text = pokemonPc.objeto
+                        }
+                    }
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -236,6 +310,29 @@ class FragmentPokemonData : Fragment() {
                 else -> {}
             }
         }
+
+        viewModel.items.observe(viewLifecycleOwner){
+
+        }
+
+        viewModel.itemsList.observe(viewLifecycleOwner){
+            val multiAutoCompleteTextView = MultiAutoCompleteTextView(context)
+            multiAutoCompleteTextView.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, it.itemList))
+            multiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer()) // Opcional: para separar las opciones por comas
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle("Seleccionar Objeto")
+            alertDialog.setView(multiAutoCompleteTextView)
+            alertDialog.setPositiveButton("ACEPTAR") { _, _ ->
+                val item = multiAutoCompleteTextView.text.toString()
+                val pokemonPc = viewModel.getPcPokemon()
+                viewModel.addItem(pokemonPc.id!!, item)
+            }
+            alertDialog.setNegativeButton("CANCELAR") { dialog, _ ->
+                dialog.cancel()
+            }
+            alertDialog.show()
+        }
+
 
         //Set editText Mote
         switchDatos.isChecked = false
@@ -262,6 +359,9 @@ class FragmentPokemonData : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        progressBarLouding.visibility = View.VISIBLE
+        constLayaut.visibility = View.INVISIBLE
+
         val idPcPokemon = FragmentPokemonDataArgs.fromBundle(requireArguments()).id
         viewModel.getPcPokemonByIdPokemon(idPcPokemon)
 
@@ -278,6 +378,21 @@ class FragmentPokemonData : Fragment() {
         }
 
         btnAddObjeto.setOnClickListener {
+
+            //viewModel.getObjetos()
+
+            val input = EditText(requireContext())
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle("Seleccionar Objeto")
+            alertDialog.setView(input)
+            alertDialog.setPositiveButton("ACEPTAR") { _, _ ->
+                val item = input.text.toString()
+                viewModel.addObjeto(idPcPokemon, item)
+            }
+            alertDialog.setNegativeButton("CANCELAR") { dialog, _ ->
+                dialog.cancel()
+            }
+            alertDialog.show()
 
         }
         btnLevlUp.setOnClickListener {
@@ -411,7 +526,6 @@ class FragmentPokemonData : Fragment() {
             }
         }
     }
-
 
 
 }
