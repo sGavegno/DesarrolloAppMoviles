@@ -22,6 +22,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
@@ -157,7 +158,7 @@ class FragmentPokemonData : Fragment() {
         }
 
         viewModel.pokemonData.observe(viewLifecycleOwner){
-            setInfoPokemon(it)
+            //setInfoPokemon(it)
         }
 
         viewModel.state.observe(viewLifecycleOwner){
@@ -177,25 +178,8 @@ class FragmentPokemonData : Fragment() {
         }
 
         viewModel.pokemonPcData.observe(viewLifecycleOwner){
-
-            labelLvl.text = it.nivel.toString()
-            labelMote.text = it.mote!!.uppercase(Locale.getDefault())
-            if(it.genero == true){
-                labelGenero.text = "♂"
-            }else if (it.genero == false){
-                labelGenero.text = "♀"
-            }else{
-                labelGenero.text = "-"
-            }
-            labelHabilidad.text = it.habilidad
-            if(it.objeto != null){
-                labelObjeto.text = it.objeto
-            } else {
-                labelObjeto.text = "No Tiene"
-            }
-            labelNotas.text = it.descripcion
-
-            viewModel.getPokemonById(it.idPokemon!!)
+            setInfoPokemon(it)
+//            viewModel.getPokemonById(it.idPokemon!!)
         }
 
         viewModel.stateLvl.observe(viewLifecycleOwner){
@@ -236,10 +220,8 @@ class FragmentPokemonData : Fragment() {
                     //Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
-                    val pokemonAux = labelMote.text
-                    val pokemon = viewModel.getPokemon()
-                    setInfoPokemon(pokemon)
                     val pokemonPc = viewModel.getPcPokemon()
+                    setInfoPokemon(pokemonPc)
                     labelLvl.text = pokemonPc.nivel.toString()
                     labelMote.text = pokemonPc.mote!!.uppercase(Locale.getDefault())
                     if(pokemonPc.objeto != null){
@@ -249,7 +231,7 @@ class FragmentPokemonData : Fragment() {
                     }
 
                     val alertDialog = AlertDialog.Builder(requireContext())
-                    alertDialog.setTitle("Felizidade ${pokemonAux} \na evolucionado en ${pokemon.nombre!!.uppercase(Locale.getDefault())}")
+                    alertDialog.setTitle("Felizidade ${pokemonPc.mote} \na evolucionado en ${pokemonPc.nombre!!.uppercase(Locale.getDefault())}")
                     alertDialog.setPositiveButton("OK") { _, _ ->
                     }
                     alertDialog.show()
@@ -397,7 +379,6 @@ class FragmentPokemonData : Fragment() {
         }
         btnLevlUp.setOnClickListener {
             viewModel.upLevelPokemon(idPcPokemon)
-
         }
 
     }
@@ -495,13 +476,31 @@ class FragmentPokemonData : Fragment() {
             }
         }
     }
-    private fun setInfoPokemon(pokemon: Pokemon){
-        labelId.text = pokemon.id.toString()
+    @SuppressLint("SetTextI18n")
+    private fun setInfoPokemon(pokemon: Pc){
+        labelLvl.text = pokemon.nivel.toString()
+        labelMote.text = pokemon.mote!!.uppercase(Locale.getDefault())
+        if(pokemon.genero == true){
+            labelGenero.text = "♂"
+        }else if (pokemon.genero == false){
+            labelGenero.text = "♀"
+        }else{
+            labelGenero.text = "-"
+        }
+
+        labelId.text = pokemon.idPokemon.toString()
         labelName.text = pokemon.nombre!!.uppercase(Locale.getDefault())
         var cont = 0
         for(tipo in pokemon.tipo!!){
             tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
             cont += 1
+        }
+
+        labelHabilidad.text = pokemon.habilidad
+        if(pokemon.objeto != null){
+            labelObjeto.text = pokemon.objeto
+        } else {
+            labelObjeto.text = "No Tiene"
         }
 
         for(state in pokemon.stats!!){
@@ -512,19 +511,21 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
-        val id = pokemon.id
+        val id = pokemon.idPokemon
         if(id != null){
             if(id < 10){
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.id}.png"
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.idPokemon}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemon.idPokemon}.png"
             }else if(id < 100){
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.id}.png"
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.idPokemon}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${pokemon.idPokemon}.png"
             }else{
-                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png").into(imgPokemon)
-                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png"
+                Glide.with(vista).load("https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.idPokemon}.png").into(imgPokemon)
+                imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.idPokemon}.png"
             }
         }
+
+        labelNotas.text = pokemon.descripcion
     }
 
 

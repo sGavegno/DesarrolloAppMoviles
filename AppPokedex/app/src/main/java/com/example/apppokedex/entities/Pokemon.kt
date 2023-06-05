@@ -23,9 +23,9 @@ data class PokemonTipoDetalle(
 )
 
 data class PokemonStats(
-    val statsBase: Int? = null,
-    val idStats: Int? = null,
-    val detalle: PokemonStatsDetalle? = null
+    var statsBase: Int? = null,
+    var idStats: Int? = null,
+    var detalle: PokemonStatsDetalle? = null
 )
 data class PokemonStatsDetalle(
     val nombre: String? = null

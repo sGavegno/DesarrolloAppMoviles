@@ -13,6 +13,7 @@ data class Usuario(
 data class Pc(
     var id: Int? = null,
     var idPokemon: Int? = null,
+    var nombre: String? =null,
     var mote: String? = null,
     var tipo: List<PokemonTipo>? = null,
     var nivel: Int? = null,

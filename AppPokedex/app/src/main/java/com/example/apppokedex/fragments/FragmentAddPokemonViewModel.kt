@@ -106,6 +106,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                     val nombre: String? = mote ?: pokemonAux?.nombre
                     pokemonPc.id = idNewPc
                     pokemonPc.idPokemon = pokemonAux?.id
+                    pokemonPc.nombre = pokemonAux?.nombre
                     pokemonPc.mote = nombre
                     pokemonPc.tipo = pokemonAux?.tipo
                     pokemonPc.nivel = nivel

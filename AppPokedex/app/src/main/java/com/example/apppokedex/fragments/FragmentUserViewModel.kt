@@ -59,7 +59,7 @@ class FragmentUserViewModel @Inject constructor(
                 val stream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 val imageView = stream.toByteArray()
-                
+
                 imagesRef.putBytes(imageView)
                     .addOnFailureListener {
                         // Handle unsuccessful uploads

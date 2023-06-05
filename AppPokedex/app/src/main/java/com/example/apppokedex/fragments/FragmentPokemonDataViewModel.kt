@@ -10,6 +10,7 @@ import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.PokemonItems
 import com.example.apppokedex.entities.PokemonItemsRepo
+import com.example.apppokedex.entities.PokemonStats
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.UserPokedex
 import com.example.apppokedex.entities.Usuario
@@ -60,6 +61,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
             statePokemon.postValue(State.FAILURE)
         }
     }
+
     private suspend fun getPokemonFireBase(id: Int): Pokemon?{
         val dbFb = Firebase.firestore
         return try {
@@ -134,6 +136,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 val pokeAux = user.pc?.filter { item -> item.id == id }?.get(0)
                 if (pokeAux != null){
                     pokeAux.nivel = pokeAux.nivel!! + 1
+                    //pokemonPcData.postValue(pokeAux!!)
                     preferencesManager.savePcPokemon(pokeAux)
                     val evolucionA = chekEvolucion(pokeAux)
                     if (evolucionA != null){
@@ -141,8 +144,6 @@ class FragmentPokemonDataViewModel @Inject constructor(
                     }
                     val result = updateUserFireBase(user)
                     if (result != null) {
-                        //pokemonPcData.postValue(pokeAux!!)
-                        preferencesManager.savePcPokemon(pokeAux)
                         stateLvl.postValue(State.SUCCESS)
                     } else {
                         stateLvl.postValue(State.FAILURE)
@@ -170,10 +171,17 @@ class FragmentPokemonDataViewModel @Inject constructor(
                     val pokemonPc = user.pc?.filter { item -> item.id == pokemon.id!! }?.get(0)
                     if (pokemonPc != null) {
                         pokemonPc.idPokemon = poke.id
+                        pokemonPc.nombre = poke.nombre
                         if (pokemonPc.mote == evolucionDe.nombre) {
                             pokemonPc.mote = poke.nombre
                         }
                         pokemonPc.tipo = poke.tipo
+
+                        //analizar los stats si son distintos a los base, para sumar la diferencia a los nuevos stats
+
+                        pokemonPc.stats = analizarStats(pokemonPc.stats, evolucionDe.stats)
+
+                        //Si evoluciono con un objeto y el objeto que tiene es el mismo, se elimina el objeto.
                         for (evol in evolucionA!!.detalles!!){
                             if(evol.idTipoEvolucion == 3){
                                 if(pokemonPc.idObjeto == evol.evolucionItem?.id){
@@ -186,9 +194,8 @@ class FragmentPokemonDataViewModel @Inject constructor(
                         //pokemonPcData.postValue(pokemonPc!!)
                         val pokedexUser = user.pokedex
                         if (pokedexUser != null) {
-                            val pokedexAux =
-                                pokedexUser.filter { item -> item.idPokemon == poke.id }
-                            if (pokedexAux.isEmpty()) {
+                            val pokedexAux = pokedexUser.filter { item -> item.idPokemon == poke.id }
+                            if (pokedexAux.isEmpty()) {         //Si no encuentra el pokemon en la pokedex del usuario lo agrega
                                 val pokedex = UserPokedex(
                                     poke.id,
                                     poke.nombre,
@@ -197,7 +204,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                                 user.pokedex!!.add(pokedex)
                             }
                         }
-                        preferencesManager.savePokemon(poke)
+//                        preferencesManager.savePokemon(poke)
                         //pokemonData.postValue(poke!!)
                         val result = updateUserFireBase(user)
                         if (result != null) {
@@ -212,6 +219,27 @@ class FragmentPokemonDataViewModel @Inject constructor(
             Log.d("evolucionPokemon", "Error evolucionPokemon ")
             stateEvolucion.postValue(State.FAILURE)
         }
+    }
+
+    fun analizarStats( statsEvolucionA: List<PokemonStats>, statsPokemonPc: List<PokemonStats>, statsEvolucion: List<PokemonStats>): PokemonStats{
+        var statsAux = PokemonStats()
+
+        val hpAux = statsPokemonPc.filter { item -> item.detalle?.nombre == "hp"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "hp"  }[0].statsBase!!
+        val ataqueAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Ataque"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Ataque"  }[0].statsBase!!
+        val defensaAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Defensa"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Defensa"  }[0].statsBase!!
+        val atEspAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Ataque Especial"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Ataque Especial"  }[0].statsBase!!
+        val defEspAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Defensa Especial"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Defensa Especial"  }[0].statsBase!!
+        val velAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Velocidad"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Velocidad"  }[0].statsBase!!
+
+
+        statsEvolucionA.get(0)?.statsBase = statsEvolucionA.get(0)?.statsBase?.plus(hpAux)
+        statsEvolucionA.get(1)?.statsBase = statsEvolucionA.get(1)?.statsBase?.plus(ataqueAux)
+        statsEvolucionA.get(2)?.statsBase = statsEvolucionA.get(2)?.statsBase?.plus(defensaAux)
+        statsEvolucionA.get(3)?.statsBase = statsEvolucionA.get(3)?.statsBase?.plus(atEspAux)
+        statsEvolucionA.get(4)?.statsBase = statsEvolucionA.get(4)?.statsBase?.plus(defEspAux)
+        statsEvolucionA.get(5)?.statsBase = statsEvolucionA.get(4)?.statsBase?.plus(velAux)
+
+        return statsAux
     }
 
     fun addObjeto(id: Int, objeto:String){
