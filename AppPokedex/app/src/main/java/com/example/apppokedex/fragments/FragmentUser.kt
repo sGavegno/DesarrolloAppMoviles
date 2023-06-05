@@ -56,8 +56,7 @@ class FragmentUser : Fragment() {
         /*
         // Carga la imagen desde los recursos (drawable)
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.entrenador_red)
-        val imageData = viewModel.bitmapToByteArray(bitmap)
-        viewModel.uploadStorageImage(imageData)
+        viewModel.uploadStorageImage(bitmap)
         */
 
         viewModel.state.observe(viewLifecycleOwner){

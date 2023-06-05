@@ -30,7 +30,9 @@ class FragmentUserViewModel @Inject constructor(
 ): ViewModel() {
 
     val state = SingleLiveEvent<State>()
+    val stateImageUpload = SingleLiveEvent<State>()
     val stateImageDownloadUri = SingleLiveEvent<State>()
+    val stateImageDelete = SingleLiveEvent<State>()
 
 
     val imageStorage = SingleLiveEvent<String>()
@@ -41,62 +43,63 @@ class FragmentUserViewModel @Inject constructor(
     }
 
 
-    // Convierte un Bitmap en un array de bytes
-    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
 
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-        return stream.toByteArray()
-    }
+    fun uploadStorageImage(bitmap: Bitmap){
+        stateImageUpload.postValue(State.LOADING)
 
-
-    fun uploadStorageImage(imageView: ByteArray){
         val storage = Firebase.storage
         val storageRef = storage.reference
 
         val pathName = "UserImage"
         val fileName = "userRed.jpg"
         val imagesRef = storageRef.child("$pathName/$fileName")
-        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
-        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
-
-        // Get the data from an ImageView as bytes
-        val uploadTask = imagesRef.putBytes(imageView)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
-            Log.d("Storage", "taskSnapshot $taskSnapshot")
-        }
-
-        val urlTask = uploadTask.addOnProgressListener {
-            val progress = (100.0 * it.bytesTransferred) / it.totalByteCount
-            Log.d("Storage", "Upload is $progress% done")
-        }.addOnPausedListener {
-            Log.d("Storage", "Upload is paused")
-        }.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener {
-            // Handle successful uploads on complete
-            // ...
-        }.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
-                }
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                // Convierte un Bitmap en un array de bytes
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val imageView = stream.toByteArray()
+                
+                imagesRef.putBytes(imageView)
+                    .addOnFailureListener {
+                        // Handle unsuccessful uploads
+                        stateImageUpload.postValue(State.FAILURE)
+                    }
+                    .addOnSuccessListener { taskSnapshot ->
+                        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                        Log.d("Storage", "taskSnapshot $taskSnapshot")
+                    }
+                    .addOnProgressListener {
+                        val progress = (100.0 * it.bytesTransferred) / it.totalByteCount
+                        Log.d("Storage", "Upload is $progress% done")
+                    }
+                    .addOnPausedListener {
+                        Log.d("Storage", "Upload is paused")
+                    }
+                    .continueWithTask { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        imagesRef.downloadUrl
+                    }
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val downloadUri = task.result
+                            stateImageUpload.postValue(State.FAILURE)
+                            Log.d("Storage", "downloadUri is $downloadUri")
+                        } else {
+                            // Handle failures
+                            stateImageUpload.postValue(State.LOADING)
+                        }
+                    }
             }
-            imagesRef.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val downloadUri = task.result
-                Log.d("Storage", "downloadUri is $downloadUri")
-            } else {
-                // Handle failures
-                // ...
-            }
+        } catch (e: Exception) {
+            state.postValue(State.FAILURE)
+            Log.d("downloadUriStorage", "Raised Exception")
+            stateImageUpload.postValue(State.FAILURE)
         }
-
     }
 
     fun downloadUriStorage(){
@@ -107,24 +110,20 @@ class FragmentUserViewModel @Inject constructor(
         val pathName = "UserImage"
         val fileName = "userRed.jpg"
         val imagenRef = storageRef.child("$pathName/$fileName")
-
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                imagenRef.downloadUrl
-                    .addOnSuccessListener { uri ->
-                        // La URL de descarga se obtuvo exitosamente
-                        val imageUrl = uri.toString()
-                        imageStorage.postValue(imageUrl)
-                        stateImageDownloadUri.postValue(State.SUCCESS)
-                    }
-                    .addOnFailureListener { exception ->
-                        // Ocurrió un error al obtener la URL de descarga
-                        // Maneja el error según tus necesidades
-                        Log.d("StorageError", "Error: $exception")
-                        stateImageDownloadUri.postValue(State.FAILURE)
-                    }
+                imagenRef.downloadUrl.addOnSuccessListener { uri ->
+                    // La URL de descarga se obtuvo exitosamente
+                    val imageUrl = uri.toString()
+                    imageStorage.postValue(imageUrl)
+                    stateImageDownloadUri.postValue(State.SUCCESS)
+                }.addOnFailureListener { exception ->
+                    // Ocurrió un error al obtener la URL de descarga
+                    // Maneja el error según tus necesidades
+                    Log.d("StorageError", "Error: $exception")
+                    stateImageDownloadUri.postValue(State.FAILURE)
+                }
             }
-
         } catch (e: Exception) {
             state.postValue(State.FAILURE)
             Log.d("downloadUriStorage", "Raised Exception")
@@ -139,8 +138,6 @@ class FragmentUserViewModel @Inject constructor(
         val pathName = "UserImage"
         val fileName = "userRed.jpg"
         val imagesRef = storageRef.child("$pathName/$fileName")
-        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
-        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
 
         val oneMegaByte: Long = 1024 * 1024
         imagesRef.getBytes(oneMegaByte)
@@ -162,16 +159,23 @@ class FragmentUserViewModel @Inject constructor(
         val pathName = "UserImage"
         val fileName = "userRed.jpg"
         val imagesRef = storageRef.child("$pathName/$fileName")
-        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
-        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
-
-        // Delete the file
-        imagesRef.delete().addOnSuccessListener {
-            // File deleted successfully
-        }.addOnFailureListener {
-            // Uh-oh, an error occurred!
+        stateImageDelete.postValue(State.LOADING)
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                // Delete the file
+                imagesRef.delete().addOnSuccessListener {
+                    // File deleted successfully
+                    stateImageDelete.postValue(State.SUCCESS)
+                }.addOnFailureListener {
+                    // Uh-oh, an error occurred!
+                    stateImageDelete.postValue(State.FAILURE)
+                }
+            }
+        } catch (e: Exception) {
+            state.postValue(State.FAILURE)
+            Log.d("downloadUriStorage", "Raised Exception")
+            stateImageDelete.postValue(State.FAILURE)
         }
-
     }
 
 
