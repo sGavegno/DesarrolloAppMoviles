@@ -2,6 +2,7 @@ package com.example.apppokedex.fragments
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.entities.State
@@ -34,6 +36,7 @@ class FragmentUser : Fragment() {
     private lateinit var btnResetPokedex : Button
     private lateinit var btnLogOut : Button
     private lateinit var progressBarLouding : ProgressBar
+    private lateinit var progressBarImg : ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +51,17 @@ class FragmentUser : Fragment() {
         btnResetPokedex = vista.findViewById(R.id.btnResetPokedex)
         btnLogOut = vista.findViewById(R.id.btnPokedexLogOut)
         progressBarLouding = vista.findViewById(R.id.progressBarUser)
+        progressBarImg = vista.findViewById(R.id.progressBarImgUser)
 
+        /*
+        // Carga la imagen desde los recursos (drawable)
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.entrenador_red)
+        val imageData = viewModel.bitmapToByteArray(bitmap)
+        viewModel.uploadStorageImage(imageData)
+        */
 
-        viewModel.state.observe(viewLifecycleOwner){state ->
-            when(state){
+        viewModel.state.observe(viewLifecycleOwner){
+            when(it){
                 State.SUCCESS ->{
                     inputTxtUserName.visibility = View.VISIBLE
                     inputTxtNombre.visibility = View.VISIBLE
@@ -71,13 +81,37 @@ class FragmentUser : Fragment() {
             }
         }
 
+        viewModel.stateImageDownloadUri.observe(viewLifecycleOwner){
+            when(it){
+                State.SUCCESS ->{
+                    imgUser.visibility = View.VISIBLE
+                    progressBarImg.visibility = View.INVISIBLE
+                }
+                State.FAILURE ->{
+                    Snackbar.make(vista, "Carga de Imagen Fallida", Snackbar.LENGTH_SHORT).show()
+                }
+                State.LOADING ->{
+                    imgUser.visibility = View.INVISIBLE
+                    progressBarImg.visibility = View.VISIBLE
+                }
+                else -> {}
+            }
+        }
+
+        viewModel.imageStorage.observe(viewLifecycleOwner){
+            Glide.with(vista).load(it).into(imgUser)
+        }
+
         return vista
     }
 
     override fun onStart() {
         super.onStart()
 
+
         val user = viewModel.getUserData()
+        viewModel.downloadUriStorage()
+
         progressBarLouding.visibility = View.INVISIBLE
         inputTxtUserName.setText(user.userName)
         inputTxtNombre.setText(user.name)

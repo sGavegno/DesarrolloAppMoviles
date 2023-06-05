@@ -87,6 +87,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.code.gson:gson:2.9.0'
 
+    // Add the dependency for the Cloud Storage library
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
     // Add the dependency for the Firebase Authentication library
     implementation 'com.google.firebase:firebase-auth-ktx'
 

@@ -8,6 +8,16 @@
     android:background="#B5C7ED"
     tools:context=".fragments.FragmentUser">
 
+    <ProgressBar
+        android:id="@+id/progressBarImgUser"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgUser"
+        app:layout_constraintEnd_toEndOf="@+id/imgUser"
+        app:layout_constraintStart_toStartOf="@+id/imgUser"
+        app:layout_constraintTop_toTopOf="@+id/imgUser" />
+
     <Button
         android:id="@+id/btnPokedexLogOut"
         android:layout_width="wrap_content"

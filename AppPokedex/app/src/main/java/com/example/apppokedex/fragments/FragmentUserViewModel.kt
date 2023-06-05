@@ -1,6 +1,10 @@
 package com.example.apppokedex.fragments
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.util.Log
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
@@ -12,10 +16,12 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,10 +30,150 @@ class FragmentUserViewModel @Inject constructor(
 ): ViewModel() {
 
     val state = SingleLiveEvent<State>()
+    val stateImageDownloadUri = SingleLiveEvent<State>()
+
+
+    val imageStorage = SingleLiveEvent<String>()
+
 
     fun getUserData(): Usuario {
         return preferencesManager.getUserLogin()
     }
+
+
+    // Convierte un Bitmap en un array de bytes
+    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        return stream.toByteArray()
+    }
+
+
+    fun uploadStorageImage(imageView: ByteArray){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+
+        val pathName = "UserImage"
+        val fileName = "userRed.jpg"
+        val imagesRef = storageRef.child("$pathName/$fileName")
+        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
+        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
+
+        // Get the data from an ImageView as bytes
+        val uploadTask = imagesRef.putBytes(imageView)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+            Log.d("Storage", "taskSnapshot $taskSnapshot")
+        }
+
+        val urlTask = uploadTask.addOnProgressListener {
+            val progress = (100.0 * it.bytesTransferred) / it.totalByteCount
+            Log.d("Storage", "Upload is $progress% done")
+        }.addOnPausedListener {
+            Log.d("Storage", "Upload is paused")
+        }.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener {
+            // Handle successful uploads on complete
+            // ...
+        }.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            imagesRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                Log.d("Storage", "downloadUri is $downloadUri")
+            } else {
+                // Handle failures
+                // ...
+            }
+        }
+
+    }
+
+    fun downloadUriStorage(){
+        stateImageDownloadUri.postValue(State.LOADING)
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+
+        val pathName = "UserImage"
+        val fileName = "userRed.jpg"
+        val imagenRef = storageRef.child("$pathName/$fileName")
+
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                imagenRef.downloadUrl
+                    .addOnSuccessListener { uri ->
+                        // La URL de descarga se obtuvo exitosamente
+                        val imageUrl = uri.toString()
+                        imageStorage.postValue(imageUrl)
+                        stateImageDownloadUri.postValue(State.SUCCESS)
+                    }
+                    .addOnFailureListener { exception ->
+                        // Ocurrió un error al obtener la URL de descarga
+                        // Maneja el error según tus necesidades
+                        Log.d("StorageError", "Error: $exception")
+                        stateImageDownloadUri.postValue(State.FAILURE)
+                    }
+            }
+
+        } catch (e: Exception) {
+            state.postValue(State.FAILURE)
+            Log.d("downloadUriStorage", "Raised Exception")
+            stateImageDownloadUri.postValue(State.FAILURE)
+        }
+    }
+
+    fun downloadStorageImage(){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+
+        val pathName = "UserImage"
+        val fileName = "userRed.jpg"
+        val imagesRef = storageRef.child("$pathName/$fileName")
+        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
+        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
+
+        val oneMegaByte: Long = 1024 * 1024
+        imagesRef.getBytes(oneMegaByte)
+            .addOnSuccessListener { bytes ->
+                // Los bytes de la imagen se descargaron exitosamente
+                // Convierte los bytes en un Bitmap
+                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            }
+            .addOnFailureListener {
+            // Handle any errors
+            }
+
+    }
+
+    fun deleteStorageImage(){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+
+        val pathName = "UserImage"
+        val fileName = "userRed.jpg"
+        val imagesRef = storageRef.child("$pathName/$fileName")
+        //-------------           Points to "UserImage/user.jpg" - Name is user.jpg - Path is UserImage/user.jpg - Parent is UserImage
+        Log.d("Storage", "Points to $imagesRef - Name is ${imagesRef.name} - Path is ${imagesRef.path} - Parent is ${imagesRef.parent}")
+
+        // Delete the file
+        imagesRef.delete().addOnSuccessListener {
+            // File deleted successfully
+        }.addOnFailureListener {
+            // Uh-oh, an error occurred!
+        }
+
+    }
+
 
     fun updateUserData(email: String, password: String, usuario: Usuario): FirebaseUser?{
         state.postValue(State.LOADING)
@@ -109,5 +255,6 @@ class FragmentUserViewModel @Inject constructor(
             null
         }
     }
+
 
 }
