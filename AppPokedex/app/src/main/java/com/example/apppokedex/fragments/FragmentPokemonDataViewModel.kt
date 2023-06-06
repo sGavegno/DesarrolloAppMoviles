@@ -178,8 +178,8 @@ class FragmentPokemonDataViewModel @Inject constructor(
                         pokemonPc.tipo = poke.tipo
 
                         //analizar los stats si son distintos a los base, para sumar la diferencia a los nuevos stats
-
-                        pokemonPc.stats = analizarStats(pokemonPc.stats, evolucionDe.stats)
+                        pokemonPc.stats = poke.stats
+                        //pokemonPc.stats = analizarStats(pokemonPc.stats, evolucionDe.stats)
 
                         //Si evoluciono con un objeto y el objeto que tiene es el mismo, se elimina el objeto.
                         for (evol in evolucionA!!.detalles!!){

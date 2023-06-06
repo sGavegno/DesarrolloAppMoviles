@@ -168,7 +168,8 @@ class FragmentPokemonData : Fragment() {
                     constLayaut.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
-
+                    progressBarLouding.visibility = View.INVISIBLE
+                    constLayaut.visibility = View.VISIBLE
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error al liberar pokemon", Snackbar.LENGTH_SHORT).show()
@@ -220,6 +221,7 @@ class FragmentPokemonData : Fragment() {
                     //Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
+                    val nameAux = labelMote.text
                     val pokemonPc = viewModel.getPcPokemon()
                     setInfoPokemon(pokemonPc)
                     labelLvl.text = pokemonPc.nivel.toString()
@@ -231,7 +233,7 @@ class FragmentPokemonData : Fragment() {
                     }
 
                     val alertDialog = AlertDialog.Builder(requireContext())
-                    alertDialog.setTitle("Felizidade ${pokemonPc.mote} \na evolucionado en ${pokemonPc.nombre!!.uppercase(Locale.getDefault())}")
+                    alertDialog.setTitle("Felicidade $nameAux \na evolucionado en ${pokemonPc.nombre!!.uppercase(Locale.getDefault())}")
                     alertDialog.setPositiveButton("OK") { _, _ ->
                     }
                     alertDialog.show()
