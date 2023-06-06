@@ -97,7 +97,7 @@ class FragmentLogin : Fragment() {
 
         btnNexScreen.setOnClickListener{
             //Analizo si los parametros estan en la base de datos
-            viewModel.userLogin(inputTxtUser.text.toString(),inputTxtPass.text.toString())
+           viewModel.userLogin(inputTxtUser.text.toString(),inputTxtPass.text.toString())
         }
 
         btnSingin.setOnClickListener{

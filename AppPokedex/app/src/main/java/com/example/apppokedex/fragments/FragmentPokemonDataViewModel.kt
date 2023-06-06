@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
+import com.example.apppokedex.entities.Estadisticas
 import com.example.apppokedex.entities.Evoluciones
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
@@ -23,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class FragmentPokemonDataViewModel @Inject constructor(
@@ -136,6 +138,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 val pokeAux = user.pc?.filter { item -> item.id == id }?.get(0)
                 if (pokeAux != null){
                     pokeAux.nivel = pokeAux.nivel!! + 1
+                    pokeAux.stats = calcularEstadisticas(pokeAux)
                     //pokemonPcData.postValue(pokeAux!!)
                     preferencesManager.savePcPokemon(pokeAux)
                     val evolucionA = chekEvolucion(pokeAux)
@@ -176,11 +179,8 @@ class FragmentPokemonDataViewModel @Inject constructor(
                             pokemonPc.mote = poke.nombre
                         }
                         pokemonPc.tipo = poke.tipo
-
-                        //analizar los stats si son distintos a los base, para sumar la diferencia a los nuevos stats
-                        pokemonPc.stats = poke.stats
-                        //pokemonPc.stats = analizarStats(pokemonPc.stats, evolucionDe.stats)
-
+                        pokemonPc.statsBase = poke.stats
+                        pokemonPc.stats = calcularEstadisticas(pokemonPc)
                         //Si evoluciono con un objeto y el objeto que tiene es el mismo, se elimina el objeto.
                         for (evol in evolucionA!!.detalles!!){
                             if(evol.idTipoEvolucion == 3){
@@ -221,25 +221,36 @@ class FragmentPokemonDataViewModel @Inject constructor(
         }
     }
 
-    fun analizarStats( statsEvolucionA: List<PokemonStats>, statsPokemonPc: List<PokemonStats>, statsEvolucion: List<PokemonStats>): PokemonStats{
-        var statsAux = PokemonStats()
+    private fun calcularEstadisticas(pokemon: Pc): Estadisticas{
+        val estadisticas = Estadisticas()
+        //estadística = ((2 * Estadística base + IV + (Puntos de esfuerzo / 4)) * (Nivel / 100) + 5) * Naturaleza
+        val nivel = pokemon.nivel
+        val statsBase = pokemon.statsBase
+        val puntosEsfuerzo = pokemon.puntoEsfuerzo
+        val iv = pokemon.iV
+        val naturaleza = pokemon.naturaleza
 
-        val hpAux = statsPokemonPc.filter { item -> item.detalle?.nombre == "hp"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "hp"  }[0].statsBase!!
-        val ataqueAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Ataque"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Ataque"  }[0].statsBase!!
-        val defensaAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Defensa"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Defensa"  }[0].statsBase!!
-        val atEspAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Ataque Especial"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Ataque Especial"  }[0].statsBase!!
-        val defEspAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Defensa Especial"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Defensa Especial"  }[0].statsBase!!
-        val velAux = statsPokemonPc.filter {  item -> item.detalle?.nombre == "Velocidad"}[0].statsBase!! - statsEvolucion.filter { item -> item.detalle?.nombre == "Velocidad"  }[0].statsBase!!
+        //estadística = ((2 * Estadística base + IV + (Puntos de esfuerzo / 4)) * (Nivel / 100) + 5) * Naturaleza
+        //calculo de HP
+        val hp = ((statsBase!!.filter { item -> item.idStats == 1 }[0].statsBase?.times(2)!! + iv!! + (puntosEsfuerzo!!.hp!! /4)) * (nivel!!/100) + 5) * (naturaleza!!.stats!!.filter { item -> item.idStats == 1 }[0].multiplicador!!)
+        estadisticas.hp = hp.roundToInt()
+        //calculo de Ataque
+        val ataque = ((statsBase.filter { item -> item.idStats == 2 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.ataque!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 2 }[0].multiplicador!!)
+        estadisticas.ataque = ataque.roundToInt()
+        //calculo de Defensa
+        val defensa = ((statsBase.filter { item -> item.idStats == 3 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.defensa!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 3 }[0].multiplicador!!)
+        estadisticas.defensa = defensa.roundToInt()
+        //calculo de Ataque Especial
+        val atEsp = ((statsBase.filter { item -> item.idStats == 4 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.atEsp!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 4 }[0].multiplicador!!)
+        estadisticas.atEsp = atEsp.roundToInt()
+        //calculo de Defensa Especial
+        val defEsp = ((statsBase.filter { item -> item.idStats == 5 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.defEsp!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 5 }[0].multiplicador!!)
+        estadisticas.defEsp = defEsp.roundToInt()
+        //calculo de Velocidad
+        val velocidad = ((statsBase.filter { item -> item.idStats == 6 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.velocidad!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 6 }[0].multiplicador!!)
+        estadisticas.velocidad = velocidad.roundToInt()
 
-
-        statsEvolucionA.get(0)?.statsBase = statsEvolucionA.get(0)?.statsBase?.plus(hpAux)
-        statsEvolucionA.get(1)?.statsBase = statsEvolucionA.get(1)?.statsBase?.plus(ataqueAux)
-        statsEvolucionA.get(2)?.statsBase = statsEvolucionA.get(2)?.statsBase?.plus(defensaAux)
-        statsEvolucionA.get(3)?.statsBase = statsEvolucionA.get(3)?.statsBase?.plus(atEspAux)
-        statsEvolucionA.get(4)?.statsBase = statsEvolucionA.get(4)?.statsBase?.plus(defEspAux)
-        statsEvolucionA.get(5)?.statsBase = statsEvolucionA.get(4)?.statsBase?.plus(velAux)
-
-        return statsAux
+        return estadisticas
     }
 
     fun addObjeto(id: Int, objeto:String){

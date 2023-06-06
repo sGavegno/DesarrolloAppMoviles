@@ -22,6 +22,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
+import com.example.apppokedex.entities.Estadisticas
 import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
@@ -191,6 +192,7 @@ class FragmentPokemonData : Fragment() {
                 State.SUCCESS->{
                     val pokemonPc = viewModel.getPcPokemon()
                     labelLvl.text = pokemonPc.nivel.toString()
+                    pokemonPc.stats?.let { it1 -> setStats(it1) }
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -231,6 +233,7 @@ class FragmentPokemonData : Fragment() {
                     } else {
                         labelObjeto.text = "No Tiene"
                     }
+                    pokemonPc.stats?.let { it1 -> setStats(it1) }
 
                     val alertDialog = AlertDialog.Builder(requireContext())
                     alertDialog.setTitle("Felicidade $nameAux \na evolucionado en ${pokemonPc.nombre!!.uppercase(Locale.getDefault())}")
@@ -254,23 +257,24 @@ class FragmentPokemonData : Fragment() {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
+                    //Analizar en ViewModel y chequear que no se alcanze el maximo
                     val pokemonPc = viewModel.getPcPokemon()
                     if(pokemonPc.objeto != null) {
                         if (pokemonPc.idObjeto == 45) {
                             //Mas PS aumnta la Salud en +10
-
+                            pokemonPc.puntoEsfuerzo!!.hp = pokemonPc.puntoEsfuerzo!!.hp!! + 10
                         }else if(pokemonPc.idObjeto == 46) {
                             //Proteina aumnta Ataque en +10
-
+                            pokemonPc.puntoEsfuerzo!!.ataque = pokemonPc.puntoEsfuerzo!!.ataque!! + 10
                         }else if(pokemonPc.idObjeto == 47) {
                             //Hierro aumnta la defensa en +10
-
+                            pokemonPc.puntoEsfuerzo!!.defensa = pokemonPc.puntoEsfuerzo!!.defensa!! + 10
                         }else if(pokemonPc.idObjeto == 48) {
                             //Carrburante aumnta la Velocidad en +10
-
+                            pokemonPc.puntoEsfuerzo!!.velocidad = pokemonPc.puntoEsfuerzo!!.velocidad!! + 10
                         }else if(pokemonPc.idObjeto == 49) {
                             //Calcio aumnta la At. Esp en +10
-
+                            pokemonPc.puntoEsfuerzo!!.atEsp = pokemonPc.puntoEsfuerzo!!.atEsp!! + 10
                         }else if(pokemonPc.idObjeto == 50) {
                             //Si el item es un caramelo raro aumentar el nivel
                             viewModel.upLevelPokemon(pokemonPc.id!!)
@@ -279,7 +283,7 @@ class FragmentPokemonData : Fragment() {
 
                         }else if(pokemonPc.idObjeto == 52) {
                             //Zinc aumnta la De. Esp en +10
-
+                            pokemonPc.puntoEsfuerzo!!.defEsp = pokemonPc.puntoEsfuerzo!!.defEsp!! + 10
                         }else if(pokemonPc.idObjeto == 53) {
                             //PP Maximos aumnta un 60% de los PPs de un ataque
 
@@ -385,34 +389,26 @@ class FragmentPokemonData : Fragment() {
 
     }
 
-    private fun setStats(stat:String, datoStat:Int){
+    private fun setStats(estadisticas: Estadisticas){
 
-        when(stat){
-            "hp" ->{
-                labelPs.text = datoStat.toString()
-                barrPs.progress = datoStat
-            }
-            "Ataque" ->{
-                labelAtaque.text = datoStat.toString()
-                barrAtaque.progress = datoStat
-            }
-            "Defensa" ->{
-                labelDefensa.text = datoStat.toString()
-                barrDefensa.progress = datoStat
-            }
-            "Ataque Especial" ->{
-                labelAtEsp.text = datoStat.toString()
-                barrAtEsp.progress = datoStat
-            }
-            "Defensa Especial" ->{
-                labelDefEsp.text = datoStat.toString()
-                barrDefEsp.progress = datoStat
-            }
-            "Velocidad" ->{
-                labelVelocidad.text = datoStat.toString()
-                barrVelocidad.progress = datoStat
-            }
-        }
+        labelPs.text = estadisticas.hp.toString()
+        barrPs.max = estadisticas.hp!!
+        barrPs.progress = estadisticas.hp!!
+
+        labelAtaque.text = estadisticas.ataque.toString()
+        barrAtaque.progress = estadisticas.ataque!!
+
+        labelDefensa.text = estadisticas.defensa.toString()
+        barrDefensa.progress = estadisticas.defensa!!
+
+        labelAtEsp.text = estadisticas.atEsp.toString()
+        barrAtEsp.progress = estadisticas.atEsp!!
+
+        labelDefEsp.text = estadisticas.defEsp.toString()
+        barrDefEsp.progress = estadisticas.defEsp!!
+
+        labelVelocidad.text = estadisticas.velocidad.toString()
+        barrVelocidad.progress = estadisticas.velocidad!!
     }
     private fun setImgTipo(idTipo : Int, imgN: Int){
         val imgTipo : ImageView = if(imgN == 0) {
@@ -505,13 +501,7 @@ class FragmentPokemonData : Fragment() {
             labelObjeto.text = "No Tiene"
         }
 
-        for(state in pokemon.stats!!){
-            state.detalle?.nombre?.let { it1 ->
-                state.statsBase?.let { it2 ->
-                    setStats(it1,it2)
-                }
-            }
-        }
+        pokemon.stats?.let { setStats(it) }
 
         val id = pokemon.idPokemon
         if(id != null){

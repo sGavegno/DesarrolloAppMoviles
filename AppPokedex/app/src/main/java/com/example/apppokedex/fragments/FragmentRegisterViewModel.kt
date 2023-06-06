@@ -53,6 +53,7 @@ class FragmentRegisterViewModel @Inject constructor(
                             val userNew = Usuario("", userName, "", "", email, mutableListOf(), mutableListOf())
                             val auxUser = addUserFireBase(userNew)
                             if (auxUser != null){
+                                preferencesManager.saveUser(userNew)
                                 state.postValue(State.SUCCESS)
                             } else {
                                 state.postValue(State.FAILURE)
@@ -105,7 +106,6 @@ class FragmentRegisterViewModel @Inject constructor(
             val documentReference = dbFb.collection("Usuarios").add(userNew).await()
             userNew.id = documentReference.id
             dbFb.collection("Usuarios").document(documentReference.id).update("id",documentReference.id).await()
-            preferencesManager.saveUser(userNew)
             userNew
         } catch (e: Exception) {
             Log.d("createUserAuth", "Raised Exception")
