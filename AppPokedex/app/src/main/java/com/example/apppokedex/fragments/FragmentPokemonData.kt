@@ -257,8 +257,10 @@ class FragmentPokemonData : Fragment() {
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
-                    //Analizar en ViewModel y chequear que no se alcanze el maximo
                     val pokemonPc = viewModel.getPcPokemon()
+                    setInfoPokemon(pokemonPc)
+
+                    /*
                     if(pokemonPc.objeto != null) {
                         if (pokemonPc.idObjeto == 45) {
                             //Mas PS aumnta la Salud en +10
@@ -291,6 +293,7 @@ class FragmentPokemonData : Fragment() {
                             labelObjeto.text = pokemonPc.objeto
                         }
                     }
+                    */
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -313,7 +316,7 @@ class FragmentPokemonData : Fragment() {
             alertDialog.setPositiveButton("ACEPTAR") { _, _ ->
                 val item = multiAutoCompleteTextView.text.toString()
                 val pokemonPc = viewModel.getPcPokemon()
-                viewModel.addItem(pokemonPc.id!!, item)
+                viewModel.addObjeto(pokemonPc.id!!, item)
             }
             alertDialog.setNegativeButton("CANCELAR") { dialog, _ ->
                 dialog.cancel()

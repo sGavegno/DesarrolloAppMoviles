@@ -26,8 +26,6 @@ class FragmentPokedexDataViewModel @Inject constructor(
 ): ViewModel() {
 
     val statePokemon = SingleLiveEvent<State>()
-    val stateEvolucion = SingleLiveEvent<State>()
-    val stateTablaTipo = SingleLiveEvent<State>()
 
     fun getPokemonById(idPokemon: Int){
         statePokemon.postValue(State.LOADING)
@@ -63,81 +61,8 @@ class FragmentPokedexDataViewModel @Inject constructor(
         }
     }
 
-    fun getEvolucionesById(idEvolucion: Int){
-        stateEvolucion.postValue(State.LOADING)
-        try {
-            var evoluciones: Evoluciones?
-            viewModelScope.launch(Dispatchers.IO) {
-                evoluciones = getEvolucioesFireBase(idEvolucion)
-                if (evoluciones != null) {
-                    preferencesManager.saveEvoluciones(evoluciones!!)
-                    stateEvolucion.postValue(State.SUCCESS)
-                } else {
-                    stateEvolucion.postValue(State.FAILURE)
-                }
-            }
-        } catch (e: Exception) {
-            Log.d("getEvolucionesById", "A ver $e")
-            stateEvolucion.postValue(State.FAILURE)
-        }
-    }
-
-    private suspend fun getEvolucioesFireBase(id: Int):Evoluciones?{
-        val dbFb = Firebase.firestore
-        return try {
-            val documents = dbFb.collection("PokemonEvoluciones").whereEqualTo("id", id).get().await()
-            if(!documents.isEmpty){
-                val evoluciones = documents.toObjects<Evoluciones>()
-                return evoluciones[0]
-            }
-            null
-        } catch (e: Exception) {
-            Log.d("Firebase", "Error getting documents: Pokedex")
-            null
-        }
-    }
-
-    fun getTablaTipos(){
-        stateTablaTipo.postValue(State.LOADING)
-        try {
-            var document: QuerySnapshot?
-            val repoTipo = TablaTiposRepo()
-            viewModelScope.launch(Dispatchers.IO) {
-                document = getTablaTiposFireBase()
-                if(document != null){
-                    val tipos = document!!.toObjects<TablaTiposPokemon>()
-                    for (tiposPokemon in tipos){
-                        repoTipo.tipos.add(tiposPokemon)
-                    }
-                    preferencesManager.saveTablaTiposPokemon(repoTipo)
-                    stateTablaTipo.postValue(State.SUCCESS)
-                } else {
-                    stateTablaTipo.postValue(State.FAILURE)
-                }
-            }
-        } catch (e: Exception) {
-            Log.d("getTablaTiposById", "A ver $e")
-            stateTablaTipo.postValue(State.FAILURE)
-        }
-    }
-
-    private suspend fun getTablaTiposFireBase(): QuerySnapshot? {
-        val dbFb = Firebase.firestore
-        return try {
-            val documents = dbFb.collection("PokemonTipos").get().await()
-            documents
-        } catch (e: Exception) {
-            Log.d("Firebase", "Error getting documents: Pokedex")
-            null
-        }
-    }
-
     fun getPokemon(): Pokemon{
         return preferencesManager.getPokemon()
-    }
-
-    fun getEvoluciones(): Evoluciones{
-        return preferencesManager.getEvoluciones()
     }
 
     fun getTablaTiposPokemon(): TablaTiposRepo{

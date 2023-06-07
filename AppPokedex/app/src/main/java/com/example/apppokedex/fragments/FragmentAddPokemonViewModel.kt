@@ -27,7 +27,7 @@ import kotlin.random.Random
 @HiltViewModel
 class FragmentAddPokemonViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
-): ViewModel() {
+) : ViewModel() {
 
     val state = SingleLiveEvent<State>()
     val statePokemon = SingleLiveEvent<State>()
@@ -35,14 +35,14 @@ class FragmentAddPokemonViewModel @Inject constructor(
     val pokemon = SingleLiveEvent<Pokemon>()
     val pcPokemon = SingleLiveEvent<Pc>()
 
-    fun getPokemonById(idPokemon: Int){
+    fun getPokemonById(idPokemon: Int) {
         statePokemon.postValue(State.LOADING)
         try {
             var result: Pokemon?
             viewModelScope.launch(Dispatchers.IO) {
                 result = getPokemonFireBase(idPokemon)
                 if (result != null) {
-                    for(item in result!!.habilidades!!){
+                    for (item in result!!.habilidades!!) {
                         val habilidad = getHabilidadFireBase(item.idHabilidades!!)
                         item.detalle?.nombre = habilidad?.nombre
                     }
@@ -59,11 +59,11 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getPokemonFireBase(idPokemon: Int):Pokemon?{
+    private suspend fun getPokemonFireBase(idPokemon: Int): Pokemon? {
         val dbFb = Firebase.firestore
         return try {
             val documents = dbFb.collection("Pokedex").whereEqualTo("id", idPokemon).get().await()
-            if(!documents.isEmpty){
+            if (!documents.isEmpty) {
                 val pokemon = documents.toObjects<Pokemon>()
                 return pokemon[0]
             }
@@ -74,11 +74,13 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getHabilidadFireBase(idHabilidad: Int):Habilidades?{
+    private suspend fun getHabilidadFireBase(idHabilidad: Int): Habilidades? {
         val dbFb = Firebase.firestore
         return try {
-            val documents = dbFb.collection("Habilidades").whereEqualTo("idHabilidad", idHabilidad).get().await()
-            if(!documents.isEmpty){
+            val documents =
+                dbFb.collection("Habilidades").whereEqualTo("idHabilidad", idHabilidad).get()
+                    .await()
+            if (!documents.isEmpty) {
                 val habilidad = documents.toObjects<Habilidades>()
                 return habilidad[0]
             }
@@ -89,17 +91,24 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    fun addUserPokemon(idPokemon: Int, mote:String?, nivel:Int, genero:Boolean?, habilidad: String,descripcion: String){
+    fun addUserPokemon(
+        idPokemon: Int,
+        mote: String?,
+        nivel: Int,
+        genero: Boolean?,
+        habilidad: String,
+        descripcion: String
+    ) {
         state.postValue(State.LOADING)
         try {
             var usuario: Usuario?
             val pokemonPc = Pc()
-            viewModelScope.launch(Dispatchers.IO){
+            viewModelScope.launch(Dispatchers.IO) {
                 val user = preferencesManager.getUserLogin()
                 val pokemonAux = getPokemonFireBase(idPokemon)
                 val pokemonUser = user.pc
                 val size = pokemonUser?.size
-                val idNewPc = if(size!! > 0){
+                val idNewPc = if (size!! > 0) {
                     pokemonUser[size - 1].id!!.plus(1)
                 } else {
                     1
@@ -118,7 +127,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 pokemonPc.descripcion = descripcion
 
                 pokemonPc.statsBase = pokemonAux.stats
-                pokemonPc.puntoEsfuerzo = Estadisticas(0,0,0,0,0,0)
+                pokemonPc.puntoEsfuerzo = Estadisticas(0, 0, 0, 0, 0, 0)
                 pokemonPc.iV = Random.nextInt(1, 32)
                 val idNaturaleza = Random.nextInt(1, 26)
                 //pokemonPc.naturaleza = Naturaleza(0, null, listOf())
@@ -147,7 +156,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                     state.postValue(State.FAILURE)
                 }
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.d("addUserPokemon", "A ver $e")
             state.postValue(State.FAILURE)
         }
@@ -156,8 +165,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
 
     private fun calcularEstadisticas(pokemon: Pc): Estadisticas{
         val estadisticas = Estadisticas()
-        //estadística = ((2 * Estadística base + IV + (Puntos de esfuerzo / 4)) * (Nivel / 100) + 5) * Naturaleza
-        val nivel = pokemon.nivel
+        val nivel : Float = pokemon.nivel!!.toFloat()
         val statsBase = pokemon.statsBase
         val puntosEsfuerzo = pokemon.puntoEsfuerzo
         val iv = pokemon.iV
@@ -165,28 +173,28 @@ class FragmentAddPokemonViewModel @Inject constructor(
 
         //estadística = ((2 * Estadística base + IV + (Puntos de esfuerzo / 4)) * (Nivel / 100) + 5) * Naturaleza
         //calculo de HP
-        val hp = ((statsBase!!.filter { item -> item.idStats == 1 }[0].statsBase?.times(2)!! + iv!! + (puntosEsfuerzo!!.hp!! /4)) * (nivel!!/100) + 5) * (naturaleza!!.stats!!.filter { item -> item.idStats == 1 }[0].multiplicador!!)
+        val hp = (((statsBase!!.filter { item -> item.idStats == 1 }[0].statsBase!! * 2) + iv!! + (puntosEsfuerzo!!.hp!! /4)) * (nivel /100) + 5) * (naturaleza!!.stats!!.filter { item -> item.idStats == 1 }[0].multiplicador!!)
         estadisticas.hp = hp.roundToInt()
         //calculo de Ataque
-        val ataque = ((statsBase.filter { item -> item.idStats == 2 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.ataque!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 2 }[0].multiplicador!!)
+        val ataque = (((statsBase.filter { item -> item.idStats == 2 }[0].statsBase!! * 2) + iv + (puntosEsfuerzo.ataque!! /4)) * (nivel /100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 2 }[0].multiplicador!!)
         estadisticas.ataque = ataque.roundToInt()
         //calculo de Defensa
-        val defensa = ((statsBase.filter { item -> item.idStats == 3 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.defensa!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 3 }[0].multiplicador!!)
+        val defensa = (((statsBase.filter { item -> item.idStats == 3 }[0].statsBase!! * 2) + iv + (puntosEsfuerzo.defensa!! /4)) * (nivel /100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 3 }[0].multiplicador!!)
         estadisticas.defensa = defensa.roundToInt()
         //calculo de Ataque Especial
-        val atEsp = ((statsBase.filter { item -> item.idStats == 4 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.atEsp!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 4 }[0].multiplicador!!)
+        val atEsp = (((statsBase.filter { item -> item.idStats == 4 }[0].statsBase!! * 2) + iv + (puntosEsfuerzo.atEsp!! /4)) * (nivel /100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 4 }[0].multiplicador!!)
         estadisticas.atEsp = atEsp.roundToInt()
         //calculo de Defensa Especial
-        val defEsp = ((statsBase.filter { item -> item.idStats == 5 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.defEsp!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 5 }[0].multiplicador!!)
+        val defEsp = (((statsBase.filter { item -> item.idStats == 5 }[0].statsBase!! * 2) + iv + (puntosEsfuerzo.defEsp!! /4)) * (nivel /100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 5 }[0].multiplicador!!)
         estadisticas.defEsp = defEsp.roundToInt()
         //calculo de Velocidad
-        val velocidad = ((statsBase.filter { item -> item.idStats == 6 }[0].statsBase?.times(2)!! + iv + (puntosEsfuerzo.velocidad!! /4)) * (nivel/100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 6 }[0].multiplicador!!)
+        val velocidad = (((statsBase.filter { item -> item.idStats == 6 }[0].statsBase!! * 2) + iv + (puntosEsfuerzo.velocidad!! /4)) * (nivel /100) + 5) * (naturaleza.stats!!.filter { item -> item.idStats == 6 }[0].multiplicador!!)
         estadisticas.velocidad = velocidad.roundToInt()
 
         return estadisticas
     }
 
-    private suspend fun updateUserFireBase(user: Usuario):Usuario?{
+    private suspend fun updateUserFireBase(user: Usuario): Usuario? {
         val dbFb = Firebase.firestore
         val id = preferencesManager.getIdUser()
         user.id = id
@@ -200,11 +208,12 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getNaturalezaFireBase(idNaturaleza: Int):Naturaleza?{
+    private suspend fun getNaturalezaFireBase(idNaturaleza: Int): Naturaleza? {
         val dbFb = Firebase.firestore
         return try {
-            val documents = dbFb.collection("PokemonNaturaleza").whereEqualTo("id", idNaturaleza).get().await()
-            if(!documents.isEmpty){
+            val documents =
+                dbFb.collection("PokemonNaturaleza").whereEqualTo("id", idNaturaleza).get().await()
+            if (!documents.isEmpty) {
                 val habilidad = documents.toObjects<Naturaleza>()
                 return habilidad[0]
             }

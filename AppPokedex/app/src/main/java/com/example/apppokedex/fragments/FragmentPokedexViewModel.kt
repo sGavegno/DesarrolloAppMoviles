@@ -1,13 +1,24 @@
 package com.example.apppokedex.fragments
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.PokedexRepo
 import com.example.apppokedex.entities.State
+import com.example.apppokedex.entities.TablaTiposPokemon
+import com.example.apppokedex.entities.TablaTiposRepo
 import com.example.apppokedex.entities.Usuario
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +27,7 @@ class FragmentPokedexViewModel @Inject constructor(
 ): ViewModel() {
 
     val state = SingleLiveEvent<State>()
+    val stateTablaTipo = SingleLiveEvent<State>()
 
     val pokedex = SingleLiveEvent<PokedexRepo>()
 
@@ -23,7 +35,6 @@ class FragmentPokedexViewModel @Inject constructor(
         state.postValue(State.LOADING)
         //Lista que contiene todos los pokemons de la base de datos
         val pokedexRepo = PokedexRepo()
-
         //Traer los datos del usuario y completar el nombre del pokemon
         val user = preferencesManager.getUserLogin()
         val pokedexUser = user.pokedex
@@ -40,6 +51,41 @@ class FragmentPokedexViewModel @Inject constructor(
             state.postValue(State.SUCCESS)
         } else {
             state.postValue(State.FAILURE)
+        }
+    }
+
+    fun getTablaTipos(){
+        stateTablaTipo.postValue(State.LOADING)
+        try {
+            var document: QuerySnapshot?
+            val repoTipo = TablaTiposRepo()
+            viewModelScope.launch(Dispatchers.IO) {
+                document = getTablaTiposFireBase()
+                if(document != null){
+                    val tipos = document!!.toObjects<TablaTiposPokemon>()
+                    for (tiposPokemon in tipos){
+                        repoTipo.tipos.add(tiposPokemon)
+                    }
+                    preferencesManager.saveTablaTiposPokemon(repoTipo)
+                    stateTablaTipo.postValue(State.SUCCESS)
+                } else {
+                    stateTablaTipo.postValue(State.FAILURE)
+                }
+            }
+        } catch (e: Exception) {
+            Log.d("getTablaTiposById", "A ver $e")
+            stateTablaTipo.postValue(State.FAILURE)
+        }
+    }
+
+    private suspend fun getTablaTiposFireBase(): QuerySnapshot? {
+        val dbFb = Firebase.firestore
+        return try {
+            val documents = dbFb.collection("PokemonTipos").get().await()
+            documents
+        } catch (e: Exception) {
+            Log.d("Firebase", "Error getting documents: Pokedex")
+            null
         }
     }
 

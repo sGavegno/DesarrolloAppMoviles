@@ -17,6 +17,7 @@ import com.example.apppokedex.adapters.EvolucionesAdapter
 import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.PokemonTipo
 import com.example.apppokedex.entities.State
+import com.example.apppokedex.entities.TablaTiposPokemon
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -31,13 +32,8 @@ class FragmentPokedexData : Fragment() {
     private lateinit var labelGeneracion : TextView
     private lateinit var labelDebilidad : TextView
     private lateinit var imgPokemon : ImageView
-    private lateinit var labelDescripcion : TextView
     private lateinit var labelAltura : TextView
     private lateinit var labelPeso : TextView
-    private lateinit var labelHabilidad : TextView
-    private lateinit var txtEvolucion : TextView
-    private lateinit var recEvoluciones : RecyclerView
-    private lateinit var adapter: EvolucionesAdapter
 
     private lateinit var imgTipo1 : ImageView
     private lateinit var imgTipo2 : ImageView
@@ -55,13 +51,9 @@ class FragmentPokedexData : Fragment() {
         imgTipo2 = vista.findViewById(R.id.imgTipo2)
         labelGeneracion = vista.findViewById(R.id.txtPokedexGeneracionDato)
         labelDebilidad = vista.findViewById(R.id.txtPokedexDebilidadDato)
-        labelDescripcion = vista.findViewById(R.id.txtPokedexDescripcion)
         imgPokemon = vista.findViewById(R.id.imgPokedexDato)
         labelAltura = vista.findViewById(R.id.txtPokedexAlturaDato)
         labelPeso = vista.findViewById(R.id.txtPokedexPesoDato)
-        labelHabilidad = vista.findViewById(R.id.txtPokedexHabilidadDato)
-        txtEvolucion = vista.findViewById(R.id.txtPokdexeEvolucion)
-        recEvoluciones = vista.findViewById(R.id.listaPokedexEvolucion)
 
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when (it) {
@@ -77,50 +69,9 @@ class FragmentPokedexData : Fragment() {
                 }
                 else -> {}
             }
-
         }
 
-        viewModel.stateEvolucion.observe(viewLifecycleOwner){
-            when (it) {
-                State.LOADING -> {
-                    Snackbar.make(vista, "Procesando Evoluciones", Snackbar.LENGTH_SHORT).show()
-                }
-                State.SUCCESS -> {
-                    val evolucionesLista = viewModel.getEvoluciones().cadenaEvolutiva
-                    if(evolucionesLista != null){
-                        adapter = EvolucionesAdapter(evolucionesLista)
-                        val layoutManager = LinearLayoutManager(context)
-                        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-                        recEvoluciones.layoutManager = layoutManager
-                        //recEvoluciones.layoutManager = GridLayoutManager(context, PokemonEvolucionList.size)             //da formato a la lista
-                        recEvoluciones.adapter = adapter
-                    }
-                }
-                State.FAILURE -> {
-                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
 
-        viewModel.stateTablaTipo.observe(viewLifecycleOwner){
-            when (it) {
-                State.LOADING -> {
-                    Snackbar.make(vista, "Procesando Evoluciones", Snackbar.LENGTH_SHORT).show()
-                }
-                State.SUCCESS -> {
-                    Snackbar.make(vista, "Tipos Cargaos", Snackbar.LENGTH_SHORT).show()
-                    val tiposPokemon = viewModel.getTablaTiposPokemon().tipos
-                    val pokemon = viewModel.getPokemon()
-                    //Buscar los tipos que coincidan con el tipo del pokemon
-                    labelDebilidad.text = "Implementar Tabla PokemonTipos"
-                }
-                State.FAILURE -> {
-                    Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
 
         return vista
     }
@@ -137,32 +88,10 @@ class FragmentPokedexData : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setPokemonData(pokemon: Pokemon){
         val auxTipo :MutableList<PokemonTipo> = mutableListOf()
-
-        labelName.text = pokemon.nombre!!.uppercase(Locale.getDefault())
-        labelId.text = pokemon.id.toString()
-        var cont = 0
-        for(tipo in pokemon.tipo!!){
-            tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
-            auxTipo.add(tipo)
-            cont += 1
-        }
-
-        labelGeneracion.text = pokemon.detalle?.idGeneracion.toString()
-        labelDebilidad.text = "Implementar Tabla PokemonTipos"
-        labelDescripcion.text = "pokemon.descripcion"
-        val altura = pokemon.altura
-        val alturaString = (altura?.div(10)).toString() + "," + (altura?.rem(10)).toString() + " m"
-        labelAltura.text = alturaString
-        val peso = pokemon.peso
-        val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
-        labelPeso.text = pesoString
-
-        var habilidadString = ""
-        for(habilidad in pokemon.habilidades!!){
-            habilidadString += (habilidad.detalle?.nombre ?: "Habilidad")
-            habilidadString += "\n"
-        }
-        labelHabilidad.text = habilidadString
+        var auxTipoDebilidad :MutableList<Int> = mutableListOf()
+        var auxTipoEfectivo :MutableList<Int> = mutableListOf()
+        var auxTipoNoEfectivo :MutableList<Int> = mutableListOf()
+        var auxTipoInmune :MutableList<Int> = mutableListOf()
 
         val id = pokemon.id
         if(id != null){
@@ -177,7 +106,51 @@ class FragmentPokedexData : Fragment() {
                 imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png"
             }
         }
-        pokemon.detalle?.idCadenaEvolutiva?.let { it1 -> viewModel.getEvolucionesById(it1) }
+
+        labelName.text = pokemon.nombre!!.uppercase(Locale.getDefault())
+        labelId.text = pokemon.id.toString()
+
+        var cont = 0
+        for(tipo in pokemon.tipo!!){
+            tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
+            auxTipo.add(tipo)
+            //auxTipoDebilidad      chequear antes de agregar una debilidad que no este ya agregada. Mismo prosedimiento con Efectivo, No Efectivo y inmune
+            cont += 1
+        }
+
+        auxTipoDebilidad = analizarDebilidad(auxTipo)
+        auxTipoEfectivo = analizarDebilidad(auxTipo)
+        auxTipoNoEfectivo = analizarDebilidad(auxTipo)
+        auxTipoInmune = analizarDebilidad(auxTipo)
+
+        labelGeneracion.text = pokemon.detalle?.idGeneracion.toString()
+
+        val altura = pokemon.altura
+        val alturaString = (altura?.div(10)).toString() + "," + (altura?.rem(10)).toString() + " m"
+        labelAltura.text = alturaString
+        val peso = pokemon.peso
+        val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
+        labelPeso.text = pesoString
+
+        labelDebilidad.text = "Implementar Tabla PokemonTipos"
+
+    }
+
+    private fun analizarDebilidad(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
+        val debilidadList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.debil!!){
+                    if (debilidadList.none { item -> item == itemTipo.idTipo }){
+                        itemTipo.idTipo?.let { debilidadList.add(it) }
+                    }
+                }
+            }
+        }
+        return debilidadList
     }
 
     private fun setImgTipo(idTipo : Int, imgN: Int){
