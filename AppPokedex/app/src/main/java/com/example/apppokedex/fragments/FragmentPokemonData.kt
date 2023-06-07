@@ -48,6 +48,7 @@ class FragmentPokemonData : Fragment() {
     private lateinit var imgTipo2 : ImageView
     private lateinit var labelHabilidad : TextView
     private lateinit var labelObjeto : TextView
+    private lateinit var labelNaturaleza : TextView
     private lateinit var labelNotas : TextView
 
     private lateinit var labelPs : TextView
@@ -62,6 +63,10 @@ class FragmentPokemonData : Fragment() {
     private lateinit var barrDefEsp : ProgressBar
     private lateinit var labelVelocidad : TextView
     private lateinit var barrVelocidad : ProgressBar
+    private lateinit var labelFelicidad : TextView
+    private lateinit var barrFelicidad : ProgressBar
+
+
     private lateinit var progressBarLouding : ProgressBar
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switchDatos: Switch
@@ -95,6 +100,7 @@ class FragmentPokemonData : Fragment() {
         imgTipo2 = vista.findViewById(R.id.imgPokemonTipo2)
         labelHabilidad = vista.findViewById(R.id.txtPokeHabilidadDato)
         labelObjeto = vista.findViewById(R.id.txtPokeObjetoDato)
+        labelNaturaleza = vista.findViewById(R.id.txtNaturalezaDato)
         labelNotas = vista.findViewById(R.id.txtNotasDato)
 
         labelPs = vista.findViewById(R.id.txtPsDato)
@@ -109,6 +115,8 @@ class FragmentPokemonData : Fragment() {
         barrDefEsp = vista.findViewById(R.id.progressBarDefEsp)
         labelVelocidad = vista.findViewById(R.id.txtVelocidadDato)
         barrVelocidad = vista.findViewById(R.id.progressBarVelocidad)
+        labelFelicidad = vista.findViewById(R.id.txtFelicidadDato)
+        barrFelicidad = vista.findViewById(R.id.progressBarFelicidad)
 
         switchDatos = vista.findViewById(R.id.swDatos)
         clDatos = vista.findViewById(R.id.clPokemonInfo)
@@ -193,6 +201,8 @@ class FragmentPokemonData : Fragment() {
                     val pokemonPc = viewModel.getPcPokemon()
                     labelLvl.text = pokemonPc.nivel.toString()
                     pokemonPc.stats?.let { it1 -> setStats(it1) }
+                    labelFelicidad.text = pokemonPc.felicidad.toString()
+                    barrFelicidad.progress = pokemonPc.felicidad!!
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -259,41 +269,6 @@ class FragmentPokemonData : Fragment() {
                 State.SUCCESS->{
                     val pokemonPc = viewModel.getPcPokemon()
                     setInfoPokemon(pokemonPc)
-
-                    /*
-                    if(pokemonPc.objeto != null) {
-                        if (pokemonPc.idObjeto == 45) {
-                            //Mas PS aumnta la Salud en +10
-                            pokemonPc.puntoEsfuerzo!!.hp = pokemonPc.puntoEsfuerzo!!.hp!! + 10
-                        }else if(pokemonPc.idObjeto == 46) {
-                            //Proteina aumnta Ataque en +10
-                            pokemonPc.puntoEsfuerzo!!.ataque = pokemonPc.puntoEsfuerzo!!.ataque!! + 10
-                        }else if(pokemonPc.idObjeto == 47) {
-                            //Hierro aumnta la defensa en +10
-                            pokemonPc.puntoEsfuerzo!!.defensa = pokemonPc.puntoEsfuerzo!!.defensa!! + 10
-                        }else if(pokemonPc.idObjeto == 48) {
-                            //Carrburante aumnta la Velocidad en +10
-                            pokemonPc.puntoEsfuerzo!!.velocidad = pokemonPc.puntoEsfuerzo!!.velocidad!! + 10
-                        }else if(pokemonPc.idObjeto == 49) {
-                            //Calcio aumnta la At. Esp en +10
-                            pokemonPc.puntoEsfuerzo!!.atEsp = pokemonPc.puntoEsfuerzo!!.atEsp!! + 10
-                        }else if(pokemonPc.idObjeto == 50) {
-                            //Si el item es un caramelo raro aumentar el nivel
-                            viewModel.upLevelPokemon(pokemonPc.id!!)
-                        }else if(pokemonPc.idObjeto == 51) {
-                            //Mas PP aumnta un 20% de los PPs de un ataque
-
-                        }else if(pokemonPc.idObjeto == 52) {
-                            //Zinc aumnta la De. Esp en +10
-                            pokemonPc.puntoEsfuerzo!!.defEsp = pokemonPc.puntoEsfuerzo!!.defEsp!! + 10
-                        }else if(pokemonPc.idObjeto == 53) {
-                            //PP Maximos aumnta un 60% de los PPs de un ataque
-
-                        }else{
-                            labelObjeto.text = pokemonPc.objeto
-                        }
-                    }
-                    */
                 }
                 State.FAILURE->{
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
@@ -412,6 +387,7 @@ class FragmentPokemonData : Fragment() {
 
         labelVelocidad.text = estadisticas.velocidad.toString()
         barrVelocidad.progress = estadisticas.velocidad!!
+
     }
     private fun setImgTipo(idTipo : Int, imgN: Int){
         val imgTipo : ImageView = if(imgN == 0) {
@@ -504,7 +480,12 @@ class FragmentPokemonData : Fragment() {
             labelObjeto.text = "No Tiene"
         }
 
+        labelNaturaleza.text = pokemon.naturaleza!!.nombre
+
         pokemon.stats?.let { setStats(it) }
+
+        labelFelicidad.text = pokemon.felicidad.toString()
+        barrFelicidad.progress = pokemon.felicidad!!
 
         val id = pokemon.idPokemon
         if(id != null){

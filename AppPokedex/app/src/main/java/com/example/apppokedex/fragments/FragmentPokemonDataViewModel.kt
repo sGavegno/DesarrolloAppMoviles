@@ -91,8 +91,16 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 val pokeAux = user.pc?.filter { item -> item.id == id }?.get(0)
                 if (pokeAux != null){
                     pokeAux.nivel = pokeAux.nivel!! + 1
+                    //Subir de nivel aument la felicidad
+                    if (pokeAux.felicidad!! <= 99){
+                        pokeAux.felicidad = pokeAux.felicidad!! + 5
+                    }else if (pokeAux.felicidad!! <= 199){
+                        pokeAux.felicidad = pokeAux.felicidad!! + 3
+                    }else if (pokeAux.felicidad!! <= 255){
+                        pokeAux.felicidad = pokeAux.felicidad!! + 2
+                    }
                     pokeAux.stats = calcularEstadisticas(pokeAux)
-                    val evolucionA = chekEvolucion(pokeAux)
+                    val evolucionA = checkEvolucion(pokeAux)
                     if (evolucionA != null){
                         pokemonEvolucionA.postValue(evolucionA!!)
                     }
@@ -186,7 +194,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                         pokemonPc = analizarObjeto(itemAux, pokemonPc)
                         //pokemonPc.objeto = itemAux.nombre
                         //pokemonPc.idObjeto = itemAux.id
-                        val evolucionA = chekEvolucion(pokemonPc)
+                        val evolucionA = checkEvolucion(pokemonPc)
                         if (evolucionA != null){
                             pokemonEvolucionA.postValue(evolucionA!!)
                         }
@@ -338,7 +346,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
         }
     }
 
-    private suspend fun chekEvolucion(pokemon: Pc):Pokemon?{
+    private suspend fun checkEvolucion(pokemon: Pc):Pokemon?{
         return try{
             var evolucionA:Pokemon?=null
             val idCadenaEvolutiva = getIdCadenaEvolutivaFireBase(pokemon.idPokemon!!)
@@ -413,38 +421,160 @@ class FragmentPokemonDataViewModel @Inject constructor(
         return estadisticas
     }
     private fun analizarObjeto(items: PokemonItems, pokemonPc: Pc): Pc{
-    //Puntos de esfuerzo    las vitaminas aumentan en 10 los puntos de una estadistica. 255 puntos maximos por estadisticas y un total de 510
-        if(items.id == 45) {
-            //Mas PS aumnta la Salud en +10
-            pokemonPc.puntoEsfuerzo!!.hp = pokemonPc.puntoEsfuerzo!!.hp!! + 10
-        }else if(items.id == 46) {
-            //Proteina aumnta Ataque en +10
-            pokemonPc.puntoEsfuerzo!!.ataque = pokemonPc.puntoEsfuerzo!!.ataque!! + 10
-        }else if(items.id == 47) {
-            //Hierro aumnta la defensa en +10
-            pokemonPc.puntoEsfuerzo!!.defensa = pokemonPc.puntoEsfuerzo!!.defensa!! + 10
-        }else if(items.id == 48) {
-            //Carrburante aumnta la Velocidad en +10
-            pokemonPc.puntoEsfuerzo!!.velocidad = pokemonPc.puntoEsfuerzo!!.velocidad!! + 10
-        }else if(items.id == 49) {
-            //Calcio aumnta la At. Esp en +10
-            pokemonPc.puntoEsfuerzo!!.atEsp = pokemonPc.puntoEsfuerzo!!.atEsp!! + 10
-        }else if(items.id == 50) {
-            //Si el item es un caramelo raro aumentar el nivel
-            pokemonPc.nivel = pokemonPc.nivel!! + 1
-        }else if(items.id == 51) {
-            //Mas PP aumnta un 20% de los PPs de un ataque
+        //Falta implementar logica par remover objetos
+        when(items.idCategoriaItem){
+            1->{
+                //Objetos de mejora de estadísticas no consumibles. Falta implementar logica. Si remuevo el objeto se deben reducir los puntos de estadistica
+                pokemonPc.objeto = items.nombre
+                pokemonPc.idObjeto = items.id
+            }
+            2->{
+                //bayas reductoras de puntos de esfuerzo. suben la felizidad del pokemon
+                if(items.id == 146){ //Baya Grana
+                    if(pokemonPc.stats!!.hp!! >= 10){
+                        pokemonPc.stats!!.hp = pokemonPc.stats!!.hp!! - 10
+                    } else {
+                        pokemonPc.stats!!.hp = 0
+                    }
+                }else if (items.id == 147){ //Baya Algama
+                    if(pokemonPc.stats!!.ataque!! >= 10){
+                        pokemonPc.stats!!.ataque = pokemonPc.stats!!.ataque!! - 10
+                    } else {
+                        pokemonPc.stats!!.ataque = 0
+                    }
+                }else if (items.id == 148){ //Baya Ispero
+                    if(pokemonPc.stats!!.defensa!! >= 10){
+                        pokemonPc.stats!!.defensa = pokemonPc.stats!!.defensa!! - 10
+                    } else {
+                        pokemonPc.stats!!.defensa = 0
+                    }
+                }else if (items.id == 149){ //Baya Meluce
+                    if(pokemonPc.stats!!.atEsp!! >= 10){
+                        pokemonPc.stats!!.atEsp = pokemonPc.stats!!.atEsp!! - 10
+                    } else {
+                        pokemonPc.stats!!.atEsp = 0
+                    }
+                }else if (items.id == 150){ //Baya Uvav
+                    if(pokemonPc.stats!!.defEsp!! >= 10){
+                        pokemonPc.stats!!.defEsp = pokemonPc.stats!!.defEsp!! - 10
+                    } else {
+                        pokemonPc.stats!!.defEsp = 0
+                    }
+                }else if (items.id == 151){ //Baya Tamate
+                    if(pokemonPc.stats!!.velocidad!! >= 10){
+                        pokemonPc.stats!!.velocidad = pokemonPc.stats!!.velocidad!! - 10
+                    } else {
+                        pokemonPc.stats!!.velocidad = 0
+                    }
+                }
+                if (pokemonPc.felicidad!! <= 255){
+                    pokemonPc.felicidad = pokemonPc.felicidad!! + 10
+                }
+            }
 
-        }else if(items.id == 52) {
-            //Zinc aumnta la De. Esp en +10
-            pokemonPc.puntoEsfuerzo!!.defEsp = pokemonPc.puntoEsfuerzo!!.defEsp!! + 10
-        }else if(items.id == 53) {
-            //PP Maximos aumnta un 60% de los PPs de un ataque
+            3->{
+                //bayas. id: 3 4 5 6 7 8
+                pokemonPc.objeto = items.nombre
+                pokemonPc.idObjeto = items.id
+            }
 
-        }else{
-            pokemonPc.objeto = items.nombre
-            pokemonPc.idObjeto = items.id
+            26->{//Vitaminas - Mejoras de estadistica
+                //Puntos de esfuerzo    las vitaminas aumentan en 10 los puntos de una estadistica. 255 puntos maximos por estadisticas y un total de 510
+                val statsTotal = pokemonPc.puntoEsfuerzo!!.hp!! + pokemonPc.puntoEsfuerzo!!.ataque!! + pokemonPc.puntoEsfuerzo!!.defensa!! + pokemonPc.puntoEsfuerzo!!.atEsp!! + pokemonPc.puntoEsfuerzo!!.defEsp!! + pokemonPc.puntoEsfuerzo!!.velocidad!!
+
+                if(items.id == 45) {
+                    //Mas PS aumnta la Salud en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.hp!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.hp = pokemonPc.puntoEsfuerzo!!.hp!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.hp = 255
+                        }
+                    }
+                }else if(items.id == 46) {
+                    //Proteina aumnta Ataque en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.ataque!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.ataque = pokemonPc.puntoEsfuerzo!!.ataque!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.ataque = 255
+                        }
+                    }
+                }else if(items.id == 47) {
+                    //Hierro aumnta la defensa en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.defensa!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.defensa = pokemonPc.puntoEsfuerzo!!.defensa!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.defensa = 255
+                        }
+                    }
+                }else if(items.id == 48) {
+                    //Carrburante aumnta la Velocidad en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.velocidad!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.velocidad = pokemonPc.puntoEsfuerzo!!.velocidad!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.velocidad = 255
+                        }
+                    }
+                }else if(items.id == 49) {
+                    //Calcio aumnta la At. Esp en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.atEsp!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.atEsp = pokemonPc.puntoEsfuerzo!!.atEsp!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.atEsp = 255
+                        }
+                    }
+                }else if(items.id == 50) {
+                    //Si el item es un caramelo raro aumentar el nivel
+                    pokemonPc.nivel = pokemonPc.nivel!! + 1
+                }else if(items.id == 51) {
+                    //Mas PP aumnta un 20% de los PPs de un ataque
+
+                }else if(items.id == 52) {
+                    //Zinc aumnta la De. Esp en +10
+                    if(statsTotal < 510){
+                        if(pokemonPc.puntoEsfuerzo!!.defEsp!! < 245){
+                            pokemonPc.puntoEsfuerzo!!.defEsp = pokemonPc.puntoEsfuerzo!!.defEsp!! + 10
+                        }else{
+                            pokemonPc.puntoEsfuerzo!!.defEsp = 255
+                        }
+                    }
+                }else if(items.id == 53) {
+                    //PP Maximos aumnta un 60% de los PPs de un ataque
+                    pokemonPc.objeto = items.nombre
+                    pokemonPc.idObjeto = items.id
+                }
+                //Las vitaminas suben la felicidad del pokemon
+                if (pokemonPc.felicidad!! <= 99){
+                    pokemonPc.felicidad = pokemonPc.felicidad!! + 5
+                }else if (pokemonPc.felicidad!! <= 199){
+                    pokemonPc.felicidad = pokemonPc.felicidad!! + 3
+                }else if (pokemonPc.felicidad!! <= 255){
+                    pokemonPc.felicidad = pokemonPc.felicidad!! + 2
+                }
+
+            }
+            /*
+            27->{
+                //Objetos de curacion
+                pokemonPc.objeto = items.nombre
+                pokemonPc.idObjeto = items.id
+            }
+            30->{
+                //Objetos de restauración de estado
+                pokemonPc.objeto = items.nombre
+                pokemonPc.idObjeto = items.id
+            }
+            */
+            else ->{
+                pokemonPc.objeto = items.nombre
+                pokemonPc.idObjeto = items.id
+            }
         }
+
         return pokemonPc
     }
 

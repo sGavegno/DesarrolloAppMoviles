@@ -43,7 +43,6 @@ class FragmentAddPokemon : Fragment() {
     private lateinit var spinnerHabilidad: Spinner
     private lateinit var imgPokemon: ImageView
     private lateinit var progressBarLouding : ProgressBar
-    private lateinit var editDescripcion: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +58,6 @@ class FragmentAddPokemon : Fragment() {
         editNivel = vista.findViewById(R.id.editTextNivel)
         spinnerGenero = vista.findViewById(R.id.spinnerGenero)
         spinnerHabilidad = vista.findViewById(R.id.spinnerHabilidad)
-        editDescripcion = vista.findViewById(R.id.editTextDescripcion)
 
         imgPokemon = vista.findViewById(R.id.imgPokemonAdd)
         progressBarLouding = vista.findViewById(R.id.progressBarAddPokemon)
@@ -77,7 +75,6 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.INVISIBLE
                     spinnerGenero.visibility = View.INVISIBLE
                     spinnerHabilidad.visibility = View.INVISIBLE
-                    editDescripcion.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
@@ -108,7 +105,6 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.INVISIBLE
                     spinnerGenero.visibility = View.INVISIBLE
                     spinnerHabilidad.visibility = View.INVISIBLE
-                    editDescripcion.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
                     switchMote.visibility = View.VISIBLE
@@ -117,7 +113,6 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.VISIBLE
                     spinnerGenero.visibility = View.VISIBLE
                     spinnerHabilidad.visibility = View.VISIBLE
-                    editDescripcion.visibility = View.VISIBLE
                 }
                 State.FAILURE->{
                     progressBarLouding.visibility = View.INVISIBLE
@@ -219,10 +214,8 @@ class FragmentAddPokemon : Fragment() {
                     null
                 }
             }
-            var textDescripcion = ""
-            if(editDescripcion.text.isNotEmpty()){
-                textDescripcion = editDescripcion.text.toString()
-            }
+            val textDescripcion = "Se camputo el dia ../../.. a las ..:.. en _UBICACION_, al nivel $nivel."
+
             val habilidadPokemon = spinnerHabilidad.selectedItem.toString()
             viewModel.addUserPokemon(
                 idPcPokemon,

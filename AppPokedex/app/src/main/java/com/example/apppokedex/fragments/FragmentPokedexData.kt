@@ -35,8 +35,10 @@ class FragmentPokedexData : Fragment() {
     private lateinit var labelAltura : TextView
     private lateinit var labelPeso : TextView
 
-    private lateinit var imgTipo1 : ImageView
-    private lateinit var imgTipo2 : ImageView
+    private var imgTipo : MutableList<ImageView> = mutableListOf()
+    private var imgTipoDevilidad : MutableList<ImageView> = mutableListOf()
+    private var imgTipoEfectividad : MutableList<ImageView> = mutableListOf()
+
 
     lateinit var vista : View
     @SuppressLint("SetTextI18n")
@@ -47,13 +49,35 @@ class FragmentPokedexData : Fragment() {
         vista = inflater.inflate(R.layout.fragment_fragment_pokedex_data, container, false)
         labelName = vista.findViewById(R.id.txtPokedexName)
         labelId = vista.findViewById(R.id.txtPokedexIdDato)
-        imgTipo1 = vista.findViewById(R.id.imgTipo1)
-        imgTipo2 = vista.findViewById(R.id.imgTipo2)
         labelGeneracion = vista.findViewById(R.id.txtPokedexGeneracionDato)
-        labelDebilidad = vista.findViewById(R.id.txtPokedexDebilidadDato)
         imgPokemon = vista.findViewById(R.id.imgPokedexDato)
         labelAltura = vista.findViewById(R.id.txtPokedexAlturaDato)
         labelPeso = vista.findViewById(R.id.txtPokedexPesoDato)
+
+        imgTipo.add(vista.findViewById(R.id.imgTipo1))
+        imgTipo.add(vista.findViewById(R.id.imgTipo2))
+
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad1))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad2))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad3))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad4))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad5))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad6))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad7))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad8))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad9))
+        imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad10))
+
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo1))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo2))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo3))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo4))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo5))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo6))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo7))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo8))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo9))
+        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo10))
 
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when (it) {
@@ -112,16 +136,29 @@ class FragmentPokedexData : Fragment() {
 
         var cont = 0
         for(tipo in pokemon.tipo!!){
-            tipo.idTipo?.let { it1 -> setImgTipo(it1, cont) }
+            tipo.idTipo?.let { it1 -> setImgTipo(it1, imgTipo[cont]) }
             auxTipo.add(tipo)
-            //auxTipoDebilidad      chequear antes de agregar una debilidad que no este ya agregada. Mismo prosedimiento con Efectivo, No Efectivo y inmune
             cont += 1
         }
 
         auxTipoDebilidad = analizarDebilidad(auxTipo)
-        auxTipoEfectivo = analizarDebilidad(auxTipo)
-        auxTipoNoEfectivo = analizarDebilidad(auxTipo)
-        auxTipoInmune = analizarDebilidad(auxTipo)
+        cont = 0
+        for(tipo in auxTipoDebilidad){
+            setImgTipo(tipo, imgTipoDevilidad[cont])
+            cont += 1
+        }
+
+        auxTipoEfectivo = analizarEfectividad(auxTipo)
+        cont = 0
+        for(tipo in auxTipoEfectivo){
+            setImgTipo(tipo, imgTipoEfectividad[cont])
+            cont += 1
+        }
+
+        auxTipoNoEfectivo = analizarNoEfectivo(auxTipo)
+
+        auxTipoInmune = analizarInmune(auxTipo)
+
 
         labelGeneracion.text = pokemon.detalle?.idGeneracion.toString()
 
@@ -153,13 +190,58 @@ class FragmentPokedexData : Fragment() {
         return debilidadList
     }
 
-    private fun setImgTipo(idTipo : Int, imgN: Int){
-        val imgTipo : ImageView = if(imgN == 0) {
-            imgTipo1
-        } else {
-            imgTipo2
-        }
+    private fun analizarEfectividad(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
+        val efectividadList: MutableList<Int> = mutableListOf()
 
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.efectivo!!){
+                    if (efectividadList.none { item -> item == itemTipo.idTipo }){
+                        itemTipo.idTipo?.let { efectividadList.add(it) }
+                    }
+                }
+            }
+        }
+        return efectividadList
+    }
+
+    private fun analizarNoEfectivo(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
+        val noEfectivoList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.noEfectivo!!){
+                    if (noEfectivoList.none { item -> item == itemTipo.idTipo }){
+                        itemTipo.idTipo?.let { noEfectivoList.add(it) }
+                    }
+                }
+            }
+        }
+        return noEfectivoList
+    }
+
+    private fun analizarInmune(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
+        val inmuneList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.inmune!!){
+                    if (inmuneList.none { item -> item == itemTipo.idTipo }){
+                        itemTipo.idTipo?.let { inmuneList.add(it) }
+                    }
+                }
+            }
+        }
+        return inmuneList
+    }
+
+    private fun setImgTipo(idTipo : Int, imgTipo: ImageView){
         when(idTipo){
             1->{
                 Glide.with(vista).load(R.drawable.tipo_normal).into(imgTipo)
