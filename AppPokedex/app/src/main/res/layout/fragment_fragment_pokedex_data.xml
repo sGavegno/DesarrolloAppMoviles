@@ -8,19 +8,6 @@
     android:background="#B5C7ED"
     tools:context=".fragments.FragmentPokedexData">
 
-    <TextView
-        android:id="@+id/txtPokedexDebilidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Es debil contra:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvPokedexDatos" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPokedexDatos"
         android:layout_width="411dp"
@@ -192,255 +179,594 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/imgTipo1"
         app:layout_constraintStart_toEndOf="@+id/imgTipo1"
         app:layout_constraintTop_toTopOf="@+id/imgTipo1" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvDebilidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardCornerRadius="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="75dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPokedexDebilidad">
+        app:layout_constraintTop_toBottomOf="@+id/cvPokedexDatos">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDevilidad"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad1"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad2"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintStart_toEndOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad1" />
+                <TextView
+                    android:id="@+id/txtPokedexDebilidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Es debil contra:"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad3"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgTipoDebilidad2"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad2" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDebilidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#000000"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPokedexDebilidad">
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad4"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad1" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDevilidad"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="#000000">
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad5"
-                android:layout_width="100dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad4"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad2"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad2"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad4" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad1"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:barrierMargin="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad6"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad3"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad5"
-                app:layout_constraintVertical_bias="1.0" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad2"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad1" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad7"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad1"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad4" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad3"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoDebilidad2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad2" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad8"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad5"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad5"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad5" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad4"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad1" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad9"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad8"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad6"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad6"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad8"
-                app:layout_constraintVertical_bias="1.0" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad5"
+                            android:layout_width="100dp"
+                            android:layout_height="0dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad4"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad2"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad4" />
 
-            <ImageView
-                android:id="@+id/imgTipoDebilidad10"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad8"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad8"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad8" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad6"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad3"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad5"
+                            app:layout_constraintVertical_bias="1.0" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad7"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad4" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Es efectivo contra:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvDebilidad" />
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad8"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad5"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad5"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad5" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad9"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoDebilidad8"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad6"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad6"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoDebilidad8"
+                            app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clEfectivo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#000000">
+                        <ImageView
+                            android:id="@+id/imgTipoDebilidad10"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoDebilidad8"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoDebilidad8"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoDebilidad8" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo1"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo2"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintStart_toEndOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo1" />
+                </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo3"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgTipoEfectivo2"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo2" />
+                <TextView
+                    android:id="@+id/txtPokedexEfectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Es efectivo contra:"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvDebilidad" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo4"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo1" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvEfectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#000000"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPokedexEfectivo">
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo5"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo4"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo2"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo2"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo4" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clEfectivo"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="#000000">
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo6"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo3"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo5"
-                app:layout_constraintVertical_bias="1.0" />
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo1"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo7"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo1"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo4" />
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo2"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo1" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo8"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo5"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo5"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo5" />
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo3"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoEfectivo2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo2" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo9"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo8"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo6"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo6"
-                app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo8"
-                app:layout_constraintVertical_bias="1.0" />
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo4"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo1" />
 
-            <ImageView
-                android:id="@+id/imgTipoEfectivo10"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo8"
-                app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo8"
-                app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo8" />
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo5"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo4"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo2"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo4" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo6"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo3"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo5"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo7"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo4" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo8"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo5"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo5"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo5" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo9"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoEfectivo8"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo6"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo6"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoEfectivo8"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoEfectivo10"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoEfectivo8"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoEfectivo8"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoEfectivo8" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txtPokedexNoEfectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="No es efectivo contra:"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvEfectivo" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvNoEfectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#000000"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPokedexNoEfectivo">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clNoEfectivo"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="#000000">
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo1"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo2"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoNoEfectivo1" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo3"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoNoEfectivo2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoNoEfectivo2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoNoEfectivo2" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo4"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoNoEfectivo1" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo5"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoNoEfectivo4"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo2"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoNoEfectivo4" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo6"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoNoEfectivo5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo3"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoNoEfectivo5"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo7"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoNoEfectivo4" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo8"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo5"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo5"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoNoEfectivo5" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo9"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoNoEfectivo8"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo6"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo6"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoNoEfectivo8"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoNoEfectivo10"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoNoEfectivo8"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoNoEfectivo8"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoNoEfectivo8" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txtPokedexInmune"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Inmune a:"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvNoEfectivo" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvInmune"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#000000"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPokedexInmune">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clInmune"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="#000000">
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune1"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune2"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoInmune1"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoInmune1"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoInmune1" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune3"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoInmune2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imgTipoInmune2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoInmune2" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune4"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoInmune1" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune5"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoInmune4"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune2"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune2"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoInmune4" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune6"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoInmune5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune3"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoInmune5"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune7"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune1"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune1"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoInmune4" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune8"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune5"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune5"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoInmune5" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune9"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgTipoInmune8"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune6"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune6"
+                            app:layout_constraintTop_toTopOf="@+id/imgTipoInmune8"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imgTipoInmune10"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/imgTipoInmune8"
+                            app:layout_constraintStart_toStartOf="@+id/imgTipoInmune8"
+                            app:layout_constraintTop_toBottomOf="@+id/imgTipoInmune8" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

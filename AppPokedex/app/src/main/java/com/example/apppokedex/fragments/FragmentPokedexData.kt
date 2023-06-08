@@ -30,15 +30,15 @@ class FragmentPokedexData : Fragment() {
     private lateinit var labelName : TextView
     private lateinit var labelId : TextView
     private lateinit var labelGeneracion : TextView
-    private lateinit var labelDebilidad : TextView
     private lateinit var imgPokemon : ImageView
     private lateinit var labelAltura : TextView
     private lateinit var labelPeso : TextView
 
     private var imgTipo : MutableList<ImageView> = mutableListOf()
     private var imgTipoDevilidad : MutableList<ImageView> = mutableListOf()
-    private var imgTipoEfectividad : MutableList<ImageView> = mutableListOf()
-
+    private var imgTipoEfectivo : MutableList<ImageView> = mutableListOf()
+    private var imgTipoNoEfectivo : MutableList<ImageView> = mutableListOf()
+    private var imgTipoInmune : MutableList<ImageView> = mutableListOf()
 
     lateinit var vista : View
     @SuppressLint("SetTextI18n")
@@ -68,16 +68,38 @@ class FragmentPokedexData : Fragment() {
         imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad9))
         imgTipoDevilidad.add(vista.findViewById(R.id.imgTipoDebilidad10))
 
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo1))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo2))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo3))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo4))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo5))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo6))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo7))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo8))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo9))
-        imgTipoEfectividad.add(vista.findViewById(R.id.imgTipoEfectivo10))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo1))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo2))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo3))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo4))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo5))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo6))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo7))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo8))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo9))
+        imgTipoEfectivo.add(vista.findViewById(R.id.imgTipoEfectivo10))
+
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo1))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo2))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo3))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo4))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo5))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo6))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo7))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo8))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo9))
+        imgTipoNoEfectivo.add(vista.findViewById(R.id.imgTipoNoEfectivo10))
+
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune1))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune2))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune3))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune4))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune5))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune6))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune7))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune8))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune9))
+        imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune10))
 
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when (it) {
@@ -151,14 +173,23 @@ class FragmentPokedexData : Fragment() {
         auxTipoEfectivo = analizarEfectividad(auxTipo)
         cont = 0
         for(tipo in auxTipoEfectivo){
-            setImgTipo(tipo, imgTipoEfectividad[cont])
+            setImgTipo(tipo, imgTipoEfectivo[cont])
             cont += 1
         }
 
         auxTipoNoEfectivo = analizarNoEfectivo(auxTipo)
+        cont = 0
+        for(tipo in auxTipoNoEfectivo){
+            setImgTipo(tipo, imgTipoNoEfectivo[cont])
+            cont += 1
+        }
 
         auxTipoInmune = analizarInmune(auxTipo)
-
+        cont = 0
+        for(tipo in auxTipoInmune){
+            setImgTipo(tipo, imgTipoInmune[cont])
+            cont += 1
+        }
 
         labelGeneracion.text = pokemon.detalle?.idGeneracion.toString()
 
@@ -168,8 +199,6 @@ class FragmentPokedexData : Fragment() {
         val peso = pokemon.peso
         val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
         labelPeso.text = pesoString
-
-        labelDebilidad.text = "Implementar Tabla PokemonTipos"
 
     }
 
@@ -182,7 +211,7 @@ class FragmentPokedexData : Fragment() {
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.debil!!){
                     if (debilidadList.none { item -> item == itemTipo.idTipo }){
-                        itemTipo.idTipo?.let { debilidadList.add(it) }
+                        aux.idTipo?.let { debilidadList.add(it) }
                     }
                 }
             }
@@ -199,7 +228,7 @@ class FragmentPokedexData : Fragment() {
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.efectivo!!){
                     if (efectividadList.none { item -> item == itemTipo.idTipo }){
-                        itemTipo.idTipo?.let { efectividadList.add(it) }
+                        aux.idTipo?.let { efectividadList.add(it) }
                     }
                 }
             }
@@ -216,7 +245,7 @@ class FragmentPokedexData : Fragment() {
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.noEfectivo!!){
                     if (noEfectivoList.none { item -> item == itemTipo.idTipo }){
-                        itemTipo.idTipo?.let { noEfectivoList.add(it) }
+                        aux.idTipo?.let { noEfectivoList.add(it) }
                     }
                 }
             }
@@ -233,7 +262,7 @@ class FragmentPokedexData : Fragment() {
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.inmune!!){
                     if (inmuneList.none { item -> item == itemTipo.idTipo }){
-                        itemTipo.idTipo?.let { inmuneList.add(it) }
+                        aux.idTipo?.let { inmuneList.add(it) }
                     }
                 }
             }
@@ -242,6 +271,7 @@ class FragmentPokedexData : Fragment() {
     }
 
     private fun setImgTipo(idTipo : Int, imgTipo: ImageView){
+        imgTipo.visibility = View.VISIBLE
         when(idTipo){
             1->{
                 Glide.with(vista).load(R.drawable.tipo_normal).into(imgTipo)

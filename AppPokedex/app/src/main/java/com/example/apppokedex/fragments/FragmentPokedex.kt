@@ -95,7 +95,10 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
 
     override fun onStart() {
         super.onStart()
-        //setInputDialogListener(this)
+
+        progressPokedex.visibility = View.VISIBLE
+        recPokemon.visibility = View.INVISIBLE
+
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)!!

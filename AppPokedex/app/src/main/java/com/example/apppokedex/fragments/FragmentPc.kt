@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonPcAdapter
 import com.example.apppokedex.entities.Pc
-import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
