@@ -2,7 +2,6 @@ package com.example.apppokedex.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
-import com.example.apppokedex.entities.Pc
 import com.example.apppokedex.entities.State
-import com.example.apppokedex.entities.UserPokedex
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -75,7 +72,7 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.INVISIBLE
                     spinnerGenero.visibility = View.INVISIBLE
                     spinnerHabilidad.visibility = View.INVISIBLE
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    //Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
                     progressBarLouding.visibility = View.INVISIBLE

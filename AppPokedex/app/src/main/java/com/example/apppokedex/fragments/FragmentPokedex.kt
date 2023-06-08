@@ -76,10 +76,10 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         viewModel.stateTablaTipo.observe(viewLifecycleOwner){
             when (it) {
                 State.LOADING -> {
-                    Snackbar.make(vista, "Procesando Tipos", Snackbar.LENGTH_SHORT).show()
+                    //Snackbar.make(vista, "Procesando Tipos", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS -> {
-                    Snackbar.make(vista, "Tipos Cargaos", Snackbar.LENGTH_SHORT).show()
+                    //Snackbar.make(vista, "Tipos Cargaos", Snackbar.LENGTH_SHORT).show()
                 }
                 State.FAILURE -> {
                     Snackbar.make(vista, "Fallo la carga de Tipos", Snackbar.LENGTH_SHORT).show()

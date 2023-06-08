@@ -23,6 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -359,21 +360,44 @@ class FragmentPokemonDataViewModel @Inject constructor(
                             1->{
                                 val level = detalle.nivel
                                 val felicidad = detalle.felicidad
+                                val afecto = detalle.afecto
+                                val horaDelDia = detalle.horaDelDia
                                 if (level != null){
                                     if (pokemon.nivel!! >= level ){
                                         evolucionA = getPokemonFireBase(item.id!!)
                                     }
                                 } else if (felicidad != null){
                                     if (pokemon.felicidad!! >= felicidad){
-                                        //chequear si es de dia o noche
-                                        evolucionA = getPokemonFireBase(item.id!!)
+                                        if (afecto != null){
+                                            if (pokemon.afecto!! >= afecto ){
+                                                evolucionA = getPokemonFireBase(item.id!!)
+                                            }
+                                        }else{
+                                            //chequear si es de dia o noche
+                                            if (horaDelDia != ""){
+                                                val calendar = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+                                                if (horaDelDia == "Noche"){
+                                                    if(calendar < 7 || calendar > 18 ){
+                                                        evolucionA = getPokemonFireBase(item.id!!)
+                                                    }
+                                                }
+                                                if (horaDelDia == "Dia"){
+                                                    if(calendar in 7..18){
+                                                        evolucionA = getPokemonFireBase(item.id!!)
+                                                    }
+
+                                                }
+                                            }else{
+                                                evolucionA = getPokemonFireBase(item.id!!)
+                                            }
+                                        }
                                     }
                                 }
                             }
                             3->{
                                 val idObjeto = detalle.idEvolucionItem
                                 if (idObjeto != null){
-                                    if (pokemon.idObjeto!! == idObjeto ){
+                                    if (pokemon.idObjeto == idObjeto ){
                                         evolucionA = getPokemonFireBase(item.id!!)
                                     }
                                 }

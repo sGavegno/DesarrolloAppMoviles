@@ -1,9 +1,12 @@
 package com.example.apppokedex.fragments
 
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +24,7 @@ import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class FragmentUser : Fragment() {
 
@@ -32,6 +36,7 @@ class FragmentUser : Fragment() {
     lateinit var inputTxtUserName : EditText
     lateinit var inputTxtNombre : EditText
     lateinit var inputTxtApellido : EditText
+    private lateinit var btnCamara : Button
     private lateinit var btnActualizar : Button
     private lateinit var btnResetPokedex : Button
     private lateinit var btnLogOut : Button
@@ -44,6 +49,7 @@ class FragmentUser : Fragment() {
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_user, container, false)
         imgUser = vista.findViewById(R.id.imgUser)
+        btnCamara = vista.findViewById(R.id.btnCamara)
         btnActualizar = vista.findViewById(R.id.btnUserActualizar)
         inputTxtUserName = vista.findViewById(R.id.txtEditUserName)
         inputTxtNombre = vista.findViewById(R.id.txtEditNombre)
@@ -98,7 +104,12 @@ class FragmentUser : Fragment() {
         }
 
         viewModel.imageStorage.observe(viewLifecycleOwner){
-            Glide.with(vista).load(it).into(imgUser)
+            if (it != null){
+                Glide.with(vista).load(it).into(imgUser)
+            }else{
+                Glide.with(vista).load(R.drawable.entrenador_red).into(imgUser)
+            }
+
         }
 
         return vista
@@ -130,6 +141,11 @@ class FragmentUser : Fragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
+        btnCamara.setOnClickListener{
+            sacarFoto(vista)
+        }
+
     }
 
     //Funciones del boton actualizar
@@ -181,4 +197,29 @@ class FragmentUser : Fragment() {
         // Mostrar el cuadro de texto
         alertDialog.show()
     }
+
+
+    fun sacarFoto(view: View) {
+
+        val camReq = 1
+        // Create an intent to start the camera.
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        // Start the camera activity.
+        startActivityForResult(intent, camReq)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val camReq = 1
+        if (requestCode == camReq && resultCode == RESULT_OK) {
+
+            // Get the image from the camera.
+            val imageBitmap = data?.extras?.get("data") as Bitmap?
+            if (imageBitmap != null) {
+                viewModel.uploadStorageImage(imageBitmap)
+            }
+        }
+    }
+
 }

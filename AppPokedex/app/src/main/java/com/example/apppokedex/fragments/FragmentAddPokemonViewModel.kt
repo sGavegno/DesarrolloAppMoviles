@@ -20,6 +20,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -34,6 +35,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
 
     val pokemon = SingleLiveEvent<Pokemon>()
     val pcPokemon = SingleLiveEvent<Pc>()
+
 
     fun getPokemonById(idPokemon: Int) {
         statePokemon.postValue(State.LOADING)
@@ -124,7 +126,11 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 pokemonPc.felicidad = pokemonAux.detalle?.felicidadBase
                 pokemonPc.habilidad = habilidad
                 pokemonPc.genero = genero
-                pokemonPc.descripcion = descripcion
+
+//                pokemonPc.descripcion = descripcion
+                val calendar = Calendar.getInstance()
+                pokemonPc.descripcion = "Se capturo el dia ${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.YEAR)} " +
+                        "a las ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}, en (UBICACION)"
 
                 pokemonPc.statsBase = pokemonAux.stats
                 pokemonPc.puntoEsfuerzo = Estadisticas(0, 0, 0, 0, 0, 0)

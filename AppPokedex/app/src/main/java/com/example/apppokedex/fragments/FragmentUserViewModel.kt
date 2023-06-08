@@ -2,9 +2,7 @@ package com.example.apppokedex.fragments
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apppokedex.PreferencesManager
@@ -34,8 +32,7 @@ class FragmentUserViewModel @Inject constructor(
     val stateImageDownloadUri = SingleLiveEvent<State>()
     val stateImageDelete = SingleLiveEvent<State>()
 
-
-    val imageStorage = SingleLiveEvent<String>()
+    val imageStorage = SingleLiveEvent<String?>()
 
 
     fun getUserData(): Usuario {
@@ -49,10 +46,9 @@ class FragmentUserViewModel @Inject constructor(
 
         val storage = Firebase.storage
         val storageRef = storage.reference
-
-        val pathName = "UserImage"
-        val fileName = "userRed.jpg"
-        val imagesRef = storageRef.child("$pathName/$fileName")
+        val user =preferencesManager.getIdUser()
+        val fileName = "img.jpg"
+        val imagenRef = storageRef.child("$user/userImg/$fileName")
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 // Convierte un Bitmap en un array de bytes
@@ -60,7 +56,7 @@ class FragmentUserViewModel @Inject constructor(
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 val imageView = stream.toByteArray()
 
-                imagesRef.putBytes(imageView)
+                imagenRef.putBytes(imageView)
                     .addOnFailureListener {
                         // Handle unsuccessful uploads
                         stateImageUpload.postValue(State.FAILURE)
@@ -82,7 +78,7 @@ class FragmentUserViewModel @Inject constructor(
                                 throw it
                             }
                         }
-                        imagesRef.downloadUrl
+                        imagenRef.downloadUrl
                     }
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -107,9 +103,9 @@ class FragmentUserViewModel @Inject constructor(
         val storage = Firebase.storage
         val storageRef = storage.reference
 
-        val pathName = "UserImage"
-        val fileName = "userRed.jpg"
-        val imagenRef = storageRef.child("$pathName/$fileName")
+        val user =preferencesManager.getIdUser()
+        val fileName = "img.jpg"
+        val imagenRef = storageRef.child("$user/userImg/$fileName")
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 imagenRef.downloadUrl.addOnSuccessListener { uri ->
@@ -121,12 +117,14 @@ class FragmentUserViewModel @Inject constructor(
                     // Ocurrió un error al obtener la URL de descarga
                     // Maneja el error según tus necesidades
                     Log.d("StorageError", "Error: $exception")
+                    imageStorage.postValue(null)
                     stateImageDownloadUri.postValue(State.FAILURE)
                 }
             }
         } catch (e: Exception) {
             state.postValue(State.FAILURE)
             Log.d("downloadUriStorage", "Raised Exception")
+            imageStorage.postValue(null)
             stateImageDownloadUri.postValue(State.FAILURE)
         }
     }
@@ -177,7 +175,6 @@ class FragmentUserViewModel @Inject constructor(
             stateImageDelete.postValue(State.FAILURE)
         }
     }
-
 
     fun updateUserData(email: String, password: String, usuario: Usuario): FirebaseUser?{
         state.postValue(State.LOADING)
