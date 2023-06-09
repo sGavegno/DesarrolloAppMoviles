@@ -30,6 +30,7 @@ class PokemonPcAdapter(
         init {
             this.view = v
         }
+        @SuppressLint("SetTextI18n")
         fun setAdapter(pokemonPc: Pc){
             //setId
             val txtId : TextView = view.findViewById(R.id.txtIdPokePcDato)
@@ -38,6 +39,9 @@ class PokemonPcAdapter(
             val txtName: TextView = view.findViewById(R.id.txtNombrePokePcDato)
             val nombre = pokemonPc.mote!!.uppercase(Locale.getDefault())
             txtName.text = nombre
+            //setGeneracion
+            val txtGeneracion : TextView = view.findViewById(R.id.txtGeneracionPc)
+            txtGeneracion.text = "G. ${pokemonPc.generacion}"
             //setImg
             val id = pokemonPc.idPokemon
             if(id!! < 10){

@@ -42,9 +42,9 @@ class FragmentPokedexViewModel @Inject constructor(
             for(i in 1..1008){
                 val pokemonUser = pokedexUser.filter { item -> item.idPokemon == i }
                 if(pokemonUser.isNotEmpty()){
-                    pokedexRepo.pokedex.add(Pokedex( pokemonUser[0].idPokemon, pokemonUser[0].nombre, pokemonUser[0].tipo))
+                    pokedexRepo.pokedex.add(Pokedex( pokemonUser[0].idPokemon, pokemonUser[0].nombre, pokemonUser[0].tipo, pokemonUser[0].generacion))
                 } else {
-                    pokedexRepo.pokedex.add(Pokedex( i, "??????", emptyList()))
+                    pokedexRepo.pokedex.add(Pokedex( i, "??????", emptyList(), null))
                 }
             }
             pokedex.postValue(pokedexRepo)

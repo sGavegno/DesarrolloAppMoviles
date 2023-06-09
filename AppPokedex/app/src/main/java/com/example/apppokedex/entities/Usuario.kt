@@ -14,6 +14,7 @@ data class Pc(
     var id: Int? = null,
     var idPokemon: Int? = null,
     var nombre: String? =null,
+    var generacion: Int? = null,
     var mote: String? = null,
     var tipo: List<PokemonTipo>? = null,
     var nivel: Int? = null,
@@ -44,6 +45,7 @@ data class UserPokedex(
     var idPokemon: Int? = null,
     var nombre: String? = null,
     var tipo: List<PokemonTipo>? = null,
+    var generacion: Int? = null
 )
 
 data class Estadisticas(
