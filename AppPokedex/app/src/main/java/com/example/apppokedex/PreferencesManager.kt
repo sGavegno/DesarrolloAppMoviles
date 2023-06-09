@@ -1,6 +1,7 @@
 package com.example.apppokedex
 
 import android.content.SharedPreferences
+import android.location.Location
 import com.example.apppokedex.entities.Evoluciones
 import com.example.apppokedex.entities.EvolucionesCadena
 import com.example.apppokedex.entities.Pc
@@ -67,6 +68,26 @@ class PreferencesManager(private val sharedPreferences: SharedPreferences, priva
     fun getPcPokemon(): Pc {
         val uJson = sharedPreferences.getString("PcPokemon", null)
         return gson.fromJson(uJson, Pc::class.java)
+    }
+
+    fun saveLocation(ubicacion: Location) {
+        val uJson = gson.toJson(ubicacion)
+        sharedPreferences.edit().putString("Location", uJson).apply()
+    }
+
+    fun getLocation(): Location {
+        val uJson = sharedPreferences.getString("Location", null)
+        return gson.fromJson(uJson, Location::class.java)
+    }
+
+    fun saveUbicacion(ubicacion: String) {
+        val uJson = gson.toJson(ubicacion)
+        sharedPreferences.edit().putString("Ubicacion", uJson).apply()
+    }
+
+    fun getUbicacion(): String {
+        val uJson = sharedPreferences.getString("Ubicacion", null)
+        return gson.fromJson(uJson, String::class.java)
     }
 
     fun savePc(pc: PcRepo) {

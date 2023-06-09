@@ -369,7 +369,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                                 } else if (felicidad != null){
                                     if (pokemon.felicidad!! >= felicidad){
                                         if (afecto != null){
-                                            if (pokemon.afecto!! >= afecto ){
+                                            if ((pokemon.afecto?:0) >= afecto ){
                                                 evolucionA = getPokemonFireBase(item.id!!)
                                             }
                                         }else{
@@ -385,7 +385,6 @@ class FragmentPokemonDataViewModel @Inject constructor(
                                                     if(calendar in 7..18){
                                                         evolucionA = getPokemonFireBase(item.id!!)
                                                     }
-
                                                 }
                                             }else{
                                                 evolucionA = getPokemonFireBase(item.id!!)
@@ -409,7 +408,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
             }
             evolucionA
         } catch (e: Exception){
-            Log.d("upLevelPokemon", "Error upLevelPokemon ")
+            Log.d("upLevelPokemon", "Error upLevelPokemon, $e ")
             null
         }
     }

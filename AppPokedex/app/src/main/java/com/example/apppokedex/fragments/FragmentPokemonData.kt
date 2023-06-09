@@ -166,10 +166,6 @@ class FragmentPokemonData : Fragment() {
             }
         }
 
-        viewModel.pokemonData.observe(viewLifecycleOwner){
-            //setInfoPokemon(it)
-        }
-
         viewModel.state.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
@@ -195,9 +191,10 @@ class FragmentPokemonData : Fragment() {
         viewModel.stateLvl.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-
+                    progressBarLouding.visibility = View.VISIBLE
                 }
                 State.SUCCESS->{
+                    progressBarLouding.visibility = View.INVISIBLE
                     val pokemonPc = viewModel.getPcPokemon()
                     labelLvl.text = pokemonPc.nivel.toString()
                     pokemonPc.stats?.let { it1 -> setStats(it1) }
@@ -205,6 +202,7 @@ class FragmentPokemonData : Fragment() {
                     barrFelicidad.progress = pokemonPc.felicidad!!
                 }
                 State.FAILURE->{
+                    progressBarLouding.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
@@ -264,23 +262,22 @@ class FragmentPokemonData : Fragment() {
         viewModel.stateItems.observe(viewLifecycleOwner){
             when(it){
                 State.LOADING->{
-                    Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
+                    progressBarLouding.visibility = View.VISIBLE
                 }
                 State.SUCCESS->{
+                    progressBarLouding.visibility = View.INVISIBLE
                     val pokemonPc = viewModel.getPcPokemon()
                     setInfoPokemon(pokemonPc)
                 }
                 State.FAILURE->{
-                    Snackbar.make(vista, "Error", Snackbar.LENGTH_SHORT).show()
+                    progressBarLouding.visibility = View.INVISIBLE
+                    Snackbar.make(vista, "Error al cargar objeto", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
         }
 
-        viewModel.items.observe(viewLifecycleOwner){
-
-        }
-
+        //No se usa.
         viewModel.itemsList.observe(viewLifecycleOwner){
             val multiAutoCompleteTextView = MultiAutoCompleteTextView(context)
             multiAutoCompleteTextView.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, it.itemList))
@@ -298,7 +295,6 @@ class FragmentPokemonData : Fragment() {
             }
             alertDialog.show()
         }
-
 
         //Set editText Mote
         switchDatos.isChecked = false
@@ -344,8 +340,7 @@ class FragmentPokemonData : Fragment() {
         }
 
         btnAddObjeto.setOnClickListener {
-
-            //viewModel.getObjetos()
+            //viewModel.getObjetos()        // esta funcion trae todos los items de FireBase. Evitar usar
 
             val input = EditText(requireContext())
             val alertDialog = AlertDialog.Builder(requireContext())
@@ -500,9 +495,7 @@ class FragmentPokemonData : Fragment() {
                 imgPokemon.tag = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.idPokemon}.png"
             }
         }
-
         labelNotas.text = pokemon.descripcion
     }
-
 
 }

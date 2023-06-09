@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +36,9 @@ class FragmentPokedexData : Fragment() {
     private lateinit var imgPokemon : ImageView
     private lateinit var labelAltura : TextView
     private lateinit var labelPeso : TextView
+    private lateinit var progresBarr: ProgressBar
+    private lateinit var scrollView: NestedScrollView
+    private lateinit var clPokemonDato: ConstraintLayout
 
     private var imgTipo : MutableList<ImageView> = mutableListOf()
     private var imgTipoDevilidad : MutableList<ImageView> = mutableListOf()
@@ -53,6 +59,9 @@ class FragmentPokedexData : Fragment() {
         imgPokemon = vista.findViewById(R.id.imgPokedexDato)
         labelAltura = vista.findViewById(R.id.txtPokedexAlturaDato)
         labelPeso = vista.findViewById(R.id.txtPokedexPesoDato)
+        progresBarr = vista.findViewById(R.id.progressBarPokedexDato)
+        scrollView = vista.findViewById(R.id.scrollViewPokedexDato)
+        clPokemonDato = vista.findViewById(R.id.clPokemonDato)
 
         imgTipo.add(vista.findViewById(R.id.imgTipo1))
         imgTipo.add(vista.findViewById(R.id.imgTipo2))
@@ -101,16 +110,31 @@ class FragmentPokedexData : Fragment() {
         imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune9))
         imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune10))
 
+
+
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when (it) {
                 State.LOADING -> {
-                    Snackbar.make(vista, "Procesando Datos", Snackbar.LENGTH_SHORT).show()
+                    labelName.visibility = View.INVISIBLE
+                    labelId.visibility = View.INVISIBLE
+                    labelGeneracion.visibility = View.INVISIBLE
+                    clPokemonDato.visibility = View.INVISIBLE
+                    scrollView.visibility = View.INVISIBLE
+                    progresBarr.visibility = View.VISIBLE
                 }
                 State.SUCCESS -> {
                     val pokemon = viewModel.getPokemon()
                     setPokemonData(pokemon)
+
+                    progresBarr.visibility = View.INVISIBLE
+                    scrollView.visibility = View.VISIBLE
+                    labelName.visibility = View.VISIBLE
+                    labelId.visibility = View.VISIBLE
+                    labelGeneracion.visibility = View.VISIBLE
+                    clPokemonDato.visibility = View.VISIBLE
                 }
                 State.FAILURE -> {
+                    progresBarr.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Fallo la carga", Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
@@ -210,7 +234,7 @@ class FragmentPokedexData : Fragment() {
             val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.debil!!){
-                    if (debilidadList.none { item -> item == itemTipo.idTipo }){
+                    if (debilidadList.none { item -> item == aux.idTipo }){
                         aux.idTipo?.let { debilidadList.add(it) }
                     }
                 }
@@ -227,7 +251,7 @@ class FragmentPokedexData : Fragment() {
             val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.efectivo!!){
-                    if (efectividadList.none { item -> item == itemTipo.idTipo }){
+                    if (efectividadList.none { item -> item == aux.idTipo }){
                         aux.idTipo?.let { efectividadList.add(it) }
                     }
                 }
@@ -244,7 +268,7 @@ class FragmentPokedexData : Fragment() {
             val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.noEfectivo!!){
-                    if (noEfectivoList.none { item -> item == itemTipo.idTipo }){
+                    if (noEfectivoList.none { item -> item == aux.idTipo }){
                         aux.idTipo?.let { noEfectivoList.add(it) }
                     }
                 }
@@ -261,7 +285,7 @@ class FragmentPokedexData : Fragment() {
             val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
             for(itemTipo in tipoAux) {
                 for (aux in itemTipo.danio!!.inmune!!){
-                    if (inmuneList.none { item -> item == itemTipo.idTipo }){
+                    if (inmuneList.none { item -> item == aux.idTipo }){
                         aux.idTipo?.let { inmuneList.add(it) }
                     }
                 }

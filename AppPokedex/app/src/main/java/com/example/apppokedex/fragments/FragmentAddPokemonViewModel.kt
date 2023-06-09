@@ -36,7 +36,6 @@ class FragmentAddPokemonViewModel @Inject constructor(
     val pokemon = SingleLiveEvent<Pokemon>()
     val pcPokemon = SingleLiveEvent<Pc>()
 
-
     fun getPokemonById(idPokemon: Int) {
         statePokemon.postValue(State.LOADING)
         try {
@@ -98,8 +97,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
         mote: String?,
         nivel: Int,
         genero: Boolean?,
-        habilidad: String,
-        descripcion: String
+        habilidad: String
     ) {
         state.postValue(State.LOADING)
         try {
@@ -124,13 +122,13 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 pokemonPc.tipo = pokemonAux!!.tipo!!
                 pokemonPc.nivel = nivel
                 pokemonPc.felicidad = pokemonAux.detalle?.felicidadBase
+                pokemonPc.afecto = 0
                 pokemonPc.habilidad = habilidad
                 pokemonPc.genero = genero
-
-//                pokemonPc.descripcion = descripcion
+                val ubicacion = preferencesManager.getUbicacion()
                 val calendar = Calendar.getInstance()
                 pokemonPc.descripcion = "Se capturo el dia ${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.YEAR)} " +
-                        "a las ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}, en (UBICACION)"
+                        "a las ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}, en $ubicacion"
 
                 pokemonPc.statsBase = pokemonAux.stats
                 pokemonPc.puntoEsfuerzo = Estadisticas(0, 0, 0, 0, 0, 0)
@@ -229,5 +227,8 @@ class FragmentAddPokemonViewModel @Inject constructor(
             null
         }
     }
+
+
+
 
 }
