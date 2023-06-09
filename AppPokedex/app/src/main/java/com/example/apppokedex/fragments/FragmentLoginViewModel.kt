@@ -12,7 +12,6 @@ import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.Usuario
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth

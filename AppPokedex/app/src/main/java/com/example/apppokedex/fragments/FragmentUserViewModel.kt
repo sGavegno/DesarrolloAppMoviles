@@ -39,8 +39,6 @@ class FragmentUserViewModel @Inject constructor(
         return preferencesManager.getUserLogin()
     }
 
-
-
     fun uploadStorageImage(bitmap: Bitmap){
         stateImageUpload.postValue(State.LOADING)
 

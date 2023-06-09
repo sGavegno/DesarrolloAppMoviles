@@ -1,8 +1,10 @@
 package com.example.apppokedex.fragments
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -16,8 +18,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.apppokedex.R
 import com.example.apppokedex.activity.MainActivity
 import com.example.apppokedex.entities.State
@@ -29,6 +34,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentUser : Fragment() {
 
     val viewModel: FragmentUserViewModel by viewModels()
+
+    private val CAMERA_PERMISSION_REQUEST_CODE = 123
 
     lateinit var vista : View
 
@@ -93,7 +100,7 @@ class FragmentUser : Fragment() {
                     progressBarImg.visibility = View.INVISIBLE
                 }
                 State.FAILURE ->{
-                    Snackbar.make(vista, "Carga de Imagen Fallida", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(vista, "Fallo la carga de imagen", Snackbar.LENGTH_SHORT).show()
                 }
                 State.LOADING ->{
                     imgUser.visibility = View.INVISIBLE
@@ -105,11 +112,10 @@ class FragmentUser : Fragment() {
 
         viewModel.imageStorage.observe(viewLifecycleOwner){
             if (it != null){
-                Glide.with(vista).load(it).into(imgUser)
+                Glide.with(vista).load(it).transform(CircleCrop()).into(imgUser)
             }else{
-                Glide.with(vista).load(R.drawable.entrenador_red).into(imgUser)
+                Glide.with(vista).load(R.drawable.entrenador_red).transform(CircleCrop()).into(imgUser)
             }
-
         }
 
         return vista
@@ -117,7 +123,6 @@ class FragmentUser : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
 
         val user = viewModel.getUserData()
         viewModel.downloadUriStorage()
@@ -143,7 +148,12 @@ class FragmentUser : Fragment() {
         }
 
         btnCamara.setOnClickListener{
-            sacarFoto(vista)
+            // Verificar permiso
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+            }else{
+                sacarFoto()
+            }
         }
 
     }
@@ -198,17 +208,16 @@ class FragmentUser : Fragment() {
         alertDialog.show()
     }
 
-
-    fun sacarFoto(view: View) {
+    //Funciones para la camara
+    private fun sacarFoto() {
 
         val camReq = 1
-        // Create an intent to start the camera.
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
         // Start the camera activity.
         startActivityForResult(intent, camReq)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val camReq = 1

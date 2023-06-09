@@ -92,13 +92,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    fun addUserPokemon(
-        idPokemon: Int,
-        mote: String?,
-        nivel: Int,
-        genero: Boolean?,
-        habilidad: String
-    ) {
+    fun addUserPokemon( idPokemon: Int, mote: String?, nivel: Int, genero: Boolean?, habilidad: String ) {
         state.postValue(State.LOADING)
         try {
             var usuario: Usuario?
@@ -134,9 +128,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 pokemonPc.puntoEsfuerzo = Estadisticas(0, 0, 0, 0, 0, 0)
                 pokemonPc.iV = Random.nextInt(1, 32)
                 val idNaturaleza = Random.nextInt(1, 26)
-                //pokemonPc.naturaleza = Naturaleza(0, null, listOf())
                 pokemonPc.naturaleza = getNaturalezaFireBase(idNaturaleza)
-                //pokemonPc.stats = Estadisticas(0,0,0,0,0,0)
                 pokemonPc.stats = calcularEstadisticas(pokemonPc)
 
                 user.pc!!.add(pokemonPc)
@@ -198,14 +190,14 @@ class FragmentAddPokemonViewModel @Inject constructor(
         return estadisticas
     }
 
-    private suspend fun updateUserFireBase(user: Usuario): Usuario? {
+    private suspend fun updateUserFireBase(usuario: Usuario): Usuario? {
         val dbFb = Firebase.firestore
         val id = preferencesManager.getIdUser()
-        user.id = id
+        usuario.id = id
         return try {
-            dbFb.collection("Usuarios").document(id).set(user).await()
-            preferencesManager.saveUser(user)
-            user
+            dbFb.collection("Usuarios").document(id).set(usuario).await()
+            preferencesManager.saveUser(usuario)
+            usuario
         } catch (e: Exception) {
             Log.d("Firebase", "Error getting documents: ")
             null
@@ -227,8 +219,5 @@ class FragmentAddPokemonViewModel @Inject constructor(
             null
         }
     }
-
-
-
 
 }
