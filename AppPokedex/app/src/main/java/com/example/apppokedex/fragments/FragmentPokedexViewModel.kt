@@ -95,16 +95,16 @@ class FragmentPokedexViewModel @Inject constructor(
     }
 
 
-    fun filterPokedex(listPokedex: MutableList<Pokedex>, tipoFilter: String){
+    fun filterPokedex(listPokedex: MutableList<Pokedex>, tipoFilter: Int){
         stateTablaTipo.postValue(State.LOADING)
         try {
             val repoPokedex = PokedexRepo()
             viewModelScope.launch(Dispatchers.IO) {
-                if(tipoFilter != "No filtrar tipo"){
+                if(tipoFilter != 0){
                     for(pokemon in listPokedex){        //No utililzo filter porque tengo objetos de tipo null y al comparar rompe
                         if(pokemon.tipo != null){
                             for(tipo in pokemon.tipo!!){
-                                if (tipo.detalle?.nombre == tipoFilter){
+                                if (tipo.idTipo == tipoFilter){
                                     repoPokedex.pokedex.add(pokemon)
                                 }
                             }

@@ -19,13 +19,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.adapters.PokemonAdapter
+import com.example.apppokedex.adapters.SpinerTipoAdapter
 import com.example.apppokedex.entities.Pokedex
 import com.example.apppokedex.entities.State
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
+class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener, SpinerTipoAdapter.SpinerTipoAdapterListener {
 
     private val viewModel: FragmentPokedexViewModel by viewModels()
 
@@ -35,6 +36,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
     private lateinit var recPokemon : RecyclerView
     private lateinit var progressPokedex : ProgressBar
     private lateinit var adapter: PokemonAdapter
+    private lateinit var adapterSpiner: SpinerTipoAdapter
     private lateinit var spinnerTipo: Spinner
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switchFilter: Switch
@@ -109,8 +111,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
             // Realiza acciones según el estado del Switch
             if (isChecked) {
                 // El Switch está activado
-                if(spinnerTipo.selectedItem.toString() != "No filtrar tipo"){
-                    viewModel.filterPokedex(listaPokedex, spinnerTipo.selectedItem.toString())
+                if(spinnerTipo.selectedItem != 0){
+                    viewModel.filterPokedex(listaPokedex, spinnerTipo.selectedItem as Int)
                 }
             } else {
                 // El Switch está desactivado
@@ -138,15 +140,21 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)!!
 
         //Get Tipos
-        val spinnerTipoItem = listOf( "No filtrar tipo", "Normal", "Lucha", "Volador", "Veneno", "Tierra", "Roca", "Bicho",
-        "Fantasma", "Acero", "Fuego", "Agua", "Planta", "Electrico", "Psiquico", "Hielo", "Dragon", "Siniestro", "Hada")
+
+        val spinnerTipoItem = listOf( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18)
         // Crea un adaptador para el Spinner
+        adapterSpiner = SpinerTipoAdapter(spinnerTipoItem,this)
+        spinnerTipo.dropDownVerticalOffset
+        spinnerTipo.adapter = adapterSpiner
+/*
+        val spinnerTipoItem = listOf( "No filtrar tipo", "Normal", "Lucha", "Volador", "Veneno", "Tierra", "Roca", "Bicho",
+            "Fantasma", "Acero", "Fuego", "Agua", "Planta", "Electrico", "Psiquico", "Hielo", "Dragon", "Siniestro", "Hada")
         val adapterTipo = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerTipoItem)
         // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
         adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Asigna el adaptador al Spinner
         spinnerTipo.adapter = adapterTipo
-
+*/
         viewModel.loadPokedex()
     }
 
@@ -174,6 +182,11 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
                 }
             }
         }
+    }
+
+    override fun onCardViewClick(idTipo: Int, position: Int) {
+        TODO("Not yet implemented")
+        //Implementar Filtro
     }
 
 }

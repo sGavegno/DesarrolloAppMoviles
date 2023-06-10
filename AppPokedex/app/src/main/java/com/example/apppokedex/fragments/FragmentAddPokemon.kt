@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Switch
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -43,6 +44,9 @@ class FragmentAddPokemon : Fragment() {
     private lateinit var imgPokemon: ImageView
     private lateinit var progressBarLouding : ProgressBar
 
+    private lateinit var cvGenero: CardView
+    private lateinit var cvHabilidad : CardView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +61,8 @@ class FragmentAddPokemon : Fragment() {
         editNivel = vista.findViewById(R.id.editTextNivel)
         spinnerGenero = vista.findViewById(R.id.spinnerGenero)
         spinnerHabilidad = vista.findViewById(R.id.spinnerHabilidad)
+        cvGenero = vista.findViewById(R.id.cvGenero)
+        cvHabilidad = vista.findViewById(R.id.cvHabilidad)
 
         imgPokemon = vista.findViewById(R.id.imgPokemonAdd)
         progressBarLouding = vista.findViewById(R.id.progressBarAddPokemon)
@@ -74,6 +80,8 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.INVISIBLE
                     spinnerGenero.visibility = View.INVISIBLE
                     spinnerHabilidad.visibility = View.INVISIBLE
+                    cvGenero.visibility = View.INVISIBLE
+                    cvHabilidad.visibility = View.INVISIBLE
                     //Snackbar.make(vista, "Procesando", Snackbar.LENGTH_SHORT).show()
                 }
                 State.SUCCESS->{
@@ -104,6 +112,8 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.INVISIBLE
                     spinnerGenero.visibility = View.INVISIBLE
                     spinnerHabilidad.visibility = View.INVISIBLE
+                    cvGenero.visibility = View.INVISIBLE
+                    cvHabilidad.visibility = View.INVISIBLE
                 }
                 State.SUCCESS->{
                     switchMote.visibility = View.VISIBLE
@@ -112,6 +122,8 @@ class FragmentAddPokemon : Fragment() {
                     editNivel.visibility = View.VISIBLE
                     spinnerGenero.visibility = View.VISIBLE
                     spinnerHabilidad.visibility = View.VISIBLE
+                    cvGenero.visibility = View.VISIBLE
+                    cvHabilidad.visibility = View.VISIBLE
                 }
                 State.FAILURE->{
                     progressBarLouding.visibility = View.INVISIBLE
