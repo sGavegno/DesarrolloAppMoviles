@@ -39,9 +39,6 @@ class PokemonPcAdapter(
             val txtName: TextView = view.findViewById(R.id.txtNombrePokePcDato)
             val nombre = pokemonPc.mote!!.uppercase(Locale.getDefault())
             txtName.text = nombre
-            //setGeneracion
-            val txtGeneracion : TextView = view.findViewById(R.id.txtGeneracionPc)
-            txtGeneracion.text = "G. ${pokemonPc.generacion}"
             //setImg
             val id = pokemonPc.idPokemon
             if(id!! < 10){

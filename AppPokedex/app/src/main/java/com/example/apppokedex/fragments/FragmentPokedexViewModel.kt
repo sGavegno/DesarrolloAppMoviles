@@ -30,6 +30,7 @@ class FragmentPokedexViewModel @Inject constructor(
     val stateTablaTipo = SingleLiveEvent<State>()
 
     val pokedex = SingleLiveEvent<PokedexRepo>()
+    val pokedexFiltrada = SingleLiveEvent<PokedexRepo>()
 
     fun loadPokedex(){
         state.postValue(State.LOADING)
@@ -91,6 +92,30 @@ class FragmentPokedexViewModel @Inject constructor(
 
     fun getUser():Usuario{
         return preferencesManager.getUserLogin()
+    }
+
+
+    fun filterPokedex(listPokedex: MutableList<Pokedex>, tipoFilter: String){
+        stateTablaTipo.postValue(State.LOADING)
+        try {
+            val repoPokedex = PokedexRepo()
+            viewModelScope.launch(Dispatchers.IO) {
+                if(tipoFilter != "No filtrar tipo"){
+                    for(pokemon in listPokedex){        //No utililzo filter porque tengo objetos de tipo null y al comparar rompe
+                        if(pokemon.tipo != null){
+                            for(tipo in pokemon.tipo!!){
+                                if (tipo.detalle?.nombre == tipoFilter){
+                                    repoPokedex.pokedex.add(pokemon)
+                                }
+                            }
+                        }
+                    }
+                }
+                pokedexFiltrada.postValue(repoPokedex)
+            }
+        } catch (e: Exception) {
+            Log.d("getTablaTiposById", "A ver $e")
+        }
     }
 
 }

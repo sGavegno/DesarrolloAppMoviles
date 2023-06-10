@@ -35,10 +35,6 @@ class PokemonAdapter(
             //setId
             val txtId : TextView = view.findViewById(R.id.txtId)
             txtId.text = pokedex.id.toString()
-
-            //setGeneracion
-            val txtGeneracion : TextView = view.findViewById(R.id.txtGeneracion)
-            txtGeneracion.text = "G. ${pokedex.generacion}"
             //setTName
             val txtName: TextView = view.findViewById(R.id.txtName)
             val nombre = pokedex.name!!.uppercase(Locale.getDefault())

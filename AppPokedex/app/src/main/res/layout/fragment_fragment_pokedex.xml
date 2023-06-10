@@ -12,8 +12,7 @@
     <ImageView
         android:id="@+id/imgTitulo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/listaPoxePc"
+        android:layout_height="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,12 +21,10 @@
         android:id="@+id/listaPoxePc"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/switchFilter" />
 
     <ProgressBar
         android:id="@+id/progressBarPokedex"
@@ -38,5 +35,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imgTitulo" />
+
+    <Spinner
+        android:id="@+id/spinnerTipos"
+        android:layout_width="135dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/switchFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTitulo" />
+
+    <Switch
+        android:id="@+id/switchFilter"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:text="Filter"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTitulo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

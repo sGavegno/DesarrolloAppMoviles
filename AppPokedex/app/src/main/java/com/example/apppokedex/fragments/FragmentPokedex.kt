@@ -1,12 +1,16 @@
 package com.example.apppokedex.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Spinner
+import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,13 +29,17 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
 
     private val viewModel: FragmentPokedexViewModel by viewModels()
 
+    private var listaPokedex: MutableList<Pokedex> = mutableListOf() // Guarda la lista original de datos
+
     private lateinit var imgTitulo : ImageView
     private lateinit var recPokemon : RecyclerView
     private lateinit var progressPokedex : ProgressBar
     private lateinit var adapter: PokemonAdapter
+    private lateinit var spinnerTipo: Spinner
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var switchFilter: Switch
 
     lateinit var vista : View
-
 
     var posPokedex = 0
     override fun onCreateView(
@@ -42,6 +50,8 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         recPokemon = vista.findViewById(R.id.listaPoxePc)
         imgTitulo = vista.findViewById(R.id.imgTitulo)
         progressPokedex = vista.findViewById(R.id.progressBarPokedex)
+        spinnerTipo = vista.findViewById(R.id.spinnerTipos)
+        switchFilter = vista.findViewById(R.id.switchFilter)
 
         Glide.with(vista).load("https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png").into(imgTitulo)
 
@@ -63,8 +73,17 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
         }
 
         viewModel.pokedex.observe(viewLifecycleOwner){
-            val pokedex = it.pokedex
-            adapter = PokemonAdapter(pokedex, this)
+            listaPokedex = it.pokedex
+            adapter = PokemonAdapter(listaPokedex, this)
+            //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
+            recPokemon.layoutManager = GridLayoutManager(context,2)
+            recPokemon.scrollToPosition(posPokedex)
+            recPokemon.adapter = adapter
+        }
+
+        viewModel.pokedexFiltrada.observe(viewLifecycleOwner){
+            val pokedexFilter = it.pokedex
+            adapter = PokemonAdapter(pokedexFilter, this)
             //recPokemon.layoutManager = LinearLayoutManager(context)       //da formato a la lista
             recPokemon.layoutManager = GridLayoutManager(context,2)
             recPokemon.scrollToPosition(posPokedex)
@@ -86,6 +105,22 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
             }
         }
 
+        switchFilter.setOnCheckedChangeListener { _, isChecked ->
+            // Realiza acciones según el estado del Switch
+            if (isChecked) {
+                // El Switch está activado
+                if(spinnerTipo.selectedItem.toString() != "No filtrar tipo"){
+                    viewModel.filterPokedex(listaPokedex, spinnerTipo.selectedItem.toString())
+                }
+            } else {
+                // El Switch está desactivado
+                adapter = PokemonAdapter(listaPokedex, this)
+                recPokemon.layoutManager = GridLayoutManager(context,2)
+                recPokemon.scrollToPosition(posPokedex)
+                recPokemon.adapter = adapter
+            }
+        }
+
         viewModel.getTablaTipos()
 
         return vista
@@ -94,12 +129,23 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener {
     override fun onStart() {
         super.onStart()
 
+        switchFilter.isChecked = false
         progressPokedex.visibility = View.VISIBLE
         recPokemon.visibility = View.INVISIBLE
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         posPokedex = sharedPref?.getInt("pos_recycler_view_pokedex", 0)!!
+
+        //Get Tipos
+        val spinnerTipoItem = listOf( "No filtrar tipo", "Normal", "Lucha", "Volador", "Veneno", "Tierra", "Roca", "Bicho",
+        "Fantasma", "Acero", "Fuego", "Agua", "Planta", "Electrico", "Psiquico", "Hielo", "Dragon", "Siniestro", "Hada")
+        // Crea un adaptador para el Spinner
+        val adapterTipo = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerTipoItem)
+        // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
+        adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Asigna el adaptador al Spinner
+        spinnerTipo.adapter = adapterTipo
 
         viewModel.loadPokedex()
     }
