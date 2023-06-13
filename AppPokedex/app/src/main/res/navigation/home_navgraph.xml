@@ -25,7 +25,9 @@
         tools:layout="@layout/fragment_fragment_pokedex">
         <action
             android:id="@+id/action_fragmentPokedex_to_fragmentPokedexData"
-            app:destination="@id/fragmentPokedexData" />
+            app:destination="@id/fragmentPokedexData"
+            app:enterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUser"
@@ -40,10 +42,14 @@
         <action
             android:id="@+id/action_fragmentPc_to_fragmentPokemonData"
             app:destination="@id/fragmentPokemonData"
+            app:enterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
             app:popUpTo="@id/fragmentPc" />
         <action
             android:id="@+id/action_fragmentPc_to_fragmentAddPokemon"
             app:destination="@id/fragmentAddPokemon"
+            app:enterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
             app:popUpTo="@id/fragmentPc" />
     </fragment>
     <fragment
@@ -67,6 +73,8 @@
         <action
             android:id="@+id/action_fragmentAddPokemon_to_fragmentPokemonData"
             app:destination="@id/fragmentPokemonData"
+            app:enterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
             app:popUpTo="@id/fragmentPc" />
         <argument
             android:name="idPokemon"
