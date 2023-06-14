@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -116,6 +117,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener, Spine
                 }
             } else {
                 // El Switch está desactivado
+                spinnerTipo.setSelection(0)
                 adapter = PokemonAdapter(listaPokedex, this)
                 recPokemon.layoutManager = GridLayoutManager(context,2)
                 recPokemon.scrollToPosition(posPokedex)
@@ -146,15 +148,28 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener, Spine
         adapterSpiner = SpinerTipoAdapter(spinnerTipoItem,this)
         spinnerTipo.dropDownVerticalOffset
         spinnerTipo.adapter = adapterSpiner
-/*
-        val spinnerTipoItem = listOf( "No filtrar tipo", "Normal", "Lucha", "Volador", "Veneno", "Tierra", "Roca", "Bicho",
-            "Fantasma", "Acero", "Fuego", "Agua", "Planta", "Electrico", "Psiquico", "Hielo", "Dragon", "Siniestro", "Hada")
-        val adapterTipo = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerTipoItem)
-        // Opcionalmente, puedes personalizar el diseño de los elementos del Spinner
-        adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Asigna el adaptador al Spinner
-        spinnerTipo.adapter = adapterTipo
-*/
+
+        spinnerTipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val itemSeleccionado = parent.getItemAtPosition(position)
+                //Implementar Filtro
+                if(itemSeleccionado != 0){
+                    if (switchFilter.isChecked){
+                        viewModel.filterPokedex(listaPokedex, itemSeleccionado as Int)
+                    }else{
+                        switchFilter.isChecked = true
+                    }
+                }else{
+                    switchFilter.isChecked = false
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Lógica para manejar cuando no se selecciona ningún elemento
+            }
+        }
+
+
         viewModel.loadPokedex()
     }
 
@@ -185,8 +200,7 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener, Spine
     }
 
     override fun onCardViewClick(idTipo: Int, position: Int) {
-        TODO("Not yet implemented")
-        //Implementar Filtro
+
     }
 
 }

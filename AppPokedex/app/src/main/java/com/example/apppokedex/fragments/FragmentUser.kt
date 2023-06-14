@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.core.app.ActivityCompat
@@ -31,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
-class FragmentUser : Fragment() {
+class FragmentUser : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     val viewModel: FragmentUserViewModel by viewModels()
 
@@ -43,7 +44,7 @@ class FragmentUser : Fragment() {
     lateinit var inputTxtUserName : EditText
     lateinit var inputTxtNombre : EditText
     lateinit var inputTxtApellido : EditText
-    private lateinit var btnCamara : Button
+    private lateinit var btnCamara : ImageButton
     private lateinit var btnActualizar : Button
     private lateinit var btnResetPokedex : Button
     private lateinit var btnLogOut : Button
@@ -56,7 +57,7 @@ class FragmentUser : Fragment() {
     ): View {
         vista = inflater.inflate(R.layout.fragment_fragment_user, container, false)
         imgUser = vista.findViewById(R.id.imgUser)
-        btnCamara = vista.findViewById(R.id.btnCamara)
+        btnCamara = vista.findViewById(R.id.imgBtnCamara)
         btnActualizar = vista.findViewById(R.id.btnUserActualizar)
         inputTxtUserName = vista.findViewById(R.id.txtEditUserName)
         inputTxtNombre = vista.findViewById(R.id.txtEditNombre)
@@ -152,7 +153,7 @@ class FragmentUser : Fragment() {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
             }else{
-                sacarFoto()
+                abrirCamara()
             }
         }
 
@@ -209,7 +210,18 @@ class FragmentUser : Fragment() {
     }
 
     //Funciones para la camara
-    private fun sacarFoto() {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permiso de camara aceptado
+                abrirCamara()
+            }
+        }
+    }
+
+    private fun abrirCamara() {
 
         val camReq = 1
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

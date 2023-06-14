@@ -1,13 +1,11 @@
 package com.example.apppokedex.adapters
 
-import android.annotation.SuppressLint
 import android.database.DataSetObserver
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SpinnerAdapter
-import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.apppokedex.R
 import com.example.apppokedex.fragments.FragmentPokedex
@@ -24,165 +22,68 @@ class SpinerTipoAdapter(
     }
 
     private fun getImgTipo(idTipo : Int): Int{
-        var tipo = 0
         when(idTipo){
             0->{
-
+                return 0
             }
             1->{
-                tipo = R.drawable.tipo_normal
+                return R.drawable.tipo_normal
             }
             2->{
-                tipo = R.drawable.tipo_lucha
+                return R.drawable.tipo_lucha
             }
             3->{
-                tipo = R.drawable.tipo_volador
+                return R.drawable.tipo_volador
             }
             4->{
-                tipo = R.drawable.tipo_veneno
+                return R.drawable.tipo_veneno
             }
             5->{
-                tipo = R.drawable.tipo_tierra
+                return R.drawable.tipo_tierra
             }
             6->{
-                tipo = R.drawable.tipo_roca
+                return R.drawable.tipo_roca
             }
             7->{
-                tipo = R.drawable.tipo_bicho
+                return R.drawable.tipo_bicho
             }
             8->{
-                tipo = R.drawable.tipo_fantasma
+                return R.drawable.tipo_fantasma
             }
             9->{
-                tipo = R.drawable.tipo_acero
+                return R.drawable.tipo_acero
             }
             10->{
-                tipo = R.drawable.tipo_fuego
+                return R.drawable.tipo_fuego
             }
             11->{
-                tipo = R.drawable.tipo_agua
+                return R.drawable.tipo_agua
             }
             12->{
-                tipo = R.drawable.tipo_planta
+                return R.drawable.tipo_planta
             }
             13->{
-                tipo = R.drawable.tipo_electrico
+                return R.drawable.tipo_electrico
             }
             14->{
-                tipo = R.drawable.tipo_psiquico
+                return R.drawable.tipo_psiquico
             }
             15->{
-                tipo = R.drawable.tipo_hielo
+                return R.drawable.tipo_hielo
             }
             16->{
-                tipo = R.drawable.tipo_dragon
+                return R.drawable.tipo_dragon
             }
             17->{
-                tipo = R.drawable.tipo_siniestro
+                return R.drawable.tipo_siniestro
             }
             18->{
-                tipo = R.drawable.tipo_hada
+                return R.drawable.tipo_hada
             }
         }
-        return tipo
+        return 0
     }
 
-    class SpinerTipoHolder(v: View){
-        private var view :View
-        init {
-            this.view = v
-        }
-
-        @SuppressLint("SetTextI18n")
-        fun setAdapter(idTipo: Int){
-            //setTipo
-            val imgTipo = getImgTipo(idTipo)
-            setImagen(imgTipo)
-        }
-
-        fun getCard(): CardView {
-            return view.findViewById(R.id.cardSpiner)
-        }
-
-        fun setImagen(imagen : Int) {
-            val imgPoke = view.findViewById<ImageView>(R.id.imgTipoSpiner)
-            Glide.with(view).load(imagen).into(imgPoke)
-        }
-
-        private fun getImgTipo(idTipo : Int): Int{
-            var tipo = 0
-            when(idTipo){
-                0->{
-
-                }
-                1->{
-                    tipo = R.drawable.tipo_normal
-                }
-                2->{
-                    tipo = R.drawable.tipo_lucha
-                }
-                3->{
-                    tipo = R.drawable.tipo_volador
-                }
-                4->{
-                    tipo = R.drawable.tipo_veneno
-                }
-                5->{
-                    tipo = R.drawable.tipo_tierra
-                }
-                6->{
-                    tipo = R.drawable.tipo_roca
-                }
-                7->{
-                    tipo = R.drawable.tipo_bicho
-                }
-                8->{
-                    tipo = R.drawable.tipo_fantasma
-                }
-                9->{
-                    tipo = R.drawable.tipo_acero
-                }
-                10->{
-                    tipo = R.drawable.tipo_fuego
-                }
-                11->{
-                    tipo = R.drawable.tipo_agua
-                }
-                12->{
-                    tipo = R.drawable.tipo_planta
-                }
-                13->{
-                    tipo = R.drawable.tipo_electrico
-                }
-                14->{
-                    tipo = R.drawable.tipo_psiquico
-                }
-                15->{
-                    tipo = R.drawable.tipo_hielo
-                }
-                16->{
-                    tipo = R.drawable.tipo_dragon
-                }
-                17->{
-                    tipo = R.drawable.tipo_siniestro
-                }
-                18->{
-                    tipo = R.drawable.tipo_hada
-                }
-            }
-            return tipo
-        }
-
-    }
-/*
-    override fun onBindViewHolder(holder: SpinerTipoHolder, position: Int) {
-        val item = spinerList[position]
-        holder.setAdapter(item)
-        holder.getCard().setOnClickListener {
-            spinerList[position].let { it1 -> listener.onCardViewClick(it1,position) }
-        }
-    }
-*/
     override fun registerDataSetObserver(p0: DataSetObserver?) {
         dataSetObserver = p0
     }
@@ -244,6 +145,7 @@ class SpinerTipoAdapter(
         }else{
             Glide.with(vista).load(R.drawable.icono_filtro).into(imgPoke)
         }
+
         return vista
     }
 

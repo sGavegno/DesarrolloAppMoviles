@@ -177,14 +177,14 @@
         app:layout_constraintStart_toStartOf="@+id/btnUserActualizar"
         app:layout_constraintTop_toBottomOf="@+id/btnUserActualizar" />
 
-    <Button
-        android:id="@+id/btnCamara"
+    <ImageButton
+        android:id="@+id/imgBtnCamara"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Tomar Foto"
-        app:cornerRadius="180dp"
+        android:backgroundTint="#B5C7ED"
+        android:contentDescription="Camara"
+        android:src="@mipmap/ic_camara"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/cardView" />
 

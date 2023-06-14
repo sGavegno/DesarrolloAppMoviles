@@ -10,10 +10,6 @@
         android:name="com.example.apppokedex.fragments.FragmentPokemonData"
         android:label="fragment_fragment_pokemon_data"
         tools:layout="@layout/fragment_fragment_pokemon_data">
-        <action
-            android:id="@+id/action_fragmentPokemonData_self"
-            app:destination="@id/fragmentPokemonData"
-            app:popUpTo="@id/fragmentPc" />
         <argument
             android:name="id"
             app:argType="integer" />
@@ -27,7 +23,7 @@
             android:id="@+id/action_fragmentPokedex_to_fragmentPokedexData"
             app:destination="@id/fragmentPokedexData"
             app:enterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUser"
@@ -43,13 +39,13 @@
             android:id="@+id/action_fragmentPc_to_fragmentPokemonData"
             app:destination="@id/fragmentPokemonData"
             app:enterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/fragmentPc" />
         <action
             android:id="@+id/action_fragmentPc_to_fragmentAddPokemon"
             app:destination="@id/fragmentAddPokemon"
             app:enterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/fragmentPc" />
     </fragment>
     <fragment
@@ -60,10 +56,6 @@
         <argument
             android:name="idPokemon"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_fragmentPokedexData_self"
-            app:destination="@id/fragmentPokedexData"
-            app:popUpTo="@id/fragmentPokedex" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddPokemon"
@@ -74,7 +66,7 @@
             android:id="@+id/action_fragmentAddPokemon_to_fragmentPokemonData"
             app:destination="@id/fragmentPokemonData"
             app:enterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/fragmentPc" />
         <argument
             android:name="idPokemon"
