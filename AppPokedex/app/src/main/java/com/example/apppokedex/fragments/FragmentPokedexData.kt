@@ -110,8 +110,6 @@ class FragmentPokedexData : Fragment() {
         imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune9))
         imgTipoInmune.add(vista.findViewById(R.id.imgTipoInmune10))
 
-
-
         viewModel.statePokemon.observe(viewLifecycleOwner){
             when (it) {
                 State.LOADING -> {
@@ -140,8 +138,6 @@ class FragmentPokedexData : Fragment() {
                 else -> {}
             }
         }
-
-
 
         return vista
     }
@@ -187,28 +183,28 @@ class FragmentPokedexData : Fragment() {
             cont += 1
         }
 
-        auxTipoDebilidad = analizarDebilidad(auxTipo)
+        auxTipoDebilidad = viewModel.analizarDebilidad(auxTipo)
         cont = 0
         for(tipo in auxTipoDebilidad){
             setImgTipo(tipo, imgTipoDevilidad[cont])
             cont += 1
         }
 
-        auxTipoEfectivo = analizarEfectividad(auxTipo)
+        auxTipoEfectivo = viewModel.analizarEfectividad(auxTipo)
         cont = 0
         for(tipo in auxTipoEfectivo){
             setImgTipo(tipo, imgTipoEfectivo[cont])
             cont += 1
         }
 
-        auxTipoNoEfectivo = analizarNoEfectivo(auxTipo)
+        auxTipoNoEfectivo = viewModel.analizarNoEfectivo(auxTipo)
         cont = 0
         for(tipo in auxTipoNoEfectivo){
             setImgTipo(tipo, imgTipoNoEfectivo[cont])
             cont += 1
         }
 
-        auxTipoInmune = analizarInmune(auxTipo)
+        auxTipoInmune = viewModel.analizarInmune(auxTipo)
         cont = 0
         for(tipo in auxTipoInmune){
             setImgTipo(tipo, imgTipoInmune[cont])
@@ -224,74 +220,6 @@ class FragmentPokedexData : Fragment() {
         val pesoString = (peso?.div(10)).toString() + "," + (peso?.rem(10)).toString() + " kg"
         labelPeso.text = pesoString
 
-    }
-
-    private fun analizarDebilidad(tipo: List<PokemonTipo>): MutableList<Int>{
-        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
-        val debilidadList: MutableList<Int> = mutableListOf()
-
-        for(pokemonTipo in tipo){
-            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
-            for(itemTipo in tipoAux) {
-                for (aux in itemTipo.danio!!.debil!!){
-                    if (debilidadList.none { item -> item == aux.idTipo }){
-                        aux.idTipo?.let { debilidadList.add(it) }
-                    }
-                }
-            }
-        }
-        return debilidadList
-    }
-
-    private fun analizarEfectividad(tipo: List<PokemonTipo>): MutableList<Int>{
-        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
-        val efectividadList: MutableList<Int> = mutableListOf()
-
-        for(pokemonTipo in tipo){
-            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
-            for(itemTipo in tipoAux) {
-                for (aux in itemTipo.danio!!.efectivo!!){
-                    if (efectividadList.none { item -> item == aux.idTipo }){
-                        aux.idTipo?.let { efectividadList.add(it) }
-                    }
-                }
-            }
-        }
-        return efectividadList
-    }
-
-    private fun analizarNoEfectivo(tipo: List<PokemonTipo>): MutableList<Int>{
-        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
-        val noEfectivoList: MutableList<Int> = mutableListOf()
-
-        for(pokemonTipo in tipo){
-            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
-            for(itemTipo in tipoAux) {
-                for (aux in itemTipo.danio!!.noEfectivo!!){
-                    if (noEfectivoList.none { item -> item == aux.idTipo }){
-                        aux.idTipo?.let { noEfectivoList.add(it) }
-                    }
-                }
-            }
-        }
-        return noEfectivoList
-    }
-
-    private fun analizarInmune(tipo: List<PokemonTipo>): MutableList<Int>{
-        val tablaTipo = viewModel.getTablaTiposPokemon().tipos
-        val inmuneList: MutableList<Int> = mutableListOf()
-
-        for(pokemonTipo in tipo){
-            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
-            for(itemTipo in tipoAux) {
-                for (aux in itemTipo.danio!!.inmune!!){
-                    if (inmuneList.none { item -> item == aux.idTipo }){
-                        aux.idTipo?.let { inmuneList.add(it) }
-                    }
-                }
-            }
-        }
-        return inmuneList
     }
 
     private fun setImgTipo(idTipo : Int, imgTipo: ImageView){

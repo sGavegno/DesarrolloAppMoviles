@@ -7,6 +7,7 @@ import com.example.apppokedex.PreferencesManager
 import com.example.apppokedex.SingleLiveEvent
 import com.example.apppokedex.entities.Evoluciones
 import com.example.apppokedex.entities.Pokemon
+import com.example.apppokedex.entities.PokemonTipo
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.TablaTiposPokemon
 import com.example.apppokedex.entities.TablaTiposRepo
@@ -68,5 +69,75 @@ class FragmentPokedexDataViewModel @Inject constructor(
     fun getTablaTiposPokemon(): TablaTiposRepo{
         return preferencesManager.getTablaTiposPokemon()
     }
+
+
+    fun analizarDebilidad(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = getTablaTiposPokemon().tipos
+        val debilidadList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.debil!!){
+                    if (debilidadList.none { item -> item == aux.idTipo }){
+                        aux.idTipo?.let { debilidadList.add(it) }
+                    }
+                }
+            }
+        }
+        return debilidadList
+    }
+
+    fun analizarEfectividad(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = getTablaTiposPokemon().tipos
+        val efectividadList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.efectivo!!){
+                    if (efectividadList.none { item -> item == aux.idTipo }){
+                        aux.idTipo?.let { efectividadList.add(it) }
+                    }
+                }
+            }
+        }
+        return efectividadList
+    }
+
+    fun analizarNoEfectivo(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = getTablaTiposPokemon().tipos
+        val noEfectivoList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.noEfectivo!!){
+                    if (noEfectivoList.none { item -> item == aux.idTipo }){
+                        aux.idTipo?.let { noEfectivoList.add(it) }
+                    }
+                }
+            }
+        }
+        return noEfectivoList
+    }
+
+    fun analizarInmune(tipo: List<PokemonTipo>): MutableList<Int>{
+        val tablaTipo = getTablaTiposPokemon().tipos
+        val inmuneList: MutableList<Int> = mutableListOf()
+
+        for(pokemonTipo in tipo){
+            val tipoAux = tablaTipo.filter { item -> item.idTipo == pokemonTipo.idTipo }
+            for(itemTipo in tipoAux) {
+                for (aux in itemTipo.danio!!.inmune!!){
+                    if (inmuneList.none { item -> item == aux.idTipo }){
+                        aux.idTipo?.let { inmuneList.add(it) }
+                    }
+                }
+            }
+        }
+        return inmuneList
+    }
+
 
 }

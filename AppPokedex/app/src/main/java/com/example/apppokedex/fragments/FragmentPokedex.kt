@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
@@ -189,6 +188,11 @@ class FragmentPokedex : Fragment(), PokemonAdapter.PokemonAdapterListener, Spine
             val pokemonUser = pokedexUser?.filter { item -> item.idPokemon == pokemon.id }
             if (pokemonUser != null) {
                 if (pokemonUser.isNotEmpty()){
+
+                    spinnerTipo.visibility = View.VISIBLE
+                    recPokemon.visibility = View.INVISIBLE
+
+                    switchFilter.isChecked = false
                     // Código para atender el clic del CardView del elemento del RecyclerView
                     val action = FragmentPokedexDirections.actionFragmentPokedexToFragmentPokedexData(
                         pokemon.id

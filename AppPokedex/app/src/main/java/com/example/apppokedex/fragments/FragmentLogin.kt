@@ -67,17 +67,22 @@ class FragmentLogin : Fragment() {
             when(it){
                 State.SUCCESS ->{
 
-
+                    btnNexScreen.visibility = View.VISIBLE
+                    btnSingin.visibility = View.VISIBLE
                     inputTxtUser.visibility = View.VISIBLE
                     inputTxtPass.visibility = View.VISIBLE
                     progressBarLouding.visibility = View.INVISIBLE
                 }
                 State.FAILURE ->{
+                    btnNexScreen.visibility = View.VISIBLE
+                    btnSingin.visibility = View.VISIBLE
                     inputTxtUser.visibility = View.VISIBLE
                     inputTxtPass.visibility = View.VISIBLE
                     progressBarLouding.visibility = View.INVISIBLE
                 }
                 State.LOADING ->{
+                    btnNexScreen.visibility = View.INVISIBLE
+                    btnSingin.visibility = View.INVISIBLE
                     inputTxtUser.visibility = View.INVISIBLE
                     inputTxtPass.visibility = View.INVISIBLE
                     progressBarLouding.visibility = View.VISIBLE
@@ -95,12 +100,16 @@ class FragmentLogin : Fragment() {
                     startActivity(intent)
                 }
                 State.FAILURE ->{
+                    btnNexScreen.visibility = View.VISIBLE
+                    btnSingin.visibility = View.VISIBLE
                     inputTxtUser.visibility = View.VISIBLE
                     inputTxtPass.visibility = View.VISIBLE
                     progressBarLouding.visibility = View.INVISIBLE
                     Snackbar.make(vista, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show()
                 }
                 State.LOADING ->{
+                    btnNexScreen.visibility = View.INVISIBLE
+                    btnSingin.visibility = View.INVISIBLE
                     inputTxtUser.visibility = View.INVISIBLE
                     inputTxtPass.visibility = View.INVISIBLE
                     progressBarLouding.visibility = View.VISIBLE

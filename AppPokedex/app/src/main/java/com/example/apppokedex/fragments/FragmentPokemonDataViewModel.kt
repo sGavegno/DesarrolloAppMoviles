@@ -190,15 +190,31 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 val user = preferencesManager.getUserLogin()
                 var pokemonPc = user.pc?.filter { item -> item.id == id }?.get(0)
                 if (pokemonPc != null) {
-                    val itemAux = getPokemonItemsFireBase(objeto)
-                    if(itemAux != null){
-                        pokemonPc = analizarObjeto(itemAux, pokemonPc)
-                        //pokemonPc.objeto = itemAux.nombre
-                        //pokemonPc.idObjeto = itemAux.id
-                        val evolucionA = checkEvolucion(pokemonPc)
-                        if (evolucionA != null){
-                            pokemonEvolucionA.postValue(evolucionA!!)
+                    if(objeto != ""){
+                        val itemAux = getPokemonItemsFireBase(objeto)
+                        if(itemAux != null){
+                            pokemonPc = analizarObjeto(itemAux, pokemonPc)
+                            //pokemonPc.objeto = itemAux.nombre
+                            //pokemonPc.idObjeto = itemAux.id
+                            val evolucionA = checkEvolucion(pokemonPc)
+                            if (evolucionA != null){
+                                pokemonEvolucionA.postValue(evolucionA!!)
+                            }
+                            val result = updateUserFireBase(user)
+                            if (result != null) {
+                                //items.postValue(itemAux!!)
+                                //pokemonPcData.postValue(pokemonPc!!)
+                                preferencesManager.savePcPokemon(pokemonPc)
+                                stateItems.postValue(State.SUCCESS)
+                            } else {
+                                stateItems.postValue(State.FAILURE)
+                            }
+                        } else{
+                            stateItems.postValue(State.FAILURE)
                         }
+                    }else{
+                        pokemonPc.objeto = null
+                        pokemonPc.idObjeto = null
                         val result = updateUserFireBase(user)
                         if (result != null) {
                             //items.postValue(itemAux!!)
@@ -208,8 +224,6 @@ class FragmentPokemonDataViewModel @Inject constructor(
                         } else {
                             stateItems.postValue(State.FAILURE)
                         }
-                    } else{
-                        stateItems.postValue(State.FAILURE)
                     }
                 }
             }
@@ -357,7 +371,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                 for (item in evolucionDe){
                     for (detalle in item.detalles!!){
                         when(detalle.idTipoEvolucion){
-                            1->{
+                            1->{ // Evoluciona al subir de nivel
                                 val level = detalle.nivel
                                 val felicidad = detalle.felicidad
                                 val afecto = detalle.afecto
@@ -393,7 +407,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                                     }
                                 }
                             }
-                            3->{
+                            3->{//evoluciona por objeto
                                 val idObjeto = detalle.idEvolucionItem
                                 if (idObjeto != null){
                                     if (pokemon.idObjeto == idObjeto ){
