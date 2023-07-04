@@ -128,8 +128,8 @@ class FragmentLogin : Fragment() {
         inputTxtUser.visibility = View.VISIBLE
         inputTxtPass.visibility = View.VISIBLE
         progressBarLouding.visibility = View.INVISIBLE
-        inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
-        inputTxtPass.setText("123456789")
+        //inputTxtUser.setText("sgavegno@frba.utn.edu.ar")
+        //inputTxtPass.setText("123456789")
 
         val sharedPref = context?.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
@@ -139,8 +139,6 @@ class FragmentLogin : Fragment() {
                 commit()
             }
         }
-
-
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)

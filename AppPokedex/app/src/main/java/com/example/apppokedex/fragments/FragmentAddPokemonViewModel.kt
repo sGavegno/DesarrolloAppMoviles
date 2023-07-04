@@ -1,5 +1,9 @@
 package com.example.apppokedex.fragments
 
+import android.annotation.SuppressLint
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +17,7 @@ import com.example.apppokedex.entities.Pokemon
 import com.example.apppokedex.entities.State
 import com.example.apppokedex.entities.UserPokedex
 import com.example.apppokedex.entities.Usuario
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -20,6 +25,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
 import java.util.Calendar
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -92,7 +98,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
         }
     }
 
-    fun addUserPokemon( idPokemon: Int, mote: String?, nivel: Int, genero: Boolean?, habilidad: String ) {
+    fun addUserPokemon( idPokemon: Int, mote: String?, nivel: Int, genero: Boolean?, habilidad: String) {
         state.postValue(State.LOADING)
         try {
             var usuario: Usuario?
@@ -119,8 +125,10 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 pokemonPc.afecto = 0
                 pokemonPc.habilidad = habilidad
                 pokemonPc.genero = genero
+
                 val ubicacion = preferencesManager.getUbicacion()
                 val calendar = Calendar.getInstance()
+
                 pokemonPc.descripcion = "Se capturo al nivel $nivel, el dia ${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.YEAR)} " +
                         "a las ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}, en $ubicacion."
 
