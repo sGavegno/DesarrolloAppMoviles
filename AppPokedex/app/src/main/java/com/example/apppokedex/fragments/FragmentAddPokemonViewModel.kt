@@ -122,7 +122,7 @@ class FragmentAddPokemonViewModel @Inject constructor(
                 val ubicacion = preferencesManager.getUbicacion()
                 val calendar = Calendar.getInstance()
                 pokemonPc.descripcion = "Se capturo al nivel $nivel, el dia ${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.YEAR)} " +
-                        "a las ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}, en $ubicacion."
+                        "a las ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}, en $ubicacion."
 
                 pokemonPc.statsBase = pokemonAux.stats
                 pokemonPc.puntoEsfuerzo = Estadisticas(0, 0, 0, 0, 0, 0)

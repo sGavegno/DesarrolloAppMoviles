@@ -102,13 +102,13 @@ class FragmentPokemonDataViewModel @Inject constructor(
                     }
                     pokeAux.stats = calcularEstadisticas(pokeAux)
                     val evolucionA = checkEvolucion(pokeAux)
-                    if (evolucionA != null){
-                        pokemonEvolucionA.postValue(evolucionA!!)
-                    }
                     val result = updateUserFireBase(user)
                     if (result != null) {
                         //pokemonPcData.postValue(pokeAux!!)
                         preferencesManager.savePcPokemon(pokeAux)
+                        if (evolucionA != null){
+                            pokemonEvolucionA.postValue(evolucionA!!)
+                        }
                         stateLvl.postValue(State.SUCCESS)
                     } else {
                         stateLvl.postValue(State.FAILURE)
@@ -197,14 +197,14 @@ class FragmentPokemonDataViewModel @Inject constructor(
                             //pokemonPc.objeto = itemAux.nombre
                             //pokemonPc.idObjeto = itemAux.id
                             val evolucionA = checkEvolucion(pokemonPc)
-                            if (evolucionA != null){
-                                pokemonEvolucionA.postValue(evolucionA!!)
-                            }
                             val result = updateUserFireBase(user)
                             if (result != null) {
                                 //items.postValue(itemAux!!)
                                 //pokemonPcData.postValue(pokemonPc!!)
                                 preferencesManager.savePcPokemon(pokemonPc)
+                                if (evolucionA != null){
+                                    pokemonEvolucionA.postValue(evolucionA!!)
+                                }
                                 stateItems.postValue(State.SUCCESS)
                             } else {
                                 stateItems.postValue(State.FAILURE)
@@ -395,7 +395,7 @@ class FragmentPokemonDataViewModel @Inject constructor(
                                                         evolucionA = getPokemonFireBase(item.id!!)
                                                     }
                                                 }
-                                                if (horaDelDia == "Dia"){
+                                                if (horaDelDia == "Día"){
                                                     if(calendar in 7..18){
                                                         evolucionA = getPokemonFireBase(item.id!!)
                                                     }
